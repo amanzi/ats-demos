@@ -33,6 +33,7 @@ import traceback
 import distutils.spawn
 import numpy
 
+sys.path.append("scripts")
 import ats_h5
 
 class NoCatchException(Exception):

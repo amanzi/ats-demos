@@ -1,0 +1,5 @@
+*.regression
+*.regression.gold
+*.ipynb_checkpoints
+LOGS/
+*.pyc

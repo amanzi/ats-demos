@@ -120,12 +120,12 @@
           <Parameter name="nonlinear tolerance" type="double" value="1e-06" />
           <Parameter name="diverged tolerance" type="double" value="1000000.0" />
           <Parameter name="limit iterations" type="int" value="21" />
-          <ParameterList name="VerboseObject" type="ParameterList">
-            <Parameter name="Verbosity Level" type="string" value="high" />
+          <ParameterList name="verbose object" type="ParameterList">
+            <Parameter name="verbosity level" type="string" value="high" />
           </ParameterList>
         </ParameterList>
-        <ParameterList name="VerboseObject" type="ParameterList">
-          <Parameter name="Verbosity Level" type="string" value="high" />
+        <ParameterList name="verbose object" type="ParameterList">
+          <Parameter name="verbosity level" type="string" value="high" />
         </ParameterList>
         <ParameterList name="timestep controller smarter parameters" type="ParameterList">
           <Parameter name="max iterations" type="int" value="18" />
@@ -177,8 +177,8 @@
             <Parameter name="modify predictor damp and cap the water spurt" type="bool" value="true" />
             <Parameter name="damp and cap the water spurt" type="bool" value="true" />
             <Parameter name="cap over atmospheric" type="double" value="0.1" />
-            <ParameterList name="VerboseObject" type="ParameterList">
-              <Parameter name="Verbosity Level" type="string" value="extreme" />
+            <ParameterList name="verbose object" type="ParameterList">
+              <Parameter name="verbosity level" type="string" value="extreme" />
             </ParameterList>
           </ParameterList>
 
@@ -194,8 +194,8 @@
 
           <ParameterList name="linear solver" type="ParameterList">
             <Parameter name="iterative method" type="string" value="nka" />
-            <ParameterList name="VerboseObject" type="ParameterList">
-              <Parameter name="Verbosity Level" type="string" value="medium" />
+            <ParameterList name="verbose object" type="ParameterList">
+              <Parameter name="verbosity level" type="string" value="medium" />
             </ParameterList>
             <ParameterList name="nka parameters" type="ParameterList">
               <Parameter name="error tolerance" type="double" value="1e-06" />
@@ -203,8 +203,8 @@
             </ParameterList>
           </ParameterList>
 
-          <ParameterList name="VerboseObject" type="ParameterList">
-            <Parameter name="Verbosity Level" type="string" value="medium" />
+          <ParameterList name="verbose object" type="ParameterList">
+            <Parameter name="verbosity level" type="string" value="medium" />
           </ParameterList>
 
 
@@ -216,8 +216,8 @@
               <Parameter name="initial time step" type="double" value="10.0" />
               <Parameter name="permeability rescaling" type="double" value="10000000.0" />
               <Parameter name="relative permeability method" type="string" value="upwind with Darcy flux" />
-              <ParameterList name="VerboseObject" type="ParameterList">
-                <Parameter name="Verbosity Level" type="string" value="high" />
+              <ParameterList name="verbose object" type="ParameterList">
+                <Parameter name="verbosity level" type="string" value="high" />
               </ParameterList>
 
               <ParameterList name="Diffusion" type="ParameterList">
@@ -256,8 +256,8 @@
                     <Parameter name="smoothing interval width" type="double" value="100.0" />
                   </ParameterList>
                 </ParameterList>
-                <ParameterList name="VerboseObject" type="ParameterList">
-                  <Parameter name="Verbosity Level" type="string" value="high" />
+                <ParameterList name="verbose object" type="ParameterList">
+                  <Parameter name="verbosity level" type="string" value="high" />
                 </ParameterList>
               </ParameterList>
 
@@ -273,8 +273,8 @@
               <Parameter name="source key" type="string" value="surface-source" />
 
               <Parameter name="initial time step" type="double" value="10.0" />
-              <ParameterList name="VerboseObject" type="ParameterList">
-                <Parameter name="Verbosity Level" type="string" value="high" />
+              <ParameterList name="verbose object" type="ParameterList">
+                <Parameter name="verbosity level" type="string" value="high" />
               </ParameterList>
 
               <ParameterList name="Diffusion" type="ParameterList">
@@ -424,8 +424,8 @@
       
       <ParameterList name="capillary_pressure_gas_liq" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="capillary pressure, atmospheric gas over liquid" />
-        <ParameterList name="VerboseObject" type="ParameterList">
-          <Parameter name="Verbosity Level" type="string" value="low" />
+        <ParameterList name="verbose object" type="ParameterList">
+          <Parameter name="verbosity level" type="string" value="low" />
         </ParameterList>
       </ParameterList>
 
@@ -438,8 +438,8 @@
           <Parameter name="EOS type" type="string" value="constant" />
           <Parameter name="density [kg/m^3]" type="double" value="1000.0" />
         </ParameterList>
-        <ParameterList name="VerboseObject" type="ParameterList">
-          <Parameter name="Verbosity Level" type="string" value="low" />
+        <ParameterList name="verbose object" type="ParameterList">
+          <Parameter name="verbosity level" type="string" value="low" />
         </ParameterList>
       </ParameterList>
 
@@ -510,8 +510,8 @@
             </ParameterList>
           </ParameterList>
         </ParameterList>
-        <ParameterList name="VerboseObject" type="ParameterList">
-          <Parameter name="Verbosity Level" type="string" value="low" />
+        <ParameterList name="verbose object" type="ParameterList">
+          <Parameter name="verbosity level" type="string" value="low" />
         </ParameterList>
       </ParameterList>
 

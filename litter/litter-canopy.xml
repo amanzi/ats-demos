@@ -315,6 +315,10 @@
                   <Parameter name="relative permeability method" type="string" value="upwind with Darcy flux" />
                   <Parameter name="permeability rescaling" type="double" value="10000000.0" />
 
+                  <Parameter name="source term" type="bool" value="true" />
+                  <Parameter name="mass source key" type="string" value="transpiration" />
+                  <Parameter name="source term is differentiable" type="bool" value="false" />
+                  
                   <Parameter name="debug cells" type="Array(int)" value="{70,99}" />-->
                   <ParameterList name="verbose object" type="ParameterList">
                     <Parameter name="verbosity level" type="string" value="high" />

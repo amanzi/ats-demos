@@ -50,6 +50,18 @@
     <Parameter name="end time units" type="string" value="s" />
   </ParameterList>
 
+  <ParameterList name="cycle driver">
+    <Parameter name="start time" type="double" value="0.0"/>
+    <Parameter name="start time units" type="string" value="s"/> <!-- valid are s/d/yr -->
+    <Parameter name="end time" type="double" value="10800.0"/>
+    <Parameter name="end time units" type="string" value="s"/> <!-- valid are s/d/yr -->
+    <ParameterList name="PK tree">
+      <ParameterList name="Overland Flow" type="ParameterList">
+        <Parameter name="PK type" type="string" value="overland flow" />
+      </ParameterList>
+    </ParameterList>
+  </ParameterList>
+
   <ParameterList name="visualization" type="ParameterList">
     <Parameter name="file name base" type="string" value="visdump" />
     <Parameter name="times start period stop" type="Array(double)" value="{0.0,600.0,-1.0}" />

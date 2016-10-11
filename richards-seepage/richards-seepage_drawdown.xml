@@ -66,11 +66,16 @@
     </ParameterList>
   </ParameterList>
 
-  <ParameterList name="coordinator" type="ParameterList">
-    <Parameter name="start time" type="double" value="0.0" />
-    <Parameter name="start time units" type="string" value="s" />
-    <Parameter name="end time" type="double" value="1.0" />
-    <Parameter name="end time units" type="string" value="yr" />
+  <ParameterList name="cycle driver">
+    <Parameter name="start time" type="double" value="0.0"/>
+    <Parameter name="start time units" type="string" value="s"/> <!-- valid are s/d/yr -->
+    <Parameter name="end time" type="double" value="1.0"/>
+    <Parameter name="end time units" type="string" value="yr"/> <!-- valid are s/d/yr -->
+    <ParameterList name="PK tree">
+      <ParameterList name="Richards" type="ParameterList">
+        <Parameter name="PK type" type="string" value="richards flow" />
+      </ParameterList>
+    </ParameterList>
   </ParameterList>
 
   <ParameterList name="visualization" type="ParameterList">

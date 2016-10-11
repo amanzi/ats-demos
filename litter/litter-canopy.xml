@@ -723,7 +723,7 @@
         <ParameterList name="compressible porosity model parameters">
           <ParameterList name="computational domain">
             <Parameter  name="region" type="string" value="computational domain"/>
-            <Parameter  name="pore compressibility" type="double" value="1.e-08"/>
+            <Parameter  name="pore compressibility [Pa^-1]" type="double" value="1.e-08"/>
           </ParameterList>
         </ParameterList>
       </ParameterList>

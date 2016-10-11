@@ -471,18 +471,18 @@
         <ParameterList name="compressible porosity model parameters" type="ParameterList">
           <ParameterList name="rest domain" type="ParameterList">
             <Parameter name="region" type="string" value="computational domain rest" />
-            <Parameter name="pore compressibility" type="double" value="1.0228e-09" />
-            <Parameter name="pore compressibility inflection point" type="double" value="0.0" />
+            <Parameter name="pore compressibility [Pa^-1]" type="double" value="1.0228e-09" />
+            <Parameter name="pore compressibility [Pa^-1] inflection point" type="double" value="0.0" />
           </ParameterList>
           <ParameterList name="first slab" type="ParameterList">
             <Parameter name="region" type="string" value="computational domain first slab" />
-            <Parameter name="pore compressibility" type="double" value="1.0228e-09" />
-            <Parameter name="pore compressibility inflection point" type="double" value="0.0" />
+            <Parameter name="pore compressibility [Pa^-1]" type="double" value="1.0228e-09" />
+            <Parameter name="pore compressibility [Pa^-1] inflection point" type="double" value="0.0" />
           </ParameterList>
           <ParameterList name="second slab" type="ParameterList">
             <Parameter name="region" type="string" value="computational domain second slab" />
-            <Parameter name="pore compressibility" type="double" value="1.0228e-09" />
-            <Parameter name="pore compressibility inflection point" type="double" value="0.0" />
+            <Parameter name="pore compressibility [Pa^-1]" type="double" value="1.0228e-09" />
+            <Parameter name="pore compressibility [Pa^-1] inflection point" type="double" value="0.0" />
           </ParameterList>
         </ParameterList>
       </ParameterList>

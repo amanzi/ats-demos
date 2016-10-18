@@ -104,6 +104,25 @@
     <Parameter name="end time units" type="string" value="d" />
   </ParameterList>
 
+  <ParameterList name="cycle driver">
+    <Parameter name="start time" type="double" value="0.0"/>
+    <Parameter name="start time units" type="string" value="s"/> <!-- valid are s/d/yr -->
+    <Parameter name="end time" type="double" value="10.0"/>
+    <Parameter name="end time units" type="string" value="d"/> <!-- valid are s/d/yr -->
+    <ParameterList name="PK tree">
+      <ParameterList name="surface-subsurface coupler" type="ParameterList">
+        <Parameter name="PK type" type="string" value="coupled water" />
+        <ParameterList name="flow" type="ParameterList">
+          <Parameter name="PK type" type="string" value="richards flow" />
+        </ParameterList>
+        <ParameterList name="overland flow" type="ParameterList">
+          <Parameter name="PK type" type="string" value="overland flow, pressure basis" />
+        </ParameterList>
+      </ParameterList>
+    </ParameterList>
+  </ParameterList>
+
+
   <ParameterList name="visualization" type="ParameterList">
     <Parameter name="file name base" type="string" value="visdump" />
     <Parameter name="times start period stop" type="Array(double)" value="{0.0,10800.0,-1.0}" />
@@ -183,81 +202,76 @@
           <Parameter name="count before increasing increase factor" type="int" value="2" />
         </ParameterList>
       </ParameterList>
+    </ParameterList>
 
-      <ParameterList name="PKs" type="ParameterList">
+    <ParameterList name="flow" type="ParameterList">
+      <Parameter name="PK type" type="string" value="richards flow" />
+      <Parameter name="primary variable" type="string" value="pressure" />
+      <Parameter name="initial time step" type="double" value="10.0" />
+      <Parameter name="permeability rescaling" type="double" value="10000000.0" />
+      <Parameter name="relative permeability method" type="string" value="upwind with Darcy flux" />
+      <ParameterList name="verbose object" type="ParameterList">
+        <Parameter name="verbosity level" type="string" value="high" />
+      </ParameterList>
 
-        <ParameterList name="flow" type="ParameterList">
-          <Parameter name="PK type" type="string" value="richards flow" />
-          <Parameter name="primary variable" type="string" value="pressure" />
-          <Parameter name="initial time step" type="double" value="10.0" />
-          <Parameter name="permeability rescaling" type="double" value="10000000.0" />
-          <Parameter name="relative permeability method" type="string" value="upwind with Darcy flux" />
-          <ParameterList name="verbose object" type="ParameterList">
-            <Parameter name="verbosity level" type="string" value="high" />
+      <ParameterList name="Diffusion" type="ParameterList">
+        <Parameter name="discretization primary" type="string" value="mfd: optimized for sparsity" />
+      </ParameterList>
+
+      <ParameterList name="boundary conditions" type="ParameterList">
+      </ParameterList>
+
+      <ParameterList name="initial condition" type="ParameterList">
+        <Parameter name="restart file" type="string" value="../data/checkpoint00001.h5" />
+      </ParameterList>
+
+      <ParameterList name="water retention evaluator" type="ParameterList">
+        <Parameter name="minimum rel perm cutoff" type="double" value="0.0" />
+        <Parameter name="use surface rel perm" type="bool" value="true" />
+        <ParameterList name="WRM parameters" type="ParameterList">
+          <ParameterList name="computation domain" type="ParameterList">
+            <Parameter name="region" type="string" value="computational domain" />
+            <Parameter name="WRM Type" type="string" value="van Genuchten" />
+            <Parameter name="van Genuchten alpha" type="double" value="0.000545" />
+            <Parameter name="van Genuchten m" type="double" value="0.190938511" />
+            <Parameter name="residual saturation" type="double" value="0.1" />
+            <Parameter name="smoothing interval width" type="double" value="100.0" />
           </ParameterList>
-
-          <ParameterList name="Diffusion" type="ParameterList">
-            <Parameter name="discretization primary" type="string" value="mfd: optimized for sparsity" />
-          </ParameterList>
-
-          <ParameterList name="boundary conditions" type="ParameterList">
-          </ParameterList>
-
-          <ParameterList name="initial condition" type="ParameterList">
-            <Parameter name="restart file" type="string" value="../data/checkpoint00001.h5" />
-          </ParameterList>
-
-          <ParameterList name="water retention evaluator" type="ParameterList">
-            <Parameter name="minimum rel perm cutoff" type="double" value="0.0" />
-            <Parameter name="use surface rel perm" type="bool" value="true" />
-            <ParameterList name="WRM parameters" type="ParameterList">
-              <ParameterList name="computation domain" type="ParameterList">
-                <Parameter name="region" type="string" value="computational domain" />
-                <Parameter name="WRM Type" type="string" value="van Genuchten" />
-                <Parameter name="van Genuchten alpha" type="double" value="0.000545" />
-                <Parameter name="van Genuchten m" type="double" value="0.190938511" />
-                <Parameter name="residual saturation" type="double" value="0.1" />
-                <Parameter name="smoothing interval width" type="double" value="100.0" />
-              </ParameterList>
-            </ParameterList>
-            <ParameterList name="verbose object" type="ParameterList">
-              <Parameter name="verbosity level" type="string" value="high" />
-            </ParameterList>
-          </ParameterList>
-
         </ParameterList>
-
-        <ParameterList name="overland flow" type="ParameterList">
-          <Parameter name="PK type" type="string" value="overland flow, pressure basis" />
-          <Parameter name="primary variable" type="string" value="surface-pressure" />
-          <Parameter name="domain name" type="string" value="surface" />
-          <Parameter name="source term" type="bool" value="true" />
-          <Parameter name="initial time step" type="double" value="10.0" />
-          <ParameterList name="verbose object" type="ParameterList">
-            <Parameter name="verbosity level" type="string" value="high" />
-          </ParameterList>
-
-          <ParameterList name="Diffusion" type="ParameterList">
-            <Parameter name="discretization primary" type="string" value="fv: default" />
-          </ParameterList>
-
-          <ParameterList name="boundary conditions" type="ParameterList">
-          </ParameterList>
-
-          <ParameterList name="initial condition" type="ParameterList">
-            <Parameter name="initialize surface head from subsurface" type="bool" value="true" />
-          </ParameterList>
-
-          <ParameterList name="overland conductivity evaluator" type="ParameterList">
-            <ParameterList name="overland conductivity model" type="ParameterList">
-              <Parameter name="overland conductivity type " type="string" value="manning" />
-              <Parameter name="Manning exponent" type="double" value="0.666666666667" />
-              <Parameter name="slope regularization epsilon" type="double" value="0.01" />
-            </ParameterList>
-          </ParameterList>
-
+        <ParameterList name="verbose object" type="ParameterList">
+          <Parameter name="verbosity level" type="string" value="high" />
         </ParameterList>
+      </ParameterList>
 
+    </ParameterList>
+
+    <ParameterList name="overland flow" type="ParameterList">
+      <Parameter name="PK type" type="string" value="overland flow, pressure basis" />
+      <Parameter name="primary variable" type="string" value="surface-pressure" />
+      <Parameter name="domain name" type="string" value="surface" />
+      <Parameter name="source term" type="bool" value="true" />
+      <Parameter name="initial time step" type="double" value="10.0" />
+      <ParameterList name="verbose object" type="ParameterList">
+        <Parameter name="verbosity level" type="string" value="high" />
+      </ParameterList>
+
+      <ParameterList name="Diffusion" type="ParameterList">
+        <Parameter name="discretization primary" type="string" value="fv: default" />
+      </ParameterList>
+
+      <ParameterList name="boundary conditions" type="ParameterList">
+      </ParameterList>
+
+      <ParameterList name="initial condition" type="ParameterList">
+        <Parameter name="initialize surface head from subsurface" type="bool" value="true" />
+      </ParameterList>
+
+      <ParameterList name="overland conductivity evaluator" type="ParameterList">
+        <ParameterList name="overland conductivity model" type="ParameterList">
+          <Parameter name="overland conductivity type " type="string" value="manning" />
+          <Parameter name="Manning exponent" type="double" value="0.666666666667" />
+          <Parameter name="slope regularization epsilon" type="double" value="0.01" />
+        </ParameterList>
       </ParameterList>
 
     </ParameterList>
@@ -274,6 +288,12 @@
 
       <ParameterList name="ponded_depth" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="ponded depth" />
+      </ParameterList>
+
+      <ParameterList name="ponded_depth_bar" type="ParameterList">
+        <Parameter name="field evaluator type" type="string" value="ponded depth" />
+        <Parameter name="ponded depth bar" type="bool" value="true" />
+        <Parameter name="height key" type="string" value="ponded_depth_bar"/>
       </ParameterList>
 
       <ParameterList name="surface-water_content" type="ParameterList">

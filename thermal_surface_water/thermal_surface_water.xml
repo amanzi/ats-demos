@@ -139,7 +139,7 @@
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="initial head" type="ParameterList">
                 <Parameter name="region" type="string" value="computational domain" />
-                <Parameter name="components" type="Array(string)" value="{cell,boundary_face}" />
+                <Parameter name="components" type="Array(string)" value="{boundary_face,cell}" />
                 <ParameterList name="function" type="ParameterList">
                   <ParameterList name="function-constant" type="ParameterList">
                     <Parameter name="value" type="double" value="101825.0" />

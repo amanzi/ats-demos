@@ -194,7 +194,7 @@
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="initial pressure cells" type="ParameterList">
             <Parameter name="region" type="string" value="computational domain" />
-            <Parameter name="component" type="string" value="cell" />
+            <Parameter name="components" type="Array(string)" value="{cell,boundary_face}" />
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-linear" type="ParameterList">
                 <Parameter name="x0" type="Array(double)" value="{0.0,0.0,0.0,7.0}" />

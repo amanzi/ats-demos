@@ -95,11 +95,11 @@
     <Parameter name="file name base" type="string" value="visdump" />
     <Parameter name="times start period stop" type="Array(double)" value="{0.0,631152.0,-1.0}" />
   </ParameterList>
-
+<!--
   <ParameterList name="checkpoint" type="ParameterList">
     <Parameter name="times start period stop" type="Array(double)" value="{0.0,31557600.0,-1.0}" />
   </ParameterList>
-
+-->
   <ParameterList name="PKs" type="ParameterList">
 
     <ParameterList name="Richards" type="ParameterList">
@@ -111,7 +111,7 @@
       <Parameter name="permeability rescaling" type="double" value="10000000.0" />
       <Parameter name="debug cells" type="Array(int)" value="{80}" />
       <ParameterList name="verbose object" type="ParameterList">
-        <Parameter name="verbosity level" type="string" value="high" />
+        <Parameter name="verbosity level" type="string" value="extreme" />
       </ParameterList>
 
       <ParameterList name="time integrator" type="ParameterList">
@@ -139,7 +139,7 @@
           <Parameter name="min iterations" type="int" value="10" />
           <Parameter name="time step reduction factor" type="double" value="0.5" />
           <Parameter name="time step increase factor" type="double" value="1.25" />
-          <Parameter name="max time step" type="double" value="10000000000.0" />
+          <Parameter name="max time step" type="double" value="1e10" />
           <Parameter name="min time step" type="double" value="1e-10" />
           <Parameter name="growth wait after fail" type="int" value="2" />
           <Parameter name="count before increasing increase factor" type="int" value="2" />
@@ -189,7 +189,7 @@
             <Parameter name="regions" type="Array(string)" value="{surface}" />
             <ParameterList name="outward mass flux" type="ParameterList">
               <ParameterList name="function-tabular" type="ParameterList">
-                <Parameter name="x values" type="Array(double)" value="{0.0,12623040.0}" />
+                <Parameter name="x values" type="Array(double)" value="{0.0,1.262e7}" />
                 <Parameter name="y values" type="Array(double)" value="{-0.004,0.0}" />
                 <Parameter name="forms" type="Array(string)" value="{constant}" />
               </ParameterList>
@@ -199,7 +199,7 @@
             <Parameter name="regions" type="Array(string)" value="{bottom face}" />
             <ParameterList name="outward mass flux" type="ParameterList">
               <ParameterList name="function-tabular" type="ParameterList">
-                <Parameter name="x values" type="Array(double)" value="{0.0,47304000.0,53611200.0}" />
+                <Parameter name="x values" type="Array(double)" value="{0.0,4.73e7,53611200.0}" />
                 <Parameter name="y values" type="Array(double)" value="{0.0,0.004,0.0}" />
                 <Parameter name="forms" type="Array(string)" value="{constant,constant}" />
               </ParameterList>
@@ -218,7 +218,7 @@
               <ParameterList name="function-linear" type="ParameterList">
                 <Parameter name="x0" type="Array(double)" value="{0.0,0.0,0.0,7.0}" />
                 <Parameter name="y0" type="double" value="101325.0" />
-                <Parameter name="gradient" type="Array(double)" value="{0.0,0.0,0.0,-9806.2306853}" />
+                <Parameter name="gradient" type="Array(double)" value="{0.0,0.0,0.0,-9806.23}" />
               </ParameterList>
             </ParameterList>
           </ParameterList>

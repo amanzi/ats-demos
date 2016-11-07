@@ -58,8 +58,8 @@
   <ParameterList name="cycle driver">
     <Parameter name="start time" type="double" value="0.0"/>
     <Parameter name="start time units" type="string" value="s"/> <!-- valid are s/d/yr -->
-    <Parameter name="end time" type="double" value="10000.0"/>
-    <Parameter name="end time units" type="string" value="s"/> <!-- valid are s/d/yr -->
+    <Parameter name="end time" type="double" value="1.0"/>
+    <Parameter name="end time units" type="string" value="yr"/> <!-- valid are s/d/yr -->
     <ParameterList name="PK tree">
       <ParameterList name="Top level MPC" type="ParameterList">
         <Parameter name="PK type" type="string" value="subsurface permafrost" />
@@ -75,7 +75,7 @@
 
   <ParameterList name="visualization" type="ParameterList">
     <Parameter name="file name base" type="string" value="visdump" />
-    <Parameter name="times start period stop" type="Array(double)" value="{0.0,3155.0,-1.0}" /> 
+    <Parameter name="times start period stop" type="Array(double)" value="{0.0,3155760.0,-1.0}" />
   </ParameterList>
 
   <ParameterList name="PKs" type="ParameterList">
@@ -416,7 +416,7 @@
         <Parameter name="internal energy key" type="string" value="internal_energy_ice" />
         <ParameterList name="IEM parameters" type="ParameterList">
           <Parameter name="IEM type" type="string" value="quadratic" />
-          <Parameter name="quadratic u_0 [J/mol]" type="double" value="-6007.87" />
+	  <Parameter name="quadratic u_0 [J/mol]" type="double" value="-6007.87" />
           <Parameter name="quadratic a [J/mol-K]" type="double" value="37.7841" />
           <Parameter name="quadratic b [J/mol-K^2]" type="double" value="0.131932" />
         </ParameterList>

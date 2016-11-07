@@ -426,7 +426,7 @@
         <Parameter name="internal energy key" type="string" value="internal_energy_ice" />
         <ParameterList name="IEM parameters" type="ParameterList">
           <Parameter name="IEM type" type="string" value="quadratic" />
-          <Parameter name="quadratic u_0 [J/mol]" type="double" value="-6007.87" />
+	  <Parameter name="quadratic u_0 [J/mol]" type="double" value="-6007.87" />
           <Parameter name="quadratic a [J/mol-K]" type="double" value="37.7841" />
           <Parameter name="quadratic b [J/mol-K^2]" type="double" value="0.131932" />
         </ParameterList>

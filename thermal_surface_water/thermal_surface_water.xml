@@ -97,7 +97,7 @@
           <Parameter name="max iterations" type="int" value="18" />
           <Parameter name="min iterations" type="int" value="10" />
           <Parameter name="time step reduction factor" type="double" value="0.5" />
-          <Parameter name="time step increase factor" type="double" value="1.5" />
+          <Parameter name="time step increase factor" type="double" value="2" />
           <Parameter name="max time step" type="double" value="100000000.0" />
           <Parameter name="min time step" type="double" value="1e-10" />
           <Parameter name="growth wait after fail" type="int" value="2" />
@@ -106,7 +106,7 @@
       </ParameterList>
 
       <ParameterList name="verbose object" type="ParameterList">
-        <Parameter name="verbosity level" type="string" value="high" />
+        <Parameter name="verbosity level" type="string" value="extreme" />
       </ParameterList>
     </ParameterList>
 
@@ -119,7 +119,7 @@
       <Parameter name="strongly coupled PK" type="bool" value="true" />
       <Parameter name="debug cells" type="Array(int)" value="{0,9}" />
       <ParameterList name="verbose object" type="ParameterList">
-        <Parameter name="verbosity level" type="string" value="high" />
+        <Parameter name="verbosity level" type="string" value="extreme" />
       </ParameterList>
 
       <ParameterList name="preconditioner" type="ParameterList">
@@ -229,7 +229,7 @@
       <Parameter name="upwind conductivity method" type="string" value="arithmetic mean" />
       <Parameter name="debug cells" type="Array(int)" value="{0,9}" />
       <ParameterList name="verbose object" type="ParameterList">
-        <Parameter name="verbosity level" type="string" value="high" />
+        <Parameter name="verbosity level" type="string" value="extreme" />
       </ParameterList>
 
       <ParameterList name="preconditioner" type="ParameterList">

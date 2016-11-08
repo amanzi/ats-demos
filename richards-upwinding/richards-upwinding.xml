@@ -81,11 +81,11 @@
 
   <ParameterList name="visualization" type="ParameterList">
     <Parameter name="file name base" type="string" value="visdump" />
-    <Parameter name="times start period stop" type="Array(double)" value="{0.0,315576000.0,-1.0}" />
+    <Parameter name="times start period stop" type="Array(double)" value="{0.0,3.15e7,-1.0}" />
   </ParameterList>
 
   <ParameterList name="checkpoint" type="ParameterList">
-    <Parameter name="times start period stop" type="Array(double)" value="{0.0,3155760000.0,-1.0}" />
+    <Parameter name="times start period stop" type="Array(double)" value="{0.0,3.15e8,-1.0}" />
   </ParameterList>
 
   <ParameterList name="PKs" type="ParameterList">
@@ -96,10 +96,10 @@
       <Parameter name="initial time step" type="double" value="10.0" />
       <Parameter name="relative permeability method" type="string" value="upwind with Darcy flux" />
       <Parameter name="modify predictor for flux BCs" type="bool" value="true" />
-      <Parameter name="permeability rescaling" type="double" value="10000000.0" />
+      <Parameter name="permeability rescaling" type="double" value="1.e7" />
       <Parameter name="debug cells" type="Array(int)" value="{49,50}" />
       <ParameterList name="verbose object" type="ParameterList">
-        <Parameter name="verbosity level" type="string" value="high" />
+        <Parameter name="verbosity level" type="string" value="extreme" />
       </ParameterList>
 
       <ParameterList name="time integrator" type="ParameterList">
@@ -113,7 +113,7 @@
           <Parameter name="backtrack factor" type="double" value="0.5" />
           <Parameter name="backtrack tolerance" type="double" value="0.0001" />
           <Parameter name="nonlinear tolerance" type="double" value="1e-06" />
-          <Parameter name="diverged tolerance" type="double" value="10000000000.0" />
+          <Parameter name="diverged tolerance" type="double" value="1.e10" />
           <Parameter name="limit iterations" type="int" value="21" />
           <ParameterList name="verbose object" type="ParameterList">
             <Parameter name="verbosity level" type="string" value="low" />
@@ -126,8 +126,8 @@
           <Parameter name="max iterations" type="int" value="18" />
           <Parameter name="min iterations" type="int" value="10" />
           <Parameter name="time step reduction factor" type="double" value="0.5" />
-          <Parameter name="time step increase factor" type="double" value="1.5" />
-          <Parameter name="max time step" type="double" value="10000000000.0" />
+          <Parameter name="time step increase factor" type="double" value="2" />
+          <Parameter name="max time step" type="double" value="1.e10" />
           <Parameter name="min time step" type="double" value="1e-10" />
           <Parameter name="growth wait after fail" type="int" value="2" />
           <Parameter name="count before increasing increase factor" type="int" value="2" />
@@ -204,15 +204,15 @@
           <ParameterList name="left soil" type="ParameterList">
             <Parameter name="region" type="string" value="left soil" />
             <Parameter name="WRM Type" type="string" value="Brooks Corey" />
-            <Parameter name="Brooks Corey alpha" type="double" value="0.00020674" />
-            <Parameter name="Brooks Corey lambda" type="double" value="0.3006" />
+            <Parameter name="Brooks Corey alpha" type="double" value="2.e-4" />
+            <Parameter name="Brooks Corey lambda" type="double" value="0.3" />
             <Parameter name="residual saturation" type="double" value="0.0" />
           </ParameterList>
           <ParameterList name="right soil" type="ParameterList">
             <Parameter name="region" type="string" value="right soil" />
             <Parameter name="WRM Type" type="string" value="van Genuchten" />
-            <Parameter name="van Genuchten alpha" type="double" value="0.0019467" />
-            <Parameter name="van Genuchten m" type="double" value="0.6294" />
+            <Parameter name="van Genuchten alpha" type="double" value="1.9e-3" />
+            <Parameter name="van Genuchten m" type="double" value="0.6" />
             <Parameter name="residual saturation" type="double" value="0.0" />
           </ParameterList>
         </ParameterList>

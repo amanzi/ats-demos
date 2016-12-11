@@ -97,7 +97,7 @@ class RegressionTest(object):
         self._input_arg = "--xml_file="
         self._input_suffix = "xml"
         self._np = None
-        self._timeout = 60.0
+        self._timeout = 162.0
         self._skip_check_gold = False
         self._check_performance = False
         self._num_failed = 0
@@ -869,7 +869,7 @@ class RegressionTestManager(object):
         for test in self._tests:
             status = TestStatus()
             self._test_header(test.name(), testlog)
-
+	    
             test.run(mpiexec, executable, dry_run, status, testlog)
 
             if not dry_run and status.skipped == 0:

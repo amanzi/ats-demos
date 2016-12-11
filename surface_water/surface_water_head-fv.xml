@@ -122,6 +122,7 @@
       </ParameterList>
 
       <ParameterList name="elevation evaluator" type="ParameterList">
+	<Parameter name="elevation key" type="string" value="elevation" />
         <ParameterList name="elevation function" type="ParameterList">
           <ParameterList name="Elevation" type="ParameterList">
             <Parameter name="region" type="string" value="Computational domain" />
@@ -158,12 +159,17 @@
       </ParameterList>
 
       <ParameterList name="overland conductivity evaluator" type="ParameterList">
+	<Parameter name="overland conductivity key" type="string" value="overland_conductivity" />
         <Parameter name="include density factor" type="bool" value="false" />
         <ParameterList name="overland conductivity model" type="ParameterList">
           <Parameter name="Manning exponent" type="double" value="0.666666666667" />
           <Parameter name="slope regularization epsilon" type="double" value="0.01" />
         </ParameterList>
       </ParameterList>
+
+       <ParameterList name="potential evaluator" type="ParameterList">
+	<Parameter name="potential key" type="string" value="pres_elev" />
+       </ParameterList>
 
       <ParameterList name="initial condition" type="ParameterList">
         <ParameterList name="function" type="ParameterList">

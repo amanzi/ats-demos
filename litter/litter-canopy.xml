@@ -539,7 +539,7 @@
       
       <ParameterList name="litter-area_index" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="additive evaluator" />
-        <Parameter name="evaluator dependencies" type="Array(string)" value="{litter-thickness}" />
+        <Parameter name="evaluator dependencies" type="Array(string)" value="{surface-litter-thickness}" />
 	    <Parameter name="litter-thickness coefficient" type="double" value="15.24." /> <!-- litter density of 1 kg / m^3 * 15.24 litter SLA  -->
       </ParameterList>
       
@@ -552,7 +552,7 @@
         <Parameter name="litter-drainage coefficient" type="double" value="1."/>
       </ParameterList>
 
-      <ParameterList name="litter-thickness" type="ParameterList">
+      <ParameterList name="surface-litter-thickness" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="cells" type="ParameterList">
@@ -599,7 +599,7 @@
         </ParameterList>
       </ParameterList>
 
-      <ParameterList name="ponded_depth" type="ParameterList">
+      <ParameterList name="surface-ponded_depth" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="ponded depth" />
       </ParameterList>
       
@@ -706,7 +706,7 @@
         </ParameterList>
       </ParameterList>
       
-      <ParameterList name="manning_coefficient" type="ParameterList">
+      <ParameterList name="surface-manning_coefficient" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="manning coefficient with litter" />
         <ParameterList name="manning coefficient parameters" type="ParameterList">
           <ParameterList name="not river or floodplain" type="ParameterList">

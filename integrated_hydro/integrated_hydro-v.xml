@@ -292,14 +292,14 @@
         <Parameter name="include water vapor" type="bool" value="true" />
       </ParameterList>
 
-      <ParameterList name="ponded_depth" type="ParameterList">
+      <ParameterList name="surface-ponded_depth" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="ponded depth" />
       </ParameterList>
 
-      <ParameterList name="ponded_depth_bar" type="ParameterList">
+      <ParameterList name="surface-ponded_depth_bar" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="ponded depth" />
         <Parameter name="ponded depth bar" type="bool" value="true" />
-        <Parameter name="height key" type="string" value="ponded_depth_bar"/>
+        <Parameter name="height key" type="string" value="surface-ponded_depth_bar"/>
       </ParameterList>
 
       <ParameterList name="surface-water_content" type="ParameterList">
@@ -331,6 +331,20 @@
       </ParameterList>
 
       <ParameterList name="surface-mass_density_liquid" type="ParameterList">
+        <Parameter name="field evaluator type" type="string" value="eos" />
+        <Parameter name="EOS basis" type="string" value="both" />
+        <Parameter name="molar density key" type="string" value="surface-molar_density_liquid" />
+        <Parameter name="mass density key" type="string" value="surface-mass_density_liquid" />
+        <ParameterList name="EOS parameters" type="ParameterList">
+          <Parameter name="EOS type" type="string" value="constant" />
+          <Parameter name="density [kg/m^3]" type="double" value="1000.0" />
+        </ParameterList>
+        <ParameterList name="verbose object" type="ParameterList">
+          <Parameter name="verbosity level" type="string" value="low" />
+        </ParameterList>
+      </ParameterList>
+      <!-- ADDED-->
+      <ParameterList name="surface-molar_density_liquid" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="eos" />
         <Parameter name="EOS basis" type="string" value="both" />
         <Parameter name="molar density key" type="string" value="surface-molar_density_liquid" />
@@ -396,7 +410,7 @@
         </ParameterList>
       </ParameterList>
 
-      <ParameterList name="manning_coefficient" type="ParameterList">
+      <ParameterList name="surface-manning_coefficient" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="domain" type="ParameterList">

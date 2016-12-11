@@ -117,7 +117,7 @@
         </ParameterList>
       </ParameterList>
 
-      <ParameterList name="elevation evaluator" type="ParameterList">
+      <ParameterList name="elevation evaluator" type="ParameterList"> 
         <ParameterList name="elevation function" type="ParameterList">
           <ParameterList name="Elevation" type="ParameterList">
             <Parameter name="region" type="string" value="Computational domain" />
@@ -188,15 +188,15 @@
         <Parameter name="field evaluator type" type="string" value="overland pressure water content" />
       </ParameterList>
 
-      <ParameterList name="ponded_depth" type="ParameterList">
+      <ParameterList name="surface-ponded_depth" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="ponded depth" />
       </ParameterList>
 
 
-      <ParameterList name="ponded_depth_bar" type="ParameterList">
+      <ParameterList name="surface-ponded_depth_bar" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="ponded depth" />
         <Parameter name="ponded depth bar" type="bool" value="true" />
-        <Parameter name="height key" type="string" value="ponded_depth_bar"/>
+        <Parameter name="height key" type="string" value="surface-ponded_depth_bar"/>
       </ParameterList>
 
 
@@ -243,8 +243,19 @@
           <Parameter name="verbosity level" type="string" value="low" />
         </ParameterList>
       </ParameterList>
-
-      <ParameterList name="manning_coefficient" type="ParameterList">
+      <!-- ADDED-->
+      <ParameterList name="surface-molar_density_liquid" type="ParameterList">
+        <Parameter name="field evaluator type" type="string" value="eos" />
+        <Parameter name="EOS basis" type="string" value="both" />
+        <Parameter name="molar density key" type="string" value="surface-molar_density_liquid" />
+        <Parameter name="mass density key" type="string" value="surface-mass_density_liquid" />
+        <Parameter name="pressure key" type="string" value="surface-effective_pressure" />
+        <ParameterList name="EOS parameters" type="ParameterList">
+          <Parameter name="EOS type" type="string" value="liquid water" />
+        </ParameterList>
+      </ParameterList>
+      
+      <ParameterList name="surface-manning_coefficient" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="domain" type="ParameterList">

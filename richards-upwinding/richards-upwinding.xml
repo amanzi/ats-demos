@@ -81,11 +81,11 @@
 
   <ParameterList name="visualization" type="ParameterList">
     <Parameter name="file name base" type="string" value="visdump" />
-    <Parameter name="times start period stop" type="Array(double)" value="{0.0,3.15e7,-1.0}" />
+    <Parameter name="times start period stop" type="Array(double)" value="{0.0,3.15e8,-1.0}" />
   </ParameterList>
 
   <ParameterList name="checkpoint" type="ParameterList">
-    <Parameter name="times start period stop" type="Array(double)" value="{0.0,3.15e8,-1.0}" />
+    <Parameter name="times start period stop" type="Array(double)" value="{0.0,3.15e9,-1.0}" />
   </ParameterList>
 
   <ParameterList name="PKs" type="ParameterList">

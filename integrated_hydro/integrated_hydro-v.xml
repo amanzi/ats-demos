@@ -204,7 +204,20 @@
           </ParameterList>
 
           <ParameterList name="initial condition" type="ParameterList">
-            <Parameter name="restart file" type="string" value="../data/checkpoint00001.h5" />
+            <Parameter name="initialize faces from cells" type="bool" value="true" />
+            <ParameterList name="function" type="ParameterList">
+              <ParameterList name="initial pressure cells" type="ParameterList">
+		<Parameter name="region" type="string" value="computational domain" />
+		<Parameter name="components" type="Array(string)" value="{cell,face}" />
+		<ParameterList name="function" type="ParameterList">
+		  <ParameterList name="function-linear" type="ParameterList">
+                    <Parameter name="x0" type="Array(double)" value="{0.0,0.0,0.0,4.0}" />
+                    <Parameter name="y0" type="double" value="101325.0" />
+                    <Parameter name="gradient" type="Array(double)" value="{0.0,0.0,0.0,-9806.23}" />
+		  </ParameterList>
+		</ParameterList>
+              </ParameterList>
+            </ParameterList>
           </ParameterList>
 
           <ParameterList name="water retention evaluator" type="ParameterList">

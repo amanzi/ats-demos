@@ -131,7 +131,7 @@
 
 
   <ParameterList name="cycle driver">
-    <Parameter name="end cycle" type="int" value="5"/>
+    <Parameter name="end cycle" type="int" value="12"/>
     <Parameter name="start time" type="double" value="0.0"/>
     <Parameter name="start time units" type="string" value="s"/> <!-- valid are s/d/yr -->
     <Parameter name="end time" type="double" value="1."/>
@@ -185,21 +185,21 @@
   </ParameterList>
 
   <!-- Vis List - see $AMANZI_DIR/src/state/visualization.hh  -->
-  <!-- <ParameterList name="visualization"> -->
-  <!--   <Parameter name="file name base" type="string" value="visdump"/> -->
-  <!--   <Parameter name="cycles start period stop" type="Array(int)" value="{0, 5, -1}"/>   -->
-  <!-- </ParameterList> -->
+  <ParameterList name="visualization">
+    <Parameter name="file name base" type="string" value="visdump"/>
+    <Parameter name="cycles start period stop" type="Array(int)" value="{0, 5, -1}"/>  
+  </ParameterList>
 
-  <!-- <ParameterList name="visualization surface"> -->
-  <!--   <Parameter name="file name base" type="string" value="visdump_surface"/> -->
-  <!--   <Parameter name="cycles start period stop" type="Array(int)" value="{0, 5, -1}"/>   -->
-  <!-- </ParameterList> -->
+  <ParameterList name="visualization surface">
+    <Parameter name="file name base" type="string" value="visdump_surface"/>
+    <Parameter name="cycles start period stop" type="Array(int)" value="{0, 5, -1}"/>  
+  </ParameterList>
  
 
-  <!-- <ParameterList name="checkpoint"> -->
-  <!--   <Parameter name="file name base" type="string" value="checkpoint"/> -->
-  <!--   <Parameter name="cycles start period stop" type="Array(int)" value="{0, 50, -1}"/>  -->
-  <!-- </ParameterList> -->
+  <ParameterList name="checkpoint">
+    <Parameter name="file name base" type="string" value="checkpoint"/>
+    <Parameter name="cycles start period stop" type="Array(int)" value="{0, 50, -1}"/> 
+  </ParameterList>
 
 
   <!-- PK List - top level placeholder for Coordinator  -->
@@ -331,9 +331,7 @@
 
       </ParameterList>
 
-      <ParameterList name="initial condition">
-        <Parameter name="restart file" type="string" value="restart.h5"/> 
-      </ParameterList>
+
 
       <ParameterList name="water retention evaluator" type="ParameterList">
         <Parameter name="minimum rel perm cutoff" type="double" value="0.0" />
@@ -427,56 +425,76 @@
     <!-- chemistry subsurface-->
     <ParameterList name="chemistry subsurface">
       <Parameter name="engine" type="string" value="PFloTran"/>
-      <Parameter name="domain name" type="string" value="domain"/>
       <Parameter name="chemistry model" type="string" value="Alquimia"/>
+      <Parameter name="domain name" type="string" value="domain"/>
+      <Parameter name="saturation key" type="string" value="saturation_liquid"/>      
       <Parameter name="fluid density key" type="string" value="mass_density_liquid"/>
-      <Parameter name="engine input file" type="string" value="../data/amanzi-u-1d-tracer-alq-pflo_sub.in"/>
+      <Parameter name="engine input file" type="string" value="../data/1d-calcite-trim_sub.in"/>
+      <ParameterList name="initial conditions">
+        <ParameterList name="mineral_volume_fractions">
+          <Parameter name="function" type="string" value="list was moved to state"/>
+        </ParameterList>
+        <ParameterList name="mineral_specific_surface_area">
+          <Parameter name="function" type="string" value="list was moved to state"/>
+        </ParameterList>
+      </ParameterList>
+      <Parameter name="minerals" type="Array(string)" value="{Calcite}"/>
       <Parameter name="activity model" type="string" value="unit"/>
       <Parameter name="maximum Newton iterations" type="int" value="100"/>
-      <Parameter name="tolerance" type="double" value="9.99999999999999980e-13"/>
-      <Parameter name="max time step (s)" type="double" value="1.00000000000000000e+10"/>
+      <Parameter name="tolerance" type="double" value="9.99999999999999980e-16"/>
+      <Parameter name="max time step (s)" type="double" value="2.20000000000000000e+05"/>
       <Parameter name="min time step (s)" type="double" value="1.00000000000000000e+10"/>
-      <Parameter name="initial time step (s)" type="double" value="1.00000000000000000e+07"/>
-      <Parameter name="time step cut threshold" type="int" value="8"/>
+      <Parameter name="initial time step (s)" type="double" value="2.20000000000000000e+05"/>
+      <Parameter name="time step cut threshold" type="int" value="5"/>
       <Parameter name="time step cut factor" type="double" value="2.00000000000000000e+00"/>
       <Parameter name="time step increase threshold" type="int" value="4"/>
       <Parameter name="time step increase factor" type="double" value="1.19999999999999996e+00"/>
       <Parameter name="time step control method" type="string" value="fixed"/>
+      <Parameter name="auxiliary data" type="Array(string)" value="{pH}"/>
       <Parameter name="initial conditions time" type="double" value="0.00000000000000000e+00"/>
       <Parameter name="use mole fraction units" type="bool" value="true"/>
-      <Parameter name="number of component concentrations" type="int" value="1"/>
+      <Parameter name="number of component concentrations" type="int" value="3"/>
       <ParameterList name="verbose object">
         <Parameter name="verbosity level" type="string" value="high"/>
       </ParameterList>
-      <ParameterList name="initial conditions"/>
     </ParameterList>
+
 
     <!-- chemistry surface-->
     <ParameterList name="chemistry surface">
       <Parameter name="engine" type="string" value="PFloTran"/>
       <Parameter name="chemistry model" type="string" value="Alquimia"/>
       <Parameter name="domain name" type="string" value="surface"/>
-      <Parameter name="fluid density key" type="string" value="surface-mass_density_liquid"/>
       <Parameter name="saturation key" type="string" value="ponded_depth"/>      
-      <Parameter name="engine input file" type="string" value="../data/amanzi-u-1d-tracer-alq-pflo_surf.in"/> 
+      <Parameter name="fluid density key" type="string" value="surface-mass_density_liquid"/>
+      <Parameter name="engine input file" type="string" value="../data/1d-calcite-trim_surf.in"/>
+      <ParameterList name="initial conditions">
+        <ParameterList name="mineral_volume_fractions">
+          <Parameter name="function" type="string" value="list was moved to state"/>
+        </ParameterList>
+        <ParameterList name="mineral_specific_surface_area">
+          <Parameter name="function" type="string" value="list was moved to state"/>
+        </ParameterList>
+      </ParameterList>
+      <Parameter name="minerals" type="Array(string)" value="{Calcite}"/>
       <Parameter name="activity model" type="string" value="unit"/>
       <Parameter name="maximum Newton iterations" type="int" value="100"/>
-      <Parameter name="tolerance" type="double" value="9.99999999999999980e-13"/>
-      <Parameter name="max time step (s)" type="double" value="1.00000000000000000e+10"/>
+      <Parameter name="tolerance" type="double" value="9.99999999999999980e-16"/>
+      <Parameter name="max time step (s)" type="double" value="2.20000000000000000e+05"/>
       <Parameter name="min time step (s)" type="double" value="1.00000000000000000e+10"/>
-      <Parameter name="initial time step (s)" type="double" value="1.00000000000000000e+07"/>
-      <Parameter name="time step cut threshold" type="int" value="8"/>
+      <Parameter name="initial time step (s)" type="double" value="2.20000000000000000e+05"/>
+      <Parameter name="time step cut threshold" type="int" value="5"/>
       <Parameter name="time step cut factor" type="double" value="2.00000000000000000e+00"/>
       <Parameter name="time step increase threshold" type="int" value="4"/>
       <Parameter name="time step increase factor" type="double" value="1.19999999999999996e+00"/>
       <Parameter name="time step control method" type="string" value="fixed"/>
+      <Parameter name="auxiliary data" type="Array(string)" value="{pH}"/>
       <Parameter name="initial conditions time" type="double" value="0.00000000000000000e+00"/>
       <Parameter name="use mole fraction units" type="bool" value="true"/>
-      <Parameter name="number of component concentrations" type="int" value="1"/>
+      <Parameter name="number of component concentrations" type="int" value="3"/>
       <ParameterList name="verbose object">
         <Parameter name="verbosity level" type="string" value="high"/>
       </ParameterList>
-      <ParameterList name="initial conditions"/>
     </ParameterList>
 
 
@@ -484,9 +502,8 @@
       <Parameter name="PK type" type="string" value="surface subsurface transport" />
       <Parameter name="PK name" type="string" value="surface subsurface transport" />
       <Parameter name="PKs order" type="Array(string)" value="{subsurface transport, surface transport}" />
-      <Parameter name="PK origin" type="string" value="ATS"/>
       <Parameter name="coupling region" type="string" value=""/>
-      <Parameter name="component names" type="Array(string)" value="{tracer}"/>
+      <Parameter name="component names" type="Array(string)" value="{H+, HCO3-, Ca++}"/>
       <ParameterList name="verbose object">
         <Parameter name="name" type="string" value="Coupled TransportPK"/>
         <Parameter name="verbosity level" type="string" value="high"/>
@@ -495,14 +512,13 @@
 
     <ParameterList name="subsurface transport">
       <Parameter name="PK type" type="string" value="transport ats"/>
-      <Parameter name="PK origin" type="string" value="Amanzi"/>
       <Parameter name="saturation_key" type="string" value="saturation_liquid"/>
       <Parameter name="prev_saturation_key" type="string" value="prev_saturation_liquid"/>
       <Parameter name="flux_key" type="string" value="mass_flux"/>
       <Parameter name="molar_density_key" type="string" value="molar_density_liquid"/>
-      <Parameter name="component names" type="Array(string)" value="{tracer}"/>
-      <Parameter name="number of liquid components" type="int" value="1"/>
-      <Parameter name="component molar masses" type="Array(double)" value="{1.0e+00}"/>
+      <Parameter name="component names" type="Array(string)" value="{H+, HCO3-, Ca++}"/>
+      <Parameter name="number of liquid components" type="int" value="3"/>
+      <Parameter name="component molar masses" type="Array(double)" value="{1.0e+00, 1.0e+00, 1.0e+00}"/>
       <Parameter name="spatial discretization order" type="int" value="1"/>
       <Parameter name="temporal discretization order" type="int" value="1"/>
       <Parameter name="cfl" type="double" value="1.00000000000000000e-00"/>
@@ -533,7 +549,7 @@
               <Parameter name="regions" type="Array(string)" value="{top face}"/>
               <ParameterList name="boundary concentration">
                 <Parameter name="field_out_key" type="string" value="surface-total_component_concentration"/>
-               <Parameter name="copy_field_out_key" type="string" value="subcycling"/>
+                <Parameter name="copy_field_out_key" type="string" value="subcycling"/>
                 <!-- <Parameter name="copy_field_out_key" type="string" value="default"/> -->
               </ParameterList>
             </ParameterList>
@@ -541,7 +557,7 @@
 
         </ParameterList>
       </ParameterList>
-      <Parameter name="number of aqueous components" type="int" value="1"/>
+      <Parameter name="number of aqueous components" type="int" value="3"/>
       <Parameter name="number of gaseous components" type="int" value="0"/>
       <Parameter name="runtime diagnostics: regions" type="Array(string)" value="{}"/>
     </ParameterList>
@@ -549,15 +565,14 @@
     <ParameterList name="surface transport">
 
       <Parameter name="PK type" type="string" value="transport ats"/>
-      <Parameter name="PK origin" type="string" value="Amanzi"/>
       <Parameter name="domain name" type="string" value="surface" />
       <Parameter name="saturation_key" type="string" value="ponded_depth"/>
       <Parameter name="prev_saturation_key" type="string" value="prev_ponded_depth"/>
       <Parameter name="flux_key" type="string" value="surface-mass_flux"/>
       <Parameter name="molar_density_key" type="string" value="surface-molar_density_liquid"/>
-      <Parameter name="component names" type="Array(string)" value="{tracer}"/>
-      <Parameter name="number of liquid components" type="int" value="1"/>
-      <Parameter name="component molar masses" type="Array(double)" value="{1.0e+00}"/>
+      <Parameter name="component names" type="Array(string)" value="{H+, HCO3-, Ca++}"/>
+      <Parameter name="number of liquid components" type="int" value="3"/>
+      <Parameter name="component molar masses" type="Array(double)" value="{1.0e+00, 1.0e+00, 1.0e+00}"/>
       <Parameter name="spatial discretization order" type="int" value="1"/>
       <Parameter name="temporal discretization order" type="int" value="1"/>
       <Parameter name="cfl" type="double" value="1.00000000000000000e-00"/>
@@ -591,10 +606,8 @@
                 <Parameter name="flux_key" type="string" value="mass_flux"/>
                 <Parameter name="copy_flux_key" type="string" value="next_timestep" />
                 <Parameter name="field_out_key" type="string" value="total_component_concentration"/>
-                <!-- <Parameter name="copy_field_out_key" type="string" value="default"/> -->
                 <Parameter name="copy_field_out_key" type="string" value="subcycling"/>
                 <Parameter name="field_in_key" type="string" value="surface-total_component_concentration"/>
-                <!-- <Parameter name="copy_field_in_key" type="string" value="default"/> -->
                 <Parameter name="copy_field_in_key" type="string" value="subcycling"/>
               </ParameterList>
             </ParameterList>
@@ -607,22 +620,15 @@
         <ParameterList name="geochemical">
           <ParameterList name="west_bc">
             <Parameter name="regions" type="Array(string)" value="{surface west}"/>
-            <Parameter name="solutes" type="Array(string)" value="{tracer}"/>
+            <Parameter name="solutes" type="Array(string)" value="{H+, HCO3-, Ca++}"/>
             <Parameter name="times" type="Array(double)" value="{0.00000000000000000e+00, 1.00000000000000000e+20}"/>
-            <Parameter name="geochemical conditions" type="Array(string)" value="{west_constraint, west_constraint}"/>
-            <Parameter name="time functions" type="Array(string)" value="{constant}"/>
-          </ParameterList>
-          <ParameterList name="east_bc">
-            <Parameter name="regions" type="Array(string)" value="{surface east}"/>
-            <Parameter name="solutes" type="Array(string)" value="{tracer}"/>
-            <Parameter name="times" type="Array(double)" value="{0.00000000000000000e+00, 1.00000000000000000e+20}"/>
-            <Parameter name="geochemical conditions" type="Array(string)" value="{initial, initial}"/>
+            <Parameter name="geochemical conditions" type="Array(string)" value="{west, west}"/>
             <Parameter name="time functions" type="Array(string)" value="{constant}"/>
           </ParameterList>
         </ParameterList>
       </ParameterList>
 
-      <Parameter name="number of aqueous components" type="int" value="1"/>
+      <Parameter name="number of aqueous components" type="int" value="3"/>
       <Parameter name="number of gaseous components" type="int" value="0"/>
       <Parameter name="runtime diagnostics: regions" type="Array(string)" value="{}"/>
     </ParameterList>
@@ -655,13 +661,12 @@
         <ParameterList name="function">
           <ParameterList name="domain rain">
           <Parameter name="region" type="string" value="rain domain"/> 
-
             <Parameter name="component" type="string" value="cell"/>
             <ParameterList name="function">
               <ParameterList name="function-tabular">
                 <!--                    <Parameter name="x values" type="Array(double)" value="{0.0, 432000.0}"/> -->
                 <Parameter name="x values" type="Array(double)" value="{0.0, 1500.0}"/>
-                <Parameter name="y values" type="Array(double)" value="{0.001, 0.0}"/>
+                <Parameter name="y values" type="Array(double)" value="{0.0001, 0.0}"/>
                 <Parameter name="forms" type="Array(string)" value="{constant}"/>
               </ParameterList>
             </ParameterList>
@@ -895,6 +900,7 @@
         <Parameter name="restart file" type="string" value="../data/restart_coupled.h5"/>
       </ParameterList>
 
+
       <ParameterList name="geochemical conditions">
         <ParameterList name="initial">
           <Parameter name="regions" type="Array(string)" value="{computational domain}"/>
@@ -906,6 +912,76 @@
           <Parameter name="regions" type="Array(string)" value="{surface domain}"/>
         </ParameterList>
       </ParameterList>
+
+      <ParameterList name="mineral_volume_fractions">
+        <ParameterList name="function">
+          <ParameterList name="All">
+            <Parameter name="region" type="string" value="computational domain"/>
+            <Parameter name="component" type="string" value="cell"/>
+            <ParameterList name="function">
+              <Parameter name="number of dofs" type="int" value="1"/>
+              <Parameter name="function type" type="string" value="composite function"/>
+              <ParameterList name="dof 1 function">
+                <ParameterList name="function-constant">
+                  <Parameter name="value" type="double" value="1.00000000000000008e-05"/>
+                </ParameterList>
+              </ParameterList>
+            </ParameterList>
+          </ParameterList>
+        </ParameterList>
+      </ParameterList>
+      <ParameterList name="mineral_specific_surface_area">
+        <ParameterList name="function">
+          <ParameterList name="All">
+            <Parameter name="region" type="string" value="computational domain"/>
+            <Parameter name="component" type="string" value="cell"/>
+            <ParameterList name="function">
+              <Parameter name="number of dofs" type="int" value="1"/>
+              <Parameter name="function type" type="string" value="composite function"/>
+              <ParameterList name="dof 1 function">
+                <ParameterList name="function-constant">
+                  <Parameter name="value" type="double" value="1.00000000000000000e+00"/>
+                </ParameterList>
+              </ParameterList>
+            </ParameterList>
+          </ParameterList>
+        </ParameterList>
+      </ParameterList>
+      <ParameterList name="surface-mineral_volume_fractions">
+        <ParameterList name="function">
+          <ParameterList name="All">
+            <Parameter name="region" type="string" value="surface domain"/>
+            <Parameter name="component" type="string" value="cell"/>
+            <ParameterList name="function">
+              <Parameter name="number of dofs" type="int" value="1"/>
+              <Parameter name="function type" type="string" value="composite function"/>
+              <ParameterList name="dof 1 function">
+                <ParameterList name="function-constant">
+                  <Parameter name="value" type="double" value="1.00000000000000008e-05"/>
+                </ParameterList>
+              </ParameterList>
+            </ParameterList>
+          </ParameterList>
+        </ParameterList>
+      </ParameterList>
+      <ParameterList name="surface-mineral_specific_surface_area">
+        <ParameterList name="function">
+          <ParameterList name="All">
+            <Parameter name="region" type="string" value="surface domain"/>
+            <Parameter name="component" type="string" value="cell"/>
+            <ParameterList name="function">
+              <Parameter name="number of dofs" type="int" value="1"/>
+              <Parameter name="function type" type="string" value="composite function"/>
+              <ParameterList name="dof 1 function">
+                <ParameterList name="function-constant">
+                  <Parameter name="value" type="double" value="1.00000000000000000e+00"/>
+                </ParameterList>
+              </ParameterList>
+            </ParameterList>
+          </ParameterList>
+        </ParameterList>
+      </ParameterList>
+
 
     </ParameterList>
   </ParameterList>

@@ -122,7 +122,7 @@
 
   </ParameterList>
 
-
+  <!-- problem definition: time control + pk tree -->
   <ParameterList name="cycle driver">
     <Parameter name="end cycle" type="int" value="1000"/>
     <Parameter name="start time" type="double" value="0.0"/>
@@ -135,6 +135,7 @@
       <ParameterList name="Flow and Reactive Transport" type="ParameterList">
         <Parameter name="PK type" type="string" value="flow reactive transport ATS" />
 
+	<!-- Flow coupler: subsurface (Richards) + surface (overland)-->
         <ParameterList name="surface-subsurface flow coupler" type="ParameterList">
           <Parameter name="PK type" type="string" value="coupled water" />
           <ParameterList name="flow" type="ParameterList">
@@ -145,9 +146,11 @@
           </ParameterList>
         </ParameterList>
 
+	<!-- Reactive transport: Chemistry coupler + Transport coupler-->
         <ParameterList name="reactive transport">
           <Parameter name="PK type" type="string" value="coupled reactive transport"/>
 
+	  <!-- Chemistry coupler: surface + subsurface -->
           <ParameterList name="chemistry coupler" type="ParameterList">
             <Parameter name="PK type" type="string" value="weak MPC" />
             <ParameterList name="chemistry surface">
@@ -158,6 +161,7 @@
             </ParameterList>
           </ParameterList>
 
+	  <!-- Transport coupler: surface + subsurface -->
           <ParameterList name="surface-subsurface transport coupler" type="ParameterList">
             <Parameter name="PK type" type="string" value="surface subsurface transport" />
             <ParameterList name="subsurface transport" type="ParameterList">
@@ -172,7 +176,7 @@
       </ParameterList>
     </ParameterList>
 
-  </ParameterList>
+  </ParameterList>   <!-- end problem definition: time control + pk tree -->
 
   <ParameterList name="verbose object" type="ParameterList">
     <Parameter name="verbosity level" type="string" value="high" />
@@ -209,6 +213,19 @@
 
   <ParameterList name="PKs">
 
+    <!-- Pk Summary: -->
+    <!-- 0. Master pK, coordinatior -->
+    <!-- 1. Flow coupler: subsurface (Richards) + surface (overland)-->
+    <!-- 1.1 Richards Flow PK -->
+    <!-- 1.2 Overland flow solver -->
+    <!-- 2. Reactive transport: Chemistry coupler + Transport coupler-->
+    <!-- 2.1 chemistry coupler -->
+    <!-- 2.1.1 chemistry subsurface-->
+    <!-- 2.1.2 chemistry surface-->
+    <!-- 2.2.1 subsurface transport -->
+    <!-- 2.2.2 surface transport -->
+
+    <!-- 0. Master pK, coordinatior -->
     <ParameterList name="Flow and Reactive Transport">
       <Parameter name="PK type" type="string" value="flow reactive transport ATS" />
       <Parameter name="PKs order" type="Array(string)" value="{surface-subsurface flow coupler, reactive transport}"/> 
@@ -218,7 +235,7 @@
       </ParameterList>
     </ParameterList>
 
-
+    <!-- 1. Flow coupler: subsurface (Richards) + surface (overland)-->
     <ParameterList name="surface-subsurface flow coupler">
       <Parameter name="PK type" type="string" value="coupled water" />
       <Parameter name="PKs order" type="Array(string)" value="{flow, overland flow}" />
@@ -291,8 +308,8 @@
       </ParameterList>
     </ParameterList>
 
-    <!-- Richards Flow PK -->
     <ParameterList name="flow">
+    <!-- 1.1 Richards Flow PK -->
       <ParameterList name="verbose object" type="ParameterList">
         <Parameter name="verbosity level" type="string" value="low" />
       </ParameterList>
@@ -331,11 +348,9 @@
         </ParameterList>
       </ParameterList>
 
-
-
-    </ParameterList>
+    </ParameterList> <!-- end: 1.1 Richards -->
       
-
+    <!-- 1.2 Overland flow solver -->
     <ParameterList name="overland flow">
       <Parameter name="PK type" type="string" value="overland flow, pressure basis"/>
       <Parameter name="primary variable" type="string" value="surface-pressure"/>
@@ -388,10 +403,10 @@
         </ParameterList>
       </ParameterList>
 
-    </ParameterList>
+    </ParameterList>     <!-- end: 1.2 Overland flow solver -->
 
 
-    <!-- reactive transport -->
+    <!-- 2. Reactive transport: Chemistry coupler + Transport coupler-->
     <ParameterList name="reactive transport">
       <Parameter name="PK type" type="string" value="coupled reactive transport"/>
       <Parameter name="PK name" type="string" value="reactive transport"/>
@@ -399,14 +414,14 @@
       <Parameter name="transport index" type="int" value="1"/>
     </ParameterList>
 
-    <!-- chemistry -->
+    <!-- 2.1 chemistry coupler -->
     <ParameterList name="chemistry coupler">
       <Parameter name="PK type" type="string" value="weak MPC" />
       <Parameter name="PK name" type="string" value="coupled chemistry" />
       <Parameter name="PKs order" type="Array(string)" value="{chemistry subsurface, chemistry surface}" />
     </ParameterList>
 
-    <!-- chemistry subsurface-->
+    <!-- 2.1.1 chemistry subsurface-->
     <ParameterList name="chemistry subsurface">
       <Parameter name="engine" type="string" value="PFloTran"/>
       <Parameter name="domain name" type="string" value="domain"/>
@@ -432,7 +447,7 @@
       <ParameterList name="initial conditions"/>
     </ParameterList>
 
-    <!-- chemistry surface-->
+    <!-- 2.1.2 chemistry surface-->
     <ParameterList name="chemistry surface">
       <Parameter name="engine" type="string" value="PFloTran"/>
       <Parameter name="chemistry model" type="string" value="Alquimia"/>
@@ -459,7 +474,7 @@
       <ParameterList name="initial conditions"/>
     </ParameterList>
 
-
+    <!-- 2.2 transport coupler -->
     <ParameterList name="surface-subsurface transport coupler">
       <Parameter name="PK type" type="string" value="surface subsurface transport" />
       <Parameter name="PK name" type="string" value="surface subsurface transport" />
@@ -471,6 +486,7 @@
       </ParameterList>
     </ParameterList>
 
+    <!-- 2.2.1 subsurface transport -->
     <ParameterList name="subsurface transport">
       <Parameter name="PK type" type="string" value="transport ATS"/>
       <Parameter name="saturation_key" type="string" value="saturation_liquid"/>
@@ -522,6 +538,7 @@
       <Parameter name="runtime diagnostics: regions" type="Array(string)" value="{}"/>
     </ParameterList>
 
+    <!-- 2.2.2 surface transport -->
     <ParameterList name="surface transport">
 
       <Parameter name="PK type" type="string" value="transport ATS"/>
@@ -614,7 +631,8 @@
       <ParameterList name="surface-water_content" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="overland pressure water content" />
       </ParameterList>
- 
+
+      <!-- rain water source on the surface, no rain if y values = 0 -->  
       <ParameterList name="surface-mass_source">
         <Parameter name="field evaluator type" type="string" value="independent variable"/>
         <ParameterList name="function">
@@ -836,6 +854,7 @@
         </ParameterList>
       </ParameterList>
 
+      <!-- connection between surface and subsurface -->
       <ParameterList name="overland_source_from_subsurface">
         <Parameter name="field evaluator type" type="string" value="overland source from subsurface via flux"/>
       </ParameterList>
@@ -858,12 +877,14 @@
         <Parameter name="value" type="Array(double)" value="{0.0, 0.0, -9.80665}"/>
       </ParameterList>
 
+      <!-- intial conditions for surface transport problem -->
       <ParameterList name="surface-geochemical conditions">
         <ParameterList name="initial">
           <Parameter name="regions" type="Array(string)" value="{surface domain}"/>
         </ParameterList>
       </ParameterList>
 
+      <!-- intial conditions for subsurface transport problem -->
       <ParameterList name="geochemical conditions">
         <ParameterList name="initial">
           <Parameter name="regions" type="Array(string)" value="{computational domain}"/>

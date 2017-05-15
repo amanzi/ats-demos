@@ -366,7 +366,7 @@
             <Parameter name="regions" type="Array(string)" value="{surface west}" />
             <ParameterList name="boundary head" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
-                <Parameter name="value" type="double" value="0.13" />
+                <Parameter name="value" type="double" value="0.103" />
               </ParameterList>
             </ParameterList>
           </ParameterList>
@@ -847,11 +847,12 @@
       </ParameterList>
 
       <ParameterList name="pressure">
-        <Parameter name="restart file" type="string" value="../data/restart_subsurface.h5"/> 
+        <Parameter name="restart file" type="string" value="../data//restart_subsurface.h5"/> 
       </ParameterList>
 
       <ParameterList name="surface-pressure">
-        <Parameter name="restart file" type="string" value="../data/restart_run_surface_flow_no_rain.h5"/> 
+        <!-- <Parameter name="restart file" type="string" value="../restart_run_surface_flow_no_rain.h5"/>  -->
+        <Parameter name="restart file" type="string" value="../data/restart_run_surface_flow_slow.h5"/> 
       </ParameterList>
 
       <ParameterList name="gravity">

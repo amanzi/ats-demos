@@ -124,7 +124,7 @@
 
   <!-- problem definition: time control + pk tree -->
   <ParameterList name="cycle driver">
-    <Parameter name="end cycle" type="int" value="1000"/>
+    <Parameter name="end cycle" type="int" value="100"/>
     <Parameter name="start time" type="double" value="0.0"/>
     <Parameter name="start time units" type="string" value="s"/> <!-- valid are s/d/yr -->
     <Parameter name="end time" type="double" value="10000."/>
@@ -191,6 +191,7 @@
   <ParameterList name="visualization surface">
     <Parameter name="file name base" type="string" value="visdump_surface"/>
     <Parameter name="times start period stop" type="Array(double)" value="{0, 200, -1}"/>  
+    <Parameter name="cycles start period stop" type="Array(int)" value="{0, 1, 50}"/> 
   </ParameterList>
 
   <ParameterList name="visualization">
@@ -285,7 +286,7 @@
           <Parameter name="backtrack lag" type="int" value="0" />
           <Parameter name="backtrack factor" type="double" value="0.5" />
           <Parameter name="backtrack tolerance" type="double" value="1e-04" />
-          <Parameter name="nonlinear tolerance" type="double" value="1e-05" />
+          <Parameter name="nonlinear tolerance" type="double" value="1e-07" />
           <Parameter name="diverged tolerance" type="double" value="1000000.0" />
           <Parameter name="limit iterations" type="int" value="21" />
           <ParameterList name="verbose object" type="ParameterList">
@@ -469,7 +470,7 @@
       <Parameter name="initial conditions time" type="double" value="0.00000000000000000e+00"/>
       <Parameter name="number of component concentrations" type="int" value="1"/>
       <ParameterList name="verbose object">
-        <Parameter name="verbosity level" type="string" value="high"/>
+        <Parameter name="verbosity level" type="string" value="extreme"/>
       </ParameterList>
       <ParameterList name="initial conditions"/>
     </ParameterList>
@@ -560,7 +561,7 @@
         <Parameter name="name" type="string" value="Surface Transport"/> 
       </ParameterList>
       <Parameter name="enable internal tests" type="string" value="no"/>
-      <Parameter name="transport subcycling" type="bool" value="true"/>
+      <Parameter name="transport subcycling" type="bool" value="false"/>
       <ParameterList name="reconstruction">
         <Parameter name="polynomial order" type="int" value="0"/>
         <Parameter name="limiter" type="string" value="tensorial"/>

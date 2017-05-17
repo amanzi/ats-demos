@@ -73,6 +73,7 @@
     <ParameterList name="surface thermal coupler" type="ParameterList">
       <Parameter name="PK type" type="string" value="strong MPC" />
       <Parameter name="PKs order" type="Array(string)" value="{overland flow,surface energy}" />
+
       <ParameterList name="time integrator" type="ParameterList">
         <Parameter name="extrapolate initial guess" type="bool" value="true" />
         <Parameter name="solver type" type="string" value="nka_bt_ats" />
@@ -146,6 +147,9 @@
 
       <ParameterList name="diffusion" type="ParameterList">
         <Parameter name="discretization primary" type="string" value="fv: default" />
+      </ParameterList>
+      <ParameterList name="diffusion preconditioner" type="ParameterList">
+        <Parameter name="Newton correction" type="string" value="true Jacobian" />
       </ParameterList>
 
       <ParameterList name="initial condition" type="ParameterList">
@@ -225,6 +229,9 @@
       <Parameter name="primary variable" type="string" value="surface-temperature" />
       <Parameter name="domain name" type="string" value="surface" />
       <Parameter name="source term" type="bool" value="true" />
+      <Parameter name="flux key" type="string" value="surface-mass_flux" />
+      <Parameter name="supress advective terms in preconditioner" type="bool" value="false" />
+      <Parameter name="limit correction to temperature change [K]" type="double" value="1.0" />
       <Parameter name="initial time step" type="double" value="10.0" />
       <Parameter name="upwind conductivity method" type="string" value="arithmetic mean" />
       <Parameter name="debug cells" type="Array(int)" value="{0,9}" />

@@ -82,6 +82,9 @@
       <ParameterList name="diffusion" type="ParameterList">
         <Parameter name="discretization primary" type="string" value="fv: default" />
       </ParameterList>
+      <ParameterList name="diffusion preconditioner" type="ParameterList">
+        <Parameter name="Newton correction" type="string" value="true Jacobian" />
+      </ParameterList>
 
       <ParameterList name="preconditioner" type="ParameterList">
         <Parameter name="preconditioner type" type="string" value="block ilu" />

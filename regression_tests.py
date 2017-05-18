@@ -540,6 +540,10 @@ class RegressionTest(object):
             print("        current matches: {1}".format(";".join(h5_current.matches(key))),
                   file=testlog)
             
+        elif (len(h5_gold.matches(key)) == 0):
+            status.fail = 1
+            print("    FAIL: Could not find gold variable match for: '{0}'".format(key), file=testlog)
+
         else:
             if self._checkpoint is not None:
                 for k in h5_gold.matches(key):

@@ -23,14 +23,12 @@
         <Parameter name="high coordinate" type="Array(double)" value="{1.0,1.0,10.0}" />
       </ParameterList>
     </ParameterList>
-
     <ParameterList name="surface domain" type="ParameterList">
       <ParameterList name="region: box" type="ParameterList">
         <Parameter name="low coordinate" type="Array(double)" value="{0.0,0.0}" />
         <Parameter name="high coordinate" type="Array(double)" value="{1.0,1.0}" />
       </ParameterList>
     </ParameterList>
-
     <ParameterList name="east face" type="ParameterList">
       <ParameterList name="region: plane" type="ParameterList">
         <Parameter name="point" type="Array(double)" value="{1.0,1.0,0.0}" />
@@ -79,16 +77,14 @@
         <Parameter name="normal" type="Array(double)" value="{0.0,0.0,1.0}" />
       </ParameterList>
     </ParameterList>
-
   </ParameterList>
 
-
-  <ParameterList name="cycle driver">
-    <Parameter name="start time" type="double" value="0.0"/>
-    <Parameter name="start time units" type="string" value="s"/> <!-- valid are s/d/yr -->
-    <Parameter name="end time" type="double" value="2.0"/>
-    <Parameter name="end time units" type="string" value="d"/> <!-- valid are s/d/yr -->
-    <ParameterList name="PK tree">
+  <ParameterList name="cycle driver" type="ParameterList">
+    <Parameter name="start time" type="double" value="0.0" />
+    <Parameter name="start time units" type="string" value="s" />
+    <Parameter name="end time" type="double" value="2.0" />
+    <Parameter name="end time units" type="string" value="d" />
+    <ParameterList name="PK tree" type="ParameterList">
       <ParameterList name="Top level MPC" type="ParameterList">
         <Parameter name="PK type" type="string" value="strong MPC" />
         <ParameterList name="surface balance" type="ParameterList">
@@ -106,7 +102,6 @@
       </ParameterList>
     </ParameterList>
   </ParameterList>
-
   <ParameterList name="visualization" type="ParameterList">
     <Parameter name="file name base" type="string" value="visdump" />
     <Parameter name="times start period stop" type="Array(double)" value="{0.0,864.0,-1.0}" />
@@ -116,14 +111,11 @@
     <Parameter name="file name base" type="string" value="visdump_surface" />
     <Parameter name="times start period stop" type="Array(double)" value="{0.0,864.0,-1.0}" />
   </ParameterList>
-
   <ParameterList name="PKs" type="ParameterList">
 
     <ParameterList name="Top level MPC" type="ParameterList">
       <Parameter name="PK type" type="string" value="strong MPC" />
       <Parameter name="PKs order" type="Array(string)" value="{surface balance, coupled water}" />
-
-
       <ParameterList name="time integrator" type="ParameterList">
         <Parameter name="extrapolate initial guess" type="bool" value="true" />
         <Parameter name="solver type" type="string" value="nka_bt_ats" />
@@ -155,8 +147,9 @@
           <Parameter name="count before increasing increase factor" type="int" value="2" />
         </ParameterList>
       </ParameterList>
+
     </ParameterList>
-      
+
     <ParameterList name="surface balance" type="ParameterList">
       <Parameter name="PK type" type="string" value="general surface balance" />
       <Parameter name="primary variable" type="string" value="litter-water_content" />
@@ -183,13 +176,12 @@
           </ParameterList>
         </ParameterList>
       </ParameterList>
+
     </ParameterList>
-        
 
     <ParameterList name="coupled water" type="ParameterList">
       <Parameter name="PK type" type="string" value="coupled water" />
       <Parameter name="PKs order" type="Array(string)" value="{flow, overland flow}" />
-
       <ParameterList name="water delegate" type="ParameterList">
         <Parameter name="modify predictor damp and cap the water spurt" type="bool" value="true" />
         <Parameter name="damp and cap the water spurt" type="bool" value="true" />
@@ -223,8 +215,8 @@
       <ParameterList name="verbose object" type="ParameterList">
         <Parameter name="verbosity level" type="string" value="medium" />
       </ParameterList>
-    </ParameterList>
 
+    </ParameterList>
 
     <ParameterList name="flow" type="ParameterList">
       <Parameter name="PK type" type="string" value="richards flow" />
@@ -239,8 +231,9 @@
       <ParameterList name="diffusion" type="ParameterList">
         <Parameter name="discretization primary" type="string" value="mfd: optimized for sparsity" />
       </ParameterList>
+
       <ParameterList name="diffusion preconditioner" type="ParameterList">
-        <Parameter name="preconditioner schema" type="Array(string)" value="{face}"/>
+        <Parameter name="preconditioner schema" type="Array(string)" value="{face}" />
       </ParameterList>
 
       <ParameterList name="boundary conditions" type="ParameterList">
@@ -261,7 +254,7 @@
           </ParameterList>
         </ParameterList>
       </ParameterList>
-      
+
       <ParameterList name="water retention evaluator" type="ParameterList">
         <Parameter name="minimum rel perm cutoff" type="double" value="0.0" />
         <Parameter name="use surface rel perm" type="bool" value="true" />
@@ -272,21 +265,20 @@
             <Parameter name="van Genuchten alpha" type="double" value="0.00056" />
             <Parameter name="van Genuchten m" type="double" value="0.24" />
             <Parameter name="residual saturation" type="double" value="0.18" />
-            <Parameter name="smoothing interval width" type="double" value="100.0" />
+            <Parameter name="smoothing interval width [saturation]" type="double" value=".1" />
           </ParameterList>
         </ParameterList>
       </ParameterList>
+
     </ParameterList>
 
     <ParameterList name="overland flow" type="ParameterList">
       <Parameter name="PK type" type="string" value="overland flow, pressure basis" />
       <Parameter name="primary variable" type="string" value="surface-pressure" />
       <Parameter name="domain name" type="string" value="surface" />
-
       <Parameter name="source term" type="bool" value="true" />
-      <Parameter name="mass source in meters" type="bool" value="false"/>
+      <Parameter name="mass source in meters" type="bool" value="false" />
       <Parameter name="source key" type="string" value="surface-source" />
-
       <Parameter name="initial time step" type="double" value="10.0" />
       <ParameterList name="verbose object" type="ParameterList">
         <Parameter name="verbosity level" type="string" value="high" />
@@ -320,10 +312,10 @@
           <Parameter name="slope regularization epsilon" type="double" value="0.01" />
         </ParameterList>
       </ParameterList>
+
     </ParameterList>
 
   </ParameterList>
-
 
   <ParameterList name="state" type="ParameterList">
     <ParameterList name="field evaluators" type="ParameterList">
@@ -331,17 +323,17 @@
       <ParameterList name="litter-source_sink" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="additive evaluator" />
         <Parameter name="evaluator dependencies" type="Array(string)" value="{litter-interception, litter-drainage}" />
-        <Parameter name="litter-interception coefficient" type="double" value="1.0"/>
-        <Parameter name="litter-drainage coefficient" type="double" value="-1.0"/>
+        <Parameter name="litter-interception coefficient" type="double" value="1.0" />
+        <Parameter name="litter-drainage coefficient" type="double" value="-1.0" />
       </ParameterList>
 
       <ParameterList name="litter-drainage" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="interception drainage" />
         <Parameter name="layer name" type="string" value="litter" />
-        <Parameter name="drainage timescale [s]" type="double" value="600"/>
-        <Parameter name="saturated moisture content [m^3 H20 / m^2 biomass area]" type="double" value=".0002"/>
-        <Parameter name="wet layer from surface water" type="bool" value="true"/>
-        <Parameter name="density of liquid water [mol/m^3]" type="double" value="55389.0"/>
+        <Parameter name="drainage timescale [s]" type="double" value="600.0" />
+        <Parameter name="saturated moisture content [m^3 H20 / m^2 biomass area]" type="double" value="0.0002" />
+        <Parameter name="wet layer from surface water" type="bool" value="true" />
+        <Parameter name="density of liquid water [mol/m^3]" type="double" value="55389.0" />
       </ParameterList>
 
       <ParameterList name="litter-interception" type="ParameterList">
@@ -349,19 +341,19 @@
         <Parameter name="layer name" type="string" value="litter" />
         <Parameter name="source key" type="string" value="precipitation_rain" />
         <Parameter name="source in meters" type="bool" value="true" />
-        <Parameter name="throughfall coefficient [m^2 / m^2 biomass area]" type="double" value=".1"/>
-        <Parameter name="density of liquid water [mol/m^3]" type="double" value="55389.0"/>
+        <Parameter name="throughfall coefficient [m^2 / m^2 biomass area]" type="double" value="0.1" />
+        <Parameter name="density of liquid water [mol/m^3]" type="double" value="55389.0" />
       </ParameterList>
 
       <ParameterList name="litter-area_index" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="additive evaluator" />
         <Parameter name="evaluator dependencies" type="Array(string)" value="{litter-thickness}" />
-	<Parameter name="litter-thickness coefficient" type="double" value="15.24" />
-        <!-- litter density of 1 kg / m^3 * 15.24 litter SLA  -->
+        <Parameter name="litter-thickness coefficient" type="double" value="15.24" />
       </ParameterList>
-      
+
       <ParameterList name="litter-thickness" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
+        <Parameter name="constant in time" type="bool" value="true" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="cells" type="ParameterList">
             <Parameter name="region" type="string" value="surface domain" />
@@ -394,6 +386,7 @@
 
       <ParameterList name="surface-source_molar_density" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
+        <Parameter name="constant in time" type="bool" value="true" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="rest domain" type="ParameterList">
             <Parameter name="region" type="string" value="surface domain" />
@@ -406,16 +399,15 @@
           </ParameterList>
         </ParameterList>
       </ParameterList>
-      
-      <!-- source to the surface is non-intercepted precip (Pr - interception) plus drainage -->
+
       <ParameterList name="surface-source" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="additive evaluator" />
         <Parameter name="evaluator dependencies" type="Array(string)" value="{precipitation_rain, litter-interception, litter-drainage}" />
-        <Parameter name="precipitation_rain coefficient" type="double" value="55389.0"/>
-        <Parameter name="litter-interception coefficient" type="double" value="-1."/>
-        <Parameter name="litter-drainage coefficient" type="double" value="1."/>
+        <Parameter name="precipitation_rain coefficient" type="double" value="55389.0" />
+        <Parameter name="litter-interception coefficient" type="double" value="-1.0" />
+        <Parameter name="litter-drainage coefficient" type="double" value="1.0" />
       </ParameterList>
-      
+
       <ParameterList name="ponded_depth" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="ponded depth" />
       </ParameterList>
@@ -423,7 +415,7 @@
       <ParameterList name="ponded_depth_bar" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="ponded depth" />
         <Parameter name="ponded depth bar" type="bool" value="true" />
-        <Parameter name="height key" type="string" value="ponded_depth_bar"/>
+        <Parameter name="height key" type="string" value="ponded_depth_bar" />
       </ParameterList>
 
       <ParameterList name="surface-water_content" type="ParameterList">
@@ -434,7 +426,7 @@
         <Parameter name="field evaluator type" type="string" value="richards water content" />
         <Parameter name="include water vapor" type="bool" value="true" />
       </ParameterList>
-      
+
       <ParameterList name="capillary_pressure_gas_liq" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="capillary pressure, atmospheric gas over liquid" />
         <ParameterList name="verbose object" type="ParameterList">
@@ -497,6 +489,7 @@
 
       <ParameterList name="manning_coefficient" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
+        <Parameter name="constant in time" type="bool" value="true" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="domain" type="ParameterList">
             <Parameter name="region" type="string" value="surface domain" />
@@ -512,6 +505,7 @@
 
       <ParameterList name="base_porosity" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
+        <Parameter name="constant in time" type="bool" value="true" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="rest domain" type="ParameterList">
             <Parameter name="region" type="string" value="computational domain" />
@@ -540,6 +534,7 @@
 
       <ParameterList name="permeability" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
+        <Parameter name="constant in time" type="bool" value="true" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="domain" type="ParameterList">
             <Parameter name="region" type="string" value="computational domain" />
@@ -563,6 +558,7 @@
 
       <ParameterList name="surface-temperature" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
+        <Parameter name="constant in time" type="bool" value="true" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="domain" type="ParameterList">
             <Parameter name="region" type="string" value="surface domain" />
@@ -578,6 +574,7 @@
 
       <ParameterList name="temperature" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
+        <Parameter name="constant in time" type="bool" value="true" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="domain" type="ParameterList">
             <Parameter name="region" type="string" value="computational domain" />
@@ -593,6 +590,7 @@
 
       <ParameterList name="surface-relative_permeability" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
+        <Parameter name="constant in time" type="bool" value="true" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="domain" type="ParameterList">
             <Parameter name="region" type="string" value="surface domain" />

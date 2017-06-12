@@ -60,29 +60,17 @@
     </ParameterList>
   </ParameterList>
 
-
-  <ParameterList name="cycle driver">
-    <Parameter name="start time" type="double" value="0.0"/>
-    <Parameter name="start time units" type="string" value="s"/> <!-- valid are s/d/yr -->
-    <Parameter name="end time" type="double" value="1.0"/>
-    <Parameter name="end time units" type="string" value="s"/> <!-- valid are s/d/yr -->
-    <ParameterList name="PK tree">
+  <ParameterList name="cycle driver" type="ParameterList">
+    <Parameter name="start time" type="double" value="0.0" />
+    <Parameter name="start time units" type="string" value="s" />
+    <Parameter name="end time" type="double" value="1.0" />
+    <Parameter name="end time units" type="string" value="s" />
+    <ParameterList name="PK tree" type="ParameterList">
       <ParameterList name="Richards" type="ParameterList">
         <Parameter name="PK type" type="string" value="richards steady state" />
       </ParameterList>
     </ParameterList>
-<!--
-    <Parameter name="component names" type="Array(string)" value="{}"/>
-    <Parameter name="number of liquid components" type="int" value="0"/>
-    <Parameter name="component molar masses" type="Array(double)" value="{}"/>
-    <ParameterList name="verbose object" type="ParameterList">
-      <Parameter name="verbosity level" type="string" value="high" />
-    </ParameterList>
--->
   </ParameterList>
-
-
-
   <ParameterList name="visualization" type="ParameterList">
     <Parameter name="file name base" type="string" value="visdump" />
     <Parameter name="times start period stop" type="Array(double)" value="{0.0,1.0,-1.0}" />
@@ -107,7 +95,7 @@
         <Parameter name="extrapolate initial guess" type="bool" value="true" />
         <Parameter name="solver type" type="string" value="nka" />
         <Parameter name="timestep controller type" type="string" value="smarter" />
-        <Parameter name="initial time step" type="double" value="86400" />
+        <Parameter name="initial time step" type="double" value="86400.0" />
         <ParameterList name="nka parameters" type="ParameterList">
           <Parameter name="max error growth factor" type="double" value="1000.0" />
           <Parameter name="modify correction" type="bool" value="true" />
@@ -267,6 +255,7 @@
 
       <ParameterList name="porosity" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
+        <Parameter name="constant in time" type="bool" value="true" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="domain" type="ParameterList">
             <Parameter name="region" type="string" value="computational domain" />
@@ -285,6 +274,7 @@
 
       <ParameterList name="permeability" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
+        <Parameter name="constant in time" type="bool" value="true" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="domain" type="ParameterList">
             <Parameter name="region" type="string" value="computational domain" />
@@ -303,6 +293,7 @@
 
       <ParameterList name="temperature" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
+        <Parameter name="constant in time" type="bool" value="true" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="domain" type="ParameterList">
             <Parameter name="region" type="string" value="computational domain" />

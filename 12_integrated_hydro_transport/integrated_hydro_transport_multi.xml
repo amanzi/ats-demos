@@ -313,7 +313,7 @@
             <Parameter name="van Genuchten alpha" type="double" value="0.000545" />
             <Parameter name="van Genuchten m" type="double" value="0.190938511" />
             <Parameter name="residual saturation" type="double" value="0.1" />
-            <Parameter name="smoothing interval width" type="double" value="100.0" />
+            <Parameter name="smoothing interval width [saturation]" type="double" value="0.1" />
           </ParameterList>
         </ParameterList>
         <ParameterList name="verbose object" type="ParameterList">

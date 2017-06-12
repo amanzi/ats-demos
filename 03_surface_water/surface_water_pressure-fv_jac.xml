@@ -43,19 +43,17 @@
     </ParameterList>
   </ParameterList>
 
-
-  <ParameterList name="cycle driver">
-    <Parameter name="start time" type="double" value="0.0"/>
-    <Parameter name="start time units" type="string" value="s"/> <!-- valid are s/d/yr -->
-    <Parameter name="end time" type="double" value="10800.0"/>
-    <Parameter name="end time units" type="string" value="s"/> <!-- valid are s/d/yr -->
-    <ParameterList name="PK tree">
+  <ParameterList name="cycle driver" type="ParameterList">
+    <Parameter name="start time" type="double" value="0.0" />
+    <Parameter name="start time units" type="string" value="s" />
+    <Parameter name="end time" type="double" value="10800.0" />
+    <Parameter name="end time units" type="string" value="s" />
+    <ParameterList name="PK tree" type="ParameterList">
       <ParameterList name="Overland Flow" type="ParameterList">
         <Parameter name="PK type" type="string" value="overland flow, pressure basis" />
       </ParameterList>
     </ParameterList>
   </ParameterList>
-
   <ParameterList name="visualization" type="ParameterList">
     <Parameter name="file name base" type="string" value="visdump" />
     <Parameter name="times start period stop" type="Array(double)" value="{0.0,600.0,-1.0}" />
@@ -65,7 +63,6 @@
     <Parameter name="file name base" type="string" value="visdump_surface" />
     <Parameter name="times start period stop" type="Array(double)" value="{0.0,600.0,-1.0}" />
   </ParameterList>
-
   <ParameterList name="PKs" type="ParameterList">
 
     <ParameterList name="Overland Flow" type="ParameterList">
@@ -82,6 +79,7 @@
       <ParameterList name="diffusion" type="ParameterList">
         <Parameter name="discretization primary" type="string" value="fv: default" />
       </ParameterList>
+
       <ParameterList name="diffusion preconditioner" type="ParameterList">
         <Parameter name="Newton correction" type="string" value="true Jacobian" />
       </ParameterList>
@@ -120,7 +118,7 @@
         </ParameterList>
       </ParameterList>
 
-      <ParameterList name="elevation evaluator" type="ParameterList"> 
+      <ParameterList name="elevation evaluator" type="ParameterList">
         <ParameterList name="elevation function" type="ParameterList">
           <ParameterList name="Elevation" type="ParameterList">
             <Parameter name="region" type="string" value="Computational domain" />
@@ -195,13 +193,11 @@
         <Parameter name="field evaluator type" type="string" value="ponded depth" />
       </ParameterList>
 
-
       <ParameterList name="ponded_depth_bar" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="ponded depth" />
         <Parameter name="ponded depth bar" type="bool" value="true" />
-        <Parameter name="height key" type="string" value="ponded_depth_bar"/>
+        <Parameter name="height key" type="string" value="ponded_depth_bar" />
       </ParameterList>
-
 
       <ParameterList name="surface-mass_source" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
@@ -246,7 +242,7 @@
           <Parameter name="verbosity level" type="string" value="low" />
         </ParameterList>
       </ParameterList>
-      <!-- ADDED-->
+
       <ParameterList name="surface-molar_density_liquid" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="eos" />
         <Parameter name="EOS basis" type="string" value="both" />
@@ -257,9 +253,10 @@
           <Parameter name="EOS type" type="string" value="liquid water" />
         </ParameterList>
       </ParameterList>
-      
+
       <ParameterList name="manning_coefficient" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
+        <Parameter name="constant in time" type="bool" value="true" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="domain" type="ParameterList">
             <Parameter name="region" type="string" value="Computational domain" />
@@ -279,6 +276,7 @@
 
       <ParameterList name="surface-temperature" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
+        <Parameter name="constant in time" type="bool" value="true" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="domain" type="ParameterList">
             <Parameter name="region" type="string" value="Computational domain" />

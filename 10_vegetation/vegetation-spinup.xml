@@ -115,8 +115,8 @@
     <Parameter name="start time units" type="string" value="s" />
     <Parameter name="end time" type="double" value="11.0" />
     <Parameter name="end time units" type="string" value="yr" />
-    <ParameterList name="PK tree">
-      <ParameterList name="carbon">
+    <ParameterList name="PK tree" type="ParameterList">
+      <ParameterList name="carbon" type="ParameterList">
         <Parameter name="PK type" type="string" value="BGC simple" />
       </ParameterList>
     </ParameterList>

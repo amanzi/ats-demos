@@ -55,12 +55,12 @@
     </ParameterList>
   </ParameterList>
 
-  <ParameterList name="cycle driver">
-    <Parameter name="start time" type="double" value="0.0"/>
-    <Parameter name="start time units" type="string" value="s"/> <!-- valid are s/d/yr -->
-    <Parameter name="end time" type="double" value="1.0"/>
-    <Parameter name="end time units" type="string" value="yr"/> <!-- valid are s/d/yr -->
-    <ParameterList name="PK tree">
+  <ParameterList name="cycle driver" type="ParameterList">
+    <Parameter name="start time" type="double" value="0.0" />
+    <Parameter name="start time units" type="string" value="s" />
+    <Parameter name="end time" type="double" value="1.0" />
+    <Parameter name="end time units" type="string" value="yr" />
+    <ParameterList name="PK tree" type="ParameterList">
       <ParameterList name="Top level MPC" type="ParameterList">
         <Parameter name="PK type" type="string" value="subsurface permafrost" />
         <ParameterList name="flow" type="ParameterList">
@@ -72,10 +72,9 @@
       </ParameterList>
     </ParameterList>
   </ParameterList>
-
   <ParameterList name="visualization" type="ParameterList">
     <Parameter name="file name base" type="string" value="visdump" />
-    <Parameter name="times start period stop" type="Array(double)" value="{0.0,3.e6,-1.0}" />
+    <Parameter name="times start period stop" type="Array(double)" value="{0.0,3000000.0,-1.0}" />
   </ParameterList>
 
   <ParameterList name="checkpoint" type="ParameterList">
@@ -83,6 +82,7 @@
   </ParameterList>
 
   <ParameterList name="PKs" type="ParameterList">
+
     <ParameterList name="Top level MPC" type="ParameterList">
       <Parameter name="PK type" type="string" value="subsurface permafrost" />
       <Parameter name="PKs order" type="Array(string)" value="{flow,energy}" />
@@ -152,12 +152,13 @@
           <Parameter name="min iterations" type="int" value="10" />
           <Parameter name="time step reduction factor" type="double" value="0.5" />
           <Parameter name="time step increase factor" type="double" value="1.5" />
-          <Parameter name="max time step" type="double" value="1.e10" />
+          <Parameter name="max time step" type="double" value="10000000000.0" />
           <Parameter name="min time step" type="double" value="1e-10" />
           <Parameter name="growth wait after fail" type="int" value="2" />
           <Parameter name="count before increasing increase factor" type="int" value="2" />
         </ParameterList>
       </ParameterList>
+
     </ParameterList>
 
     <ParameterList name="flow" type="ParameterList">
@@ -166,11 +167,9 @@
       <Parameter name="initial time step" type="double" value="1.0" />
       <Parameter name="relative permeability method" type="string" value="upwind with Darcy flux" />
       <Parameter name="permeability rescaling" type="double" value="10000000.0" />
-
       <Parameter name="limit correction to pressure change [Pa]" type="double" value="400000.0" />
       <Parameter name="max valid change in saturation in a time step [-]" type="double" value="0.1" />
       <Parameter name="max valid change in ice saturation in a time step [-]" type="double" value="0.1" />
-
       <Parameter name="debug cells" type="Array(int)" value="{0,99}" />
       <ParameterList name="verbose object" type="ParameterList">
         <Parameter name="verbosity level" type="string" value="high" />
@@ -428,6 +427,7 @@
 
       <ParameterList name="base_porosity" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
+        <Parameter name="constant in time" type="bool" value="true" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="domain" type="ParameterList">
             <Parameter name="region" type="string" value="computational domain" />
@@ -456,6 +456,7 @@
 
       <ParameterList name="permeability" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
+        <Parameter name="constant in time" type="bool" value="true" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="domain" type="ParameterList">
             <Parameter name="region" type="string" value="computational domain" />
@@ -474,6 +475,7 @@
 
       <ParameterList name="density_rock" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
+        <Parameter name="constant in time" type="bool" value="true" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="domain" type="ParameterList">
             <Parameter name="region" type="string" value="computational domain" />

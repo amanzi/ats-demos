@@ -60,18 +60,17 @@
     </ParameterList>
   </ParameterList>
 
-  <ParameterList name="cycle driver">
-    <Parameter name="start time" type="double" value="0.0"/>
-    <Parameter name="start time units" type="string" value="s"/> <!-- valid are s/d/yr -->
-    <Parameter name="end time" type="double" value="1.0"/>
-    <Parameter name="end time units" type="string" value="s"/> <!-- valid are s/d/yr -->
-    <ParameterList name="PK tree">
+  <ParameterList name="cycle driver" type="ParameterList">
+    <Parameter name="start time" type="double" value="0.0" />
+    <Parameter name="start time units" type="string" value="s" />
+    <Parameter name="end time" type="double" value="1.0" />
+    <Parameter name="end time units" type="string" value="s" />
+    <ParameterList name="PK tree" type="ParameterList">
       <ParameterList name="Richards" type="ParameterList">
         <Parameter name="PK type" type="string" value="richards steady state" />
       </ParameterList>
     </ParameterList>
   </ParameterList>
-
   <ParameterList name="visualization" type="ParameterList">
     <Parameter name="file name base" type="string" value="visdump" />
     <Parameter name="times start period stop" type="Array(double)" value="{0.0,1.0,-1.0}" />
@@ -166,22 +165,6 @@
           </ParameterList>
         </ParameterList>
       </ParameterList>
-      <!-- <ParameterList name="initial condition" type="ParameterList"> -->
-      <!--   <Parameter name="initialize faces from cells" type="bool" value="true" /> -->
-      <!--   <ParameterList name="function" type="ParameterList"> -->
-      <!--     <ParameterList name="initial pressure cells" type="ParameterList"> -->
-      <!--       <Parameter name="region" type="string" value="computational domain" /> -->
-      <!--       <Parameter name="component" type="string" value="cell" /> -->
-      <!--       <ParameterList name="function" type="ParameterList"> -->
-      <!--         <ParameterList name="function-linear" type="ParameterList"> -->
-      <!--           <Parameter name="x0" type="Array(double)" value="{0.0,0.0,0.0,0.0}" /> -->
-      <!--           <Parameter name="y0" type="double" value="140000.0" /> -->
-      <!--           <Parameter name="gradient" type="Array(double)" value="{0.0,0.0,0.0,-9806.2306853}" /> -->
-      <!--         </ParameterList> -->
-      <!--       </ParameterList> -->
-      <!--     </ParameterList> -->
-      <!--   </ParameterList> -->
-      <!-- </ParameterList> -->
 
       <ParameterList name="water retention evaluator" type="ParameterList">
         <ParameterList name="WRM parameters" type="ParameterList">
@@ -269,6 +252,7 @@
 
       <ParameterList name="porosity" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
+        <Parameter name="constant in time" type="bool" value="true" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="domain" type="ParameterList">
             <Parameter name="region" type="string" value="computational domain" />
@@ -287,6 +271,7 @@
 
       <ParameterList name="permeability" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
+        <Parameter name="constant in time" type="bool" value="true" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="domain" type="ParameterList">
             <Parameter name="region" type="string" value="computational domain" />
@@ -305,6 +290,7 @@
 
       <ParameterList name="temperature" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
+        <Parameter name="constant in time" type="bool" value="true" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="domain" type="ParameterList">
             <Parameter name="region" type="string" value="computational domain" />

@@ -321,7 +321,7 @@
       <Parameter name="permeability rescaling" type="double" value="10000000.0" />
       <Parameter name="relative permeability method" type="string" value="upwind with Darcy flux"/>
 
-      <ParameterList name="Diffusion" type="ParameterList">
+      <ParameterList name="diffusion" type="ParameterList">
 	<Parameter name="discretization primary" type="string" value="mfd: optimized for sparsity"/>
       </ParameterList>
 
@@ -341,7 +341,7 @@
             <Parameter name="van Genuchten alpha" type="double" value="1.5e-4" />
             <Parameter name="van Genuchten m" type="double" value="0.8" />
             <Parameter name="van Genuchten residual saturation" type="double" value="0.1" />
-            <Parameter name="smoothing interval width" type="double" value="100.0" />
+            <Parameter name="smoothing interval width [saturation]" type="double" value="0.1" />
           </ParameterList>
         </ParameterList>
         <ParameterList name="verbose object" type="ParameterList">
@@ -363,7 +363,7 @@
         <Parameter name="verbosity level" type="string" value="medium" />
       </ParameterList>
 
-      <ParameterList name="Diffusion" type="ParameterList">
+      <ParameterList name="diffusion" type="ParameterList">
 	<Parameter name="discretization primary" type="string" value="fv: default"/>
       </ParameterList>
 

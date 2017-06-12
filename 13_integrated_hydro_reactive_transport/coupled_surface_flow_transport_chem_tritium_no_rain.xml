@@ -214,7 +214,7 @@
         <Parameter name="verbosity level" type="string" value="low" />
       </ParameterList>
 
-      <ParameterList name="Diffusion" type="ParameterList">
+      <ParameterList name="diffusion" type="ParameterList">
 	<Parameter name="discretization primary" type="string" value="fv: default"/>
       </ParameterList>
 

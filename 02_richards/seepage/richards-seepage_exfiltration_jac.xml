@@ -137,7 +137,6 @@
 
       <ParameterList name="diffusion preconditioner" type="ParameterList">
         <Parameter name="Newton correction" type="string" value="true Jacobian" />
-        <Parameter name="Newton correction lag" type="int" value="2" />
       </ParameterList>
 
       <ParameterList name="preconditioner" type="ParameterList">

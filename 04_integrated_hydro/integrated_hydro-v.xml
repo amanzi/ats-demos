@@ -534,10 +534,6 @@
         </ParameterList>
       </ParameterList>
 
-      <ParameterList name="overland_source_from_subsurface" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="overland source from subsurface via flux" />
-      </ParameterList>
-
     </ParameterList>
     <ParameterList name="initial conditions" type="ParameterList">
 

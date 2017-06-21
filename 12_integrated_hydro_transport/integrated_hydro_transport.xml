@@ -444,7 +444,7 @@
               <Parameter name="regions" type="Array(string)" value="{top face}"/>
               <ParameterList name="boundary concentration">
                 <Parameter name="field_out_key" type="string" value="surface-total_component_concentration"/>
-                <Parameter name="copy_field_out_key" type="string" value="default"/>
+                <Parameter name="copy_field_out_key" type="string" value="subcycling"/>
               </ParameterList>
             </ParameterList>
           </ParameterList>

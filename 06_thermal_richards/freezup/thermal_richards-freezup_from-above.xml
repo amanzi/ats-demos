@@ -299,11 +299,11 @@
     <ParameterList name="field evaluators" type="ParameterList">
 
       <ParameterList name="water_content" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="permafrost water content" />
+        <Parameter name="field evaluator type" type="string" value="liquid+ice water content" />
       </ParameterList>
 
       <ParameterList name="energy" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="three phase energy" />
+        <Parameter name="field evaluator type" type="string" value="liquid+ice energy" />
       </ParameterList>
 
       <ParameterList name="capillary_pressure_gas_liq" type="ParameterList">

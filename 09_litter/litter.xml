@@ -265,7 +265,7 @@
             <Parameter name="van Genuchten alpha" type="double" value="0.00056" />
             <Parameter name="van Genuchten m" type="double" value="0.24" />
             <Parameter name="residual saturation" type="double" value="0.18" />
-            <Parameter name="smoothing interval width [saturation]" type="double" value=".1" />
+            <Parameter name="smoothing interval width [saturation]" type="double" value="0.1" />
           </ParameterList>
         </ParameterList>
       </ParameterList>
@@ -423,7 +423,7 @@
       </ParameterList>
 
       <ParameterList name="water_content" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="richards water content" />
+        <Parameter name="field evaluator type" type="string" value="liquid+gas water content" />
         <Parameter name="include water vapor" type="bool" value="true" />
       </ParameterList>
 

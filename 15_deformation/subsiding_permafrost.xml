@@ -101,7 +101,7 @@
     </ParameterList>
   </ParameterList>
 
-  <ParameterList name="cycle driver">
+  <ParameterList name="cycle driver" type="ParameterList">
     <Parameter name="end cycle" type="int" value="100000" />
     <Parameter name="start time" type="double" value="1.0" />
     <Parameter name="start time units" type="string" value="yr" />
@@ -110,21 +110,17 @@
     <ParameterList name="required times" type="ParameterList">
       <Parameter name="times start period stop 0" type="Array(double)" value="{0.0,86400.0,-1.0}" />
     </ParameterList>
-    <ParameterList name="PK tree">
+    <ParameterList name="PK tree" type="ParameterList">
       <ParameterList name="Top level MPC" type="ParameterList">
         <Parameter name="PK type" type="string" value="weak MPC" />
-
         <ParameterList name="subsidence" type="ParameterList">
           <Parameter name="PK type" type="string" value="volumetric deformation" />
         </ParameterList>
-
         <ParameterList name="snow distribution" type="ParameterList">
           <Parameter name="PK type" type="string" value="snow distribution" />
         </ParameterList>
-	
         <ParameterList name="coupled SEB and permafrost" type="ParameterList">
-          <Parameter name="PK type" type="string" value="strong MPC"/>
-
+          <Parameter name="PK type" type="string" value="strong MPC" />
           <ParameterList name="SEB" type="ParameterList">
             <Parameter name="PK type" type="string" value="surface balance implicit" />
           </ParameterList>
@@ -133,61 +129,53 @@
             <ParameterList name="subsurface flow" type="ParameterList">
               <Parameter name="PK type" type="string" value="permafrost flow" />
             </ParameterList>
-
             <ParameterList name="subsurface energy" type="ParameterList">
               <Parameter name="PK type" type="string" value="three-phase energy" />
             </ParameterList>
-
             <ParameterList name="surface flow" type="ParameterList">
               <Parameter name="PK type" type="string" value="overland flow with ice" />
             </ParameterList>
-
             <ParameterList name="surface energy" type="ParameterList">
               <Parameter name="PK type" type="string" value="surface energy" />
             </ParameterList>
           </ParameterList>
         </ParameterList>
-
       </ParameterList>
     </ParameterList>
-
   </ParameterList>
-
   <ParameterList name="visualization" type="ParameterList">
     <Parameter name="file name base" type="string" value="visdump" />
-    <Parameter name="times start period stop" type="Array(double)" value="{0.0,864000,-1.0}" />
+    <Parameter name="times start period stop" type="Array(double)" value="{0.0,864000.0,-1.0}" />
     <Parameter name="dynamic mesh" type="bool" value="true" />
   </ParameterList>
 
   <ParameterList name="visualization surface" type="ParameterList">
     <Parameter name="file name base" type="string" value="visdump_surface" />
-    <Parameter name="times start period stop" type="Array(double)" value="{0.0,864000,-1.0}" />
+    <Parameter name="times start period stop" type="Array(double)" value="{0.0,864000.0,-1.0}" />
     <Parameter name="dynamic mesh" type="bool" value="true" />
   </ParameterList>
   <ParameterList name="checkpoint" type="ParameterList">
-    <Parameter name="times start period stop" type="Array(double)" value="{0.0,31536000,-1.0}" />
+    <Parameter name="times start period stop" type="Array(double)" value="{0.0,31536000.0,-1.0}" />
   </ParameterList>
 
   <ParameterList name="PKs" type="ParameterList">
 
-    <!-- Top level MPC -->
     <ParameterList name="Top level MPC" type="ParameterList">
       <Parameter name="PK type" type="string" value="weak MPC" />
       <Parameter name="PKs order" type="Array(string)" value="{subsidence, snow distribution,coupled SEB and permafrost}" />
+
     </ParameterList>
 
-    <!-- subsidence PK -->
     <ParameterList name="subsidence" type="ParameterList">
       <Parameter name="PK type" type="string" value="volumetric deformation" />
       <Parameter name="primary variable" type="string" value="base_porosity" />
       <Parameter name="deformation mode" type="string" value="structural" />
       <Parameter name="deformation region" type="string" value="ice rich domain" />
       <Parameter name="deformation strategy" type="string" value="average" />
-      <Parameter name="deformation relaxation time [s]" type="double" value="43200" />
+      <Parameter name="deformation relaxation time [s]" type="double" value="43200.0" />
       <Parameter name="volume fraction of solids required to be structural [-]" type="double" value="0.5" />
       <Parameter name="bottom region" type="string" value="bottom face" />
       <Parameter name="bottom region type" type="string" value="node" />
-
       <ParameterList name="initial condition" type="ParameterList">
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="mineral soil" type="ParameterList">
@@ -235,8 +223,6 @@
 
     </ParameterList>
 
-    
-    <!-- snow distribution -->
     <ParameterList name="snow distribution" type="ParameterList">
       <Parameter name="PK type" type="string" value="snow distribution" />
       <Parameter name="primary variable" type="string" value="precipitation_snow" />
@@ -367,6 +353,7 @@
           <Parameter name="count before increasing increase factor" type="int" value="2" />
         </ParameterList>
       </ParameterList>
+
     </ParameterList>
 
     <ParameterList name="SEB" type="ParameterList">
@@ -444,6 +431,7 @@
           </ParameterList>
         </ParameterList>
       </ParameterList>
+
     </ParameterList>
 
     <ParameterList name="subsurface flow" type="ParameterList">
@@ -607,7 +595,7 @@
             <Parameter name="thermal conductivity of ice [W/(m-K)]" type="double" value="2.25" />
             <Parameter name="thermal conductivity of gas [W/(m-K)]" type="double" value="0.024" />
             <Parameter name="thermal conductivity of liquid [W/(m-K)]" type="double" value="0.591" />
-            <Parameter name="thermal conductivity of soil [W/(m-K)]" type="double" value="1" />
+            <Parameter name="thermal conductivity of soil [W/(m-K)]" type="double" value="1.0" />
             <Parameter name="unsaturated alpha frozen [-]" type="double" value="1.0" />
             <Parameter name="unsaturated alpha unfrozen [-]" type="double" value="0.5" />
           </ParameterList>
@@ -617,7 +605,7 @@
             <Parameter name="thermal conductivity of ice [W/(m-K)]" type="double" value="2.25" />
             <Parameter name="thermal conductivity of gas [W/(m-K)]" type="double" value="0.024" />
             <Parameter name="thermal conductivity of liquid [W/(m-K)]" type="double" value="0.591" />
-            <Parameter name="thermal conductivity of soil [W/(m-K)]" type="double" value="1" />
+            <Parameter name="thermal conductivity of soil [W/(m-K)]" type="double" value="1.0" />
             <Parameter name="unsaturated alpha frozen [-]" type="double" value="1.0" />
             <Parameter name="unsaturated alpha unfrozen [-]" type="double" value="0.5" />
           </ParameterList>
@@ -627,7 +615,7 @@
             <Parameter name="thermal conductivity of ice [W/(m-K)]" type="double" value="2.25" />
             <Parameter name="thermal conductivity of gas [W/(m-K)]" type="double" value="0.024" />
             <Parameter name="thermal conductivity of liquid [W/(m-K)]" type="double" value="0.591" />
-            <Parameter name="thermal conductivity of soil [W/(m-K)]" type="double" value="2" />
+            <Parameter name="thermal conductivity of soil [W/(m-K)]" type="double" value="2.0" />
             <Parameter name="unsaturated alpha frozen [-]" type="double" value="1.0" />
             <Parameter name="unsaturated alpha unfrozen [-]" type="double" value="0.5" />
           </ParameterList>
@@ -637,7 +625,7 @@
             <Parameter name="thermal conductivity of ice [W/(m-K)]" type="double" value="2.25" />
             <Parameter name="thermal conductivity of gas [W/(m-K)]" type="double" value="0.024" />
             <Parameter name="thermal conductivity of liquid [W/(m-K)]" type="double" value="0.591" />
-            <Parameter name="thermal conductivity of soil [W/(m-K)]" type="double" value="2" />
+            <Parameter name="thermal conductivity of soil [W/(m-K)]" type="double" value="2.0" />
             <Parameter name="unsaturated alpha frozen [-]" type="double" value="1.0" />
             <Parameter name="unsaturated alpha unfrozen [-]" type="double" value="0.5" />
           </ParameterList>
@@ -647,7 +635,7 @@
             <Parameter name="thermal conductivity of ice [W/(m-K)]" type="double" value="2.25" />
             <Parameter name="thermal conductivity of gas [W/(m-K)]" type="double" value="0.024" />
             <Parameter name="thermal conductivity of liquid [W/(m-K)]" type="double" value="0.591" />
-            <Parameter name="thermal conductivity of soil [W/(m-K)]" type="double" value="2" />
+            <Parameter name="thermal conductivity of soil [W/(m-K)]" type="double" value="2.0" />
             <Parameter name="unsaturated alpha frozen [-]" type="double" value="1.0" />
             <Parameter name="unsaturated alpha unfrozen [-]" type="double" value="0.5" />
           </ParameterList>
@@ -657,7 +645,7 @@
             <Parameter name="thermal conductivity of ice [W/(m-K)]" type="double" value="2.25" />
             <Parameter name="thermal conductivity of gas [W/(m-K)]" type="double" value="0.024" />
             <Parameter name="thermal conductivity of liquid [W/(m-K)]" type="double" value="0.591" />
-            <Parameter name="thermal conductivity of soil [W/(m-K)]" type="double" value="2" />
+            <Parameter name="thermal conductivity of soil [W/(m-K)]" type="double" value="2.0" />
             <Parameter name="unsaturated alpha frozen [-]" type="double" value="1.0" />
             <Parameter name="unsaturated alpha unfrozen [-]" type="double" value="0.5" />
           </ParameterList>
@@ -713,11 +701,11 @@
     <ParameterList name="field evaluators" type="ParameterList">
 
       <ParameterList name="water_content" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="permafrost water content" />
+        <Parameter name="field evaluator type" type="string" value="liquid+ice water content" />
       </ParameterList>
 
       <ParameterList name="energy" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="three phase energy" />
+        <Parameter name="field evaluator type" type="string" value="liquid+ice energy" />
       </ParameterList>
 
       <ParameterList name="surface-water_content" type="ParameterList">
@@ -740,6 +728,7 @@
         <Parameter name="external enthalpy key" type="string" value="surface-mass_source_enthalpy" />
         <Parameter name="internal density key" type="string" value="surface-molar_density_liquid" />
         <Parameter name="external density key" type="string" value="surface-source_molar_density" />
+        <Parameter name="mass source units" type="string" value="m s^-1" />
         <ParameterList name="verbose object" type="ParameterList">
           <Parameter name="verbosity level" type="string" value="low" />
         </ParameterList>
@@ -1263,7 +1252,6 @@
         <Parameter name="deformation key" type="string" value="base_porosity" />
       </ParameterList>
 
-
       <ParameterList name="saturation_liquid" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="permafrost WRM" />
         <Parameter name="minimum rel perm cutoff" type="double" value="0.0" />
@@ -1327,7 +1315,6 @@
         </ParameterList>
       </ParameterList>
 
-      
     </ParameterList>
     <ParameterList name="initial conditions" type="ParameterList">
 

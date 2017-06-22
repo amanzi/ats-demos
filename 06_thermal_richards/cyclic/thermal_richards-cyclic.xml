@@ -55,13 +55,6 @@
     </ParameterList>
   </ParameterList>
 
-  <ParameterList name="coordinator" type="ParameterList">
-    <Parameter name="start time" type="double" value="0.0" />
-    <Parameter name="start time units" type="string" value="s" />
-    <Parameter name="end time" type="double" value="1.0" />
-    <Parameter name="end time units" type="string" value="yr" />
-  </ParameterList>
-
   <ParameterList name="cycle driver" type="ParameterList">
     <Parameter name="start time" type="double" value="0.0" />
     <Parameter name="start time units" type="string" value="s" />
@@ -308,7 +301,7 @@
     <ParameterList name="field evaluators" type="ParameterList">
 
       <ParameterList name="water_content" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="permafrost water content" />
+        <Parameter name="field evaluator type" type="string" value="three phase water content" />
       </ParameterList>
 
       <ParameterList name="energy" type="ParameterList">

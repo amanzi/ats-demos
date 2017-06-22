@@ -172,7 +172,7 @@
             <Parameter name="components" type="Array(string)" value="{cell,boundary_face}" />
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-linear" type="ParameterList">
-                <Parameter name="x0" type="Array(double)" value="{0.0,0.0,0.0,7.}" />
+                <Parameter name="x0" type="Array(double)" value="{0.0,0.0,0.0,7.0}" />
                 <Parameter name="y0" type="double" value="101325.0" />
                 <Parameter name="gradient" type="Array(double)" value="{0.0,0.0,0.0,-9806.2306853}" />
               </ParameterList>
@@ -205,7 +205,6 @@
 
       <ParameterList name="water_content" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="richards water content" />
-        <Parameter name="include water vapor" type="bool" value="true" />
       </ParameterList>
 
       <ParameterList name="capillary_pressure_gas_liq" type="ParameterList">

@@ -209,7 +209,6 @@
 
       <ParameterList name="water_content" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="richards water content" />
-        <Parameter name="include water vapor" type="bool" value="true" />
       </ParameterList>
 
       <ParameterList name="capillary_pressure_gas_liq" type="ParameterList">

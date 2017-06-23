@@ -194,11 +194,11 @@
         <Parameter name="field evaluator type" type="string" value="overland pressure water content" />
       </ParameterList>
 
-      <ParameterList name="surface-ponded_depth" type="ParameterList">
+      <ParameterList name="ponded_depth" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="ponded depth" />
       </ParameterList>
 
-      <ParameterList name="surface-ponded_depth_bar" type="ParameterList">
+      <ParameterList name="ponded_depth_bar" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="ponded depth" />
         <Parameter name="ponded depth bar" type="bool" value="true" />
         <Parameter name="height key" type="string" value="surface-ponded_depth_bar" />
@@ -259,7 +259,7 @@
         </ParameterList>
       </ParameterList>
 
-      <ParameterList name="surface-manning_coefficient" type="ParameterList">
+      <ParameterList name="manning_coefficient" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
         <Parameter name="constant in time" type="bool" value="true" />
         <ParameterList name="function" type="ParameterList">

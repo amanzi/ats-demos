@@ -55,13 +55,13 @@
     </ParameterList>
   </ParameterList>
   <ParameterList name="visualization" type="ParameterList">
+    <Parameter name="cycles" type="Array(int)" value="{0,25,36,42,48,54,58,60,62,64,66,67,68,69,70,71,72,73,74}" />
     <Parameter name="file name base" type="string" value="visdump" />
-    <Parameter name="times start period stop" type="Array(double)" value="{0.0,600.0,-1.0}" />
   </ParameterList>
 
   <ParameterList name="visualization surface" type="ParameterList">
+    <Parameter name="cycles" type="Array(int)" value="{0,25,36,42,48,54,58,60,62,64,66,67,68,69,70,71,72,73,74}" />
     <Parameter name="file name base" type="string" value="visdump_surface" />
-    <Parameter name="times start period stop" type="Array(double)" value="{0.0,600.0,-1.0}" />
   </ParameterList>
   <ParameterList name="PKs" type="ParameterList">
 
@@ -87,14 +87,14 @@
       <ParameterList name="time integrator" type="ParameterList">
         <Parameter name="extrapolate initial guess" type="bool" value="true" />
         <Parameter name="solver type" type="string" value="nka" />
-        <Parameter name="timestep controller type" type="string" value="smarter" />
+        <Parameter name="timestep controller type" type="string" value="from file" />
         <ParameterList name="nka parameters" type="ParameterList">
           <Parameter name="max error growth factor" type="double" value="1000.0" />
           <Parameter name="modify correction" type="bool" value="true" />
           <Parameter name="monitor" type="string" value="monitor residual" />
           <Parameter name="nonlinear tolerance" type="double" value="1e-10" />
-          <Parameter name="diverged tolerance" type="double" value="1000.0" />
-          <Parameter name="limit iterations" type="int" value="51" />
+          <Parameter name="diverged tolerance" type="double" value="10000000000.0" />
+          <Parameter name="limit iterations" type="int" value="100" />
           <ParameterList name="verbose object" type="ParameterList">
             <Parameter name="verbosity level" type="string" value="high" />
           </ParameterList>
@@ -111,6 +111,9 @@
           <Parameter name="min time step" type="double" value="1e-10" />
           <Parameter name="growth wait after fail" type="int" value="2" />
           <Parameter name="count before increasing increase factor" type="int" value="2" />
+        </ParameterList>
+        <ParameterList name="timestep controller from file parameters">
+          <Parameter name="file name" type="string" value="../data/surface_water_pressure-fv_dts.h5" />
         </ParameterList>
       </ParameterList>
 

@@ -72,8 +72,8 @@
     </ParameterList>
   </ParameterList>
   <ParameterList name="visualization" type="ParameterList">
+    <Parameter name="cycles" type="Array(int)" value="{0,18,21,23,24,25,26,27,28,29,30}" />
     <Parameter name="file name base" type="string" value="visdump" />
-    <Parameter name="times start period stop" type="Array(double)" value="{0.0,3155760.0,-1.0}" />
   </ParameterList>
 
   <ParameterList name="checkpoint" type="ParameterList">
@@ -96,7 +96,7 @@
       <ParameterList name="time integrator" type="ParameterList">
         <Parameter name="extrapolate initial guess" type="bool" value="true" />
         <Parameter name="solver type" type="string" value="nka_bt_ats" />
-        <Parameter name="timestep controller type" type="string" value="smarter" />
+        <Parameter name="timestep controller type" type="string" value="from file" />
         <ParameterList name="nka_bt_ats parameters" type="ParameterList">
           <Parameter name="nka lag iterations" type="int" value="2" />
           <Parameter name="max backtrack steps" type="int" value="5" />
@@ -104,8 +104,8 @@
           <Parameter name="backtrack factor" type="double" value="0.5" />
           <Parameter name="backtrack tolerance" type="double" value="0.0001" />
           <Parameter name="nonlinear tolerance" type="double" value="1e-06" />
-          <Parameter name="diverged tolerance" type="double" value="100000.0" />
-          <Parameter name="limit iterations" type="int" value="21" />
+          <Parameter name="diverged tolerance" type="double" value="10000000000.0" />
+          <Parameter name="limit iterations" type="int" value="100" />
           <ParameterList name="verbose object" type="ParameterList">
             <Parameter name="verbosity level" type="string" value="high" />
           </ParameterList>
@@ -122,6 +122,9 @@
           <Parameter name="min time step" type="double" value="1e-10" />
           <Parameter name="growth wait after fail" type="int" value="2" />
           <Parameter name="count before increasing increase factor" type="int" value="2" />
+        </ParameterList>
+        <ParameterList name="timestep controller from file parameters">
+          <Parameter name="file name" type="string" value="../data/richards-infiltration_fv_jac_dts.h5" />
         </ParameterList>
       </ParameterList>
 
@@ -209,7 +212,6 @@
 
       <ParameterList name="water_content" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="richards water content" />
-        <Parameter name="include water vapor" type="bool" value="true" />
       </ParameterList>
 
       <ParameterList name="capillary_pressure_gas_liq" type="ParameterList">

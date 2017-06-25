@@ -329,6 +329,7 @@
       <ParameterList name="surface-total_energy_source" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
         <Parameter name="constant in time" type="bool" value="true" />
+        <Parameter name="mass source units" type="string" value="m s^-1" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="cells" type="ParameterList">
             <Parameter name="region" type="string" value="computational domain" />

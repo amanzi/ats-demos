@@ -221,7 +221,7 @@
             <Parameter name="van Genuchten alpha" type="double" value="0.0006137" />
             <Parameter name="van Genuchten m" type="double" value="0.5" />
             <Parameter name="residual saturation" type="double" value="0.2" />
-            <Parameter name="smoothing interval width [saturation]" type="double" value=".1" />
+            <Parameter name="smoothing interval width [saturation]" type="double" value="0.1" />
           </ParameterList>
           <ParameterList name="first slab" type="ParameterList">
             <Parameter name="region" type="string" value="computational domain first slab" />
@@ -229,7 +229,7 @@
             <Parameter name="van Genuchten alpha" type="double" value="0.0001023" />
             <Parameter name="van Genuchten m" type="double" value="0.666666666667" />
             <Parameter name="residual saturation" type="double" value="0.3" />
-            <Parameter name="smoothing interval width [saturation]" type="double" value=".1" />
+            <Parameter name="smoothing interval width [saturation]" type="double" value="0.1" />
           </ParameterList>
           <ParameterList name="second slab" type="ParameterList">
             <Parameter name="region" type="string" value="computational domain second slab" />
@@ -237,7 +237,7 @@
             <Parameter name="van Genuchten alpha" type="double" value="0.0001023" />
             <Parameter name="van Genuchten m" type="double" value="0.666666666667" />
             <Parameter name="residual saturation" type="double" value="0.3" />
-            <Parameter name="smoothing interval width [saturation]" type="double" value=".1" />
+            <Parameter name="smoothing interval width [saturation]" type="double" value="0.1" />
           </ParameterList>
         </ParameterList>
       </ParameterList>

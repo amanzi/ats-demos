@@ -7,11 +7,6 @@
       <Parameter name="number of cells" type="Array(int)" value="{1,1,100}" />
       <Parameter name="domain low coordinate" type="Array(double)" value="{0.0,0.0,0.0}" />
       <Parameter name="domain high coordinate" type="Array(double)" value="{1.0,1.0,10.0}" />
-      <Parameter name="Number of mesh blocks" type="int" value="1" />
-      <ParameterList name="Mesh block 1" type="ParameterList">
-        <Parameter name="Z0" type="double" value="0.0" />
-        <Parameter name="Z1" type="double" value="10.0" />
-      </ParameterList>
     </ParameterList>
     <ParameterList name="surface mesh" type="ParameterList">
       <Parameter name="surface sideset name" type="string" value="surface" />
@@ -106,13 +101,13 @@
     </ParameterList>
   </ParameterList>
   <ParameterList name="visualization" type="ParameterList">
+    <Parameter name="cycles" type="Array(int)" value="{0,8,9,12,15,17,19,22,25,27,29,31,33,35,37,39,41,43,45,47,49,51,53,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232}" />
     <Parameter name="file name base" type="string" value="visdump" />
-    <Parameter name="times start period stop" type="Array(double)" value="{0.0,864.0,-1.0}" />
   </ParameterList>
 
   <ParameterList name="visualization surface" type="ParameterList">
+    <Parameter name="cycles" type="Array(int)" value="{0,8,9,12,15,17,19,22,25,27,29,31,33,35,37,39,41,43,45,47,49,51,53,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232}" />
     <Parameter name="file name base" type="string" value="visdump_surface" />
-    <Parameter name="times start period stop" type="Array(double)" value="{0.0,864.0,-1.0}" />
   </ParameterList>
   <ParameterList name="PKs" type="ParameterList">
 
@@ -122,7 +117,7 @@
       <ParameterList name="time integrator" type="ParameterList">
         <Parameter name="extrapolate initial guess" type="bool" value="true" />
         <Parameter name="solver type" type="string" value="nka_bt_ats" />
-        <Parameter name="timestep controller type" type="string" value="smarter" />
+        <Parameter name="timestep controller type" type="string" value="from file" />
         <ParameterList name="nka_bt_ats parameters" type="ParameterList">
           <Parameter name="nka lag iterations" type="int" value="2" />
           <Parameter name="max backtrack steps" type="int" value="5" />
@@ -130,8 +125,8 @@
           <Parameter name="backtrack factor" type="double" value="0.5" />
           <Parameter name="backtrack tolerance" type="double" value="0.0001" />
           <Parameter name="nonlinear tolerance" type="double" value="1e-06" />
-          <Parameter name="diverged tolerance" type="double" value="1000000.0" />
-          <Parameter name="limit iterations" type="int" value="21" />
+          <Parameter name="diverged tolerance" type="double" value="10000000000.0" />
+          <Parameter name="limit iterations" type="int" value="100" />
           <ParameterList name="verbose object" type="ParameterList">
             <Parameter name="verbosity level" type="string" value="high" />
           </ParameterList>
@@ -148,6 +143,9 @@
           <Parameter name="min time step" type="double" value="1e-10" />
           <Parameter name="growth wait after fail" type="int" value="2" />
           <Parameter name="count before increasing increase factor" type="int" value="2" />
+        </ParameterList>
+        <ParameterList name="timestep controller from file parameters">
+          <Parameter name="file name" type="string" value="../data/integrated_hydro-column_dts.h5" />
         </ParameterList>
       </ParameterList>
 
@@ -240,7 +238,7 @@
             <Parameter name="van Genuchten alpha" type="double" value="0.000545" />
             <Parameter name="van Genuchten m" type="double" value="0.19" />
             <Parameter name="residual saturation" type="double" value="0.1" />
-            <Parameter name="smoothing interval width [saturation]" type="double" value=".1" />
+            <Parameter name="smoothing interval width [saturation]" type="double" value="0.1" />
           </ParameterList>
         </ParameterList>
         <ParameterList name="verbose object" type="ParameterList">
@@ -337,7 +335,6 @@
 
       <ParameterList name="water_content" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="richards water content" />
-        <Parameter name="include water vapor" type="bool" value="true" />
       </ParameterList>
 
       <ParameterList name="capillary_pressure_gas_liq" type="ParameterList">
@@ -388,26 +385,6 @@
         <Parameter name="viscosity key" type="string" value="viscosity_liquid" />
         <ParameterList name="viscosity model parameters" type="ParameterList">
           <Parameter name="viscosity relation type" type="string" value="liquid water" />
-        </ParameterList>
-      </ParameterList>
-
-      <ParameterList name="molar_density_gas" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="eos" />
-        <Parameter name="EOS basis" type="string" value="molar" />
-        <Parameter name="molar density key" type="string" value="molar_density_gas" />
-        <ParameterList name="EOS parameters" type="ParameterList">
-          <Parameter name="EOS type" type="string" value="vapor in gas" />
-          <ParameterList name="gas EOS parameters" type="ParameterList">
-            <Parameter name="EOS type" type="string" value="ideal gas" />
-          </ParameterList>
-        </ParameterList>
-      </ParameterList>
-
-      <ParameterList name="mol_frac_gas" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="molar fraction gas" />
-        <Parameter name="molar fraction key" type="string" value="mol_frac_gas" />
-        <ParameterList name="vapor pressure model parameters" type="ParameterList">
-          <Parameter name="vapor pressure model type" type="string" value="water vapor over water/ice" />
         </ParameterList>
       </ParameterList>
 

@@ -98,19 +98,18 @@
     <Parameter name="start time units" type="string" value="s" />
     <Parameter name="end time" type="double" value="1000.0" />
     <Parameter name="end time units" type="string" value="s" />
-    <ParameterList name="PK tree">
-      <ParameterList name="Top level MPC">
+    <ParameterList name="PK tree" type="ParameterList">
+      <ParameterList name="Top level MPC" type="ParameterList">
         <Parameter name="PK type" type="string" value="weak MPC" />
-        <ParameterList name="deformation">
+        <ParameterList name="deformation" type="ParameterList">
           <Parameter name="PK type" type="string" value="volumetric deformation" />
         </ParameterList>
-        <ParameterList name="flow">
+        <ParameterList name="flow" type="ParameterList">
           <Parameter name="PK type" type="string" value="richards flow" />
         </ParameterList>
       </ParameterList>
     </ParameterList>
   </ParameterList>
-
   <ParameterList name="visualization" type="ParameterList">
     <Parameter name="file name base" type="string" value="visdump" />
     <Parameter name="times start period stop 0" type="Array(double)" value="{0.0,100.0,-1.0}" />
@@ -125,6 +124,7 @@
     <ParameterList name="Top level MPC" type="ParameterList">
       <Parameter name="PK type" type="string" value="weak MPC" />
       <Parameter name="PKs order" type="Array(string)" value="{deformation, flow}" />
+
     </ParameterList>
 
     <ParameterList name="deformation" type="ParameterList">
@@ -133,7 +133,6 @@
       <Parameter name="deformation strategy" type="string" value="average" />
       <Parameter name="primary variable" type="string" value="base_porosity" />
       <Parameter name="initial time step" type="double" value="10.0" />
-
       <ParameterList name="initial condition" type="ParameterList">
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="domain" type="ParameterList">
@@ -159,7 +158,7 @@
           </ParameterList>
         </ParameterList>
       </ParameterList>
-      
+
     </ParameterList>
 
     <ParameterList name="flow" type="ParameterList">
@@ -168,7 +167,6 @@
       <Parameter name="strongly coupled PK" type="bool" value="false" />
       <Parameter name="initial time step" type="double" value="10.0" />
       <Parameter name="relative permeability method" type="string" value="upwind with Darcy flux" />
-
       <ParameterList name="time integrator" type="ParameterList">
         <Parameter name="extrapolate initial guess" type="bool" value="true" />
         <Parameter name="solver type" type="string" value="nka" />
@@ -323,7 +321,6 @@
         </ParameterList>
       </ParameterList>
 
-
       <ParameterList name="temperature" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
         <ParameterList name="function" type="ParameterList">
@@ -347,13 +344,13 @@
             <Parameter name="components" type="Array(string)" value="{cell}" />
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
-                <Parameter name="value" type="double" value="0." />
+                <Parameter name="value" type="double" value="0.0" />
               </ParameterList>
             </ParameterList>
           </ParameterList>
         </ParameterList>
       </ParameterList>
-      
+
       <ParameterList name="effective_pressure" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="effective_pressure" />
       </ParameterList>
@@ -367,7 +364,7 @@
           </ParameterList>
         </ParameterList>
       </ParameterList>
-      
+
       <ParameterList name="cell_volume" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="deforming cell volume" />
         <Parameter name="deformation key" type="string" value="base_porosity" />

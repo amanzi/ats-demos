@@ -185,21 +185,21 @@
   </ParameterList>
 
   <!-- Vis List - see $AMANZI_DIR/src/state/visualization.hh  -->
-  <!-- <ParameterList name="visualization"> -->
-  <!--   <Parameter name="file name base" type="string" value="visdump"/> -->
-  <!--   <Parameter name="cycles start period stop" type="Array(int)" value="{0, 5, -1}"/>   -->
-  <!-- </ParameterList> -->
+  <ParameterList name="visualization">
+    <Parameter name="file name base" type="string" value="visdump"/>
+    <Parameter name="cycles start period stop" type="Array(int)" value="{0, 1, -1}"/>
+  </ParameterList>
 
-  <!-- <ParameterList name="visualization surface"> -->
-  <!--   <Parameter name="file name base" type="string" value="visdump_surface"/> -->
-  <!--   <Parameter name="cycles start period stop" type="Array(int)" value="{0, 5, -1}"/>   -->
-  <!-- </ParameterList> -->
+  <ParameterList name="visualization surface">
+    <Parameter name="file name base" type="string" value="visdump_surface"/>
+    <Parameter name="cycles start period stop" type="Array(int)" value="{0, 1, -1}"/>
+  </ParameterList>
  
 
-  <!-- <ParameterList name="checkpoint"> -->
-  <!--   <Parameter name="file name base" type="string" value="checkpoint"/> -->
-  <!--   <Parameter name="cycles start period stop" type="Array(int)" value="{0, 50, -1}"/>  -->
-  <!-- </ParameterList> -->
+  <ParameterList name="checkpoint">
+    <Parameter name="file name base" type="string" value="checkpoint"/>
+    <Parameter name="cycles start period stop" type="Array(int)" value="{0, 1, -1}"/>
+  </ParameterList>
 
 
   <!-- PK List - top level placeholder for Coordinator  -->

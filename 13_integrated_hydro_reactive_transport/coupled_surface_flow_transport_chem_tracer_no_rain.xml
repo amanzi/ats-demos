@@ -127,7 +127,7 @@
     <Parameter name="end cycle" type="int" value="1000"/>
     <Parameter name="start time" type="double" value="0.0"/>
     <Parameter name="start time units" type="string" value="s"/> <!-- valid are s/d/yr -->
-    <Parameter name="end time" type="double" value="1000."/>
+    <Parameter name="end time" type="double" value="10000."/>
     <Parameter name="end time units" type="string" value="s"/> <!-- valid are s/d/yr -->
     <ParameterList name="PK tree">
 
@@ -166,7 +166,8 @@
 
   <ParameterList name="visualization surface">
     <Parameter name="file name base" type="string" value="visdump_surface"/>
-    <Parameter name="cycles start period stop" type="Array(int)" value="{0, 2, -1}"/>  
+    <Parameter name="cycles start period stop" type="Array(int)" value="{0, 1, 10}"/>
+    <Parameter name="times start period stop" type="Array(double)" value="{0, 200, -1}"/>
   </ParameterList>
  
 
@@ -236,7 +237,7 @@
             <Parameter name="regions" type="Array(string)" value="{surface west}" />
             <ParameterList name="boundary head" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
-                <Parameter name="value" type="double" value="0.13" />
+                <Parameter name="value" type="double" value="0.103" />
               </ParameterList>
             </ParameterList>
           </ParameterList>
@@ -634,7 +635,7 @@
       </ParameterList>
 
       <ParameterList name="surface-pressure">
-        <Parameter name="restart file" type="string" value="../data/restart_run_surface_flow_no_rain.h5"/> 
+        <Parameter name="restart file" type="string" value="../data/restart_run_surface_flow_slow.h5"/> 
       </ParameterList>
 
       <ParameterList name="gravity">

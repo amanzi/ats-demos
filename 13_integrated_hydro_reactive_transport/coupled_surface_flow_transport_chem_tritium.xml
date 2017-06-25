@@ -166,7 +166,9 @@
 
   <ParameterList name="visualization surface">
     <Parameter name="file name base" type="string" value="visdump_surface"/>
-    <Parameter name="cycles start period stop" type="Array(int)" value="{0, 2, -1}"/>  
+    <!-- <Parameter name="cycles start period stop" type="Array(int)" value="{0, 2, -1}"/>   -->
+    <Parameter name="cycles start period stop" type="Array(int)" value="{0, 1, 10}"/>
+    <Parameter name="times start period stop" type="Array(double)" value="{0, 200, -1}"/>
   </ParameterList>
  
 
@@ -236,7 +238,7 @@
             <Parameter name="regions" type="Array(string)" value="{surface west}" />
             <ParameterList name="boundary head" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
-                <Parameter name="value" type="double" value="0.13" />
+                <Parameter name="value" type="double" value="0.103" />
               </ParameterList>
             </ParameterList>
           </ParameterList>
@@ -403,9 +405,9 @@
             <Parameter name="component" type="string" value="cell"/>
             <ParameterList name="function">
               <ParameterList name="function-tabular">
-                <!--                    <Parameter name="x values" type="Array(double)" value="{0.0, 432000.0}"/> -->
+                <!-- <Parameter name="x values" type="Array(double)" value="{0.0, 432000.0}"/> -->
                 <Parameter name="x values" type="Array(double)" value="{0.0, 1500.0}"/>
-                <Parameter name="y values" type="Array(double)" value="{0.00002778, 0.0}"/>
+                <Parameter name="y values" type="Array(double)" value="{0., 0.0}"/>
                 <!-- <Parameter name="y values" type="Array(double)" value="{0.0, 0.0}"/> -->
                 <Parameter name="forms" type="Array(string)" value="{constant}"/>
               </ParameterList>
@@ -626,7 +628,7 @@
       </ParameterList>
 
       <ParameterList name="surface-pressure">
-        <Parameter name="restart file" type="string" value="../data/restart_run_surface_flow2.h5"/> 
+        <Parameter name="restart file" type="string" value="../data/restart_run_surface_flow_slow.h5"/> 
       </ParameterList>
 
       <ParameterList name="gravity">

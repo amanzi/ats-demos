@@ -131,7 +131,7 @@
 
 
   <ParameterList name="cycle driver">
-    <Parameter name="end cycle" type="int" value="100000"/> 
+    <Parameter name="end cycle" type="int" value="40"/> 
     <Parameter name="start time" type="double" value="0.0"/>
     <Parameter name="start time units" type="string" value="s"/> <!-- valid are s/d/yr -->
     <Parameter name="end time" type="double" value="1."/>
@@ -187,18 +187,18 @@
   <!-- Vis List - see $AMANZI_DIR/src/state/visualization.hh  -->
   <ParameterList name="visualization">
     <Parameter name="file name base" type="string" value="visdump"/>
-    <Parameter name="cycles start period stop" type="Array(int)" value="{0, 5, -1}"/>  
+    <Parameter name="cycles start period stop" type="Array(int)" value="{0, 10, -1}"/>  
   </ParameterList>
 
   <ParameterList name="visualization surface">
     <Parameter name="file name base" type="string" value="visdump_surface"/>
-    <Parameter name="cycles start period stop" type="Array(int)" value="{0, 5, -1}"/>  
+    <Parameter name="cycles start period stop" type="Array(int)" value="{0, 10, -1}"/>  
   </ParameterList>
  
 
   <ParameterList name="checkpoint">
     <Parameter name="file name base" type="string" value="checkpoint"/>
-    <Parameter name="cycles start period stop" type="Array(int)" value="{0, 50, -1}"/> 
+    <Parameter name="cycles start period stop" type="Array(int)" value="{0, 10, -1}"/> 
   </ParameterList>
 
 
@@ -666,8 +666,8 @@
               <ParameterList name="function-tabular">
                 <!--                    <Parameter name="x values" type="Array(double)" value="{0.0, 432000.0}"/> -->
                 <Parameter name="x values" type="Array(double)" value="{0.0, 1500.0}"/>
-                <Parameter name="y values" type="Array(double)" value="{0.0001, 0.0}"/>
-                <Parameter name="forms" type="Array(string)" value="{constant}"/>
+                <Parameter name="y values" type="Array(double)" value="{0.00007, 0.0}"/>
+                <Parameter name="forms" type="Array(string)" value="{linear}"/>
               </ParameterList>
             </ParameterList>
           </ParameterList>

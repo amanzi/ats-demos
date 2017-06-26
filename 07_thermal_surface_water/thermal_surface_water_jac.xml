@@ -50,7 +50,7 @@
     <Parameter name="end time units" type="string" value="s" />
     <ParameterList name="PK tree" type="ParameterList">
       <ParameterList name="surface thermal coupler" type="ParameterList">
-        <Parameter name="PK type" type="string" value="strong MPC" />
+        <Parameter name="PK type" type="string" value="mpc coupled cells" />
         <ParameterList name="overland flow" type="ParameterList">
           <Parameter name="PK type" type="string" value="overland flow with ice" />
         </ParameterList>
@@ -67,7 +67,14 @@
   <ParameterList name="PKs" type="ParameterList">
 
     <ParameterList name="surface thermal coupler" type="ParameterList">
-      <Parameter name="PK type" type="string" value="strong MPC" />
+      <Parameter name="PK type" type="string" value="mpc coupled cells" />
+      <Parameter name="conserved quantity A" type="string" value="surface-water_content" />
+      <Parameter name="conserved quantity B" type="string" value="surface-energy" />
+      <Parameter name="primary variable A" type="string" value="surface-pressure" />
+      <Parameter name="primary variable B" type="string" value="surface-temperature" />
+      <Parameter name="domain name" type="string" value="surface" />
+      
+      
       <Parameter name="PKs order" type="Array(string)" value="{overland flow,surface energy}" />
       <ParameterList name="time integrator" type="ParameterList">
         <Parameter name="extrapolate initial guess" type="bool" value="true" />
@@ -101,6 +108,28 @@
         </ParameterList>
       </ParameterList>
 
+      <ParameterList name="linear solver" type="ParameterList">
+        <Parameter name="iterative method" type="string" value="nka" />
+        <ParameterList name="verbose object" type="ParameterList">
+          <Parameter name="verbosity level" type="string" value="high" />
+        </ParameterList>
+        <ParameterList name="nka parameters" type="ParameterList">
+          <Parameter name="error tolerance" type="double" value="1e-06" />
+          <Parameter name="maximum number of iterations" type="int" value="5" />
+        </ParameterList>
+      </ParameterList>
+
+      <ParameterList name="preconditioner" type="ParameterList">
+        <Parameter name="preconditioner type" type="string" value="boomer amg" />
+        <ParameterList name="boomer amg parameters" type="ParameterList">
+          <Parameter name="cycle applications" type="int" value="1" />
+          <Parameter name="smoother sweeps" type="int" value="2" />
+          <Parameter name="strong threshold" type="double" value="0.25" />
+          <Parameter name="tolerance" type="double" value="0.0" />
+          <Parameter name="number of functions" type="int" value="2" />
+        </ParameterList>
+      </ParameterList>
+      
       <ParameterList name="verbose object" type="ParameterList">
         <Parameter name="verbosity level" type="string" value="extreme" />
       </ParameterList>
@@ -119,15 +148,12 @@
         <Parameter name="verbosity level" type="string" value="extreme" />
       </ParameterList>
 
-      <ParameterList name="preconditioner" type="ParameterList">
-        <Parameter name="preconditioner type" type="string" value="boomer amg" />
-        <ParameterList name="boomer amg parameters" type="ParameterList">
-          <Parameter name="cycle applications" type="int" value="1" />
-          <Parameter name="smoother sweeps" type="int" value="2" />
-          <Parameter name="strong threshold" type="double" value="0.25" />
-          <Parameter name="tolerance" type="double" value="0.0" />
-          <Parameter name="number of functions" type="int" value="2" />
-        </ParameterList>
+      <ParameterList name="diffusion" type="ParameterList">
+        <Parameter name="discretization primary" type="string" value="fv: default" />
+      </ParameterList>
+
+      <ParameterList name="diffusion preconditioner" type="ParameterList">
+        <Parameter name="Newton correction" type="string" value="true Jacobian" />
       </ParameterList>
 
       <ParameterList name="linear solver" type="ParameterList">
@@ -141,14 +167,16 @@
         </ParameterList>
       </ParameterList>
 
-      <ParameterList name="diffusion" type="ParameterList">
-        <Parameter name="discretization primary" type="string" value="fv: default" />
+      <ParameterList name="preconditioner" type="ParameterList">
+        <Parameter name="preconditioner type" type="string" value="boomer amg" />
+        <ParameterList name="boomer amg parameters" type="ParameterList">
+          <Parameter name="cycle applications" type="int" value="1" />
+          <Parameter name="smoother sweeps" type="int" value="2" />
+          <Parameter name="strong threshold" type="double" value="0.25" />
+          <Parameter name="tolerance" type="double" value="0.0" />
+        </ParameterList>
       </ParameterList>
-
-      <ParameterList name="diffusion preconditioner" type="ParameterList">
-        <Parameter name="Newton correction" type="string" value="true Jacobian" />
-      </ParameterList>
-
+      
       <ParameterList name="initial condition" type="ParameterList">
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="initial head" type="ParameterList">
@@ -236,15 +264,12 @@
         <Parameter name="verbosity level" type="string" value="extreme" />
       </ParameterList>
 
-      <ParameterList name="preconditioner" type="ParameterList">
-        <Parameter name="preconditioner type" type="string" value="boomer amg" />
-        <ParameterList name="boomer amg parameters" type="ParameterList">
-          <Parameter name="cycle applications" type="int" value="1" />
-          <Parameter name="smoother sweeps" type="int" value="2" />
-          <Parameter name="strong threshold" type="double" value="0.25" />
-          <Parameter name="tolerance" type="double" value="0.0" />
-          <Parameter name="number of functions" type="int" value="2" />
-        </ParameterList>
+      <ParameterList name="diffusion" type="ParameterList">
+        <Parameter name="discretization primary" type="string" value="fv: default" />
+      </ParameterList>
+
+      <ParameterList name="advection" type="ParameterList">
+        <Parameter name="Advection method" type="string" value="donor upwind" />
       </ParameterList>
 
       <ParameterList name="linear solver" type="ParameterList">
@@ -258,14 +283,16 @@
         </ParameterList>
       </ParameterList>
 
-      <ParameterList name="diffusion" type="ParameterList">
-        <Parameter name="discretization primary" type="string" value="fv: default" />
+      <ParameterList name="preconditioner" type="ParameterList">
+        <Parameter name="preconditioner type" type="string" value="boomer amg" />
+        <ParameterList name="boomer amg parameters" type="ParameterList">
+          <Parameter name="cycle applications" type="int" value="1" />
+          <Parameter name="smoother sweeps" type="int" value="2" />
+          <Parameter name="strong threshold" type="double" value="0.25" />
+          <Parameter name="tolerance" type="double" value="0.0" />
+        </ParameterList>
       </ParameterList>
-
-      <ParameterList name="advection" type="ParameterList">
-        <Parameter name="Advection method" type="string" value="donor upwind" />
-      </ParameterList>
-
+      
       <ParameterList name="initial condition" type="ParameterList">
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="initial temperature" type="ParameterList">
@@ -320,6 +347,8 @@
 
       <ParameterList name="surface-energy" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="surface ice energy" />
+        <Parameter name="ponded depth key" type="string" value="ponded_depth" />
+        <Parameter name="unfrozen fraction key" type="string" value="unfrozen_fraction" />
       </ParameterList>
 
       <ParameterList name="unfrozen_effective_depth" type="ParameterList">

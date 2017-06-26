@@ -111,8 +111,9 @@
     </ParameterList>
   </ParameterList>
   <ParameterList name="visualization" type="ParameterList">
-    <Parameter name="cycles" type="Array(int)" value="{0,10,17,20,24,26,28,30,32,34,39}" />
     <Parameter name="file name base" type="string" value="visdump" />
+    <Parameter name="times start period stop 0" type="Array(double)" value="{0.0,100.0,-1.0}" />
+    <Parameter name="dynamic mesh" type="bool" value="true" />
   </ParameterList>
 
   <ParameterList name="checkpoint" type="ParameterList">
@@ -169,14 +170,14 @@
       <ParameterList name="time integrator" type="ParameterList">
         <Parameter name="extrapolate initial guess" type="bool" value="true" />
         <Parameter name="solver type" type="string" value="nka" />
-        <Parameter name="timestep controller type" type="string" value="from file" />
+        <Parameter name="timestep controller type" type="string" value="smarter" />
         <ParameterList name="nka parameters" type="ParameterList">
           <Parameter name="max error growth factor" type="double" value="1000.0" />
           <Parameter name="modify correction" type="bool" value="true" />
           <Parameter name="monitor" type="string" value="monitor residual" />
           <Parameter name="nonlinear tolerance" type="double" value="1e-05" />
-          <Parameter name="diverged tolerance" type="double" value="10000000000.0" />
-          <Parameter name="limit iterations" type="int" value="100" />
+          <Parameter name="diverged tolerance" type="double" value="1000.0" />
+          <Parameter name="limit iterations" type="int" value="51" />
           <Parameter name="preconditioner lag iterations" type="int" value="0" />
           <Parameter name="convergence monitor" type="string" value="monitor residual" />
           <Parameter name="max divergent interations" type="int" value="20" />
@@ -198,9 +199,6 @@
           <Parameter name="min time step" type="double" value="1.0" />
           <Parameter name="growth wait after fail" type="int" value="2" />
           <Parameter name="count before increasing increase factor" type="int" value="2" />
-        </ParameterList>
-        <ParameterList name="timestep controller from file parameters">
-          <Parameter name="file name" type="string" value="../data/deformation_squish_dts.h5" />
         </ParameterList>
       </ParameterList>
 

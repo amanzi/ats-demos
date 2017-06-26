@@ -714,6 +714,8 @@
 
       <ParameterList name="surface-energy" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="surface ice energy" />
+        <Parameter name="ponded depth key" type="string" value="ponded_depth" />
+        <Parameter name="unfrozen fraction key" type="string" value="unfrozen_fraction" />
       </ParameterList>
 
       <ParameterList name="ponded_depth" type="ParameterList">

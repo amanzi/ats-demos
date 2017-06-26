@@ -104,7 +104,7 @@
       <Parameter name="component names" type="Array(string)" value="{Tc-99}"/>
       <Parameter name="number of liquid components" type="int" value="1"/>
       <Parameter name="component molar masses" type="Array(double)" value="{1.0e+00}"/>
-      <Parameter name="spatial discretization order" type="int" value="1"/>
+      <Parameter name="spatial discretization order" type="int" value="2"/>
       <Parameter name="temporal discretization order" type="int" value="1"/>
       <Parameter name="cfl" type="double" value="1.00000000000000000e-00"/>
       <Parameter name="solver" type="string" value="PCG with Hypre AMG"/>

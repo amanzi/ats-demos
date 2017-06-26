@@ -191,12 +191,12 @@
             <Parameter name="regions" type="Array(string)" value="{east}"/>
           </ParameterList>
         </ParameterList>
-        <ParameterList name="head">
+        <ParameterList name="mass flux">
           <ParameterList name="west">
             <Parameter name="regions" type="Array(string)" value="{west}"/>
-            <ParameterList name="boundary head">
+            <ParameterList name="outward mass flux">
               <ParameterList name="function-constant">
-                <Parameter name="value" type="double" value="0.1"/>
+                <Parameter name="value" type="double" value="-1.e-1"/>
               </ParameterList>
             </ParameterList>
           </ParameterList>

@@ -122,13 +122,13 @@
     </ParameterList>
   </ParameterList>
   <ParameterList name="visualization" type="ParameterList">
-    <Parameter name="cycles" type="Array(int)" value="{3653,3663,3673,3683,3693,3703,3713,3723,3733,3743,3753,3763,3773,3783,3793,3803,3813,3823,3833,3843,3853,3863,3873,3883,3893,3903,3913,3923,3933,3943,3953,3963,3973,3983,3993,4003,4013}" />
     <Parameter name="file name base" type="string" value="visdump" />
+    <Parameter name="times start period stop 0" type="Array(double)" value="{315576000.0,864000.0,347133600.0}" />
   </ParameterList>
 
   <ParameterList name="visualization surface" type="ParameterList">
-    <Parameter name="cycles" type="Array(int)" value="{3653,3663,3673,3683,3693,3703,3713,3723,3733,3743,3753,3763,3773,3783,3793,3803,3813,3823,3833,3843,3853,3863,3873,3883,3893,3903,3913,3923,3933,3943,3953,3963,3973,3983,3993,4003,4013}" />
     <Parameter name="file name base" type="string" value="visdump_surface" />
+    <Parameter name="times start period stop 0" type="Array(double)" value="{315576000.0,864000.0,347133600.0}" />
   </ParameterList>
   <ParameterList name="checkpoint" type="ParameterList">
   </ParameterList>

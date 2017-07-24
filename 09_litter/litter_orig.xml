@@ -152,7 +152,7 @@
 
     <ParameterList name="surface balance" type="ParameterList">
       <Parameter name="PK type" type="string" value="general surface balance" />
-      <Parameter name="primary variable" type="string" value="litter-water_content" />
+      <Parameter name="primary variable key" type="string" value="litter-water_content" />
       <Parameter name="conserved quantity key" type="string" value="litter-water_content" />
       <Parameter name="layer name" type="string" value="litter" />
       <Parameter name="domain name" type="string" value="surface" />
@@ -220,7 +220,7 @@
 
     <ParameterList name="flow" type="ParameterList">
       <Parameter name="PK type" type="string" value="richards flow" />
-      <Parameter name="primary variable" type="string" value="pressure" />
+      <Parameter name="primary variable key" type="string" value="pressure" />
       <Parameter name="initial time step" type="double" value="10.0" />
       <Parameter name="permeability rescaling" type="double" value="10000000.0" />
       <Parameter name="relative permeability method" type="string" value="upwind with Darcy flux" />
@@ -274,7 +274,7 @@
 
     <ParameterList name="overland flow" type="ParameterList">
       <Parameter name="PK type" type="string" value="overland flow, pressure basis" />
-      <Parameter name="primary variable" type="string" value="surface-pressure" />
+      <Parameter name="primary variable key" type="string" value="surface-pressure" />
       <Parameter name="domain name" type="string" value="surface" />
       <Parameter name="source term" type="bool" value="true" />
       <Parameter name="mass source in meters" type="bool" value="false" />
@@ -408,11 +408,11 @@
         <Parameter name="litter-drainage coefficient" type="double" value="1.0" />
       </ParameterList>
 
-      <ParameterList name="ponded_depth" type="ParameterList">
+      <ParameterList name="surface-ponded_depth" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="ponded depth" />
       </ParameterList>
 
-      <ParameterList name="ponded_depth_bar" type="ParameterList">
+      <ParameterList name="surface-ponded_depth_bar" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="ponded depth" />
         <Parameter name="ponded depth bar" type="bool" value="true" />
         <Parameter name="height key" type="string" value="ponded_depth_bar" />
@@ -487,7 +487,7 @@
         </ParameterList>
       </ParameterList>
 
-      <ParameterList name="manning_coefficient" type="ParameterList">
+      <ParameterList name="surface-manning_coefficient" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
         <Parameter name="constant in time" type="bool" value="true" />
         <ParameterList name="function" type="ParameterList">

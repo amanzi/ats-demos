@@ -161,7 +161,7 @@
     </ParameterList>
 
     <ParameterList name="flow" type="ParameterList">
-      <Parameter name="primary variable" type="string" value="pressure" />
+      <Parameter name="primary variable key" type="string" value="pressure" />
       <Parameter name="PK type" type="string" value="permafrost flow" />
       <Parameter name="initial time step" type="double" value="1.0" />
       <Parameter name="relative permeability method" type="string" value="upwind with Darcy flux" />
@@ -218,7 +218,7 @@
     </ParameterList>
 
     <ParameterList name="energy" type="ParameterList">
-      <Parameter name="primary variable" type="string" value="temperature" />
+      <Parameter name="primary variable key" type="string" value="temperature" />
       <Parameter name="PK type" type="string" value="three-phase energy" />
       <Parameter name="source term" type="bool" value="false" />
       <Parameter name="initial time step" type="double" value="1.0" />

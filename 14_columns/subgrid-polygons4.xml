@@ -191,7 +191,7 @@
       
     <ParameterList name="surfstar flow" type="ParameterList">
       <Parameter name="PK type" type="string" value="overland flow with ice" />
-      <Parameter name="primary variable" type="string" value="surface_star-pressure" />
+      <Parameter name="primary variable key" type="string" value="surface_star-pressure" />
       <Parameter name="domain name" type="string" value="surface_star" />
       <Parameter name="subgrid model" type="bool" value="true" />
       <Parameter name="source term" type="bool" value="false" />
@@ -287,7 +287,7 @@
     
     <ParameterList name="surfstar energy" type="ParameterList">
       <Parameter name="PK type" type="string" value="surface energy" />
-      <Parameter name="primary variable" type="string" value="surface_star-temperature" />
+      <Parameter name="primary variable key" type="string" value="surface_star-temperature" />
       <Parameter name="domain name" type="string" value="surface_star" />
       <Parameter name="source term" type="bool" value="false" />
       <Parameter name="flux key" type="string" value="surface_star-mass_flux" />
@@ -415,7 +415,7 @@
       
     <ParameterList name="SEB" type="ParameterList">
       <Parameter name="PK type" type="string" value="surface balance implicit" />
-      <Parameter name="primary variable" type="string" value="surface-snow_depth" />
+      <Parameter name="primary variable key" type="string" value="surface-snow_depth" />
       <Parameter name="domain name" type="string" value="surface" />
       <Parameter name="conserved quantity key" type="string" value="surface-snow_depth" />
       <Parameter name="max time step" type="double" value="86400.0" />
@@ -510,7 +510,7 @@
       
     <ParameterList name="SSF" type="ParameterList">
       <Parameter name="PK type" type="string" value="permafrost flow" />
-      <Parameter name="primary variable" type="string" value="pressure" />
+      <Parameter name="primary variable key" type="string" value="pressure" />
       <Parameter name="domain name" type="string" value="" />
       <Parameter name="source term" type="bool" value="true" />
       <Parameter name="clobber surface rel perm" type="bool" value="true" />
@@ -573,7 +573,7 @@
     
     <ParameterList name="SSE" type="ParameterList">
       <Parameter name="PK type" type="string" value="three-phase energy" />
-      <Parameter name="primary variable" type="string" value="temperature" />
+      <Parameter name="primary variable key" type="string" value="temperature" />
       <Parameter name="domain name" type="string" value="" />
       <Parameter name="source term" type="bool" value="false" />
       <Parameter name="initial time step" type="double" value="1.0" />
@@ -634,7 +634,7 @@
     
     <ParameterList name="SF" type="ParameterList">
       <Parameter name="PK type" type="string" value="overland flow with ice" />
-      <Parameter name="primary variable" type="string" value="surface-pressure" />
+      <Parameter name="primary variable key" type="string" value="surface-pressure" />
       <Parameter name="domain name" type="string" value="surface" />
       <Parameter name="source term" type="bool" value="true" />
       <Parameter name="initial time step" type="double" value="1.0" />
@@ -678,7 +678,7 @@
     
     <ParameterList name="SE" type="ParameterList">
       <Parameter name="PK type" type="string" value="surface energy" />
-      <Parameter name="primary variable" type="string" value="surface-temperature" />
+      <Parameter name="primary variable key" type="string" value="surface-temperature" />
       <Parameter name="domain name" type="string" value="surface" />
       <Parameter name="source term" type="bool" value="true" />
       <Parameter name="flux key" type="string" value="surface-mass_flux" />

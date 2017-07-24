@@ -74,7 +74,7 @@
 
     <ParameterList name="Overland Flow" type="ParameterList">
       <Parameter name="PK type" type="string" value="overland flow" />
-      <Parameter name="primary variable" type="string" value="ponded_depth" />
+      <Parameter name="primary variable key" type="string" value="surface-ponded_depth" />
       <Parameter name="source term" type="bool" value="true" />
       <Parameter name="debug cells" type="Array(int)" value="{0,9}" />
       <Parameter name="initial time step" type="double" value="10.0" />
@@ -122,14 +122,13 @@
           <Parameter name="growth wait after fail" type="int" value="2" />
           <Parameter name="count before increasing increase factor" type="int" value="2" />
         </ParameterList>
-        <ParameterList name="timestep controller from file parameters">
+        <ParameterList name="timestep controller from file parameters" type="ParameterList">
           <Parameter name="file name" type="string" value="../data/surface_water_head-fv_jac_dts.h5" />
         </ParameterList>
       </ParameterList>
 
       <ParameterList name="elevation evaluator" type="ParameterList">
-        <Parameter name="elevation key" type="string" value="elevation" />
-        <ParameterList name="elevation function" type="ParameterList">
+       <ParameterList name="elevation function" type="ParameterList">
           <ParameterList name="Elevation" type="ParameterList">
             <Parameter name="region" type="string" value="Computational domain" />
             <Parameter name="components" type="Array(string)" value="{cell,face}" />
@@ -218,7 +217,7 @@
         </ParameterList>
       </ParameterList>
 
-      <ParameterList name="manning_coefficient" type="ParameterList">
+      <ParameterList name="surface-manning_coefficient" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
         <Parameter name="constant in time" type="bool" value="true" />
         <ParameterList name="function" type="ParameterList">

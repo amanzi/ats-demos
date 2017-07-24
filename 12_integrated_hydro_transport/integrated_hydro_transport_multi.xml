@@ -270,7 +270,7 @@
       </ParameterList>
       <Parameter name="PK type" type="string" value="richards flow"/>
       <Parameter name="darcy flux key" type="string" value="mass_flux"/>
-      <Parameter name="primary variable" type="string" value="pressure"/>
+      <Parameter name="primary variable key" type="string" value="pressure"/>
       <Parameter name="initial time step" type="double" value="10"/>
       <Parameter name="permeability rescaling" type="double" value="10000000.0" />
       <Parameter name="relative permeability method" type="string" value="upwind with Darcy flux"/>
@@ -325,7 +325,7 @@
 
     <ParameterList name="overland flow">
       <Parameter name="PK type" type="string" value="overland flow, pressure basis"/>
-      <Parameter name="primary variable" type="string" value="surface-pressure"/>
+      <Parameter name="primary variable key" type="string" value="surface-pressure"/>
       <Parameter name="domain name" type="string" value="surface"/>
       <Parameter name="source term" type="bool" value="true"/>
       <Parameter name="mass source in meters" type="bool" value="true"/>

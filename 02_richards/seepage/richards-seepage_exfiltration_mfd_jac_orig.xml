@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <ParameterList name="Main" type="ParameterList">
   <Parameter name="Native Unstructured Input" type="bool" value="true" />
   <Parameter name="grid_option" type="string" value="Unstructured" />
@@ -93,7 +92,7 @@
   <ParameterList name="PKs" type="ParameterList">
 
     <ParameterList name="Richards" type="ParameterList">
-      <Parameter name="primary variable" type="string" value="pressure" />
+      <Parameter name="primary variable key" type="string" value="pressure" />
       <Parameter name="PK type" type="string" value="richards flow" />
       <Parameter name="initial time step" type="double" value="1.0" />
       <Parameter name="relative permeability method" type="string" value="upwind with Darcy flux" />
@@ -183,7 +182,7 @@
             <Parameter name="regions" type="Array(string)" value="{surface}" />
             <ParameterList name="outward mass flux" type="ParameterList">
               <ParameterList name="function-tabular" type="ParameterList">
-                <Parameter name="x values" type="Array(double)" value="{0.0,1.262e7}" />
+                <Parameter name="x values" type="Array(double)" value="{0.0,12620000.0}" />
                 <Parameter name="y values" type="Array(double)" value="{-0.004,0.0}" />
                 <Parameter name="forms" type="Array(string)" value="{constant}" />
               </ParameterList>
@@ -193,7 +192,7 @@
             <Parameter name="regions" type="Array(string)" value="{bottom face}" />
             <ParameterList name="outward mass flux" type="ParameterList">
               <ParameterList name="function-tabular" type="ParameterList">
-                <Parameter name="x values" type="Array(double)" value="{0.0,4.73e7,53611200.0}" />
+                <Parameter name="x values" type="Array(double)" value="{0.0,47300000.0,53611200.0}" />
                 <Parameter name="y values" type="Array(double)" value="{0.0,0.004,0.0}" />
                 <Parameter name="forms" type="Array(string)" value="{constant,constant}" />
               </ParameterList>

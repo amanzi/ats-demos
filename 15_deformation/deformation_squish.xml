@@ -130,7 +130,7 @@
       <Parameter name="PK type" type="string" value="volumetric deformation" />
       <Parameter name="deformation mode" type="string" value="prescribed" />
       <Parameter name="deformation strategy" type="string" value="average" />
-      <Parameter name="primary variable" type="string" value="base_porosity" />
+      <Parameter name="primary variable key" type="string" value="base_porosity" />
       <Parameter name="initial time step" type="double" value="10.0" />
       <ParameterList name="initial condition" type="ParameterList">
         <ParameterList name="function" type="ParameterList">
@@ -162,7 +162,7 @@
 
     <ParameterList name="flow" type="ParameterList">
       <Parameter name="PK type" type="string" value="richards flow" />
-      <Parameter name="primary variable" type="string" value="pressure" />
+      <Parameter name="primary variable key" type="string" value="pressure" />
       <Parameter name="strongly coupled PK" type="bool" value="false" />
       <Parameter name="initial time step" type="double" value="10.0" />
       <Parameter name="relative permeability method" type="string" value="upwind with Darcy flux" />
@@ -199,7 +199,7 @@
           <Parameter name="growth wait after fail" type="int" value="2" />
           <Parameter name="count before increasing increase factor" type="int" value="2" />
         </ParameterList>
-        <ParameterList name="timestep controller from file parameters">
+        <ParameterList name="timestep controller from file parameters" type="ParameterList">
           <Parameter name="file name" type="string" value="../data/deformation_squish_dts.h5" />
         </ParameterList>
       </ParameterList>

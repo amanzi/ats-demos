@@ -131,7 +131,7 @@
 
     <ParameterList name="carbon budget" type="ParameterList">
       <Parameter name="PK type" type="string" value="BGC simple" />
-      <Parameter name="primary variable" type="string" value="carbon" />
+      <Parameter name="primary variable key" type="string" value="carbon" />
       <Parameter name="initial time step" type="double" value="86400.0" />
       <Parameter name="soil partition name" type="string" value="all" />
       <Parameter name="cryoturbation mixing coefficient [cm^2/yr]" type="double" value="0.0" />
@@ -223,7 +223,7 @@
 
     <ParameterList name="canopy" type="ParameterList">
       <Parameter name="PK type" type="string" value="general surface balance" />
-      <Parameter name="primary variable" type="string" value="canopy-water_content" />
+      <Parameter name="primary variable key" type="string" value="canopy-water_content" />
       <Parameter name="conserved quantity key" type="string" value="canopy-water_content" />
       <Parameter name="layer name" type="string" value="canopy" />
       <Parameter name="domain name" type="string" value="surface" />
@@ -251,7 +251,7 @@
 
     <ParameterList name="litter" type="ParameterList">
       <Parameter name="PK type" type="string" value="general surface balance" />
-      <Parameter name="primary variable" type="string" value="litter-water_content" />
+      <Parameter name="primary variable key" type="string" value="litter-water_content" />
       <Parameter name="conserved quantity key" type="string" value="litter-water_content" />
       <Parameter name="layer name" type="string" value="litter" />
       <Parameter name="domain name" type="string" value="surface" />
@@ -322,7 +322,7 @@
 
     <ParameterList name="surface flow" type="ParameterList">
       <Parameter name="PK type" type="string" value="overland flow, pressure basis" />
-      <Parameter name="primary variable" type="string" value="surface-pressure" />
+      <Parameter name="primary variable key" type="string" value="surface-pressure" />
       <Parameter name="domain name" type="string" value="surface" />
       <Parameter name="source term" type="bool" value="true" />
       <Parameter name="source key" type="string" value="surface-mass_source" />
@@ -367,7 +367,7 @@
 
     <ParameterList name="subsurface flow" type="ParameterList">
       <Parameter name="PK type" type="string" value="richards flow" />
-      <Parameter name="primary variable" type="string" value="pressure" />
+      <Parameter name="primary variable key" type="string" value="pressure" />
       <Parameter name="initial time step" type="double" value="1.0" />
       <Parameter name="relative permeability method" type="string" value="upwind with Darcy flux" />
       <Parameter name="permeability rescaling" type="double" value="10000000.0" />
@@ -552,7 +552,7 @@
         </ParameterList>
       </ParameterList>
 
-      <ParameterList name="ponded_depth" type="ParameterList">
+      <ParameterList name="surface-ponded_depth" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="ponded depth" />
       </ParameterList>
 
@@ -665,7 +665,7 @@
         </ParameterList>
       </ParameterList>
 
-      <ParameterList name="manning_coefficient" type="ParameterList">
+      <ParameterList name="surface-manning_coefficient" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="manning coefficient with litter" />
         <ParameterList name="manning coefficient parameters" type="ParameterList">
           <ParameterList name="not river or floodplain" type="ParameterList">

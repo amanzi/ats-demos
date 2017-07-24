@@ -18,6 +18,9 @@ class File(object):
     def __getitem__(self, index):
         return self._fid.__getitem__(index)
 
+    def __exit__(self):
+        return self.close()
+
     def simulationTime(self):
         raise NotImplementedError("simulation time not implemented")
 
@@ -31,7 +34,21 @@ class File(object):
         if '.' in varname and varname in self._vars:
             return [varname,]
         else:
-            return [v for v in self._vars if v.startswith(varname)]
+            matches = []
+            for v in self._vars:
+                if v.split('.')[0] == varname:
+                    matches.append(v)
+                else:
+                    # this deals with the changing names from
+                    # ponded_depth to surface-ponded_depth, etc
+                    vsplit = v.split('.')[0].split('-')
+                    varnamesplit = varname.split('.')[0].split('-')
+                    if vsplit[-1] == varnamesplit[-1] and \
+                       len(vsplit) == 2 and vsplit[0] == 'surface' and \
+                       len(varnamesplit) == 1:
+                        matches.append(v)
+                    
+            return matches
 
     def steps(self):
         return self._keys

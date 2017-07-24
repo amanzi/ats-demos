@@ -137,7 +137,7 @@
 
     <ParameterList name="carbon" type="ParameterList">
       <Parameter name="PK type" type="string" value="BGC simple" />
-      <Parameter name="primary variable" type="string" value="carbon" />
+      <Parameter name="primary variable key" type="string" value="carbon" />
       <Parameter name="initial time step" type="double" value="86400.0" />
       <Parameter name="soil partition name" type="string" value="all" />
       <Parameter name="cryoturbation mixing coefficient [cm^2/yr]" type="double" value="5.0" />

@@ -74,7 +74,7 @@
 
     <ParameterList name="Overland Flow" type="ParameterList">
       <Parameter name="PK type" type="string" value="overland flow" />
-      <Parameter name="primary variable" type="string" value="ponded_depth" />
+      <Parameter name="primary variable key" type="string" value="ponded_depth" />
       <Parameter name="source term" type="bool" value="true" />
       <Parameter name="debug cells" type="Array(int)" value="{0,9}" />
       <Parameter name="initial time step" type="double" value="10.0" />
@@ -211,7 +211,7 @@
         </ParameterList>
       </ParameterList>
 
-      <ParameterList name="manning_coefficient" type="ParameterList">
+      <ParameterList name="surface-manning_coefficient" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
         <Parameter name="constant in time" type="bool" value="true" />
         <ParameterList name="function" type="ParameterList">

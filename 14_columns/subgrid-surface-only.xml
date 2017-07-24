@@ -86,7 +86,7 @@
 
     <ParameterList name="Overland Flow" type="ParameterList">
       <Parameter name="PK type" type="string" value="overland flow, pressure basis" />
-      <Parameter name="primary variable" type="string" value="surface-pressure" />
+      <Parameter name="primary variable key" type="string" value="surface-pressure" />
       <Parameter name="source term" type="bool" value="false" />
       <Parameter name="domain name" type="string" value="surface" />
       <Parameter name="flux key" type="string" value="surface-mass_flux" />

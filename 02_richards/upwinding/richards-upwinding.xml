@@ -91,7 +91,7 @@
 
     <ParameterList name="Richards" type="ParameterList">
       <Parameter name="PK type" type="string" value="richards flow" />
-      <Parameter name="primary variable" type="string" value="pressure" />
+      <Parameter name="primary variable key" type="string" value="pressure" />
       <Parameter name="initial time step" type="double" value="10.0" />
       <Parameter name="relative permeability method" type="string" value="upwind with Darcy flux" />
       <Parameter name="modify predictor for flux BCs" type="bool" value="true" />

@@ -90,7 +90,7 @@
   <ParameterList name="PKs" type="ParameterList">
 
     <ParameterList name="Richards" type="ParameterList">
-      <Parameter name="primary variable" type="string" value="pressure" />
+      <Parameter name="primary variable key" type="string" value="pressure" />
       <Parameter name="PK type" type="string" value="richards flow" />
       <Parameter name="initial time step" type="double" value="1.0" />
       <Parameter name="relative permeability method" type="string" value="upwind with Darcy flux" />
@@ -171,7 +171,7 @@
             </ParameterList>
           </ParameterList>
         </ParameterList>
-        <ParameterList name="seepage face" type="ParameterList">
+        <ParameterList name="seepage face pressure" type="ParameterList">
           <ParameterList name="top" type="ParameterList">
             <Parameter name="regions" type="Array(string)" value="{east face seepage face}" />
             <ParameterList name="boundary pressure" type="ParameterList">

@@ -168,7 +168,7 @@
 
     <ParameterList name="subsidence" type="ParameterList">
       <Parameter name="PK type" type="string" value="volumetric deformation" />
-      <Parameter name="primary variable" type="string" value="base_porosity" />
+      <Parameter name="primary variable key" type="string" value="base_porosity" />
       <Parameter name="deformation mode" type="string" value="structural" />
       <Parameter name="deformation region" type="string" value="ice rich domain" />
       <Parameter name="deformation strategy" type="string" value="average" />
@@ -225,7 +225,7 @@
 
     <ParameterList name="snow distribution" type="ParameterList">
       <Parameter name="PK type" type="string" value="snow distribution" />
-      <Parameter name="primary variable" type="string" value="precipitation_snow" />
+      <Parameter name="primary variable key" type="string" value="precipitation_snow" />
       <Parameter name="conserved quantity key" type="string" value="precipitation_snow" />
       <Parameter name="domain name" type="string" value="surface" />
       <Parameter name="initial time step" type="double" value="1.0" />
@@ -358,7 +358,7 @@
 
     <ParameterList name="SEB" type="ParameterList">
       <Parameter name="PK type" type="string" value="surface balance implicit" />
-      <Parameter name="primary variable" type="string" value="snow_depth" />
+      <Parameter name="primary variable key" type="string" value="snow_depth" />
       <Parameter name="conserved quantity key" type="string" value="snow_depth" />
       <Parameter name="domain name" type="string" value="surface" />
       <Parameter name="debug cells" type="Array(int)" value="{0}" />
@@ -436,7 +436,7 @@
 
     <ParameterList name="subsurface flow" type="ParameterList">
       <Parameter name="PK type" type="string" value="permafrost flow" />
-      <Parameter name="primary variable" type="string" value="pressure" />
+      <Parameter name="primary variable key" type="string" value="pressure" />
       <Parameter name="source term" type="bool" value="true" />
       <Parameter name="initial time step" type="double" value="86400.0" />
       <Parameter name="relative permeability method" type="string" value="upwind with Darcy flux" />
@@ -525,7 +525,7 @@
 
     <ParameterList name="surface flow" type="ParameterList">
       <Parameter name="PK type" type="string" value="overland flow with ice" />
-      <Parameter name="primary variable" type="string" value="surface-pressure" />
+      <Parameter name="primary variable key" type="string" value="surface-pressure" />
       <Parameter name="domain name" type="string" value="surface" />
       <Parameter name="source term" type="bool" value="true" />
       <Parameter name="initial time step" type="double" value="86400.0" />
@@ -556,7 +556,7 @@
 
     <ParameterList name="subsurface energy" type="ParameterList">
       <Parameter name="PK type" type="string" value="three-phase energy" />
-      <Parameter name="primary variable" type="string" value="temperature" />
+      <Parameter name="primary variable key" type="string" value="temperature" />
       <Parameter name="source term" type="bool" value="false" />
       <Parameter name="initial time step" type="double" value="86400.0" />
       <Parameter name="supress advective terms in preconditioner" type="bool" value="true" />
@@ -660,7 +660,7 @@
 
     <ParameterList name="surface energy" type="ParameterList">
       <Parameter name="PK type" type="string" value="surface energy" />
-      <Parameter name="primary variable" type="string" value="surface-temperature" />
+      <Parameter name="primary variable key" type="string" value="surface-temperature" />
       <Parameter name="domain name" type="string" value="surface" />
       <Parameter name="source term" type="bool" value="true" />
       <Parameter name="flux key" type="string" value="surface-mass_flux" />
@@ -718,7 +718,7 @@
         <Parameter name="unfrozen fraction key" type="string" value="unfrozen_fraction" />
       </ParameterList>
 
-      <ParameterList name="ponded_depth" type="ParameterList">
+      <ParameterList name="surface-ponded_depth" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="icy ponded depth" />
       </ParameterList>
 
@@ -950,7 +950,7 @@
         </ParameterList>
       </ParameterList>
 
-      <ParameterList name="manning_coefficient" type="ParameterList">
+      <ParameterList name="surface-manning_coefficient" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="cells" type="ParameterList">

@@ -119,7 +119,7 @@
 
     <ParameterList name="Richards" type="ParameterList">
       <Parameter name="PK type" type="string" value="richards steady state" />
-      <Parameter name="primary variable" type="string" value="pressure" />
+      <Parameter name="primary variable key" type="string" value="pressure" />
       <Parameter name="initial time step" type="double" value="1.0" />
       <Parameter name="relative permeability method" type="string" value="upwind with Darcy flux" />
       <Parameter name="permeability rescaling" type="double" value="10000000.0" />

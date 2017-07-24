@@ -74,7 +74,7 @@
 
     <ParameterList name="Overland Flow" type="ParameterList">
       <Parameter name="PK type" type="string" value="overland flow" />
-      <Parameter name="primary variable" type="string" value="ponded_depth" />
+      <Parameter name="primary variable key" type="string" value="ponded_depth" />
       <Parameter name="source term" type="bool" value="false" />
       <Parameter name="debug cells" type="Array(int)" value="{0,9}" />
       <Parameter name="initial time step" type="double" value="10.0" />
@@ -184,19 +184,18 @@
         </ParameterList>
       </ParameterList>
 
-
       <ParameterList name="boundary conditions" type="ParameterList">
-        <ParameterList name="zero gradient">
-          <ParameterList name="east">
-            <Parameter name="regions" type="Array(string)" value="{east}"/>
+        <ParameterList name="zero gradient" type="ParameterList">
+          <ParameterList name="east" type="ParameterList">
+            <Parameter name="regions" type="Array(string)" value="{east}" />
           </ParameterList>
         </ParameterList>
-        <ParameterList name="mass flux">
-          <ParameterList name="west">
-            <Parameter name="regions" type="Array(string)" value="{west}"/>
-            <ParameterList name="outward mass flux">
-              <ParameterList name="function-constant">
-                <Parameter name="value" type="double" value="-1.e-1"/>
+        <ParameterList name="mass flux" type="ParameterList">
+          <ParameterList name="west" type="ParameterList">
+            <Parameter name="regions" type="Array(string)" value="{west}" />
+            <ParameterList name="outward mass flux" type="ParameterList">
+              <ParameterList name="function-constant" type="ParameterList">
+                <Parameter name="value" type="double" value="-0.1" />
               </ParameterList>
             </ParameterList>
           </ParameterList>
@@ -210,7 +209,7 @@
   <ParameterList name="state" type="ParameterList">
     <ParameterList name="field evaluators" type="ParameterList">
 
-      <ParameterList name="manning_coefficient" type="ParameterList">
+      <ParameterList name="surface-manning_coefficient" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
         <Parameter name="constant in time" type="bool" value="true" />
         <ParameterList name="function" type="ParameterList">

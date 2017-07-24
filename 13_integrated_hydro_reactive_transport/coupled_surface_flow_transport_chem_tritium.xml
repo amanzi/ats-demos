@@ -205,7 +205,7 @@
 
     <ParameterList name="overland flow">
       <Parameter name="PK type" type="string" value="overland flow, pressure basis"/>
-      <Parameter name="primary variable" type="string" value="surface-pressure"/>
+      <Parameter name="primary variable key" type="string" value="surface-pressure"/>
       <Parameter name="domain name" type="string" value="surface"/>
       <Parameter name="source term" type="bool" value="true"/>
       <Parameter name="mass source in meters" type="bool" value="true"/>

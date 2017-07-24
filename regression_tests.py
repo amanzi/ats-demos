@@ -532,7 +532,7 @@ class RegressionTest(object):
                               self._TIMESTEPS, tolerance, status, testlog)
 
     def _compare_values(self, h5_current, h5_gold, key, tolerance, status, testlog):
-        if set(h5_current.matches(key)) != set(h5_gold.matches(key)):
+        if len(set(h5_current.matches(key))) != len(set(h5_gold.matches(key))):
             status.fail = 1
             print("    FAIL: {0} : {1} :".format(self.name(), key), file=testlog)
             print("        gold matches: {1}".format(";".join(h5_gold.matches(key))),
@@ -546,15 +546,15 @@ class RegressionTest(object):
 
         else:
             if self._checkpoint is not None:
-                for k in h5_gold.matches(key):
-                    self._check_tolerance(h5_current[k][:], h5_gold[k][:],
-                                          k, tolerance, status, testlog)
+                for k1,k2 in zip(h5_gold.matches(key),h5_current.matches(key)):
+                    self._check_tolerance(h5_current[k2][:], h5_gold[k1][:],
+                                          k2, tolerance, status, testlog)
             else:
-                for k in h5_gold.matches(key):
+                for k1,k2 in zip(h5_gold.matches(key),h5_current.matches(key)):
                     for i_current, i_gold in zip(h5_current.steps(), h5_gold.steps()):
-                        key_with_index = "{0} [{1}]".format(k, i_gold)
-                        self._check_tolerance(h5_current[k][i_current][:],
-                                              h5_gold[k][i_gold][:],
+                        key_with_index = "{0} [{1}]".format(k1, i_gold)
+                        self._check_tolerance(h5_current[k2][i_current][:],
+                                              h5_gold[k1][i_gold][:],
                                               key_with_index, tolerance,
                                               status, testlog)
 
@@ -1508,7 +1508,7 @@ def main(options):
     start = time.time()
     report = {}
     for config_file in config_file_list:
-        try:
+        # try:
             # NOTE(bja): the try block is inside this loop so that if
             # a single test throws an exception in a large batch of
             # tests, we can recover and at least try running the other
@@ -1558,19 +1558,20 @@ def main(options):
 
             report[filename] = test_manager.run_status()
             os.chdir(root_dir)
-        except Exception as error:
-            message = txtwrap.fill(
-                "ERROR: a problem occured in file '{0}'.  This is "
-                "probably an error with commandline options, the "
-                "configuration file, or an internal error.  The "
-                "error is:\n{1}".format(config_file, str(error)))
-            print(''.join(['\n', message, '\n']), file=testlog)
-            if options.backtrace:
-                traceback.print_exc()
-            print('F', end='', file=sys.stdout)
-            report[filename] = TestStatus()
-            report[filename].fail = 1
+        # except Exception as error:
+        #     message = txtwrap.fill(
+        #         "ERROR: a problem occured in file '{0}'.  This is "
+        #         "probably an error with commandline options, the "
+        #         "configuration file, or an internal error.  The "
+        #         "error is:\n{1}".format(config_file, str(error)))
+        #     print(''.join(['\n', message, '\n']), file=testlog)
+        #     if options.backtrace:
+        #         traceback.print_exc()
+        #     print('F', end='', file=sys.stdout)
+        #     report[filename] = TestStatus()
+        #     report[filename].fail = 1
 
+            
     stop = time.time()
     status = 0
     if not options.dry_run and not options.update:
@@ -1592,12 +1593,12 @@ def main(options):
 
 if __name__ == "__main__":
     cmdl_options = commandline_options()
-    try:
-        suite_status = main(cmdl_options)
-        sys.exit(suite_status)
-    except Exception as error:
-        print(str(error))
-        if cmdl_options.backtrace:
-            traceback.print_exc()
-        sys.exit(1)
+    #    try:
+    suite_status = main(cmdl_options)
+    #sys.exit(suite_status)
+    # except Exception as error:
+    #     print(str(error))
+    #     if cmdl_options.backtrace:
+    #         traceback.print_exc()
+    #     sys.exit(1)
 

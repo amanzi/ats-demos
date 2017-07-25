@@ -1,14 +1,14 @@
 <ParameterList name="Main" type="ParameterList">
-  <Parameter name="Native Unstructured Input" type="bool" value="true" />
-  <Parameter name="grid_option" type="string" value="Unstructured" />
   <ParameterList name="mesh" type="ParameterList">
-    <Parameter name="deformable mesh" type="bool" value="true" />
-    <Parameter isUsed="true" name="framework" type="string" value="MSTK" />
-    <ParameterList name="read mesh file" type="ParameterList">
-      <Parameter name="file" type="string" value="../data/mesh_fsets.exo" />
-      <Parameter name="format" type="string" value="Exodus II" />
+    <ParameterList name="domain" type="ParameterList">
+      <Parameter name="deformable mesh" type="bool" value="true" />
+      <Parameter isUsed="true" name="framework" type="string" value="MSTK" />
+      <ParameterList name="read mesh file" type="ParameterList">
+        <Parameter name="file" type="string" value="../data/mesh_fsets.exo" />
+        <Parameter name="format" type="string" value="Exodus II" />
+      </ParameterList>
     </ParameterList>
-    <ParameterList name="surface mesh" type="ParameterList">
+    <ParameterList name="surface" type="ParameterList">
       <Parameter name="surface sideset name" type="string" value="surface" />
       <ParameterList name="expert" type="ParameterList">
         <Parameter name="verify mesh" type="bool" value="false" />
@@ -225,9 +225,8 @@
 
     <ParameterList name="snow distribution" type="ParameterList">
       <Parameter name="PK type" type="string" value="snow distribution" />
-      <Parameter name="primary variable key" type="string" value="precipitation_snow" />
-      <Parameter name="conserved quantity key" type="string" value="precipitation_snow" />
-      <Parameter name="domain name" type="string" value="surface" />
+      <Parameter name="primary variable key" type="string" value="surface-precipitation_snow" />
+      <Parameter name="conserved quantity key" type="string" value="surface-precipitation_snow" />
       <Parameter name="initial time step" type="double" value="1.0" />
       <Parameter name="upwind conductivity method" type="string" value="upwind by potential difference" />
       <ParameterList name="precipitation function" type="ParameterList">
@@ -358,9 +357,8 @@
 
     <ParameterList name="SEB" type="ParameterList">
       <Parameter name="PK type" type="string" value="surface balance implicit" />
-      <Parameter name="primary variable key" type="string" value="snow_depth" />
-      <Parameter name="conserved quantity key" type="string" value="snow_depth" />
-      <Parameter name="domain name" type="string" value="surface" />
+      <Parameter name="primary variable key" type="string" value="surface-snow_depth" />
+      <Parameter name="conserved quantity key" type="string" value="surface-snow_depth" />
       <Parameter name="debug cells" type="Array(int)" value="{0}" />
       <ParameterList name="verbose object" type="ParameterList">
         <Parameter name="verbosity level" type="string" value="low" />
@@ -714,8 +712,6 @@
 
       <ParameterList name="surface-energy" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="surface ice energy" />
-        <Parameter name="ponded depth key" type="string" value="ponded_depth" />
-        <Parameter name="unfrozen fraction key" type="string" value="unfrozen_fraction" />
       </ParameterList>
 
       <ParameterList name="surface-ponded_depth" type="ParameterList">
@@ -788,14 +784,14 @@
         </ParameterList>
       </ParameterList>
 
-      <ParameterList name="unfrozen_fraction" type="ParameterList">
+      <ParameterList name="surface-unfrozen_fraction" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="unfrozen fraction" />
         <ParameterList name="unfrozen fraction model" type="ParameterList">
           <Parameter name="transition width [K]" type="double" value="0.2" />
         </ParameterList>
       </ParameterList>
 
-      <ParameterList name="unfrozen_effective_depth" type="ParameterList">
+      <ParameterList name="surface-unfrozen_effective_depth" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="unfrozen effective depth" />
       </ParameterList>
 
@@ -965,7 +961,7 @@
         </ParameterList>
       </ParameterList>
 
-      <ParameterList name="manning_coefficient_snow" type="ParameterList">
+      <ParameterList name="surface-snow_manning_coefficient" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="domain" type="ParameterList">
@@ -980,19 +976,19 @@
         </ParameterList>
       </ParameterList>
 
-      <ParameterList name="snow_skin_potential" type="ParameterList">
+      <ParameterList name="surface-snow_skin_potential" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="snow skin potential" />
         <Parameter name="dt factor" type="double" value="864000.0" />
       </ParameterList>
 
-      <ParameterList name="snow_conductivity" type="ParameterList">
+      <ParameterList name="surface-snow_conductivity" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="overland conductivity" />
         <Parameter name="include dt factor" type="bool" value="true" />
         <Parameter name="dt factor" type="double" value="864000.0" />
         <Parameter name="include density factor" type="bool" value="false" />
-        <Parameter name="height key" type="string" value="precipitation_snow" />
-        <Parameter name="slope key" type="string" value="slope_magnitude" />
-        <Parameter name="coefficient key" type="string" value="manning_coefficient_snow" />
+        <Parameter name="height key" type="string" value="surface-precipitation_snow" />
+        <Parameter name="slope key" type="string" value="surface-slope_magnitude" />
+        <Parameter name="coefficient key" type="string" value="surface-snow_manning_coefficient" />
         <ParameterList name="overland conductivity model" type="ParameterList">
           <Parameter name="Manning exponent" type="double" value="0.666666666667" />
           <Parameter name="slope regularization epsilon" type="double" value="0.01" />
@@ -1109,7 +1105,7 @@
         <Parameter name="subsurface key" type="string" value="porosity" />
       </ParameterList>
 
-      <ParameterList name="incoming_shortwave_radiation" type="ParameterList">
+      <ParameterList name="surface-incoming_shortwave_radiation" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="domain" type="ParameterList">
@@ -1129,7 +1125,7 @@
         </ParameterList>
       </ParameterList>
 
-      <ParameterList name="incoming_longwave_radiation" type="ParameterList">
+      <ParameterList name="surface-incoming_longwave_radiation" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="domain" type="ParameterList">
@@ -1149,7 +1145,7 @@
         </ParameterList>
       </ParameterList>
 
-      <ParameterList name="air_temperature" type="ParameterList">
+      <ParameterList name="surface-air_temperature" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="domain" type="ParameterList">
@@ -1169,7 +1165,7 @@
         </ParameterList>
       </ParameterList>
 
-      <ParameterList name="relative_humidity" type="ParameterList">
+      <ParameterList name="surface-relative_humidity" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="domain" type="ParameterList">
@@ -1189,7 +1185,7 @@
         </ParameterList>
       </ParameterList>
 
-      <ParameterList name="wind_speed" type="ParameterList">
+      <ParameterList name="surface-wind_speed" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="domain" type="ParameterList">
@@ -1209,7 +1205,7 @@
         </ParameterList>
       </ParameterList>
 
-      <ParameterList name="precipitation_rain" type="ParameterList">
+      <ParameterList name="surface-precipitation_rain" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="domain" type="ParameterList">
@@ -1220,26 +1216,6 @@
                 <Parameter name="file" type="string" value="../data/CESM_4_5.h5" />
                 <Parameter name="x header" type="string" value="time [s]" />
                 <Parameter name="y header" type="string" value="precipitation rain [m s^-1]" />
-              </ParameterList>
-            </ParameterList>
-          </ParameterList>
-        </ParameterList>
-        <ParameterList name="verbose object" type="ParameterList">
-          <Parameter name="verbosity level" type="string" value="low" />
-        </ParameterList>
-      </ParameterList>
-
-      <ParameterList name="precipitation_snow" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="independent variable" />
-        <ParameterList name="function" type="ParameterList">
-          <ParameterList name="domain" type="ParameterList">
-            <Parameter name="region" type="string" value="surface domain" />
-            <Parameter name="component" type="string" value="cell" />
-            <ParameterList name="function" type="ParameterList">
-              <ParameterList name="function-tabular" type="ParameterList">
-                <Parameter name="file" type="string" value="../data/CESM_4_5.h5" />
-                <Parameter name="x header" type="string" value="time [s]" />
-                <Parameter name="y header" type="string" value="precipitation snow [m SWE s^-1]" />
               </ParameterList>
             </ParameterList>
           </ParameterList>

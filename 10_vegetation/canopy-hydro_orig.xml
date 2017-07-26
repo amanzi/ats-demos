@@ -1,18 +1,20 @@
 <ParameterList name="Main" type="ParameterList">
   <ParameterList name="mesh" type="ParameterList">
-    <Parameter isUsed="true" name="framework" type="string" value="MSTK" />
-    <ParameterList name="generate mesh" type="ParameterList">
-      <Parameter name="number of cells" type="Array(int)" value="{1,1,100}" />
-      <Parameter name="domain low coordinate" type="Array(double)" value="{0.0,0.0,0.0}" />
-      <Parameter name="domain high coordinate" type="Array(double)" value="{1.0,1.0,10.0}" />
-      <Parameter name="Number of mesh blocks" type="int" value="1" />
-      <ParameterList name="Mesh block 1" type="ParameterList">
-        <Parameter name="Z0" type="double" value="0.0" />
-        <Parameter name="Z1" type="double" value="10.0" />
-      </ParameterList>
-    </ParameterList>
-    <ParameterList name="surface mesh" type="ParameterList">
+    <ParameterList name="surface" type="ParameterList">
       <Parameter name="surface sideset name" type="string" value="surface" />
+    </ParameterList>
+    <ParameterList name="domain">
+      <Parameter isUsed="true" name="framework" type="string" value="MSTK" />
+      <ParameterList name="generate mesh" type="ParameterList">
+        <Parameter name="number of cells" type="Array(int)" value="{1,1,100}" />
+        <Parameter name="domain low coordinate" type="Array(double)" value="{0.0,0.0,0.0}" />
+        <Parameter name="domain high coordinate" type="Array(double)" value="{1.0,1.0,10.0}" />
+        <Parameter name="Number of mesh blocks" type="int" value="1" />
+        <ParameterList name="Mesh block 1" type="ParameterList">
+          <Parameter name="Z0" type="double" value="0.0" />
+          <Parameter name="Z1" type="double" value="10.0" />
+        </ParameterList>
+      </ParameterList>
     </ParameterList>
   </ParameterList>
 

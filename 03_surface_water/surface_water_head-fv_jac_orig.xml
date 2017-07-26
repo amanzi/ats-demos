@@ -2,11 +2,13 @@
   <Parameter name="Native Unstructured Input" type="bool" value="true" />
   <Parameter name="grid_option" type="string" value="Unstructured" />
   <ParameterList name="mesh" type="ParameterList">
-    <Parameter isUsed="true" name="framework" type="string" value="MSTK" />
-    <ParameterList name="generate mesh" type="ParameterList">
-      <Parameter name="number of cells" type="Array(int)" value="{10,1}" />
-      <Parameter name="domain low coordinate" type="Array(double)" value="{0.0,0.0}" />
-      <Parameter name="domain high coordinate" type="Array(double)" value="{10.0,1.0}" />
+    <ParameterList name="domain">
+      <Parameter isUsed="true" name="framework" type="string" value="MSTK" />
+      <ParameterList name="generate mesh" type="ParameterList">
+        <Parameter name="number of cells" type="Array(int)" value="{10,1}" />
+        <Parameter name="domain low coordinate" type="Array(double)" value="{0.0,0.0}" />
+        <Parameter name="domain high coordinate" type="Array(double)" value="{10.0,1.0}" />
+      </ParameterList>
     </ParameterList>
   </ParameterList>
 
@@ -74,7 +76,7 @@
 
     <ParameterList name="Overland Flow" type="ParameterList">
       <Parameter name="PK type" type="string" value="overland flow" />
-      <Parameter name="primary variable key" type="string" value="ponded_depth" />
+      <Parameter name="primary variable key" type="string" value="surface-ponded_depth" />
       <Parameter name="source term" type="bool" value="true" />
       <Parameter name="debug cells" type="Array(int)" value="{0,9}" />
       <Parameter name="initial time step" type="double" value="10.0" />

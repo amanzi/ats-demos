@@ -2,13 +2,15 @@
   <Parameter name="Native Unstructured Input" type="bool" value="true" />
   <Parameter name="grid_option" type="string" value="Unstructured" />
   <ParameterList name="mesh" type="ParameterList">
-    <Parameter name="framework" type="string" value="MSTK" />
-    <ParameterList name="read mesh file" type="ParameterList">
-      <Parameter name="file" type="string" value="../mesh/one_polygon.exo" />
-      <Parameter name="format" type="string" value="Exodus II" />
-    </ParameterList>
-    <ParameterList name="surface mesh" type="ParameterList">
+    <ParameterList name="surface" type="ParameterList">
       <Parameter name="surface sideset name" type="string" value="surface" />
+    </ParameterList>
+    <ParameterList name="domain">
+      <Parameter name="framework" type="string" value="MSTK" />
+      <ParameterList name="read mesh file" type="ParameterList">
+        <Parameter name="file" type="string" value="../mesh/one_polygon.exo" />
+        <Parameter name="format" type="string" value="Exodus II" />
+      </ParameterList>
     </ParameterList>
   </ParameterList>
 

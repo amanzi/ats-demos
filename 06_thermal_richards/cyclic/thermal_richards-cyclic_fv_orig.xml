@@ -2,11 +2,13 @@
   <Parameter name="Native Unstructured Input" type="bool" value="true" />
   <Parameter name="grid_option" type="string" value="Unstructured" />
   <ParameterList name="mesh" type="ParameterList">
-    <Parameter isUsed="true" name="framework" type="string" value="MSTK" />
-    <ParameterList name="generate mesh" type="ParameterList">
-      <Parameter name="number of cells" type="Array(int)" value="{1,1,100}" />
-      <Parameter name="domain low coordinate" type="Array(double)" value="{0.0,0.0,0.0}" />
-      <Parameter name="domain high coordinate" type="Array(double)" value="{1.0,1.0,10.0}" />
+    <ParameterList name="domain">
+      <Parameter isUsed="true" name="framework" type="string" value="MSTK" />
+      <ParameterList name="generate mesh" type="ParameterList">
+        <Parameter name="number of cells" type="Array(int)" value="{1,1,100}" />
+        <Parameter name="domain low coordinate" type="Array(double)" value="{0.0,0.0,0.0}" />
+        <Parameter name="domain high coordinate" type="Array(double)" value="{1.0,1.0,10.0}" />
+      </ParameterList>
     </ParameterList>
   </ParameterList>
 
@@ -305,7 +307,7 @@
       </ParameterList>
 
       <ParameterList name="energy" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="liquid+ice energy" />
+        <Parameter name="field evaluator type" type="string" value="three phase energy" />
       </ParameterList>
 
       <ParameterList name="capillary_pressure_gas_liq" type="ParameterList">

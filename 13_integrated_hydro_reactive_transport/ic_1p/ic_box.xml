@@ -2,10 +2,12 @@
   <Parameter name="Native Unstructured Input" type="bool" value="true" />
   <Parameter name="grid_option" type="string" value="Unstructured" />
   <ParameterList name="mesh" type="ParameterList">
-    <Parameter isUsed="true" name="Framework" type="string" value="MSTK" />
-    <ParameterList name="read mesh file" type="ParameterList">
-      <Parameter name="file" type="string" value="../../mesh/box.exo" />
-      <Parameter name="format" type="string" value="Exodus II" />
+    <ParameterList name="domain">
+      <Parameter isUsed="true" name="Framework" type="string" value="MSTK" />
+      <ParameterList name="read mesh file" type="ParameterList">
+        <Parameter name="file" type="string" value="../../mesh/box.exo" />
+        <Parameter name="format" type="string" value="Exodus II" />
+      </ParameterList>
     </ParameterList>
   </ParameterList>
 

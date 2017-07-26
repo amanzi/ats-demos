@@ -2,15 +2,17 @@
   <Parameter name="Native Unstructured Input" type="bool" value="true" />
   <Parameter name="grid_option" type="string" value="Unstructured" />
   <ParameterList name="mesh" type="ParameterList">
-    <Parameter isUsed="true" name="framework" type="string" value="MSTK" />
-    <ParameterList name="generate mesh" type="ParameterList">
-      <Parameter name="number of cells" type="Array(int)" value="{10,1}" />
-      <Parameter name="domain low coordinate" type="Array(double)" value="{0.0,0.0}" />
-      <Parameter name="domain high coordinate" type="Array(double)" value="{10.0,1.0}" />
-    </ParameterList>
-    <ParameterList name="surface mesh" type="ParameterList">
+    <ParameterList name="surface" type="ParameterList">
       <Parameter name="aliased" type="bool" value="true" />
-    </ParameterList>    
+    </ParameterList>
+    <ParameterList name="domain">
+      <Parameter isUsed="true" name="framework" type="string" value="MSTK" />
+      <ParameterList name="generate mesh" type="ParameterList">
+        <Parameter name="number of cells" type="Array(int)" value="{10,1}" />
+        <Parameter name="domain low coordinate" type="Array(double)" value="{0.0,0.0}" />
+        <Parameter name="domain high coordinate" type="Array(double)" value="{10.0,1.0}" />
+      </ParameterList>
+    </ParameterList>
   </ParameterList>
 
   <ParameterList name="regions" type="ParameterList">
@@ -72,7 +74,6 @@
     <ParameterList name="surface thermal coupler" type="ParameterList">
       <Parameter name="PK type" type="string" value="strong MPC" />
       <Parameter name="PKs order" type="Array(string)" value="{overland flow,surface energy}" />
-
       <ParameterList name="time integrator" type="ParameterList">
         <Parameter name="extrapolate initial guess" type="bool" value="true" />
         <Parameter name="solver type" type="string" value="nka_bt_ats" />
@@ -144,10 +145,11 @@
           <Parameter name="number of functions" type="int" value="2" />
         </ParameterList>
       </ParameterList>
-      
+
       <ParameterList name="diffusion" type="ParameterList">
         <Parameter name="discretization primary" type="string" value="fv: default" />
       </ParameterList>
+
       <ParameterList name="diffusion preconditioner" type="ParameterList">
         <Parameter name="Newton approximation" type="string" value="true Jacobian" />
       </ParameterList>
@@ -239,6 +241,7 @@
       <ParameterList name="diffusion" type="ParameterList">
         <Parameter name="discretization primary" type="string" value="fv: default" />
       </ParameterList>
+
       <ParameterList name="diffusion preconditioner" type="ParameterList">
         <Parameter name="Newton approximation" type="string" value="true Jacobian" />
       </ParameterList>
@@ -268,7 +271,7 @@
           <Parameter name="number of functions" type="int" value="2" />
         </ParameterList>
       </ParameterList>
-      
+
       <ParameterList name="initial condition" type="ParameterList">
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="initial temperature" type="ParameterList">

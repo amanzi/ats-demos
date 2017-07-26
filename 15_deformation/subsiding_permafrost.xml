@@ -225,6 +225,7 @@
 
     <ParameterList name="snow distribution" type="ParameterList">
       <Parameter name="PK type" type="string" value="snow distribution" />
+      <Parameter name="domain name" type="string" value="surface" />
       <Parameter name="primary variable key" type="string" value="surface-precipitation_snow" />
       <Parameter name="conserved quantity key" type="string" value="surface-precipitation_snow" />
       <Parameter name="initial time step" type="double" value="1.0" />
@@ -357,8 +358,8 @@
 
     <ParameterList name="SEB" type="ParameterList">
       <Parameter name="PK type" type="string" value="surface balance implicit" />
+      <Parameter name="domain name" type="string" value="surface" />
       <Parameter name="primary variable key" type="string" value="surface-snow_depth" />
-      <Parameter name="conserved quantity key" type="string" value="surface-snow_depth" />
       <Parameter name="debug cells" type="Array(int)" value="{0}" />
       <ParameterList name="verbose object" type="ParameterList">
         <Parameter name="verbosity level" type="string" value="low" />

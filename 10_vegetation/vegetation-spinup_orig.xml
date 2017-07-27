@@ -1,16 +1,17 @@
 <ParameterList name="Main" type="ParameterList">
-  <Parameter name="Native Unstructured Input" type="bool" value="true" />
-  <Parameter name="grid_option" type="string" value="Unstructured" />
   <ParameterList name="mesh" type="ParameterList">
     <ParameterList name="surface" type="ParameterList">
-      <Parameter name="surface sideset name" type="string" value="surface" />
+      <Parameter name="mesh type" type="string" value="surface" />
       <ParameterList name="expert" type="ParameterList">
         <Parameter name="verify mesh" type="bool" value="false" />
       </ParameterList>
+      <ParameterList name="surface parameters">
+        <Parameter name="surface sideset name" type="string" value="surface" />
+      </ParameterList>
     </ParameterList>
-    <ParameterList name="domain">
-      <Parameter name="framework" type="string" value="MSTK" />
-      <ParameterList name="read mesh file" type="ParameterList">
+    <ParameterList name="domain" type="ParameterList">
+      <Parameter name="mesh type" type="string" value="read mesh file" />
+      <ParameterList name="read mesh file parameters" type="ParameterList">
         <Parameter name="file" type="string" value="../data/mesh_fsets-moss-Center-10peat.exo" />
         <Parameter name="format" type="string" value="Exodus II" />
       </ParameterList>

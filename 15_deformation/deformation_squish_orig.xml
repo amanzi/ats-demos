@@ -1,12 +1,16 @@
 <ParameterList name="main" type="ParameterList">
   <ParameterList name="mesh" type="ParameterList">
     <ParameterList name="surface" type="ParameterList">
-      <Parameter name="surface sideset names" type="Array(string)" value="{surface}" />
-    </ParameterList>
-    <ParameterList name="domain">
-      <Parameter name="framework" type="string" value="MSTK" />
       <Parameter name="deformable mesh" type="bool" value="true" />
-      <ParameterList name="generate mesh" type="ParameterList">
+      <Parameter name="mesh type" type="string" value="surface" />
+      <ParameterList name="surface parameters">
+        <Parameter name="surface sideset names" type="Array(string)" value="{surface}" />
+      </ParameterList>
+    </ParameterList>
+    <ParameterList name="domain" type="ParameterList">
+      <Parameter name="deformable mesh" type="bool" value="true" />
+      <Parameter name="mesh type" type="string" value="generate mesh" />
+      <ParameterList name="generate mesh parameters" type="ParameterList">
         <Parameter name="domain low coordinate" type="Array(double)" value="{0.0,0.0,0.0}" />
         <Parameter name="domain high coordinate" type="Array(double)" value="{10.0,10.0,4.0}" />
         <Parameter name="number of cells" type="Array(int)" value="{1,1,40}" />

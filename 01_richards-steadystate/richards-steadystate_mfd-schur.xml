@@ -66,11 +66,6 @@
       </ParameterList>
     </ParameterList>
   </ParameterList>
-  <ParameterList name="visualization" type="ParameterList">
-    <Parameter name="file name base" type="string" value="visdump" />
-    <Parameter name="times start period stop" type="Array(double)" value="{0.0,1.0,-1.0}" />
-  </ParameterList>
-
   <ParameterList name="checkpoint" type="ParameterList">
   </ParameterList>
 
@@ -299,6 +294,12 @@
         <Parameter name="value" type="Array(double)" value="{0.0,0.0,-9.80665}" />
       </ParameterList>
 
+    </ParameterList>
+  </ParameterList>
+  <ParameterList name="visualization">
+    <ParameterList name="domain" type="ParameterList">
+      <Parameter name="file name base" type="string" value="visdump" />
+      <Parameter name="times start period stop" type="Array(double)" value="{0.0,1.0,-1.0}" />
     </ParameterList>
   </ParameterList>
 </ParameterList>

@@ -2,8 +2,10 @@
   <ParameterList name="mesh" type="ParameterList">
     <ParameterList name="surface" type="ParameterList">
       <Parameter name="mesh type" type="string" value="surface" />
-      <ParameterList name="surface parameters">
+      <ParameterList name="surface parameters" type="ParameterList">
         <Parameter name="surface sideset name" type="string" value="surface" />
+      </ParameterList>
+      <ParameterList name="surface">
       </ParameterList>
     </ParameterList>
     <ParameterList name="domain" type="ParameterList">

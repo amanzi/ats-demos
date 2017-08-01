@@ -2,8 +2,10 @@
   <ParameterList name="mesh" type="ParameterList">
     <ParameterList name="surface" type="ParameterList">
       <Parameter name="mesh type" type="string" value="aliased" />
-      <ParameterList name="aliased parameters" >
-        <Parameter name="alias" type="string" value="domain"/>
+      <ParameterList name="aliased parameters" type="ParameterList">
+        <Parameter name="alias" type="string" value="domain" />
+      </ParameterList>
+      <ParameterList name="surface">
       </ParameterList>
     </ParameterList>
     <ParameterList name="domain" type="ParameterList">
@@ -59,15 +61,6 @@
         <Parameter name="PK type" type="string" value="overland flow, pressure basis" />
       </ParameterList>
     </ParameterList>
-  </ParameterList>
-  <ParameterList name="visualization" type="ParameterList">
-    <Parameter name="cycles" type="Array(int)" value="{0,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25}" />
-    <Parameter name="file name base" type="string" value="visdump" />
-  </ParameterList>
-
-  <ParameterList name="visualization surface" type="ParameterList">
-    <Parameter name="cycles" type="Array(int)" value="{0,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25}" />
-    <Parameter name="file name base" type="string" value="visdump_surface" />
   </ParameterList>
   <ParameterList name="PKs" type="ParameterList">
 
@@ -290,6 +283,16 @@
         <Parameter name="value" type="Array(double)" value="{0.0,0.0,-9.80665}" />
       </ParameterList>
 
+    </ParameterList>
+  </ParameterList>
+  <ParameterList name="visualization">
+    <ParameterList name="domain" type="ParameterList">
+      <Parameter name="cycles" type="Array(int)" value="{0,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25}" />
+      <Parameter name="file name base" type="string" value="visdump" />
+    </ParameterList>
+    <ParameterList name="surface" type="ParameterList">
+      <Parameter name="cycles" type="Array(int)" value="{0,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25}" />
+      <Parameter name="file name base" type="string" value="visdump_surface" />
     </ParameterList>
   </ParameterList>
 </ParameterList>

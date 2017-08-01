@@ -5,8 +5,10 @@
       <ParameterList name="expert" type="ParameterList">
         <Parameter name="verify mesh" type="bool" value="false" />
       </ParameterList>
-      <ParameterList name="surface parameters">
+      <ParameterList name="surface parameters" type="ParameterList">
         <Parameter name="surface sideset name" type="string" value="surface" />
+      </ParameterList>
+      <ParameterList name="surface">
       </ParameterList>
     </ParameterList>
     <ParameterList name="domain" type="ParameterList">
@@ -87,11 +89,6 @@
       </ParameterList>
     </ParameterList>
   </ParameterList>
-  <ParameterList name="visualization" type="ParameterList">
-    <Parameter name="file name base" type="string" value="visdump" />
-    <Parameter name="times start period stop" type="Array(double)" value="{0.0,631152.0,-1.0}" />
-  </ParameterList>
-
   <ParameterList name="checkpoint" type="ParameterList">
     <Parameter name="times start period stop" type="Array(double)" value="{0.0,31557600.0,-1.0}" />
   </ParameterList>
@@ -386,6 +383,12 @@
         <Parameter name="value" type="Array(double)" value="{0.0,0.0,-9.80665}" />
       </ParameterList>
 
+    </ParameterList>
+  </ParameterList>
+  <ParameterList name="visualization">
+    <ParameterList name="domain" type="ParameterList">
+      <Parameter name="file name base" type="string" value="visdump" />
+      <Parameter name="times start period stop" type="Array(double)" value="{0.0,631152.0,-1.0}" />
     </ParameterList>
   </ParameterList>
 </ParameterList>

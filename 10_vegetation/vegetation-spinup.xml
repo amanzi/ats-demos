@@ -5,8 +5,10 @@
       <ParameterList name="expert" type="ParameterList">
         <Parameter name="verify mesh" type="bool" value="false" />
       </ParameterList>
-      <ParameterList name="surface parameters">
+      <ParameterList name="surface parameters" type="ParameterList">
         <Parameter name="surface sideset name" type="string" value="surface" />
+      </ParameterList>
+      <ParameterList name="surface">
       </ParameterList>
     </ParameterList>
     <ParameterList name="domain" type="ParameterList">
@@ -123,15 +125,6 @@
         <Parameter name="PK type" type="string" value="BGC simple" />
       </ParameterList>
     </ParameterList>
-  </ParameterList>
-  <ParameterList name="visualization" type="ParameterList">
-    <Parameter name="cycles" type="Array(int)" value="{3653,3663,3673,3683,3693,3703,3713,3723,3733,3743,3753,3763,3773,3783,3793,3803,3813,3823,3833,3843,3853,3863,3873,3883,3893,3903,3913,3923,3933,3943,3953,3963,3973,3983,3993,4003,4013}" />
-    <Parameter name="file name base" type="string" value="visdump" />
-  </ParameterList>
-
-  <ParameterList name="visualization surface" type="ParameterList">
-    <Parameter name="cycles" type="Array(int)" value="{3653,3663,3673,3683,3693,3703,3713,3723,3733,3743,3753,3763,3773,3783,3793,3803,3813,3823,3833,3843,3853,3863,3873,3883,3893,3903,3913,3923,3933,3943,3953,3963,3973,3983,3993,4003,4013}" />
-    <Parameter name="file name base" type="string" value="visdump_surface" />
   </ParameterList>
   <ParameterList name="checkpoint" type="ParameterList">
   </ParameterList>
@@ -359,6 +352,16 @@
         <Parameter name="value" type="Array(double)" value="{0.0,0.0,-9.80665}" />
       </ParameterList>
 
+    </ParameterList>
+  </ParameterList>
+  <ParameterList name="visualization">
+    <ParameterList name="domain" type="ParameterList">
+      <Parameter name="cycles" type="Array(int)" value="{3653,3663,3673,3683,3693,3703,3713,3723,3733,3743,3753,3763,3773,3783,3793,3803,3813,3823,3833,3843,3853,3863,3873,3883,3893,3903,3913,3923,3933,3943,3953,3963,3973,3983,3993,4003,4013}" />
+      <Parameter name="file name base" type="string" value="visdump" />
+    </ParameterList>
+    <ParameterList name="surface" type="ParameterList">
+      <Parameter name="cycles" type="Array(int)" value="{3653,3663,3673,3683,3693,3703,3713,3723,3733,3743,3753,3763,3773,3783,3793,3803,3813,3823,3833,3843,3853,3863,3873,3883,3893,3903,3913,3923,3933,3943,3953,3963,3973,3983,3993,4003,4013}" />
+      <Parameter name="file name base" type="string" value="visdump_surface" />
     </ParameterList>
   </ParameterList>
 </ParameterList>

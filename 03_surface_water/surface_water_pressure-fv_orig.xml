@@ -2,8 +2,10 @@
   <ParameterList name="mesh" type="ParameterList">
     <ParameterList name="surface" type="ParameterList">
       <Parameter name="mesh type" type="string" value="aliased" />
-      <ParameterList name="aliased parameters" >
-        <Parameter name="alias" type="string" value="domain"/>
+      <ParameterList name="aliased parameters" type="ParameterList">
+        <Parameter name="alias" type="string" value="domain" />
+      </ParameterList>
+      <ParameterList name="surface">
       </ParameterList>
     </ParameterList>
     <ParameterList name="domain" type="ParameterList">
@@ -59,15 +61,6 @@
         <Parameter name="PK type" type="string" value="overland flow, pressure basis" />
       </ParameterList>
     </ParameterList>
-  </ParameterList>
-  <ParameterList name="visualization" type="ParameterList">
-    <Parameter name="file name base" type="string" value="visdump" />
-    <Parameter name="times start period stop" type="Array(double)" value="{0.0,600.0,-1.0}" />
-  </ParameterList>
-
-  <ParameterList name="visualization surface" type="ParameterList">
-    <Parameter name="file name base" type="string" value="visdump_surface" />
-    <Parameter name="times start period stop" type="Array(double)" value="{0.0,600.0,-1.0}" />
   </ParameterList>
   <ParameterList name="PKs" type="ParameterList">
 
@@ -303,6 +296,16 @@
         <Parameter name="value" type="Array(double)" value="{0.0,0.0,-9.80665}" />
       </ParameterList>
 
+    </ParameterList>
+  </ParameterList>
+  <ParameterList name="visualization">
+    <ParameterList name="domain" type="ParameterList">
+      <Parameter name="file name base" type="string" value="visdump" />
+      <Parameter name="times start period stop" type="Array(double)" value="{0.0,600.0,-1.0}" />
+    </ParameterList>
+    <ParameterList name="surface" type="ParameterList">
+      <Parameter name="file name base" type="string" value="visdump_surface" />
+      <Parameter name="times start period stop" type="Array(double)" value="{0.0,600.0,-1.0}" />
     </ParameterList>
   </ParameterList>
 </ParameterList>

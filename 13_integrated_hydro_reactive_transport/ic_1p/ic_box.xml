@@ -106,11 +106,6 @@
       </ParameterList>
     </ParameterList>
   </ParameterList>
-  <ParameterList name="visualization" type="ParameterList">
-    <Parameter name="file name base" type="string" value="vis_box" />
-    <Parameter name="cycles start period stop" type="Array(int)" value="{0,1,-1}" />
-  </ParameterList>
-
   <ParameterList name="checkpoint" type="ParameterList">
     <Parameter name="file name base" type="string" value="chk_box" />
     <Parameter name="times start period stop" type="Array(double)" value="{0.0,315576000.0,-1.0}" />
@@ -385,6 +380,12 @@
         <Parameter name="value" type="Array(double)" value="{0.0,0.0,-9.80665}" />
       </ParameterList>
 
+    </ParameterList>
+  </ParameterList>
+  <ParameterList name="visualization">
+    <ParameterList name="domain" type="ParameterList">
+      <Parameter name="file name base" type="string" value="vis_box" />
+      <Parameter name="cycles start period stop" type="Array(int)" value="{0,1,-1}" />
     </ParameterList>
   </ParameterList>
 </ParameterList>

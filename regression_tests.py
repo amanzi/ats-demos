@@ -535,9 +535,9 @@ class RegressionTest(object):
         if len(set(h5_current.matches(key))) != len(set(h5_gold.matches(key))):
             status.fail = 1
             print("    FAIL: {0} : {1} :".format(self.name(), key), file=testlog)
-            print("        gold matches: {1}".format(";".join(h5_gold.matches(key))),
+            print("        gold matches: {0}".format(";".join(h5_gold.matches(key))),
                   file=testlog)
-            print("        current matches: {1}".format(";".join(h5_current.matches(key))),
+            print("        current matches: {0}".format(";".join(h5_current.matches(key))),
                   file=testlog)
             
         elif (len(h5_gold.matches(key)) == 0):

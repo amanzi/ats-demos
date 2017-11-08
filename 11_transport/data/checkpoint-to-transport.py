@@ -1,5 +1,7 @@
 import h5py
-d = h5py.File("checkpoint00025.h5",'r')
+import numpy as np
+
+d = h5py.File("checkpoint04000.h5",'r')
 d2 = h5py.File("ss_flow_results.h5",'w')
 d2.create_dataset("time", data=np.array([0.,]))
 flux = d2.create_group("surface-mass_flux.face.0")

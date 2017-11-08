@@ -1,14 +1,19 @@
 <ParameterList name="Main" type="ParameterList">
-  <Parameter name="Native Unstructured Input" type="bool" value="true" />
-  <Parameter name="grid_option" type="string" value="Unstructured" />
   <ParameterList name="mesh" type="ParameterList">
-    <Parameter isUsed="true" name="framework" type="string" value="MSTK" />
-    <ParameterList name="read mesh file" type="ParameterList">
-      <Parameter name="file" type="string" value="../meshes/box.exo" />
-      <Parameter name="format" type="string" value="Exodus II" />
+    <ParameterList name="surface" type="ParameterList">
+      <Parameter name="mesh type" type="string" value="surface" />
+      <ParameterList name="surface parameters" type="ParameterList">
+        <Parameter name="surface sideset names" type="Array(string)" value="{top face}" />
+      </ParameterList>
+      <ParameterList name="surface">
+      </ParameterList>
     </ParameterList>
-    <ParameterList name="surface mesh" type="ParameterList">
-      <Parameter name="surface sideset names" type="Array(string)" value="{top face}" />
+    <ParameterList name="domain" type="ParameterList">
+      <Parameter name="mesh type" type="string" value="read mesh file" />
+      <ParameterList name="read mesh file parameters" type="ParameterList">
+        <Parameter name="file" type="string" value="../meshes/box.exo" />
+        <Parameter name="format" type="string" value="Exodus II" />
+      </ParameterList>
     </ParameterList>
   </ParameterList>
 
@@ -117,15 +122,6 @@
   <ParameterList name="verbose object" type="ParameterList">
     <Parameter name="verbosity level" type="string" value="high" />
   </ParameterList>
-  <ParameterList name="visualization" type="ParameterList">
-    <Parameter name="file name base" type="string" value="visdump" />
-    <Parameter name="cycles start period stop" type="Array(int)" value="{0,100,-1}" />
-  </ParameterList>
-
-  <ParameterList name="visualization surface" type="ParameterList">
-    <Parameter name="file name base" type="string" value="visdump_surface" />
-    <Parameter name="cycles start period stop" type="Array(int)" value="{0,100,-1}" />
-  </ParameterList>
   <ParameterList name="checkpoint" type="ParameterList">
     <Parameter name="file name base" type="string" value="checkpoint" />
     <Parameter name="cycles start period stop" type="Array(int)" value="{0,100,-1}" />
@@ -135,7 +131,7 @@
 
     <ParameterList name="overland flow" type="ParameterList">
       <Parameter name="PK type" type="string" value="overland flow, pressure basis" />
-      <Parameter name="primary variable" type="string" value="surface-pressure" />
+      <Parameter name="primary variable key" type="string" value="surface-pressure" />
       <Parameter name="domain name" type="string" value="surface" />
       <Parameter name="source term" type="bool" value="true" />
       <Parameter name="mass source in meters" type="bool" value="true" />
@@ -226,7 +222,7 @@
         <Parameter name="include water vapor" type="bool" value="true" />
       </ParameterList>
 
-      <ParameterList name="ponded_depth" type="ParameterList">
+      <ParameterList name="surface-ponded_depth" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="ponded depth" />
       </ParameterList>
 
@@ -341,7 +337,7 @@
         </ParameterList>
       </ParameterList>
 
-      <ParameterList name="manning_coefficient" type="ParameterList">
+      <ParameterList name="surface-manning_coefficient" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
         <Parameter name="constant in time" type="bool" value="true" />
         <ParameterList name="function" type="ParameterList">
@@ -488,6 +484,16 @@
         </ParameterList>
       </ParameterList>
 
+    </ParameterList>
+  </ParameterList>
+  <ParameterList name="visualization">
+    <ParameterList name="domain" type="ParameterList">
+      <Parameter name="file name base" type="string" value="visdump" />
+      <Parameter name="cycles start period stop" type="Array(int)" value="{0,100,-1}" />
+    </ParameterList>
+    <ParameterList name="surface" type="ParameterList">
+      <Parameter name="file name base" type="string" value="visdump_surface" />
+      <Parameter name="cycles start period stop" type="Array(int)" value="{0,100,-1}" />
     </ParameterList>
   </ParameterList>
 </ParameterList>

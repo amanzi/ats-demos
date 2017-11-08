@@ -1,18 +1,37 @@
 <ParameterList name="Main" type="ParameterList">
   <ParameterList name="mesh" type="ParameterList">
-    <Parameter isUsed="true" name="framework" type="string" value="MSTK" />
-    <ParameterList name="generate mesh" type="ParameterList">
-      <Parameter name="number of cells" type="Array(int)" value="{1,1,100}" />
-      <Parameter name="domain low coordinate" type="Array(double)" value="{0.0,0.0,0.0}" />
-      <Parameter name="domain high coordinate" type="Array(double)" value="{1.0,1.0,10.0}" />
-      <Parameter name="Number of mesh blocks" type="int" value="1" />
-      <ParameterList name="Mesh block 1" type="ParameterList">
-        <Parameter name="Z0" type="double" value="0.0" />
-        <Parameter name="Z1" type="double" value="10.0" />
+    <ParameterList name="litter" type="ParameterList">
+      <Parameter name="mesh type" type="string" value="aliased" />
+      <ParameterList name="aliased parameters" type="ParameterList">
+        <Parameter name="alias" type="string" value="surface" />
       </ParameterList>
     </ParameterList>
-    <ParameterList name="surface mesh" type="ParameterList">
-      <Parameter name="surface sideset name" type="string" value="surface" />
+    <ParameterList name="canopy" type="ParameterList">
+      <Parameter name="mesh type" type="string" value="aliased" />
+      <ParameterList name="aliased parameters" type="ParameterList">
+        <Parameter name="alias" type="string" value="surface" />
+      </ParameterList>
+    </ParameterList>
+    <ParameterList name="surface" type="ParameterList">
+      <Parameter name="mesh type" type="string" value="surface" />
+      <ParameterList name="surface parameters" type="ParameterList">
+        <Parameter name="surface sideset name" type="string" value="surface" />
+      </ParameterList>
+      <ParameterList name="surface">
+      </ParameterList>
+    </ParameterList>
+    <ParameterList name="domain" type="ParameterList">
+      <Parameter name="mesh type" type="string" value="generate mesh" />
+      <ParameterList name="generate mesh parameters" type="ParameterList">
+        <Parameter name="number of cells" type="Array(int)" value="{1,1,100}" />
+        <Parameter name="domain low coordinate" type="Array(double)" value="{0.0,0.0,0.0}" />
+        <Parameter name="domain high coordinate" type="Array(double)" value="{1.0,1.0,10.0}" />
+        <Parameter name="Number of mesh blocks" type="int" value="1" />
+        <ParameterList name="Mesh block 1" type="ParameterList">
+          <Parameter name="Z0" type="double" value="0.0" />
+          <Parameter name="Z1" type="double" value="10.0" />
+        </ParameterList>
+      </ParameterList>
     </ParameterList>
   </ParameterList>
 
@@ -112,15 +131,6 @@
       </ParameterList>
     </ParameterList>
   </ParameterList>
-  <ParameterList name="visualization" type="ParameterList">
-    <Parameter name="file name base" type="string" value="visdump" />
-    <Parameter name="times start period stop" type="Array(double)" value="{0.0,864.0,-1.0}" />
-  </ParameterList>
-
-  <ParameterList name="visualization surface" type="ParameterList">
-    <Parameter name="file name base" type="string" value="visdump_surface" />
-    <Parameter name="times start period stop" type="Array(double)" value="{0.0,864.0,-1.0}" />
-  </ParameterList>
   <ParameterList name="PKs" type="ParameterList">
 
     <ParameterList name="Top level MPC" type="ParameterList">
@@ -131,7 +141,7 @@
 
     <ParameterList name="carbon budget" type="ParameterList">
       <Parameter name="PK type" type="string" value="BGC simple" />
-      <Parameter name="primary variable" type="string" value="carbon" />
+      <Parameter name="primary variable key" type="string" value="carbon" />
       <Parameter name="initial time step" type="double" value="86400.0" />
       <Parameter name="soil partition name" type="string" value="all" />
       <Parameter name="cryoturbation mixing coefficient [cm^2/yr]" type="double" value="0.0" />
@@ -193,7 +203,7 @@
       <ParameterList name="time integrator" type="ParameterList">
         <Parameter name="extrapolate initial guess" type="bool" value="true" />
         <Parameter name="solver type" type="string" value="nka_bt_ats" />
-        <Parameter name="timestep controller type" type="string" value="smarter" />
+        <Parameter name="timestep controller type" type="string" value="from file" />
         <ParameterList name="nka_bt_ats parameters" type="ParameterList">
           <Parameter name="nka lag iterations" type="int" value="2" />
           <Parameter name="max backtrack steps" type="int" value="5" />
@@ -201,8 +211,8 @@
           <Parameter name="backtrack factor" type="double" value="0.5" />
           <Parameter name="backtrack tolerance" type="double" value="1e-05" />
           <Parameter name="nonlinear tolerance" type="double" value="0.0001" />
-          <Parameter name="diverged tolerance" type="double" value="100000.0" />
-          <Parameter name="limit iterations" type="int" value="21" />
+          <Parameter name="diverged tolerance" type="double" value="10000000000.0" />
+          <Parameter name="limit iterations" type="int" value="100" />
           <ParameterList name="verbose object" type="ParameterList">
             <Parameter name="verbosity level" type="string" value="extreme" />
           </ParameterList>
@@ -217,16 +227,19 @@
           <Parameter name="growth wait after fail" type="int" value="2" />
           <Parameter name="count before increasing increase factor" type="int" value="2" />
         </ParameterList>
+        <ParameterList name="timestep controller from file parameters" type="ParameterList">
+          <Parameter name="file name" type="string" value="../data/litter-canopy_dts.h5" />
+        </ParameterList>
       </ParameterList>
 
     </ParameterList>
 
     <ParameterList name="canopy" type="ParameterList">
       <Parameter name="PK type" type="string" value="general surface balance" />
-      <Parameter name="primary variable" type="string" value="canopy-water_content" />
+      <Parameter name="primary variable key" type="string" value="canopy-water_content" />
       <Parameter name="conserved quantity key" type="string" value="canopy-water_content" />
       <Parameter name="layer name" type="string" value="canopy" />
-      <Parameter name="domain name" type="string" value="surface" />
+      <Parameter name="domain name" type="string" value="canopy" />
       <Parameter name="max time step" type="double" value="8640.0" />
       <Parameter name="debug cells" type="Array(int)" value="{0}" />
       <ParameterList name="verbose object" type="ParameterList">
@@ -251,10 +264,10 @@
 
     <ParameterList name="litter" type="ParameterList">
       <Parameter name="PK type" type="string" value="general surface balance" />
-      <Parameter name="primary variable" type="string" value="litter-water_content" />
+      <Parameter name="primary variable key" type="string" value="litter-water_content" />
       <Parameter name="conserved quantity key" type="string" value="litter-water_content" />
       <Parameter name="layer name" type="string" value="litter" />
-      <Parameter name="domain name" type="string" value="surface" />
+      <Parameter name="domain name" type="string" value="litter" />
       <Parameter name="max time step" type="double" value="8640.0" />
       <Parameter name="debug cells" type="Array(int)" value="{0}" />
       <ParameterList name="verbose object" type="ParameterList">
@@ -322,7 +335,7 @@
 
     <ParameterList name="surface flow" type="ParameterList">
       <Parameter name="PK type" type="string" value="overland flow, pressure basis" />
-      <Parameter name="primary variable" type="string" value="surface-pressure" />
+      <Parameter name="primary variable key" type="string" value="surface-pressure" />
       <Parameter name="domain name" type="string" value="surface" />
       <Parameter name="source term" type="bool" value="true" />
       <Parameter name="source key" type="string" value="surface-mass_source" />
@@ -367,7 +380,7 @@
 
     <ParameterList name="subsurface flow" type="ParameterList">
       <Parameter name="PK type" type="string" value="richards flow" />
-      <Parameter name="primary variable" type="string" value="pressure" />
+      <Parameter name="primary variable key" type="string" value="pressure" />
       <Parameter name="initial time step" type="double" value="1.0" />
       <Parameter name="relative permeability method" type="string" value="upwind with Darcy flux" />
       <Parameter name="permeability rescaling" type="double" value="10000000.0" />
@@ -443,17 +456,17 @@
         <Parameter name="saturated moisture content [m^3 H20 / m^2 biomass area]" type="double" value="0.0002" />
         <Parameter name="wet layer from surface water" type="bool" value="false" />
         <Parameter name="density of liquid water [mol/m^3]" type="double" value="55389.0" />
-        <Parameter name="area index key" type="string" value="total_leaf_area_index" />
+        <Parameter name="area index key" type="string" value="surface-total_leaf_area_index" />
       </ParameterList>
 
       <ParameterList name="canopy-interception" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="interception/throughfall" />
         <Parameter name="layer name" type="string" value="canopy" />
-        <Parameter name="source key" type="string" value="precipitation_rain" />
+        <Parameter name="source key" type="string" value="canopy-precipitation_rain" />
         <Parameter name="source in meters" type="bool" value="true" />
         <Parameter name="throughfall coefficient [m^2 / m^2 biomass area]" type="double" value="0.2" />
         <Parameter name="density of liquid water [mol/m^3]" type="double" value="55389.0" />
-        <Parameter name="area index key" type="string" value="total_leaf_area_index" />
+        <Parameter name="area index key" type="string" value="surface-total_leaf_area_index" />
       </ParameterList>
 
       <ParameterList name="litter-source_sink" type="ParameterList">
@@ -483,8 +496,8 @@
 
       <ParameterList name="litter-source" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="additive evaluator" />
-        <Parameter name="evaluator dependencies" type="Array(string)" value="{precipitation_rain, canopy-interception, canopy-drainage}" />
-        <Parameter name="precipitation_rain coefficient" type="double" value="55389.0" />
+        <Parameter name="evaluator dependencies" type="Array(string)" value="{canopy-precipitation_rain, canopy-interception, canopy-drainage}" />
+        <Parameter name="canopy-precipitation_rain coefficient" type="double" value="55389.0" />
         <Parameter name="canopy-interception coefficient" type="double" value="-1.0" />
         <Parameter name="canopy-drainage coefficient" type="double" value="1.0" />
       </ParameterList>
@@ -519,7 +532,7 @@
         <Parameter name="litter-drainage coefficient" type="double" value="1.0" />
       </ParameterList>
 
-      <ParameterList name="precipitation_rain" type="ParameterList">
+      <ParameterList name="canopy-precipitation_rain" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="domain rain" type="ParameterList">
@@ -552,7 +565,7 @@
         </ParameterList>
       </ParameterList>
 
-      <ParameterList name="ponded_depth" type="ParameterList">
+      <ParameterList name="surface-ponded_depth" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="ponded depth" />
       </ParameterList>
 
@@ -665,7 +678,7 @@
         </ParameterList>
       </ParameterList>
 
-      <ParameterList name="manning_coefficient" type="ParameterList">
+      <ParameterList name="surface-manning_coefficient" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="manning coefficient with litter" />
         <ParameterList name="manning coefficient parameters" type="ParameterList">
           <ParameterList name="not river or floodplain" type="ParameterList">
@@ -730,8 +743,9 @@
         <Parameter name="field evaluator type" type="string" value="effective_pressure" />
       </ParameterList>
 
-      <ParameterList name="incoming_shortwave_radiation" type="ParameterList">
+      <ParameterList name="surface-incoming_shortwave_radiation" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
+        <Parameter name="constant in time" type="bool" value="true" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="domain" type="ParameterList">
             <Parameter name="region" type="string" value="surface domain" />
@@ -745,8 +759,9 @@
         </ParameterList>
       </ParameterList>
 
-      <ParameterList name="incoming_longwave_radiation" type="ParameterList">
+      <ParameterList name="surface-incoming_longwave_radiation" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
+        <Parameter name="constant in time" type="bool" value="true" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="domain" type="ParameterList">
             <Parameter name="region" type="string" value="surface domain" />
@@ -760,8 +775,9 @@
         </ParameterList>
       </ParameterList>
 
-      <ParameterList name="air_temperature" type="ParameterList">
+      <ParameterList name="surface-air_temperature" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
+        <Parameter name="constant in time" type="bool" value="true" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="domain" type="ParameterList">
             <Parameter name="region" type="string" value="surface domain" />
@@ -775,8 +791,9 @@
         </ParameterList>
       </ParameterList>
 
-      <ParameterList name="relative_humidity" type="ParameterList">
+      <ParameterList name="surface-relative_humidity" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
+        <Parameter name="constant in time" type="bool" value="true" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="domain" type="ParameterList">
             <Parameter name="region" type="string" value="surface domain" />
@@ -790,8 +807,9 @@
         </ParameterList>
       </ParameterList>
 
-      <ParameterList name="wind_speed" type="ParameterList">
+      <ParameterList name="surface-wind_speed" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
+        <Parameter name="constant in time" type="bool" value="true" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="domain" type="ParameterList">
             <Parameter name="region" type="string" value="surface domain" />
@@ -805,8 +823,9 @@
         </ParameterList>
       </ParameterList>
 
-      <ParameterList name="co2_concentration" type="ParameterList">
+      <ParameterList name="surface-co2_concentration" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
+        <Parameter name="constant in time" type="bool" value="true" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="domain" type="ParameterList">
             <Parameter name="region" type="string" value="surface domain" />
@@ -847,6 +866,24 @@
         <Parameter name="value" type="Array(double)" value="{0.0,0.0,-9.80665}" />
       </ParameterList>
 
+    </ParameterList>
+  </ParameterList>
+  <ParameterList name="visualization">
+    <ParameterList name="domain" type="ParameterList">
+      <Parameter name="cycles" type="Array(int)" value="{0}" />
+      <Parameter name="file name base" type="string" value="visdump" />
+    </ParameterList>
+    <ParameterList name="surface" type="ParameterList">
+      <Parameter name="cycles" type="Array(int)" value="{0}" />
+      <Parameter name="file name base" type="string" value="visdump_surface" />
+    </ParameterList>
+    <ParameterList name="litter" type="ParameterList">
+      <Parameter name="cycles" type="Array(int)" value="{0}" />
+      <Parameter name="file name base" type="string" value="visdump_litter" />
+    </ParameterList>
+    <ParameterList name="canopy" type="ParameterList">
+      <Parameter name="cycles" type="Array(int)" value="{0}" />
+      <Parameter name="file name base" type="string" value="visdump_canopy" />
     </ParameterList>
   </ParameterList>
 </ParameterList>

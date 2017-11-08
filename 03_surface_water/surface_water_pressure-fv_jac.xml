@@ -1,12 +1,20 @@
 <ParameterList name="Main" type="ParameterList">
-  <Parameter name="Native Unstructured Input" type="bool" value="true" />
-  <Parameter name="grid_option" type="string" value="Unstructured" />
   <ParameterList name="mesh" type="ParameterList">
-    <Parameter isUsed="true" name="framework" type="string" value="MSTK" />
-    <ParameterList name="generate mesh" type="ParameterList">
-      <Parameter name="number of cells" type="Array(int)" value="{10,1}" />
-      <Parameter name="domain low coordinate" type="Array(double)" value="{0.0,0.0}" />
-      <Parameter name="domain high coordinate" type="Array(double)" value="{10.0,1.0}" />
+    <ParameterList name="surface" type="ParameterList">
+      <Parameter name="mesh type" type="string" value="aliased" />
+      <ParameterList name="aliased parameters" type="ParameterList">
+        <Parameter name="alias" type="string" value="domain" />
+      </ParameterList>
+      <ParameterList name="surface">
+      </ParameterList>
+    </ParameterList>
+    <ParameterList name="domain" type="ParameterList">
+      <Parameter name="mesh type" type="string" value="generate mesh" />
+      <ParameterList name="generate mesh parameters" type="ParameterList">
+        <Parameter name="number of cells" type="Array(int)" value="{10,1}" />
+        <Parameter name="domain low coordinate" type="Array(double)" value="{0.0,0.0}" />
+        <Parameter name="domain high coordinate" type="Array(double)" value="{10.0,1.0}" />
+      </ParameterList>
     </ParameterList>
   </ParameterList>
 
@@ -54,20 +62,11 @@
       </ParameterList>
     </ParameterList>
   </ParameterList>
-  <ParameterList name="visualization" type="ParameterList">
-    <Parameter name="cycles" type="Array(int)" value="{0,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25}" />
-    <Parameter name="file name base" type="string" value="visdump" />
-  </ParameterList>
-
-  <ParameterList name="visualization surface" type="ParameterList">
-    <Parameter name="cycles" type="Array(int)" value="{0,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25}" />
-    <Parameter name="file name base" type="string" value="visdump_surface" />
-  </ParameterList>
   <ParameterList name="PKs" type="ParameterList">
 
     <ParameterList name="Overland Flow" type="ParameterList">
       <Parameter name="PK type" type="string" value="overland flow, pressure basis" />
-      <Parameter name="primary variable" type="string" value="surface-pressure" />
+      <Parameter name="primary variable key" type="string" value="surface-pressure" />
       <Parameter name="domain name" type="string" value="surface" />
       <Parameter name="source term" type="bool" value="true" />
       <Parameter name="debug cells" type="Array(int)" value="{0,9}" />
@@ -116,7 +115,7 @@
           <Parameter name="growth wait after fail" type="int" value="2" />
           <Parameter name="count before increasing increase factor" type="int" value="2" />
         </ParameterList>
-        <ParameterList name="timestep controller from file parameters">
+        <ParameterList name="timestep controller from file parameters" type="ParameterList">
           <Parameter name="file name" type="string" value="../data/surface_water_pressure-fv_jac_dts.h5" />
         </ParameterList>
       </ParameterList>
@@ -192,14 +191,8 @@
         <Parameter name="field evaluator type" type="string" value="overland pressure water content" />
       </ParameterList>
 
-      <ParameterList name="ponded_depth" type="ParameterList">
+      <ParameterList name="surface-ponded_depth" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="ponded depth" />
-      </ParameterList>
-
-      <ParameterList name="ponded_depth_bar" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="ponded depth" />
-        <Parameter name="ponded depth bar" type="bool" value="true" />
-        <Parameter name="height key" type="string" value="ponded_depth_bar" />
       </ParameterList>
 
       <ParameterList name="surface-mass_source" type="ParameterList">
@@ -222,21 +215,6 @@
       <ParameterList name="surface-source_molar_density" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="eos" />
         <Parameter name="EOS basis" type="string" value="molar" />
-        <Parameter name="molar density key" type="string" value="surface-source_molar_density" />
-        <ParameterList name="EOS parameters" type="ParameterList">
-          <Parameter name="EOS type" type="string" value="constant" />
-          <Parameter name="density [kg/m^3]" type="double" value="1000.0" />
-        </ParameterList>
-        <ParameterList name="verbose object" type="ParameterList">
-          <Parameter name="verbosity level" type="string" value="low" />
-        </ParameterList>
-      </ParameterList>
-
-      <ParameterList name="surface-mass_density_liquid" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="eos" />
-        <Parameter name="EOS basis" type="string" value="both" />
-        <Parameter name="molar density key" type="string" value="surface-molar_density_liquid" />
-        <Parameter name="mass density key" type="string" value="surface-mass_density_liquid" />
         <ParameterList name="EOS parameters" type="ParameterList">
           <Parameter name="EOS type" type="string" value="constant" />
           <Parameter name="density [kg/m^3]" type="double" value="1000.0" />
@@ -249,15 +227,16 @@
       <ParameterList name="surface-molar_density_liquid" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="eos" />
         <Parameter name="EOS basis" type="string" value="both" />
-        <Parameter name="molar density key" type="string" value="surface-molar_density_liquid" />
-        <Parameter name="mass density key" type="string" value="surface-mass_density_liquid" />
-        <Parameter name="pressure key" type="string" value="surface-effective_pressure" />
         <ParameterList name="EOS parameters" type="ParameterList">
-          <Parameter name="EOS type" type="string" value="liquid water" />
+          <Parameter name="EOS type" type="string" value="constant" />
+          <Parameter name="density [kg/m^3]" type="double" value="1000.0" />
+        </ParameterList>
+        <ParameterList name="verbose object" type="ParameterList">
+          <Parameter name="verbosity level" type="string" value="low" />
         </ParameterList>
       </ParameterList>
 
-      <ParameterList name="manning_coefficient" type="ParameterList">
+      <ParameterList name="surface-manning_coefficient" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
         <Parameter name="constant in time" type="bool" value="true" />
         <ParameterList name="function" type="ParameterList">
@@ -304,6 +283,16 @@
         <Parameter name="value" type="Array(double)" value="{0.0,0.0,-9.80665}" />
       </ParameterList>
 
+    </ParameterList>
+  </ParameterList>
+  <ParameterList name="visualization">
+    <ParameterList name="domain" type="ParameterList">
+      <Parameter name="cycles" type="Array(int)" value="{0,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25}" />
+      <Parameter name="file name base" type="string" value="visdump" />
+    </ParameterList>
+    <ParameterList name="surface" type="ParameterList">
+      <Parameter name="cycles" type="Array(int)" value="{0,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25}" />
+      <Parameter name="file name base" type="string" value="visdump_surface" />
     </ParameterList>
   </ParameterList>
 </ParameterList>

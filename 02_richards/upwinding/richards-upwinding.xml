@@ -1,12 +1,12 @@
 <ParameterList name="Main" type="ParameterList">
-  <Parameter name="Native Unstructured Input" type="bool" value="true" />
-  <Parameter name="grid_option" type="string" value="Unstructured" />
   <ParameterList name="mesh" type="ParameterList">
-    <Parameter isUsed="true" name="framework" type="string" value="MSTK" />
-    <ParameterList name="generate mesh" type="ParameterList">
-      <Parameter name="domain low coordinate" type="Array(double)" value="{0.0,0.0,0.0}" />
-      <Parameter name="domain high coordinate" type="Array(double)" value="{100.0,1.0,1.0}" />
-      <Parameter name="number of cells" type="Array(int)" value="{100,1,1}" />
+    <ParameterList name="domain" type="ParameterList">
+      <Parameter name="mesh type" type="string" value="generate mesh" />
+      <ParameterList name="generate mesh parameters" type="ParameterList">
+        <Parameter name="domain low coordinate" type="Array(double)" value="{0.0,0.0,0.0}" />
+        <Parameter name="domain high coordinate" type="Array(double)" value="{100.0,1.0,1.0}" />
+        <Parameter name="number of cells" type="Array(int)" value="{100,1,1}" />
+      </ParameterList>
     </ParameterList>
   </ParameterList>
 
@@ -78,11 +78,6 @@
       </ParameterList>
     </ParameterList>
   </ParameterList>
-  <ParameterList name="visualization" type="ParameterList">
-    <Parameter name="file name base" type="string" value="visdump" />
-    <Parameter name="times start period stop" type="Array(double)" value="{0.0,315000000.0,-1.0}" />
-  </ParameterList>
-
   <ParameterList name="checkpoint" type="ParameterList">
     <Parameter name="times start period stop" type="Array(double)" value="{0.0,3150000000.0,-1.0}" />
   </ParameterList>
@@ -91,7 +86,7 @@
 
     <ParameterList name="Richards" type="ParameterList">
       <Parameter name="PK type" type="string" value="richards flow" />
-      <Parameter name="primary variable" type="string" value="pressure" />
+      <Parameter name="primary variable key" type="string" value="pressure" />
       <Parameter name="initial time step" type="double" value="10.0" />
       <Parameter name="relative permeability method" type="string" value="upwind with Darcy flux" />
       <Parameter name="modify predictor for flux BCs" type="bool" value="true" />
@@ -338,6 +333,12 @@
         <Parameter name="value" type="Array(double)" value="{0.0,0.0,-9.80665}" />
       </ParameterList>
 
+    </ParameterList>
+  </ParameterList>
+  <ParameterList name="visualization">
+    <ParameterList name="domain" type="ParameterList">
+      <Parameter name="file name base" type="string" value="visdump" />
+      <Parameter name="times start period stop" type="Array(double)" value="{0.0,315000000.0,-1.0}" />
     </ParameterList>
   </ParameterList>
 </ParameterList>

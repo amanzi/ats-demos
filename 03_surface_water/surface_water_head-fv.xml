@@ -1,12 +1,12 @@
 <ParameterList name="Main" type="ParameterList">
-  <Parameter name="Native Unstructured Input" type="bool" value="true" />
-  <Parameter name="grid_option" type="string" value="Unstructured" />
   <ParameterList name="mesh" type="ParameterList">
-    <Parameter isUsed="true" name="framework" type="string" value="MSTK" />
-    <ParameterList name="generate mesh" type="ParameterList">
-      <Parameter name="number of cells" type="Array(int)" value="{10,1}" />
-      <Parameter name="domain low coordinate" type="Array(double)" value="{0.0,0.0}" />
-      <Parameter name="domain high coordinate" type="Array(double)" value="{10.0,1.0}" />
+    <ParameterList name="domain" type="ParameterList">
+      <Parameter name="mesh type" type="string" value="generate mesh" />
+      <ParameterList name="generate mesh parameters" type="ParameterList">
+        <Parameter name="number of cells" type="Array(int)" value="{10,1}" />
+        <Parameter name="domain low coordinate" type="Array(double)" value="{0.0,0.0}" />
+        <Parameter name="domain high coordinate" type="Array(double)" value="{10.0,1.0}" />
+      </ParameterList>
     </ParameterList>
   </ParameterList>
 
@@ -61,20 +61,11 @@
       </ParameterList>
     </ParameterList>
   </ParameterList>
-  <ParameterList name="visualization" type="ParameterList">
-    <Parameter name="cycles" type="Array(int)" value="{0,45,81,117,148,160,168,174,178,182,185,188,191,193,195,197,199,201,203}" />
-    <Parameter name="file name base" type="string" value="visdump" />
-  </ParameterList>
-
-  <ParameterList name="visualization surface" type="ParameterList">
-    <Parameter name="cycles" type="Array(int)" value="{0,45,81,117,148,160,168,174,178,182,185,188,191,193,195,197,199,201,203}" />
-    <Parameter name="file name base" type="string" value="visdump_surface" />
-  </ParameterList>
   <ParameterList name="PKs" type="ParameterList">
 
     <ParameterList name="Overland Flow" type="ParameterList">
       <Parameter name="PK type" type="string" value="overland flow" />
-      <Parameter name="primary variable" type="string" value="ponded_depth" />
+      <Parameter name="primary variable key" type="string" value="surface-ponded_depth" />
       <Parameter name="source term" type="bool" value="true" />
       <Parameter name="debug cells" type="Array(int)" value="{0,9}" />
       <Parameter name="initial time step" type="double" value="10.0" />
@@ -118,13 +109,12 @@
           <Parameter name="growth wait after fail" type="int" value="2" />
           <Parameter name="count before increasing increase factor" type="int" value="2" />
         </ParameterList>
-        <ParameterList name="timestep controller from file parameters">
+        <ParameterList name="timestep controller from file parameters" type="ParameterList">
           <Parameter name="file name" type="string" value="../data/surface_water_head-fv_dts.h5" />
         </ParameterList>
       </ParameterList>
 
       <ParameterList name="elevation evaluator" type="ParameterList">
-        <Parameter name="elevation key" type="string" value="elevation" />
         <ParameterList name="elevation function" type="ParameterList">
           <ParameterList name="Elevation" type="ParameterList">
             <Parameter name="region" type="string" value="Computational domain" />
@@ -161,7 +151,6 @@
       </ParameterList>
 
       <ParameterList name="overland conductivity evaluator" type="ParameterList">
-        <Parameter name="overland conductivity key" type="string" value="overland_conductivity" />
         <Parameter name="include density factor" type="bool" value="false" />
         <ParameterList name="overland conductivity model" type="ParameterList">
           <Parameter name="Manning exponent" type="double" value="0.666666666667" />
@@ -214,7 +203,7 @@
         </ParameterList>
       </ParameterList>
 
-      <ParameterList name="manning_coefficient" type="ParameterList">
+      <ParameterList name="surface-manning_coefficient" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
         <Parameter name="constant in time" type="bool" value="true" />
         <ParameterList name="function" type="ParameterList">
@@ -241,6 +230,16 @@
         <Parameter name="value" type="Array(double)" value="{0.0,0.0,-9.80665}" />
       </ParameterList>
 
+    </ParameterList>
+  </ParameterList>
+  <ParameterList name="visualization">
+    <ParameterList name="domain" type="ParameterList">
+      <Parameter name="cycles" type="Array(int)" value="{0,45,81,117,148,160,168,174,178,182,185,188,191,193,195,197,199,201,203}" />
+      <Parameter name="file name base" type="string" value="visdump" />
+    </ParameterList>
+    <ParameterList name="surface" type="ParameterList">
+      <Parameter name="cycles" type="Array(int)" value="{0,45,81,117,148,160,168,174,178,182,185,188,191,193,195,197,199,201,203}" />
+      <Parameter name="file name base" type="string" value="visdump_surface" />
     </ParameterList>
   </ParameterList>
 </ParameterList>

@@ -1,14 +1,22 @@
 <ParameterList name="main" type="ParameterList">
   <ParameterList name="mesh" type="ParameterList">
-    <Parameter name="framework" type="string" value="MSTK" />
-    <Parameter name="deformable mesh" type="bool" value="true" />
-    <ParameterList name="generate mesh" type="ParameterList">
-      <Parameter name="domain low coordinate" type="Array(double)" value="{0.0,0.0,0.0}" />
-      <Parameter name="domain high coordinate" type="Array(double)" value="{10.0,10.0,4.0}" />
-      <Parameter name="number of cells" type="Array(int)" value="{1,1,40}" />
+    <ParameterList name="surface" type="ParameterList">
+      <Parameter name="deformable mesh" type="bool" value="true" />
+      <Parameter name="mesh type" type="string" value="surface" />
+      <ParameterList name="surface parameters" type="ParameterList">
+        <Parameter name="surface sideset names" type="Array(string)" value="{surface}" />
+      </ParameterList>
+      <ParameterList name="surface">
+      </ParameterList>
     </ParameterList>
-    <ParameterList name="surface mesh" type="ParameterList">
-      <Parameter name="surface sideset names" type="Array(string)" value="{surface}" />
+    <ParameterList name="domain" type="ParameterList">
+      <Parameter name="deformable mesh" type="bool" value="true" />
+      <Parameter name="mesh type" type="string" value="generate mesh" />
+      <ParameterList name="generate mesh parameters" type="ParameterList">
+        <Parameter name="domain low coordinate" type="Array(double)" value="{0.0,0.0,0.0}" />
+        <Parameter name="domain high coordinate" type="Array(double)" value="{10.0,10.0,4.0}" />
+        <Parameter name="number of cells" type="Array(int)" value="{1,1,40}" />
+      </ParameterList>
     </ParameterList>
   </ParameterList>
 
@@ -110,12 +118,6 @@
       </ParameterList>
     </ParameterList>
   </ParameterList>
-  <ParameterList name="visualization" type="ParameterList">
-    <Parameter name="file name base" type="string" value="visdump" />
-    <Parameter name="times start period stop 0" type="Array(double)" value="{0.0,100.0,-1.0}" />
-    <Parameter name="dynamic mesh" type="bool" value="true" />
-  </ParameterList>
-
   <ParameterList name="checkpoint" type="ParameterList">
   </ParameterList>
 
@@ -131,7 +133,7 @@
       <Parameter name="PK type" type="string" value="volumetric deformation" />
       <Parameter name="deformation mode" type="string" value="prescribed" />
       <Parameter name="deformation strategy" type="string" value="average" />
-      <Parameter name="primary variable" type="string" value="base_porosity" />
+      <Parameter name="primary variable key" type="string" value="base_porosity" />
       <Parameter name="initial time step" type="double" value="10.0" />
       <ParameterList name="initial condition" type="ParameterList">
         <ParameterList name="function" type="ParameterList">
@@ -163,21 +165,21 @@
 
     <ParameterList name="flow" type="ParameterList">
       <Parameter name="PK type" type="string" value="richards flow" />
-      <Parameter name="primary variable" type="string" value="pressure" />
+      <Parameter name="primary variable key" type="string" value="pressure" />
       <Parameter name="strongly coupled PK" type="bool" value="false" />
       <Parameter name="initial time step" type="double" value="10.0" />
       <Parameter name="relative permeability method" type="string" value="upwind with Darcy flux" />
       <ParameterList name="time integrator" type="ParameterList">
         <Parameter name="extrapolate initial guess" type="bool" value="true" />
         <Parameter name="solver type" type="string" value="nka" />
-        <Parameter name="timestep controller type" type="string" value="smarter" />
+        <Parameter name="timestep controller type" type="string" value="from file" />
         <ParameterList name="nka parameters" type="ParameterList">
           <Parameter name="max error growth factor" type="double" value="1000.0" />
           <Parameter name="modify correction" type="bool" value="true" />
           <Parameter name="monitor" type="string" value="monitor residual" />
           <Parameter name="nonlinear tolerance" type="double" value="1e-05" />
-          <Parameter name="diverged tolerance" type="double" value="1000.0" />
-          <Parameter name="limit iterations" type="int" value="51" />
+          <Parameter name="diverged tolerance" type="double" value="10000000000.0" />
+          <Parameter name="limit iterations" type="int" value="100" />
           <Parameter name="preconditioner lag iterations" type="int" value="0" />
           <Parameter name="convergence monitor" type="string" value="monitor residual" />
           <Parameter name="max divergent interations" type="int" value="20" />
@@ -199,6 +201,9 @@
           <Parameter name="min time step" type="double" value="1.0" />
           <Parameter name="growth wait after fail" type="int" value="2" />
           <Parameter name="count before increasing increase factor" type="int" value="2" />
+        </ParameterList>
+        <ParameterList name="timestep controller from file parameters" type="ParameterList">
+          <Parameter name="file name" type="string" value="../data/deformation_squish_dts.h5" />
         </ParameterList>
       </ParameterList>
 
@@ -381,6 +386,12 @@
         <Parameter name="value" type="Array(double)" value="{0.0,0.0,-9.80665}" />
       </ParameterList>
 
+    </ParameterList>
+  </ParameterList>
+  <ParameterList name="visualization">
+    <ParameterList name="domain" type="ParameterList">
+      <Parameter name="cycles" type="Array(int)" value="{0,10,17,20,24,26,28,30,32,34,39}" />
+      <Parameter name="file name base" type="string" value="visdump" />
     </ParameterList>
   </ParameterList>
 </ParameterList>

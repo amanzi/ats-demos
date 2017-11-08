@@ -1,16 +1,21 @@
 <ParameterList name="Main" type="ParameterList">
-  <Parameter name="Native Unstructured Input" type="bool" value="true" />
-  <Parameter name="grid_option" type="string" value="Unstructured" />
   <ParameterList name="mesh" type="ParameterList">
-    <Parameter name="framework" type="string" value="MSTK" />
-    <ParameterList name="read mesh file" type="ParameterList">
-      <Parameter name="file" type="string" value="../data/mesh_fsets-moss-Center-10peat.exo" />
-      <Parameter name="format" type="string" value="Exodus II" />
-    </ParameterList>
-    <ParameterList name="surface mesh" type="ParameterList">
-      <Parameter name="surface sideset name" type="string" value="surface" />
+    <ParameterList name="surface" type="ParameterList">
+      <Parameter name="mesh type" type="string" value="surface" />
       <ParameterList name="expert" type="ParameterList">
         <Parameter name="verify mesh" type="bool" value="false" />
+      </ParameterList>
+      <ParameterList name="surface parameters" type="ParameterList">
+        <Parameter name="surface sideset name" type="string" value="surface" />
+      </ParameterList>
+      <ParameterList name="surface">
+      </ParameterList>
+    </ParameterList>
+    <ParameterList name="domain" type="ParameterList">
+      <Parameter name="mesh type" type="string" value="read mesh file" />
+      <ParameterList name="read mesh file parameters" type="ParameterList">
+        <Parameter name="file" type="string" value="../data/mesh_fsets-moss-Center-10peat.exo" />
+        <Parameter name="format" type="string" value="Exodus II" />
       </ParameterList>
     </ParameterList>
   </ParameterList>
@@ -121,15 +126,6 @@
       </ParameterList>
     </ParameterList>
   </ParameterList>
-  <ParameterList name="visualization" type="ParameterList">
-    <Parameter name="file name base" type="string" value="visdump" />
-    <Parameter name="times start period stop 0" type="Array(double)" value="{315576000.0,864000.0,347133600.0}" />
-  </ParameterList>
-
-  <ParameterList name="visualization surface" type="ParameterList">
-    <Parameter name="file name base" type="string" value="visdump_surface" />
-    <Parameter name="times start period stop 0" type="Array(double)" value="{315576000.0,864000.0,347133600.0}" />
-  </ParameterList>
   <ParameterList name="checkpoint" type="ParameterList">
   </ParameterList>
 
@@ -137,7 +133,7 @@
 
     <ParameterList name="carbon" type="ParameterList">
       <Parameter name="PK type" type="string" value="BGC simple" />
-      <Parameter name="primary variable" type="string" value="carbon" />
+      <Parameter name="primary variable key" type="string" value="carbon" />
       <Parameter name="initial time step" type="double" value="86400.0" />
       <Parameter name="soil partition name" type="string" value="all" />
       <Parameter name="cryoturbation mixing coefficient [cm^2/yr]" type="double" value="5.0" />
@@ -356,6 +352,16 @@
         <Parameter name="value" type="Array(double)" value="{0.0,0.0,-9.80665}" />
       </ParameterList>
 
+    </ParameterList>
+  </ParameterList>
+  <ParameterList name="visualization">
+    <ParameterList name="domain" type="ParameterList">
+      <Parameter name="cycles" type="Array(int)" value="{3653,3663,3673,3683,3693,3703,3713,3723,3733,3743,3753,3763,3773,3783,3793,3803,3813,3823,3833,3843,3853,3863,3873,3883,3893,3903,3913,3923,3933,3943,3953,3963,3973,3983,3993,4003,4013}" />
+      <Parameter name="file name base" type="string" value="visdump" />
+    </ParameterList>
+    <ParameterList name="surface" type="ParameterList">
+      <Parameter name="cycles" type="Array(int)" value="{3653,3663,3673,3683,3693,3703,3713,3723,3733,3743,3753,3763,3773,3783,3793,3803,3813,3823,3833,3843,3853,3863,3873,3883,3893,3903,3913,3923,3933,3943,3953,3963,3973,3983,3993,4003,4013}" />
+      <Parameter name="file name base" type="string" value="visdump_surface" />
     </ParameterList>
   </ParameterList>
 </ParameterList>

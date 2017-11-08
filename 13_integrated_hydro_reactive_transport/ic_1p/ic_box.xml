@@ -1,11 +1,12 @@
 <ParameterList name="Main" type="ParameterList">
-  <Parameter name="Native Unstructured Input" type="bool" value="true" />
-  <Parameter name="grid_option" type="string" value="Unstructured" />
   <ParameterList name="mesh" type="ParameterList">
-    <Parameter isUsed="true" name="Framework" type="string" value="MSTK" />
-    <ParameterList name="read mesh file" type="ParameterList">
-      <Parameter name="file" type="string" value="../../mesh/box.exo" />
-      <Parameter name="format" type="string" value="Exodus II" />
+    <ParameterList name="domain" type="ParameterList">
+      <Parameter isUsed="true" name="Framework" type="string" value="MSTK" />
+      <Parameter name="mesh type" type="string" value="read mesh file" />
+      <ParameterList name="read mesh file parameters" type="ParameterList">
+        <Parameter name="file" type="string" value="../../mesh/box.exo" />
+        <Parameter name="format" type="string" value="Exodus II" />
+      </ParameterList>
     </ParameterList>
   </ParameterList>
 
@@ -105,11 +106,6 @@
       </ParameterList>
     </ParameterList>
   </ParameterList>
-  <ParameterList name="visualization" type="ParameterList">
-    <Parameter name="file name base" type="string" value="vis_box" />
-    <Parameter name="cycles start period stop" type="Array(int)" value="{0,1,-1}" />
-  </ParameterList>
-
   <ParameterList name="checkpoint" type="ParameterList">
     <Parameter name="file name base" type="string" value="chk_box" />
     <Parameter name="times start period stop" type="Array(double)" value="{0.0,315576000.0,-1.0}" />
@@ -119,7 +115,7 @@
 
     <ParameterList name="Richards" type="ParameterList">
       <Parameter name="PK type" type="string" value="richards steady state" />
-      <Parameter name="primary variable" type="string" value="pressure" />
+      <Parameter name="primary variable key" type="string" value="pressure" />
       <Parameter name="initial time step" type="double" value="1.0" />
       <Parameter name="relative permeability method" type="string" value="upwind with Darcy flux" />
       <Parameter name="permeability rescaling" type="double" value="10000000.0" />
@@ -384,6 +380,12 @@
         <Parameter name="value" type="Array(double)" value="{0.0,0.0,-9.80665}" />
       </ParameterList>
 
+    </ParameterList>
+  </ParameterList>
+  <ParameterList name="visualization">
+    <ParameterList name="domain" type="ParameterList">
+      <Parameter name="file name base" type="string" value="vis_box" />
+      <Parameter name="cycles start period stop" type="Array(int)" value="{0,1,-1}" />
     </ParameterList>
   </ParameterList>
 </ParameterList>

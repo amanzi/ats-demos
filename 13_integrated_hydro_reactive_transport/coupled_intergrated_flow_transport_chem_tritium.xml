@@ -17,9 +17,6 @@
     </ParameterList>
   </ParameterList>
 
-  <ParameterList name="Domain" type="ParameterList">
-    <Parameter name="Spatial Dimension" type="int" value="3" />
-  </ParameterList>
   <ParameterList name="regions" type="ParameterList">
     <ParameterList name="computational domain" type="ParameterList">
       <ParameterList name="region: box" type="ParameterList">
@@ -234,7 +231,7 @@
           <Parameter name="min iterations" type="int" value="10" />
           <Parameter name="time step reduction factor" type="double" value="0.909090909091" />
           <Parameter name="time step increase factor" type="double" value="1.1" />
-          <Parameter name="max time step" type="double" value="3000000.0" />
+          <Parameter name="max time step" type="double" value="300.0" />
           <Parameter name="min time step" type="double" value="1e-10" />
           <Parameter name="growth wait after fail" type="int" value="2" />
           <Parameter name="count before increasing increase factor" type="int" value="2" />
@@ -349,6 +346,7 @@
       <Parameter name="engine" type="string" value="PFloTran" />
       <Parameter name="domain name" type="string" value="domain" />
       <Parameter name="chemistry model" type="string" value="Alquimia" />
+      <Parameter name="saturation key" type="string" value="saturation_liquid" />      
       <Parameter name="fluid density key" type="string" value="mass_density_liquid" />
       <Parameter name="engine input file" type="string" value="../data/amanzi-u-1d-tritium-alq_sub.in" />
       <Parameter name="activity model" type="string" value="unit" />
@@ -378,7 +376,7 @@
       <Parameter name="engine" type="string" value="PFloTran" />
       <Parameter name="chemistry model" type="string" value="Alquimia" />
       <Parameter name="fluid density key" type="string" value="surface-mass_density_liquid" />
-      <Parameter name="saturation key" type="string" value="ponded_depth" />
+      <Parameter name="saturation key" type="string" value="surface-ponded_depth" />
       <Parameter name="domain name" type="string" value="surface" />
       <Parameter name="engine input file" type="string" value="../data/amanzi-u-1d-tritium-alq_surf.in" />
       <Parameter name="activity model" type="string" value="unit" />
@@ -417,9 +415,9 @@
     </ParameterList>
 
     <ParameterList name="subsurface transport" type="ParameterList">
-      <Parameter name="PK type" type="string" value="transport ATS" />
-      <Parameter name="saturation_key" type="string" value="saturation_liquid" />
-      <Parameter name="prev_saturation_key" type="string" value="prev_saturation_liquid" />
+      <Parameter name="PK type" type="string" value="transport ats" />
+      <Parameter name="saturation liquid key" type="string" value="saturation_liquid" />
+      <Parameter name="previous saturation liquid key" type="string" value="prev_saturation_liquid" />
       <Parameter name="flux_key" type="string" value="mass_flux" />
       <Parameter name="molar_density_key" type="string" value="molar_density_liquid" />
       <Parameter name="component names" type="Array(string)" value="{Tritium}" />
@@ -460,7 +458,7 @@
               <Parameter name="regions" type="Array(string)" value="{top face}" />
               <ParameterList name="boundary concentration" type="ParameterList">
                 <Parameter name="field_out_key" type="string" value="surface-total_component_concentration" />
-                <Parameter name="copy_field_out_key" type="string" value="subcycling" />
+                <Parameter name="copy_field_out_key" type="string" value="default" />
               </ParameterList>
             </ParameterList>
           </ParameterList>
@@ -470,10 +468,10 @@
     </ParameterList>
 
     <ParameterList name="surface transport" type="ParameterList">
-      <Parameter name="PK type" type="string" value="transport ATS" />
+      <Parameter name="PK type" type="string" value="transport ats" />
       <Parameter name="domain name" type="string" value="surface" />
-      <Parameter name="saturation_key" type="string" value="ponded_depth" />
-      <Parameter name="prev_saturation_key" type="string" value="prev_ponded_depth" />
+      <Parameter name="saturation liquid key" type="string" value="surface-ponded_depth" />
+      <Parameter name="previous saturation liquid key" type="string" value="surface-prev_ponded_depth" />
       <Parameter name="flux_key" type="string" value="surface-mass_flux" />
       <Parameter name="molar_density_key" type="string" value="surface-molar_density_liquid" />
       <Parameter name="component names" type="Array(string)" value="{Tritium}" />
@@ -516,9 +514,9 @@
                 <Parameter name="flux_key" type="string" value="mass_flux" />
                 <Parameter name="copy_flux_key" type="string" value="next_timestep" />
                 <Parameter name="field_out_key" type="string" value="total_component_concentration" />
-                <Parameter name="copy_field_out_key" type="string" value="subcycling" />
+                <Parameter name="copy_field_out_key" type="string" value="default" />
                 <Parameter name="field_in_key" type="string" value="surface-total_component_concentration" />
-                <Parameter name="copy_field_in_key" type="string" value="subcycling" />
+                <Parameter name="copy_field_in_key" type="string" value="default" />
               </ParameterList>
             </ParameterList>
           </ParameterList>
@@ -700,7 +698,6 @@
         <ParameterList name="compressible porosity model parameters" type="ParameterList">
           <ParameterList name="computational domain" type="ParameterList">
             <Parameter name="region" type="string" value="computational domain" />
-            <Parameter name="pore compressibility [Pa^-1]" type="double" value="1e-09" />
             <Parameter name="pore compressibility [Pa^-1]" type="double" value="1e-09" />
           </ParameterList>
         </ParameterList>

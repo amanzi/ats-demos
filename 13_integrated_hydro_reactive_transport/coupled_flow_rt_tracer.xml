@@ -17,9 +17,6 @@
     </ParameterList>
   </ParameterList>
 
-  <ParameterList name="Domain" type="ParameterList">
-    <Parameter name="Spatial Dimension" type="int" value="3" />
-  </ParameterList>
   <ParameterList name="regions" type="ParameterList">
     <ParameterList name="computational domain" type="ParameterList">
       <ParameterList name="region: box" type="ParameterList">
@@ -116,8 +113,8 @@
   <ParameterList name="cycle driver" type="ParameterList">
     <Parameter name="start time" type="double" value="0.0" />
     <Parameter name="start time units" type="string" value="s" />
-    <Parameter name="end time" type="double" value="1.0" />
-    <Parameter name="end time units" type="string" value="yr" />
+    <Parameter name="end time" type="double" value="3600.0" />
+    <Parameter name="end time units" type="string" value="s" />
     <ParameterList name="PK tree" type="ParameterList">
       <ParameterList name="Flow and Reactive Transport" type="ParameterList">
         <Parameter name="PK type" type="string" value="flow reactive transport ATS" />
@@ -154,27 +151,27 @@
       </ParameterList>
     </ParameterList>
   </ParameterList>
+  
   <ParameterList name="verbose object" type="ParameterList">
     <Parameter name="verbosity level" type="string" value="high" />
   </ParameterList>
-  <ParameterList name="PKs" type="ParameterList">
 
 
   <!-- Vis List - see $AMANZI_DIR/src/state/visualization.hh  -->
   <ParameterList name="visualization">
-    <Parameter name="file name base" type="string" value="visdump"/>
-    <Parameter name="cycles start period stop" type="Array(int)" value="{0, 1, -1}"/>
-  </ParameterList>
-
-  <ParameterList name="visualization surface">
-    <Parameter name="file name base" type="string" value="visdump_surface"/>
-    <Parameter name="cycles start period stop" type="Array(int)" value="{0, 1, -1}"/>
-  </ParameterList>
- 
+    <ParameterList name="domain">
+      <Parameter name="file name base" type="string" value="visdump" />
+      <Parameter name="cycles start period stop" type="Array(int)" value="{0,10,-1}" />
+    </ParameterList>
+    <ParameterList name="surface">
+      <Parameter name="file name base" type="string" value="visdump_surface" />
+      <Parameter name="cycles start period stop" type="Array(int)" value="{0,10,-1}" />
+    </ParameterList>
+  </ParameterList> 
 
   <ParameterList name="checkpoint">
     <Parameter name="file name base" type="string" value="checkpoint"/>
-    <Parameter name="cycles start period stop" type="Array(int)" value="{0, 1, -1}"/>
+    <Parameter name="cycles start period stop" type="Array(int)" value="{0, 10, -1}"/>
   </ParameterList>
 
 
@@ -306,9 +303,9 @@
         </ParameterList>
       </ParameterList>
 
-      <ParameterList name="initial condition" type="ParameterList">
-        <Parameter name="restart file" type="string" value="restart.h5" />
-      </ParameterList>
+      <!-- <ParameterList name="initial condition" type="ParameterList"> -->
+      <!--   <Parameter name="restart file" type="string" value="restart.h5" /> -->
+      <!-- </ParameterList> -->
 
       <ParameterList name="water retention evaluator" type="ParameterList">
         <Parameter name="minimum rel perm cutoff" type="double" value="0.0" />
@@ -427,7 +424,7 @@
       <Parameter name="chemistry model" type="string" value="Alquimia" />
       <Parameter name="domain name" type="string" value="surface" />
       <Parameter name="fluid density key" type="string" value="surface-mass_density_liquid" />
-      <Parameter name="saturation key" type="string" value="ponded_depth" />
+      <Parameter name="saturation key" type="string" value="surface-ponded_depth" />
       <Parameter name="engine input file" type="string" value="../data/amanzi-u-1d-tracer-alq-pflo_surf.in" />
       <Parameter name="activity model" type="string" value="unit" />
       <Parameter name="maximum Newton iterations" type="int" value="100" />
@@ -457,8 +454,6 @@
       <Parameter name="PK type" type="string" value="surface subsurface transport" />
       <Parameter name="PK name" type="string" value="surface subsurface transport" />
       <Parameter name="PKs order" type="Array(string)" value="{subsurface transport, surface transport}" />
-      <Parameter name="PK origin" type="string" value="ATS" />
-      <Parameter name="coupling region" type="string" value="" />
       <Parameter name="component names" type="Array(string)" value="{tracer}" />
       <ParameterList name="verbose object" type="ParameterList">
         <Parameter name="name" type="string" value="Coupled TransportPK" />
@@ -469,9 +464,8 @@
 
     <ParameterList name="subsurface transport" type="ParameterList">
       <Parameter name="PK type" type="string" value="transport ats" />
-      <Parameter name="PK origin" type="string" value="Amanzi" />
-      <Parameter name="saturation_key" type="string" value="saturation_liquid" />
-      <Parameter name="prev_saturation_key" type="string" value="prev_saturation_liquid" />
+      <Parameter name="saturation liquid key" type="string" value="saturation_liquid" />
+      <Parameter name="previous saturation liquid key" type="string" value="prev_saturation_liquid" />
       <Parameter name="flux_key" type="string" value="mass_flux" />
       <Parameter name="molar_density_key" type="string" value="molar_density_liquid" />
       <Parameter name="component names" type="Array(string)" value="{tracer}" />
@@ -480,7 +474,6 @@
       <Parameter name="spatial discretization order" type="int" value="1" />
       <Parameter name="temporal discretization order" type="int" value="1" />
       <Parameter name="cfl" type="double" value="1.0" />
-      <Parameter name="flow mode" type="string" value="transient" />
       <Parameter name="solver" type="string" value="PCG with Hypre AMG" />
       <Parameter name="enable internal tests" type="string" value="no" />
       <Parameter name="transport subcycling" type="bool" value="false" />
@@ -512,7 +505,7 @@
               <Parameter name="regions" type="Array(string)" value="{top face}" />
               <ParameterList name="boundary concentration" type="ParameterList">
                 <Parameter name="field_out_key" type="string" value="surface-total_component_concentration" />
-                <Parameter name="copy_field_out_key" type="string" value="subcycling" />
+                <Parameter name="copy_field_out_key" type="string" value="default" />
               </ParameterList>
             </ParameterList>
           </ParameterList>
@@ -523,10 +516,9 @@
 
     <ParameterList name="surface transport" type="ParameterList">
       <Parameter name="PK type" type="string" value="transport ats" />
-      <Parameter name="PK origin" type="string" value="Amanzi" />
       <Parameter name="domain name" type="string" value="surface" />
-      <Parameter name="saturation_key" type="string" value="ponded_depth" />
-      <Parameter name="prev_saturation_key" type="string" value="prev_ponded_depth" />
+      <Parameter name="saturation liquid key" type="string" value="surface-ponded_depth" />
+      <Parameter name="previous saturation liquid key" type="string" value="surface-prev_ponded_depth" />
       <Parameter name="flux_key" type="string" value="surface-mass_flux" />
       <Parameter name="molar_density_key" type="string" value="surface-molar_density_liquid" />
       <Parameter name="component names" type="Array(string)" value="{tracer}" />
@@ -569,9 +561,9 @@
                 <Parameter name="flux_key" type="string" value="mass_flux" />
                 <Parameter name="copy_flux_key" type="string" value="next_timestep" />
                 <Parameter name="field_out_key" type="string" value="total_component_concentration" />
-                <Parameter name="copy_field_out_key" type="string" value="subcycling" />
+                <Parameter name="copy_field_out_key" type="string" value="default" />
                 <Parameter name="field_in_key" type="string" value="surface-total_component_concentration" />
-                <Parameter name="copy_field_in_key" type="string" value="subcycling" />
+                <Parameter name="copy_field_in_key" type="string" value="default" />
               </ParameterList>
             </ParameterList>
           </ParameterList>
@@ -760,7 +752,6 @@
         <ParameterList name="compressible porosity model parameters" type="ParameterList">
           <ParameterList name="computational domain" type="ParameterList">
             <Parameter name="region" type="string" value="computational domain" />
-            <Parameter name="pore compressibility [Pa^-1]" type="double" value="1e-09" />
             <Parameter name="pore compressibility [Pa^-1]" type="double" value="1e-09" />
           </ParameterList>
         </ParameterList>

@@ -406,6 +406,7 @@
       <Parameter name="spatial discretization order" type="int" value="1" />
       <Parameter name="temporal discretization order" type="int" value="1" />
       <Parameter name="cfl" type="double" value="1.0" />
+      <Parameter name="water tolerance" type="double" value="1e-3" />            
       <Parameter name="solver" type="string" value="PCG with Hypre AMG" />
       <Parameter name="enable internal tests" type="string" value="no" />
       <Parameter name="transport subcycling" type="bool" value="false" />

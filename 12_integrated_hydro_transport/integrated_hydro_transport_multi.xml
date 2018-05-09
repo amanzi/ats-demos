@@ -364,6 +364,7 @@
       <Parameter name="number of aqueous components" type="int" value="3" />
       <Parameter name="number of gaseous components" type="int" value="0" />
       <Parameter name="runtime diagnostics: regions" type="Array(string)" value="{}" />
+      <Parameter name="runtime diagnostics: solute names" type="Array(string)" value="{Tc-99, Tc-100, Tc-101}" />
       <ParameterList name="verbose object">
         <Parameter name="verbosity level" type="string" value="extreme" />
         <Parameter name="name" type="string" value="Subsurface Transport" />
@@ -411,12 +412,14 @@
       <Parameter name="spatial discretization order" type="int" value="1" />
       <Parameter name="temporal discretization order" type="int" value="1" />
       <Parameter name="cfl" type="double" value="1.0" />
+      <Parameter name="water tolerance" type="double" value="1e-3" />      
       <Parameter name="solver" type="string" value="PCG with Hypre AMG" />
       <Parameter name="enable internal tests" type="string" value="no" />
       <Parameter name="transport subcycling" type="bool" value="false" />
       <Parameter name="number of aqueous components" type="int" value="3" />
       <Parameter name="number of gaseous components" type="int" value="0" />
       <Parameter name="runtime diagnostics: regions" type="Array(string)" value="{}" />
+      <Parameter name="runtime diagnostics: solute names" type="Array(string)" value="{Tc-99, Tc-100, Tc-101}" />      
       <ParameterList name="verbose object">
         <Parameter name="verbosity level" type="string" value="extreme" />
         <Parameter name="name" type="string" value="Surface Transport" />

@@ -110,9 +110,51 @@
         <Parameter name="low coordinate" type="Array(double)" value="{10.0,0.0}" />
         <Parameter name="high coordinate" type="Array(double)" value="{10.0,1.0}" />
       </ParameterList>
-    </ParameterList>    
+    </ParameterList>
+    <ParameterList name="observation pointA">
+      <ParameterList name="region: point">
+        <Parameter name="coordinate" type="Array(double)" value="{4.9, 0.5, 8.8}"/>
+      </ParameterList>
+    </ParameterList>        
   </ParameterList>
 
+
+  <ParameterList name="observations" type="ParameterList">
+    <ParameterList name="pointA_Tc-99" type="ParameterList">
+      <Parameter name="variable" type="string" value="total_component_concentration" />
+      <Parameter name="region" type="string" value="observation pointA" />
+      <Parameter name="functional" type="string" value="observation data: point" />
+      <Parameter name="delimiter" type="string" value=" " />
+      <Parameter name="location name" type="string" value="cell" />
+      <Parameter name="write interval" type="int" value="1" />
+      <Parameter name="component" type="int" value="0" />
+      <Parameter name="observation output filename" type="string" value="pointA_Tc-99.dat" />
+      <Parameter name="cycles start period stop" type="Array(int)" value="{0, 1, -1}"/>
+    </ParameterList>
+    <ParameterList name="pointA_Tc-100" type="ParameterList">
+      <Parameter name="variable" type="string" value="total_component_concentration" />
+      <Parameter name="region" type="string" value="observation pointA" />
+      <Parameter name="functional" type="string" value="observation data: point" />
+      <Parameter name="delimiter" type="string" value=" " />
+      <Parameter name="location name" type="string" value="cell" />
+      <Parameter name="write interval" type="int" value="1" />
+      <Parameter name="component" type="int" value="1" />
+      <Parameter name="observation output filename" type="string" value="pointA_Tc-100.dat" />
+      <Parameter name="cycles start period stop" type="Array(int)" value="{0, 1, -1}"/>
+    </ParameterList>
+    <ParameterList name="pointA_Tc-101" type="ParameterList">
+      <Parameter name="variable" type="string" value="total_component_concentration" />
+      <Parameter name="region" type="string" value="observation pointA" />
+      <Parameter name="functional" type="string" value="observation data: point" />
+      <Parameter name="delimiter" type="string" value=" " />
+      <Parameter name="location name" type="string" value="cell" />
+      <Parameter name="write interval" type="int" value="1" />
+      <Parameter name="component" type="int" value="2" />
+      <Parameter name="observation output filename" type="string" value="pointA_Tc-101.dat" />
+      <Parameter name="cycles start period stop" type="Array(int)" value="{0, 1, -1}"/>
+    </ParameterList>
+  </ParameterList>
+  
   <ParameterList name="cycle driver">
     <Parameter name="end cycle" type="int" value="100" />
     <Parameter name="start time" type="double" value="0.0" />

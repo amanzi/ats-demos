@@ -1,0 +1,38 @@
+test0:
+ - basic, constant forcing
+ - no veg, no snow
+ - unsaturated
+ - condensing at ss
+
+test1:
+ - basic, constant forcing
+ - no veg, no snow
+ - unsaturated
+ - evaporating at ss
+
+test2:
+ - basic, constant forcing
+ - no veg, no snow
+ - saturated
+ - evaporating
+
+Note this is a known limitation of CLM -- it cannot handle dynamic
+wetting/drying, so albedo is always set by the soil value, even when
+that soil is covered by water.  It might be possible to hack CLM to
+deal with this case using itypwat, but it isn't dealt with now.
+
+test3:
+ test0, adds precip
+ 
+
+
+Things to check:
+- both sides of the evap sign (change rel hum)
+
+
+- VEG TYPE: bare soil / forest / water body
+- saturated state (1m belowground, aboveground)
+- snow / nosnow
+
+- MET DATA: constant, variable daily, variable hourly
+

@@ -137,9 +137,11 @@
         <Parameter name="preconditioner type" type="string" value="boomer amg" />
         <ParameterList name="boomer amg parameters" type="ParameterList">
           <Parameter name="cycle iterations" type="int" value="3" />
+          <Parameter name="use block indices" type="bool" value="true" />          
           <Parameter name="smoother sweeps" type="int" value="2" />
           <Parameter name="strong threshold" type="double" value="0.5" />
           <Parameter name="tolerance" type="double" value="0.0" />
+          <Parameter name="verbosity" type="int" value="3" />
         </ParameterList>
       </ParameterList>
 
@@ -198,6 +200,7 @@
     <ParameterList name="flow" type="ParameterList">
       <Parameter name="PK type" type="string" value="richards flow" />
       <Parameter name="primary variable key" type="string" value="pressure" />
+      <Parameter name="domain name" type="string" value="domain" />
       <Parameter name="initial time step" type="double" value="10.0" />
       <Parameter name="permeability rescaling" type="double" value="10000000.0" />
       <Parameter name="clobber surface rel perm" type="bool" value="false" />

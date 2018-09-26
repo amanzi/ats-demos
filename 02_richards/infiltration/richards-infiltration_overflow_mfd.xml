@@ -71,7 +71,7 @@
     <Parameter name="start time units" type="string" value="s" />
     <Parameter name="end time" type="double" value="4.0" />
     <Parameter name="end time units" type="string" value="yr" />
-    <Parameter name="restart from checkpoint file" type="string" value="../data/checkpoint00803.h5" />
+    <Parameter name="restart from checkpoint file" type="string" value="../data/checkpoint00798.h5" />
     <ParameterList name="PK tree" type="ParameterList">
       <ParameterList name="Richards" type="ParameterList">
         <Parameter name="PK type" type="string" value="richards flow" />
@@ -91,7 +91,7 @@
       <Parameter name="relative permeability method" type="string" value="upwind with Darcy flux" />
       <Parameter name="modify predictor for flux BCs" type="bool" value="true" />
       <Parameter name="permeability rescaling" type="double" value="10000000.0" />
-      <Parameter name="debug cells" type="Array(int)" value="{0,99}" />
+      <Parameter name="debug faces" type="Array(int)" value="{190}" />
       <ParameterList name="verbose object" type="ParameterList">
         <Parameter name="verbosity level" type="string" value="high" />
       </ParameterList>

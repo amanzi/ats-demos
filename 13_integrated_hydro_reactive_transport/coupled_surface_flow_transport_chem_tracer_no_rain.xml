@@ -131,19 +131,13 @@
   <ParameterList name="verbose object" type="ParameterList">
     <Parameter name="verbosity level" type="string" value="high" />
   </ParameterList>
-
-  <!-- Vis List - see $AMANZI_DIR/src/state/visualization.hh  -->
-  <!-- <ParameterList name="visualization"> -->
-  <!--   <Parameter name="file name base" type="string" value="visdump"/> -->
-  <!--   <Parameter name="cycles start period stop" type="Array(int)" value="{0, 5, -1}"/>   -->
-  <!-- </ParameterList> -->
-
   <ParameterList name="visualization" type="ParameterList">
     <ParameterList name="surface" type="ParameterList">
       <Parameter name="file name base" type="string" value="visdump_surface" />
       <Parameter name="cycles start period stop" type="Array(int)" value="{0,5,-1}" />
-    </ParameterList>    
+    </ParameterList>
   </ParameterList>
+
   <ParameterList name="checkpoint" type="ParameterList">
     <Parameter name="file name base" type="string" value="checkpoint" />
     <Parameter name="cycles start period stop" type="Array(int)" value="{0,50,-1}" />

@@ -134,14 +134,13 @@
   <ParameterList name="verbose object" type="ParameterList">
     <Parameter name="verbosity level" type="string" value="high" />
   </ParameterList>
-
   <ParameterList name="visualization">
     <ParameterList name="surface" type="ParameterList">
       <Parameter name="file name base" type="string" value="visdump_surface" />
-      <Parameter name="cycles start period stop" type="Array(int)" value="{0, 1, 10}"/>
-      <Parameter name="times start period stop" type="Array(double)" value="{0, 200, -1}"/>
+      <Parameter name="cycles start period stop" type="Array(int)" value="{0,1,10}" />
+      <Parameter name="times start period stop" type="Array(double)" value="{0.0,200.0,-1.0}" />
     </ParameterList>
-  </ParameterList> 
+  </ParameterList>
 
   <ParameterList name="checkpoint" type="ParameterList">
     <Parameter name="file name base" type="string" value="checkpoint" />

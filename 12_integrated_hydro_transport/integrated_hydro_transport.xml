@@ -115,10 +115,10 @@
     <Parameter name="end cycle" type="int" value="-1" />
     <Parameter name="start time" type="double" value="0.0" />
     <Parameter name="start time units" type="string" value="s" />
-    <Parameter name="end time" type="double" value="200" />
+    <Parameter name="end time" type="double" value="200.0" />
     <Parameter name="end time units" type="string" value="d" />
     <ParameterList name="required times">
-      <Parameter name="times start period stop 0" type="Array(double)" value="{0.0,10.0, 10.0}" />
+      <Parameter name="times start period stop 0" type="Array(double)" value="{0.0,10.0,10.0}" />
     </ParameterList>
     <ParameterList name="PK tree">
       <ParameterList name="Flow and Reactive Transport">
@@ -152,7 +152,6 @@
     <Parameter name="cycles start period stop" type="Array(int)" value="{0,50,-1}" />
   </ParameterList>
 
-
   <ParameterList name="PKs">
 
     <ParameterList name="Flow and Reactive Transport">
@@ -181,7 +180,6 @@
         </ParameterList>
       </ParameterList>
 
-
       <ParameterList name="preconditioner">
         <Parameter name="preconditioner type" type="string" value="boomer amg" />
         <ParameterList name="boomer amg parameters">
@@ -193,16 +191,15 @@
       </ParameterList>
 
       <ParameterList name="linear solver">
-        <Parameter name="iterative method" type="string" value="nka" />
+        <Parameter name="iterative method" type="string" value="gmres" />
         <ParameterList name="verbose object">
           <Parameter name="verbosity level" type="string" value="low" />
         </ParameterList>
-        <ParameterList name="nka parameters">
+        <ParameterList name="gmres parameters" type="ParameterList">
+          <Parameter name="preconditioning strategy" type="string" value="left" />
           <Parameter name="error tolerance" type="double" value="1e-06" />
-          <Parameter name="maximum number of iterations" type="int" value="20" />
-          <ParameterList name="verbose object">
-            <Parameter name="verbosity level" type="string" value="low" />
-          </ParameterList>
+          <Parameter name="convergence criteria" type="Array(string)" value="{relative residual,make one iteration}" />
+          <Parameter name="maximum number of iteration" type="int" value="80" />
         </ParameterList>
       </ParameterList>
 
@@ -364,7 +361,6 @@
       <Parameter name="number of aqueous components" type="int" value="1" />
       <Parameter name="number of gaseous components" type="int" value="0" />
       <Parameter name="runtime diagnostics: regions" type="Array(string)" value="{}" />
-
       <ParameterList name="verbose object">
         <Parameter name="verbosity level" type="string" value="extreme" />
         <Parameter name="name" type="string" value="Subsurface Transport" />
@@ -391,6 +387,7 @@
           </ParameterList>
         </ParameterList>
       </ParameterList>
+
     </ParameterList>
 
     <ParameterList name="surface transport">
@@ -406,7 +403,7 @@
       <Parameter name="spatial discretization order" type="int" value="1" />
       <Parameter name="temporal discretization order" type="int" value="1" />
       <Parameter name="cfl" type="double" value="1.0" />
-      <Parameter name="water tolerance" type="double" value="1e-3" />            
+      <Parameter name="water tolerance" type="double" value="0.001" />
       <Parameter name="solver" type="string" value="PCG with Hypre AMG" />
       <Parameter name="enable internal tests" type="string" value="no" />
       <Parameter name="transport subcycling" type="bool" value="false" />
@@ -709,13 +706,11 @@
         </ParameterList>
       </ParameterList>
 
-
       <ParameterList name="overland_source_from_subsurface">
         <Parameter name="field evaluator type" type="string" value="overland source from subsurface via flux" />
       </ParameterList>
 
     </ParameterList>
-
     <ParameterList name="initial conditions">
 
       <ParameterList name="pressure">
@@ -772,7 +767,6 @@
 
     </ParameterList>
   </ParameterList>
-
   <ParameterList name="visualization">
     <ParameterList name="domain">
       <Parameter name="file name base" type="string" value="visdump" />

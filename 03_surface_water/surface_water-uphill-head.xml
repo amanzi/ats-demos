@@ -188,7 +188,7 @@
             <ParameterList name="boundary head" type="ParameterList">
 	      <ParameterList name="function-tabular">
                 <Parameter name="x values" type="Array(double)" value="{0,864000}"/>
-                <Parameter name="y values" type="Array(double)" value="{.0,0.0}"/>
+                <Parameter name="y values" type="Array(double)" value="{0.05,0.05}"/>
                 <Parameter name="forms" type="Array(string)" value="{constant}"/>
               </ParameterList>
             </ParameterList>
@@ -277,7 +277,7 @@
         <ParameterList name="function">
           <ParameterList name="domain">
             <Parameter name="region" type="string" value="surface domain"/>
-            <Parameter name="components" type="Array(string)" value="{cell}"/>
+            <Parameter name="components" type="Array(string)" value="{cell, boundary_face}"/>
             <ParameterList name="function">
               <ParameterList name="function-constant"> <!-- time component -->
                 <Parameter name="value" type="double" value="100."/>

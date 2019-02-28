@@ -151,13 +151,9 @@
       </ParameterList>
     </ParameterList>
   </ParameterList>
-  
   <ParameterList name="verbose object" type="ParameterList">
     <Parameter name="verbosity level" type="string" value="high" />
   </ParameterList>
-
-
-  <!-- Vis List - see $AMANZI_DIR/src/state/visualization.hh  -->
   <ParameterList name="visualization">
     <ParameterList name="domain">
       <Parameter name="file name base" type="string" value="visdump" />
@@ -167,19 +163,12 @@
       <Parameter name="file name base" type="string" value="visdump_surface" />
       <Parameter name="cycles start period stop" type="Array(int)" value="{0,10,-1}" />
     </ParameterList>
-  </ParameterList> 
-
-  <ParameterList name="checkpoint">
-    <Parameter name="file name base" type="string" value="checkpoint"/>
-    <Parameter name="cycles start period stop" type="Array(int)" value="{0, 10, -1}"/>
   </ParameterList>
 
-
-  <!-- PK List - top level placeholder for Coordinator  -->
-  <!-- in this problem the PK structure looks like:
-                Coordinator (singleton, outer loop)
-                     |
-    -->
+  <ParameterList name="checkpoint">
+    <Parameter name="file name base" type="string" value="checkpoint" />
+    <Parameter name="cycles start period stop" type="Array(int)" value="{0,10,-1}" />
+  </ParameterList>
 
   <ParameterList name="PKs">
 
@@ -220,16 +209,15 @@
       </ParameterList>
 
       <ParameterList name="linear solver" type="ParameterList">
-        <Parameter name="iterative method" type="string" value="nka" />
+        <Parameter name="iterative method" type="string" value="gmres" />
         <ParameterList name="verbose object" type="ParameterList">
           <Parameter name="verbosity level" type="string" value="low" />
         </ParameterList>
-        <ParameterList name="nka parameters" type="ParameterList">
+        <ParameterList name="gmres parameters" type="ParameterList">
+          <Parameter name="preconditioning strategy" type="string" value="left" />
           <Parameter name="error tolerance" type="double" value="1e-06" />
-          <Parameter name="maximum number of iterations" type="int" value="20" />
-          <ParameterList name="verbose object" type="ParameterList">
-            <Parameter name="verbosity level" type="string" value="low" />
-          </ParameterList>
+          <Parameter name="convergence criteria" type="Array(string)" value="{relative residual,make one iteration}" />
+          <Parameter name="maximum number of iteration" type="int" value="80" />
         </ParameterList>
       </ParameterList>
 
@@ -302,10 +290,6 @@
           </ParameterList>
         </ParameterList>
       </ParameterList>
-
-      <!-- <ParameterList name="initial condition" type="ParameterList"> -->
-      <!--   <Parameter name="restart file" type="string" value="restart.h5" /> -->
-      <!-- </ParameterList> -->
 
       <ParameterList name="water retention evaluator" type="ParameterList">
         <Parameter name="minimum rel perm cutoff" type="double" value="0.0" />

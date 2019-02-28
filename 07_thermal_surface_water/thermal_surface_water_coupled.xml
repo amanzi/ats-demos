@@ -56,7 +56,7 @@
     <Parameter name="end time units" type="string" value="s" />
     <ParameterList name="PK tree" type="ParameterList">
       <ParameterList name="surface thermal coupler" type="ParameterList">
-        <Parameter name="PK type" type="string" value="strong MPC" />
+        <Parameter name="PK type" type="string" value="mpc coupled cells" />
         <ParameterList name="overland flow" type="ParameterList">
           <Parameter name="PK type" type="string" value="overland flow with ice" />
         </ParameterList>
@@ -69,8 +69,13 @@
   <ParameterList name="PKs" type="ParameterList">
 
     <ParameterList name="surface thermal coupler" type="ParameterList">
-      <Parameter name="PK type" type="string" value="strong MPC" />
+      <Parameter name="PK type" type="string" value="mpc coupled cells" />
       <Parameter name="PKs order" type="Array(string)" value="{overland flow,surface energy}" />
+      <Parameter name="conserved quantity A" type="string" value="surface-water_content" />
+      <Parameter name="conserved quantity B" type="string" value="surface-energy" />
+      <Parameter name="primary variable A" type="string" value="surface-pressure" />
+      <Parameter name="primary variable B" type="string" value="surface-temperature" />
+      <Parameter name="domain name" type="string" value="surface" />
       <ParameterList name="time integrator" type="ParameterList">
         <Parameter name="extrapolate initial guess" type="bool" value="true" />
         <Parameter name="solver type" type="string" value="nka_bt_ats" />
@@ -103,24 +108,6 @@
         </ParameterList>
       </ParameterList>
 
-      <ParameterList name="verbose object" type="ParameterList">
-        <Parameter name="verbosity level" type="string" value="extreme" />
-      </ParameterList>
-
-    </ParameterList>
-
-    <ParameterList name="overland flow" type="ParameterList">
-      <Parameter name="PK type" type="string" value="overland flow with ice" />
-      <Parameter name="primary variable key" type="string" value="surface-pressure" />
-      <Parameter name="domain name" type="string" value="surface" />
-      <Parameter name="source term" type="bool" value="false" />
-      <Parameter name="initial time step" type="double" value="10.0" />
-      <Parameter name="strongly coupled PK" type="bool" value="true" />
-      <Parameter name="debug cells" type="Array(int)" value="{0,9}" />
-      <ParameterList name="verbose object" type="ParameterList">
-        <Parameter name="verbosity level" type="string" value="extreme" />
-      </ParameterList>
-
       <ParameterList name="linear solver" type="ParameterList">
         <Parameter name="iterative method" type="string" value="gmres" />
         <ParameterList name="verbose object" type="ParameterList">
@@ -138,11 +125,29 @@
         <Parameter name="preconditioner type" type="string" value="boomer amg" />
         <ParameterList name="boomer amg parameters" type="ParameterList">
           <Parameter name="cycle applications" type="int" value="1" />
-          <Parameter name="smoother sweeps" type="int" value="2" />
-          <Parameter name="strong threshold" type="double" value="0.25" />
+          <Parameter name="smoother sweeps" type="int" value="1" />
+          <Parameter name="strong threshold" type="double" value="0.85" />
           <Parameter name="tolerance" type="double" value="0.0" />
           <Parameter name="number of functions" type="int" value="2" />
         </ParameterList>
+      </ParameterList>
+
+      <ParameterList name="verbose object" type="ParameterList">
+        <Parameter name="verbosity level" type="string" value="extreme" />
+      </ParameterList>
+
+    </ParameterList>
+
+    <ParameterList name="overland flow" type="ParameterList">
+      <Parameter name="PK type" type="string" value="overland flow with ice" />
+      <Parameter name="primary variable key" type="string" value="surface-pressure" />
+      <Parameter name="domain name" type="string" value="surface" />
+      <Parameter name="source term" type="bool" value="false" />
+      <Parameter name="initial time step" type="double" value="10.0" />
+      <Parameter name="strongly coupled PK" type="bool" value="true" />
+      <Parameter name="debug cells" type="Array(int)" value="{0,9}" />
+      <ParameterList name="verbose object" type="ParameterList">
+        <Parameter name="verbosity level" type="string" value="extreme" />
       </ParameterList>
 
       <ParameterList name="diffusion" type="ParameterList">
@@ -232,6 +237,7 @@
       <Parameter name="source term" type="bool" value="true" />
       <Parameter name="initial time step" type="double" value="10.0" />
       <Parameter name="upwind conductivity method" type="string" value="arithmetic mean" />
+      <Parameter name="supress advective terms in preconditioner" type="bool" value="false" />
       <Parameter name="debug cells" type="Array(int)" value="{0,9}" />
       <Parameter name="source term is differentiable" type="bool" value="true" />
       <ParameterList name="verbose object" type="ParameterList">
@@ -248,30 +254,6 @@
 
       <ParameterList name="advection" type="ParameterList">
         <Parameter name="Advection method" type="string" value="donor upwind" />
-      </ParameterList>
-
-      <ParameterList name="linear solver" type="ParameterList">
-        <Parameter name="iterative method" type="string" value="gmres" />
-        <ParameterList name="verbose object" type="ParameterList">
-          <Parameter name="verbosity level" type="string" value="high" />
-        </ParameterList>
-        <ParameterList name="gmres parameters" type="ParameterList">
-          <Parameter name="preconditioning strategy" type="string" value="left" />
-          <Parameter name="error tolerance" type="double" value="1e-06" />
-          <Parameter name="convergence criteria" type="Array(string)" value="{relative residual,make one iteration}" />
-          <Parameter name="maximum number of iteration" type="int" value="80" />
-        </ParameterList>
-      </ParameterList>
-
-      <ParameterList name="preconditioner" type="ParameterList">
-        <Parameter name="preconditioner type" type="string" value="boomer amg" />
-        <ParameterList name="boomer amg parameters" type="ParameterList">
-          <Parameter name="cycle applications" type="int" value="1" />
-          <Parameter name="smoother sweeps" type="int" value="2" />
-          <Parameter name="strong threshold" type="double" value="0.25" />
-          <Parameter name="tolerance" type="double" value="0.0" />
-          <Parameter name="number of functions" type="int" value="2" />
-        </ParameterList>
       </ParameterList>
 
       <ParameterList name="initial condition" type="ParameterList">
@@ -317,11 +299,13 @@
       </ParameterList>
 
       <ParameterList name="surface-water_content" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="overland pressure water content" />
+        <Parameter name="field evaluator type" type="string" value="multiplicative evaluator" />
+        <Parameter name="evaluator dependency suffixes" type="Array(string)" value="{ponded_depth, molar_density_liquid, cell_volume}" />
       </ParameterList>
 
       <ParameterList name="surface-energy" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="surface ice energy" />
+        <Parameter name="molar density ice key suffix" type="string" value="molar_density_liquid" />
       </ParameterList>
 
       <ParameterList name="surface-unfrozen_effective_depth" type="ParameterList">
@@ -358,29 +342,6 @@
         <ParameterList name="unfrozen fraction model" type="ParameterList">
           <Parameter name="transition width [K]" type="double" value="0.2" />
         </ParameterList>
-      </ParameterList>
-
-      <ParameterList name="surface-molar_density_ice" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="eos" />
-        <Parameter name="EOS basis" type="string" value="both" />
-        <ParameterList name="EOS parameters" type="ParameterList">
-          <Parameter name="EOS type" type="string" value="ice" />
-        </ParameterList>
-      </ParameterList>
-
-      <ParameterList name="surface-mass_density_ice" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="eos" />
-        <Parameter name="EOS basis" type="string" value="both" />
-        <ParameterList name="EOS parameters" type="ParameterList">
-          <Parameter name="EOS type" type="string" value="ice" />
-        </ParameterList>
-        <ParameterList name="verbose object" type="ParameterList">
-          <Parameter name="verbosity level" type="string" value="low" />
-        </ParameterList>
-      </ParameterList>
-
-      <ParameterList name="surface-effective_pressure" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="effective_pressure" />
       </ParameterList>
 
       <ParameterList name="surface-internal_energy_liquid" type="ParameterList">

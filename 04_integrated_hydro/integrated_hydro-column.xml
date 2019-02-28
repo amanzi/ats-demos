@@ -165,13 +165,15 @@
       </ParameterList>
 
       <ParameterList name="linear solver" type="ParameterList">
-        <Parameter name="iterative method" type="string" value="nka" />
+        <Parameter name="iterative method" type="string" value="gmres" />
         <ParameterList name="verbose object" type="ParameterList">
           <Parameter name="verbosity level" type="string" value="medium" />
         </ParameterList>
-        <ParameterList name="nka parameters" type="ParameterList">
+        <ParameterList name="gmres parameters" type="ParameterList">
+          <Parameter name="preconditioning strategy" type="string" value="left" />
           <Parameter name="error tolerance" type="double" value="1e-06" />
-          <Parameter name="maximum number of iterations" type="int" value="20" />
+          <Parameter name="convergence criteria" type="Array(string)" value="{relative residual,make one iteration}" />
+          <Parameter name="maximum number of iteration" type="int" value="80" />
         </ParameterList>
       </ParameterList>
 
@@ -252,6 +254,7 @@
       <Parameter name="mass source in meters" type="bool" value="true" />
       <Parameter name="source key" type="string" value="precipitation_rain" />
       <Parameter name="initial time step" type="double" value="10.0" />
+      <Parameter name="source term is differentiable" type="bool" value="true" />
       <ParameterList name="verbose object" type="ParameterList">
         <Parameter name="verbosity level" type="string" value="high" />
       </ParameterList>

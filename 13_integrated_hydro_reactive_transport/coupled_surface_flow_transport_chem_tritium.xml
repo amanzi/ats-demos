@@ -131,22 +131,14 @@
   <ParameterList name="verbose object" type="ParameterList">
     <Parameter name="verbosity level" type="string" value="high" />
   </ParameterList>
-
-
-  <!-- Vis List - see $AMANZI_DIR/src/state/visualization.hh  -->
-  <!-- <ParameterList name="visualization"> -->
-  <!--   <Parameter name="file name base" type="string" value="visdump"/> -->
-  <!--   <Parameter name="cycles start period stop" type="Array(int)" value="{0, 5, -1}"/>   -->
-  <!-- </ParameterList> -->
-
   <ParameterList name="visualization">
     <ParameterList name="surface" type="ParameterList">
       <Parameter name="file name base" type="string" value="visdump_surface" />
-      <Parameter name="cycles start period stop" type="Array(int)" value="{0, 1, 10}"/>
-      <Parameter name="times start period stop" type="Array(double)" value="{0, 200, -1}"/>
+      <Parameter name="cycles start period stop" type="Array(int)" value="{0,1,10}" />
+      <Parameter name="times start period stop" type="Array(double)" value="{0.0,200.0,-1.0}" />
     </ParameterList>
   </ParameterList>
-  
+
   <ParameterList name="checkpoint" type="ParameterList">
     <Parameter name="file name base" type="string" value="checkpoint" />
     <Parameter name="cycles start period stop" type="Array(int)" value="{0,50,-1}" />
@@ -582,7 +574,6 @@
       <ParameterList name="atmospheric_pressure" type="ParameterList">
         <Parameter name="value" type="double" value="101325.0" />
       </ParameterList>
-
 
       <ParameterList name="surface-pressure" type="ParameterList">
         <Parameter name="restart file" type="string" value="../data/restart_run_surface_flow2.h5" />

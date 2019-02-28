@@ -114,7 +114,7 @@
     <Parameter name="end cycle" type="int" value="-1" />
     <Parameter name="start time" type="double" value="0.0" />
     <Parameter name="start time units" type="string" value="s" />
-    <Parameter name="end time" type="double" value="3600" />
+    <Parameter name="end time" type="double" value="3600.0" />
     <Parameter name="end time units" type="string" value="s" />
     <ParameterList name="PK tree" type="ParameterList">
       <ParameterList name="Flow and Reactive Transport" type="ParameterList">
@@ -155,9 +155,6 @@
   <ParameterList name="verbose object" type="ParameterList">
     <Parameter name="verbosity level" type="string" value="high" />
   </ParameterList>
-
-
-  <!-- Vis List - see $AMANZI_DIR/src/state/visualization.hh  -->
   <ParameterList name="visualization">
     <ParameterList name="domain">
       <Parameter name="file name base" type="string" value="visdump" />
@@ -167,27 +164,21 @@
       <Parameter name="file name base" type="string" value="visdump_surface" />
       <Parameter name="cycles start period stop" type="Array(int)" value="{0,10,-1}" />
     </ParameterList>
-  </ParameterList> 
- 
-
-  <ParameterList name="checkpoint">
-    <Parameter name="file name base" type="string" value="checkpoint"/>
-    <Parameter name="cycles start period stop" type="Array(int)" value="{0, 10, -1}"/> 
   </ParameterList>
 
-
-  <!-- PK List - top level placeholder for Coordinator  -->
-  <!-- in this problem the PK structure looks like:
-                Coordinator (singleton, outer loop)
-                     |-->
+  <ParameterList name="checkpoint">
+    <Parameter name="file name base" type="string" value="checkpoint" />
+    <Parameter name="cycles start period stop" type="Array(int)" value="{0,10,-1}" />
+  </ParameterList>
 
   <ParameterList name="PKs" type="ParameterList">
+
     <ParameterList name="Flow and Reactive Transport" type="ParameterList">
       <Parameter name="PK type" type="string" value="flow reactive transport ATS" />
       <Parameter name="PKs order" type="Array(string)" value="{surface-subsurface flow coupler, reactive transport}" />
       <Parameter name="master PK index" type="int" value="0" />
       <ParameterList name="verbose object" type="ParameterList">
-        <Parameter name="name" type="string" value="FlowTransportPK" />        
+        <Parameter name="name" type="string" value="FlowTransportPK" />
         <Parameter name="verbosity level" type="string" value="extreme" />
       </ParameterList>
 
@@ -220,16 +211,15 @@
       </ParameterList>
 
       <ParameterList name="linear solver" type="ParameterList">
-        <Parameter name="iterative method" type="string" value="nka" />
+        <Parameter name="iterative method" type="string" value="gmres" />
         <ParameterList name="verbose object" type="ParameterList">
           <Parameter name="verbosity level" type="string" value="low" />
         </ParameterList>
-        <ParameterList name="nka parameters" type="ParameterList">
+        <ParameterList name="gmres parameters" type="ParameterList">
+          <Parameter name="preconditioning strategy" type="string" value="left" />
           <Parameter name="error tolerance" type="double" value="1e-06" />
-          <Parameter name="maximum number of iterations" type="int" value="20" />
-          <ParameterList name="verbose object" type="ParameterList">
-            <Parameter name="verbosity level" type="string" value="low" />
-          </ParameterList>
+          <Parameter name="convergence criteria" type="Array(string)" value="{relative residual,make one iteration}" />
+          <Parameter name="maximum number of iteration" type="int" value="80" />
         </ParameterList>
       </ParameterList>
 
@@ -409,6 +399,7 @@
       <Parameter name="use mole fraction units" type="bool" value="true" />
       <Parameter name="number of component concentrations" type="int" value="3" />
       <ParameterList name="initial conditions" type="ParameterList">
+
       </ParameterList>
 
       <ParameterList name="verbose object" type="ParameterList">
@@ -441,6 +432,7 @@
       <Parameter name="use mole fraction units" type="bool" value="true" />
       <Parameter name="number of component concentrations" type="int" value="3" />
       <ParameterList name="initial conditions" type="ParameterList">
+
       </ParameterList>
 
       <ParameterList name="verbose object" type="ParameterList">
@@ -602,19 +594,17 @@
         <Parameter name="field evaluator type" type="string" value="overland pressure water content" />
       </ParameterList>
 
-
       <ParameterList name="surface-mass_source">
-        <Parameter name="field evaluator type" type="string" value="independent variable"/>
+        <Parameter name="field evaluator type" type="string" value="independent variable" />
         <ParameterList name="function">
           <ParameterList name="domain rain">
-          <Parameter name="region" type="string" value="rain domain"/> 
-            <Parameter name="component" type="string" value="cell"/>
+            <Parameter name="region" type="string" value="rain domain" />
+            <Parameter name="component" type="string" value="cell" />
             <ParameterList name="function">
               <ParameterList name="function-tabular">
-                <!--                    <Parameter name="x values" type="Array(double)" value="{0.0, 432000.0}"/> -->
-                <Parameter name="x values" type="Array(double)" value="{0.0, 1500.0}"/>
-                <Parameter name="y values" type="Array(double)" value="{0.00007, 0.0}"/>
-                <Parameter name="forms" type="Array(string)" value="{linear}"/>
+                <Parameter name="x values" type="Array(double)" value="{0.0,1500.0}" />
+                <Parameter name="y values" type="Array(double)" value="{7e-05,0.0}" />
+                <Parameter name="forms" type="Array(string)" value="{linear}" />
               </ParameterList>
             </ParameterList>
           </ParameterList>
@@ -883,31 +873,31 @@
               <Parameter name="function type" type="string" value="composite function" />
               <ParameterList name="dof 1 function" type="ParameterList">
                 <ParameterList name="function-constant" type="ParameterList">
-                  <Parameter name="value" type="double" value="1.00000000000000000e+02" />
+                  <Parameter name="value" type="double" value="100.0" />
                 </ParameterList>
               </ParameterList>
             </ParameterList>
           </ParameterList>
         </ParameterList>
       </ParameterList>
-      
+
       <ParameterList name="mineral_rate_constant">
         <ParameterList name="function">
           <ParameterList name="All">
-            <Parameter name="region" type="string" value="computational domain"/>
-            <Parameter name="component" type="string" value="cell"/>
+            <Parameter name="region" type="string" value="computational domain" />
+            <Parameter name="component" type="string" value="cell" />
             <ParameterList name="function">
-              <Parameter name="number of dofs" type="int" value="1"/>
-              <Parameter name="function type" type="string" value="composite function"/>
+              <Parameter name="number of dofs" type="int" value="1" />
+              <Parameter name="function type" type="string" value="composite function" />
               <ParameterList name="dof 1 function">
                 <ParameterList name="function-constant">
-                  <Parameter name="value" type="double" value="0.00000000000000000e+00"/>
+                  <Parameter name="value" type="double" value="0.0" />
                 </ParameterList>
               </ParameterList>
             </ParameterList>
           </ParameterList>
         </ParameterList>
-      </ParameterList>      
+      </ParameterList>
 
       <ParameterList name="surface-mineral_volume_fractions" type="ParameterList">
         <ParameterList name="function" type="ParameterList">
@@ -948,20 +938,20 @@
       <ParameterList name="surface-mineral_rate_constant">
         <ParameterList name="function">
           <ParameterList name="Entire Domain">
-            <Parameter name="region" type="string" value="surface domain"/>
-            <Parameter name="component" type="string" value="cell"/>
+            <Parameter name="region" type="string" value="surface domain" />
+            <Parameter name="component" type="string" value="cell" />
             <ParameterList name="function">
-              <Parameter name="number of dofs" type="int" value="1"/>
-              <Parameter name="function type" type="string" value="composite function"/>
+              <Parameter name="number of dofs" type="int" value="1" />
+              <Parameter name="function type" type="string" value="composite function" />
               <ParameterList name="dof 1 function">
                 <ParameterList name="function-constant">
-                  <Parameter name="value" type="double" value="0.00000000000000000e+00"/>
+                  <Parameter name="value" type="double" value="0.0" />
                 </ParameterList>
               </ParameterList>
             </ParameterList>
           </ParameterList>
         </ParameterList>
-      </ParameterList>      
+      </ParameterList>
 
     </ParameterList>
   </ParameterList>

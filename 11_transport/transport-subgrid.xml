@@ -82,7 +82,6 @@
       </ParameterList>
     </ParameterList>
   </ParameterList>
-
   <ParameterList name="visualization" type="ParameterList">
     <ParameterList name="surface" type="ParameterList">
       <Parameter name="file name base" type="string" value="visdump_surface" />
@@ -98,9 +97,11 @@
   </ParameterList>
 
   <ParameterList name="PKs" type="ParameterList">
+
     <ParameterList name="coupler" type="ParameterList">
       <Parameter name="PK type" type="string" value="weak MPC" />
       <Parameter name="PKs order" type="Array(string)" value="{surface transport, subgrid_*-coupler}" />
+
     </ParameterList>
 
     <ParameterList name="subgrid_*-coupler" type="ParameterList">
@@ -109,8 +110,9 @@
       <Parameter name="entity kind" type="string" value="CELL" />
       <Parameter name="parent domain" type="string" value="surface" />
       <Parameter name="subgrid region name" type="string" value="surface domain" />
+
     </ParameterList>
-    
+
     <ParameterList name="subgrid_*-transport" type="ParameterList">
       <Parameter name="PK type" type="string" value="transport ats" />
       <Parameter name="domain name" type="string" value="subgrid_*" />
@@ -157,6 +159,7 @@
       </ParameterList>
 
       <ParameterList name="initial conditions" type="ParameterList">
+
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="All" type="ParameterList">
             <Parameter name="regions" type="Array(string)" value="{ENTIRE_MESH_REGION}" />
@@ -172,9 +175,9 @@
             </ParameterList>
           </ParameterList>
         </ParameterList>
+
       </ParameterList>
 
-      
     </ParameterList>
 
     <ParameterList name="surface transport" type="ParameterList">
@@ -392,7 +395,6 @@
         </ParameterList>
       </ParameterList>
 
-      
     </ParameterList>
   </ParameterList>
 </ParameterList>

@@ -131,13 +131,15 @@
       </ParameterList>
 
       <ParameterList name="linear solver" type="ParameterList">
-        <Parameter name="iterative method" type="string" value="nka" />
+        <Parameter name="iterative method" type="string" value="gmres" />
         <ParameterList name="VerboseObject" type="ParameterList">
           <Parameter name="Verbosity Level" type="string" value="medium" />
         </ParameterList>
-        <ParameterList name="nka parameters" type="ParameterList">
-          <Parameter name="error tolerance" type="double" value="1e-10" />
-          <Parameter name="maximum number of iterations" type="int" value="40" />
+        <ParameterList name="gmres parameters" type="ParameterList">
+          <Parameter name="preconditioning strategy" type="string" value="left" />
+          <Parameter name="error tolerance" type="double" value="1e-06" />
+          <Parameter name="convergence criteria" type="Array(string)" value="{relative residual,make one iteration}" />
+          <Parameter name="maximum number of iteration" type="int" value="80" />
         </ParameterList>
       </ParameterList>
 
@@ -247,6 +249,7 @@
       <Parameter name="source term" type="bool" value="true" />
       <Parameter name="initial time step" type="double" value="60.0" />
       <Parameter name="debug cells" type="Array(int)" value="{0}" />
+      <Parameter name="source term is differentiable" type="bool" value="true" />
       <ParameterList name="VerboseObject" type="ParameterList">
         <Parameter name="Verbosity Level" type="string" value="high" />
       </ParameterList>

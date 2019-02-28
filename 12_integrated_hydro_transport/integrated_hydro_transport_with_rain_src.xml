@@ -115,7 +115,7 @@
     <Parameter name="end cycle" type="int" value="-1" />
     <Parameter name="start time" type="double" value="0.0" />
     <Parameter name="start time units" type="string" value="s" />
-    <Parameter name="end time" type="double" value="200" />
+    <Parameter name="end time" type="double" value="2" />
     <Parameter name="end time units" type="string" value="d" />
     <ParameterList name="required times">
       <Parameter name="times start period stop 0" type="Array(double)" value="{0.0,10.0, 10.0}" />
@@ -385,7 +385,7 @@
               <Parameter name="regions" type="Array(string)" value="{top face}" />
               <ParameterList name="boundary concentration">
                 <Parameter name="field_out_key" type="string" value="surface-total_component_concentration" />
-                <Parameter name="copy_field_out_key" type="string" value="default" />
+                <Parameter name="copy_field_out_key" type="string" value="with source" />
               </ParameterList>
             </ParameterList>
           </ParameterList>
@@ -406,7 +406,9 @@
       <Parameter name="spatial discretization order" type="int" value="1" />
       <Parameter name="temporal discretization order" type="int" value="1" />
       <Parameter name="cfl" type="double" value="1.0" />
-      <Parameter name="water tolerance" type="double" value="1e-3" />            
+      <Parameter name="water tolerance" type="double" value="1e-5" />
+      <Parameter name="special source" type="bool" value="true" />
+      <Parameter name="water source in meters" type="bool" value="true" />      
       <Parameter name="solver" type="string" value="PCG with Hypre AMG" />
       <Parameter name="enable internal tests" type="string" value="no" />
       <Parameter name="transport subcycling" type="bool" value="false" />
@@ -442,18 +444,18 @@
                 <Parameter name="field_out_key" type="string" value="total_component_concentration" />
                 <Parameter name="copy_field_out_key" type="string" value="default" />
                 <Parameter name="field_in_key" type="string" value="surface-total_component_concentration" />
-                <Parameter name="copy_field_in_key" type="string" value="default" />
+                <Parameter name="copy_field_in_key" type="string" value="with source" />
               </ParameterList>
             </ParameterList>
           </ParameterList>
           <ParameterList name="Tc-99">
             <ParameterList name="SOURCE: Tracer">
-              <Parameter name="regions" type="Array(string)" value="{tracer source}" />
-              <Parameter name="spatial distribution method" type="string" value="volume" />
+              <Parameter name="regions" type="Array(string)" value="{rain domain}" />
+              <Parameter name="spatial distribution method" type="string" value="none" />
               <ParameterList name="sink">
                 <ParameterList name="function-tabular">
-                  <Parameter name="y values" type="Array(double)" value="{1.0,0.0}" />
-                  <Parameter name="x values" type="Array(double)" value="{0.0,10.0}" />
+                  <Parameter name="y values" type="Array(double)" value="{1e-2,0.0}" />
+                  <Parameter name="x values" type="Array(double)" value="{0.0,864.0}" />
                   <Parameter name="forms" type="Array(string)" value="{constant}" />
                 </ParameterList>
               </ParameterList>
@@ -490,8 +492,8 @@
             <Parameter name="component" type="string" value="cell" />
             <ParameterList name="function">
               <ParameterList name="function-tabular">
-                <Parameter name="x values" type="Array(double)" value="{0.0,100.0}" />
-                <Parameter name="y values" type="Array(double)" value="{2.778e-05,0.0}" />
+                <Parameter name="x values" type="Array(double)" value="{0.0, 864.0}" />
+                <Parameter name="y values" type="Array(double)" value="{1e-4, 0.0}" />
                 <Parameter name="forms" type="Array(string)" value="{constant}" />
               </ParameterList>
             </ParameterList>
@@ -719,11 +721,11 @@
     <ParameterList name="initial conditions">
 
       <ParameterList name="pressure">
-        <Parameter name="restart file" type="string" value="../data/restart_coupled.h5" />
+        <Parameter name="restart file" type="string" value="../data/restart_coupled_with_rain_src.h5" />
       </ParameterList>
 
       <ParameterList name="surface-pressure">
-        <Parameter name="restart file" type="string" value="../data/restart_coupled.h5" />
+        <Parameter name="restart file" type="string" value="../data/restart_coupled_with_rain_src.h5" />
       </ParameterList>
 
       <ParameterList name="atmospheric_pressure">
@@ -776,11 +778,11 @@
   <ParameterList name="visualization">
     <ParameterList name="domain">
       <Parameter name="file name base" type="string" value="visdump" />
-      <Parameter name="cycles start period stop" type="Array(int)" value="{0,5,-1}" />
+      <Parameter name="cycles start period stop" type="Array(int)" value="{0, 5, -1}" />
     </ParameterList>
     <ParameterList name="surface">
       <Parameter name="file name base" type="string" value="visdump_surface" />
-      <Parameter name="cycles start period stop" type="Array(int)" value="{0,5,-1}" />
+      <Parameter name="cycles start period stop" type="Array(int)" value="{0, 5, -1}" />
     </ParameterList>
   </ParameterList>
 </ParameterList>

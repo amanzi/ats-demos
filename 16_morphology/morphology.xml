@@ -225,7 +225,7 @@
             <Parameter name="regions" type="Array(string)" value="{surface west}"/>
             <ParameterList name="outward mass flux">
               <ParameterList name="function-tabular">
-                <Parameter name="file" type="string" value="../floodplain1.h5" />
+                <Parameter name="file" type="string" value="../data/floodplain1.h5" />
                 <Parameter name="x header" type="string" value="Time" />
                 <Parameter name="y header" type="string" value="Flux" />
                 <Parameter name="form" type="Array(string)" value="{constant}"/>

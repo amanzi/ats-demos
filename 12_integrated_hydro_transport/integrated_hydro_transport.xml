@@ -122,7 +122,7 @@
     </ParameterList>
     <ParameterList name="PK tree">
       <ParameterList name="Flow and Reactive Transport">
-        <Parameter name="PK type" type="string" value="flow reactive transport ATS" />
+        <Parameter name="PK type" type="string" value="flow reactive transport" />
         <ParameterList name="surface-subsurface flow coupler">
           <Parameter name="PK type" type="string" value="coupled water" />
           <ParameterList name="flow">

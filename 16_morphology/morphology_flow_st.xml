@@ -94,7 +94,7 @@
     <Parameter name="start time units" type="string" value="s" />
     <!-- <Parameter name="end cycle" type="int" value="10" /> -->
     <Parameter name="end time" type="double" value="1" />
-    <Parameter name="end time units" type="string" value="yr" />
+    <Parameter name="end time units" type="string" value="h" />
     <!-- <Parameter name="restart from checkpoint file" type="string" value="restart.h5" /> -->
     <ParameterList name="PK tree" type="ParameterList">
       <ParameterList name="GeoMorphology" type="ParameterList">

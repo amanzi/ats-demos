@@ -19,34 +19,22 @@
   </ParameterList>
 
   <ParameterList name="regions" type="ParameterList">
-    <ParameterList name="Computational domain" type="ParameterList">
+    <ParameterList name="surface domain" type="ParameterList">
       <ParameterList name="region: box" type="ParameterList">
         <Parameter name="low coordinate" type="Array(double)" value="{0.0,0.0}" />
         <Parameter name="high coordinate" type="Array(double)" value="{10.0,1.0}" />
       </ParameterList>
     </ParameterList>
-    <ParameterList name="Left side" type="ParameterList">
+    <ParameterList name="left side" type="ParameterList">
       <ParameterList name="region: plane" type="ParameterList">
         <Parameter name="point" type="Array(double)" value="{0.0,0.0}" />
         <Parameter name="normal" type="Array(double)" value="{1.0,0.0}" />
       </ParameterList>
     </ParameterList>
-    <ParameterList name="Bottom side" type="ParameterList">
-      <ParameterList name="region: plane" type="ParameterList">
-        <Parameter name="point" type="Array(double)" value="{0.0,0.0}" />
-        <Parameter name="normal" type="Array(double)" value="{0.0,1.0}" />
-      </ParameterList>
-    </ParameterList>
-    <ParameterList name="Right side" type="ParameterList">
+    <ParameterList name="right side" type="ParameterList">
       <ParameterList name="region: plane" type="ParameterList">
         <Parameter name="point" type="Array(double)" value="{10.0,1.0}" />
         <Parameter name="normal" type="Array(double)" value="{-1.0,0.0}" />
-      </ParameterList>
-    </ParameterList>
-    <ParameterList name="Top side" type="ParameterList">
-      <ParameterList name="region: plane" type="ParameterList">
-        <Parameter name="point" type="Array(double)" value="{10.0,1.0}" />
-        <Parameter name="normal" type="Array(double)" value="{0.0,-1.0}" />
       </ParameterList>
     </ParameterList>
   </ParameterList>
@@ -57,14 +45,14 @@
     <Parameter name="end time" type="double" value="10800.0" />
     <Parameter name="end time units" type="string" value="s" />
     <ParameterList name="PK tree" type="ParameterList">
-      <ParameterList name="Overland Flow" type="ParameterList">
+      <ParameterList name="overland flow" type="ParameterList">
         <Parameter name="PK type" type="string" value="overland flow, pressure basis" />
       </ParameterList>
     </ParameterList>
   </ParameterList>
   <ParameterList name="PKs" type="ParameterList">
 
-    <ParameterList name="Overland Flow" type="ParameterList">
+    <ParameterList name="overland flow" type="ParameterList">
       <Parameter name="PK type" type="string" value="overland flow, pressure basis" />
       <Parameter name="primary variable key" type="string" value="surface-pressure" />
       <Parameter name="domain name" type="string" value="surface" />
@@ -73,7 +61,7 @@
       <Parameter name="initial time step" type="double" value="10.0" />
       <Parameter name="source term is differentiable" type="bool" value="true" />
       <ParameterList name="verbose object" type="ParameterList">
-        <Parameter name="verbosity level" type="string" value="extreme" />
+        <Parameter name="verbosity level" type="string" value="high" />
       </ParameterList>
 
       <ParameterList name="diffusion" type="ParameterList">
@@ -87,14 +75,14 @@
       <ParameterList name="time integrator" type="ParameterList">
         <Parameter name="extrapolate initial guess" type="bool" value="true" />
         <Parameter name="solver type" type="string" value="nka" />
-        <Parameter name="timestep controller type" type="string" value="from file" />
+        <Parameter name="timestep controller type" type="string" value="smarter" />
         <ParameterList name="nka parameters" type="ParameterList">
           <Parameter name="max error growth factor" type="double" value="1000.0" />
           <Parameter name="modify correction" type="bool" value="true" />
           <Parameter name="monitor" type="string" value="monitor residual" />
           <Parameter name="nonlinear tolerance" type="double" value="1e-10" />
-          <Parameter name="diverged tolerance" type="double" value="10000000000.0" />
-          <Parameter name="limit iterations" type="int" value="100" />
+          <Parameter name="diverged tolerance" type="double" value="1000.0" />
+          <Parameter name="limit iterations" type="int" value="51" />
           <ParameterList name="verbose object" type="ParameterList">
             <Parameter name="verbosity level" type="string" value="high" />
           </ParameterList>
@@ -112,15 +100,12 @@
           <Parameter name="growth wait after fail" type="int" value="2" />
           <Parameter name="count before increasing increase factor" type="int" value="2" />
         </ParameterList>
-        <ParameterList name="timestep controller from file parameters" type="ParameterList">
-          <Parameter name="file name" type="string" value="../data/surface_water_pressure-fv_dts.h5" />
-        </ParameterList>
       </ParameterList>
 
       <ParameterList name="elevation evaluator" type="ParameterList">
         <ParameterList name="elevation function" type="ParameterList">
           <ParameterList name="Elevation" type="ParameterList">
-            <Parameter name="region" type="string" value="Computational domain" />
+            <Parameter name="region" type="string" value="surface domain" />
             <Parameter name="components" type="Array(string)" value="{cell, face}" />
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-separable" type="ParameterList">
@@ -142,7 +127,7 @@
         </ParameterList>
         <ParameterList name="slope function" type="ParameterList">
           <ParameterList name="Slope magnitude Left/Right page" type="ParameterList">
-            <Parameter name="regions" type="Array(string)" value="{Computational domain}" />
+            <Parameter name="regions" type="Array(string)" value="{surface domain}" />
             <Parameter name="component" type="string" value="cell" />
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
@@ -162,9 +147,9 @@
 
       <ParameterList name="initial condition" type="ParameterList">
         <ParameterList name="function" type="ParameterList">
-          <ParameterList name="initial head" type="ParameterList">
-            <Parameter name="region" type="string" value="Computational domain" />
-            <Parameter name="component" type="string" value="cell" />
+          <ParameterList name="initial pressure" type="ParameterList">
+            <Parameter name="region" type="string" value="surface domain" />
+            <Parameter name="components" type="Array(string)" value="{cell,boundary_face}" />
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
                 <Parameter name="value" type="double" value="101325.0" />
@@ -192,11 +177,17 @@
         <Parameter name="field evaluator type" type="string" value="ponded depth" />
       </ParameterList>
 
+      <ParameterList name="surface-ponded_depth_bar" type="ParameterList">
+        <Parameter name="field evaluator type" type="string" value="ponded depth" />
+        <Parameter name="ponded depth bar" type="bool" value="true" />
+        <Parameter name="height key" type="string" value="ponded_depth_bar" />
+      </ParameterList>
+
       <ParameterList name="surface-mass_source" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="domain rain" type="ParameterList">
-            <Parameter name="region" type="string" value="Computational domain" />
+            <Parameter name="region" type="string" value="surface domain" />
             <Parameter name="component" type="string" value="cell" />
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-tabular" type="ParameterList">
@@ -212,6 +203,21 @@
       <ParameterList name="surface-source_molar_density" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="eos" />
         <Parameter name="EOS basis" type="string" value="molar" />
+        <Parameter name="molar density key" type="string" value="surface-source_molar_density" />
+        <ParameterList name="EOS parameters" type="ParameterList">
+          <Parameter name="EOS type" type="string" value="constant" />
+          <Parameter name="density [kg/m^3]" type="double" value="1000.0" />
+        </ParameterList>
+        <ParameterList name="verbose object" type="ParameterList">
+          <Parameter name="verbosity level" type="string" value="low" />
+        </ParameterList>
+      </ParameterList>
+
+      <ParameterList name="surface-mass_density_liquid" type="ParameterList">
+        <Parameter name="field evaluator type" type="string" value="eos" />
+        <Parameter name="EOS basis" type="string" value="both" />
+        <Parameter name="molar density key" type="string" value="surface-molar_density_liquid" />
+        <Parameter name="mass density key" type="string" value="surface-mass_density_liquid" />
         <ParameterList name="EOS parameters" type="ParameterList">
           <Parameter name="EOS type" type="string" value="constant" />
           <Parameter name="density [kg/m^3]" type="double" value="1000.0" />
@@ -224,12 +230,11 @@
       <ParameterList name="surface-molar_density_liquid" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="eos" />
         <Parameter name="EOS basis" type="string" value="both" />
+        <Parameter name="molar density key" type="string" value="surface-molar_density_liquid" />
+        <Parameter name="mass density key" type="string" value="surface-mass_density_liquid" />
+        <Parameter name="pressure key" type="string" value="surface-effective_pressure" />
         <ParameterList name="EOS parameters" type="ParameterList">
-          <Parameter name="EOS type" type="string" value="constant" />
-          <Parameter name="density [kg/m^3]" type="double" value="1000.0" />
-        </ParameterList>
-        <ParameterList name="verbose object" type="ParameterList">
-          <Parameter name="verbosity level" type="string" value="low" />
+          <Parameter name="EOS type" type="string" value="liquid water" />
         </ParameterList>
       </ParameterList>
 
@@ -238,7 +243,7 @@
         <Parameter name="constant in time" type="bool" value="true" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="domain" type="ParameterList">
-            <Parameter name="region" type="string" value="Computational domain" />
+            <Parameter name="region" type="string" value="surface domain" />
             <Parameter name="components" type="Array(string)" value="{cell}" />
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
@@ -258,8 +263,8 @@
         <Parameter name="constant in time" type="bool" value="true" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="domain" type="ParameterList">
-            <Parameter name="region" type="string" value="Computational domain" />
-            <Parameter name="component" type="string" value="cell" />
+            <Parameter name="region" type="string" value="surface domain" />
+            <Parameter name="components" type="Array(string)" value="{cell,boundary_face}" />
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
                 <Parameter name="value" type="double" value="274.65" />
@@ -284,12 +289,12 @@
   </ParameterList>
   <ParameterList name="visualization">
     <ParameterList name="domain" type="ParameterList">
-      <Parameter name="cycles" type="Array(int)" value="{0,25,36,42,48,54,58,60,62,64,66,67,68,69,70,71,72,73,74}" />
       <Parameter name="file name base" type="string" value="visdump" />
+      <Parameter name="times start period stop" type="Array(double)" value="{0.0,600.0,-1.0}" />
     </ParameterList>
     <ParameterList name="surface" type="ParameterList">
-      <Parameter name="cycles" type="Array(int)" value="{0,25,36,42,48,54,58,60,62,64,66,67,68,69,70,71,72,73,74}" />
       <Parameter name="file name base" type="string" value="visdump_surface" />
+      <Parameter name="times start period stop" type="Array(double)" value="{0.0,600.0,-1.0}" />
     </ParameterList>
   </ParameterList>
 </ParameterList>

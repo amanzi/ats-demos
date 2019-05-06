@@ -72,7 +72,7 @@
       <ParameterList name="diffusion preconditioner" type="ParameterList">
         <Parameter name="Newton correction" type="string" value="true Jacobian" />
       </ParameterList>
-      
+
       <ParameterList name="preconditioner" type="ParameterList">
         <Parameter name="preconditioner type" type="string" value="block ilu" />
       </ParameterList>
@@ -169,6 +169,16 @@
       </ParameterList>
 
       <ParameterList name="boundary conditions" type="ParameterList">
+        <ParameterList name="seepage face head" type="ParameterList">
+          <ParameterList name="outlet" type="ParameterList">
+            <Parameter name="regions" type="Array(string)" value="{right side}" />
+            <ParameterList name="boundary head" type="ParameterList">
+              <ParameterList name="function-constant" type="ParameterList">
+                <Parameter name="value" type="double" value="0.15" />
+              </ParameterList>
+            </ParameterList>
+          </ParameterList>
+        </ParameterList>
       </ParameterList>
 
     </ParameterList>
@@ -310,5 +320,4 @@
       <Parameter name="times start period stop" type="Array(double)" value="{0.0,300.0,-1.0}" />
     </ParameterList>
   </ParameterList>
-  
 </ParameterList>

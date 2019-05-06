@@ -59,7 +59,6 @@
       <Parameter name="source term" type="bool" value="true" />
       <Parameter name="debug cells" type="Array(int)" value="{0,9}" />
       <Parameter name="initial time step" type="double" value="10.0" />
-      <Parameter name="mass source in meters" type="bool" value="true" />
       <Parameter name="source term is differentiable" type="bool" value="true" />
       <ParameterList name="verbose object" type="ParameterList">
         <Parameter name="verbosity level" type="string" value="high" />
@@ -72,7 +71,7 @@
       <ParameterList name="diffusion preconditioner" type="ParameterList">
         <Parameter name="Newton correction" type="string" value="true Jacobian" />
       </ParameterList>
-      
+
       <ParameterList name="preconditioner" type="ParameterList">
         <Parameter name="preconditioner type" type="string" value="block ilu" />
       </ParameterList>
@@ -169,6 +168,11 @@
       </ParameterList>
 
       <ParameterList name="boundary conditions" type="ParameterList">
+        <ParameterList name="zero gradient" type="ParameterList">
+          <ParameterList name="outlet" type="ParameterList">
+            <Parameter name="regions" type="Array(string)" value="{right side}" />
+          </ParameterList>
+        </ParameterList>
       </ParameterList>
 
     </ParameterList>
@@ -310,5 +314,4 @@
       <Parameter name="times start period stop" type="Array(double)" value="{0.0,300.0,-1.0}" />
     </ParameterList>
   </ParameterList>
-  
 </ParameterList>

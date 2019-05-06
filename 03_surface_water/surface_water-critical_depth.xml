@@ -50,15 +50,15 @@
       </ParameterList>
     </ParameterList>
   </ParameterList>
-  <ParameterList name="PKs" type="ParameterList">
 
+  <ParameterList name="PKs" type="ParameterList">
     <ParameterList name="overland flow" type="ParameterList">
       <Parameter name="PK type" type="string" value="overland flow, pressure basis" />
       <Parameter name="primary variable key" type="string" value="surface-pressure" />
       <Parameter name="domain name" type="string" value="surface" />
       <Parameter name="source term" type="bool" value="true" />
       <Parameter name="debug cells" type="Array(int)" value="{0,9}" />
-      <Parameter name="initial time step" type="double" value="10.0" />
+      <Parameter name="initial time step" type="double" value="60.0" />
       <Parameter name="mass source in meters" type="bool" value="true" />
       <Parameter name="source term is differentiable" type="bool" value="true" />
       <ParameterList name="verbose object" type="ParameterList">
@@ -72,7 +72,7 @@
       <ParameterList name="diffusion preconditioner" type="ParameterList">
         <Parameter name="Newton correction" type="string" value="true Jacobian" />
       </ParameterList>
-      
+
       <ParameterList name="preconditioner" type="ParameterList">
         <Parameter name="preconditioner type" type="string" value="block ilu" />
       </ParameterList>
@@ -150,7 +150,7 @@
       <ParameterList name="overland conductivity evaluator" type="ParameterList">
         <ParameterList name="overland conductivity model" type="ParameterList">
           <Parameter name="Manning exponent" type="double" value="0.666666666667" />
-          <Parameter name="slope regularization epsilon" type="double" value="0.01" />
+          <Parameter name="slope regularization epsilon" type="double" value="0.0" />
         </ParameterList>
       </ParameterList>
 
@@ -169,6 +169,11 @@
       </ParameterList>
 
       <ParameterList name="boundary conditions" type="ParameterList">
+        <ParameterList name="critical depth" type="ParameterList">
+          <ParameterList name="outlet" type="ParameterList">
+            <Parameter name="regions" type="Array(string)" value="{right side}" />
+          </ParameterList>
+        </ParameterList>
       </ParameterList>
 
     </ParameterList>
@@ -296,7 +301,7 @@
       <Parameter name="times start period stop" type="Array(double)" value="{0.0,600.0,-1.0}" />
     </ParameterList>
   </ParameterList>
-
+  
   <ParameterList name="observations" type="ParameterList">
     <ParameterList name="surface outlet flux" type="ParameterList">
       <Parameter name="variable" type="string" value="surface-mass_flux" />
@@ -310,5 +315,4 @@
       <Parameter name="times start period stop" type="Array(double)" value="{0.0,300.0,-1.0}" />
     </ParameterList>
   </ParameterList>
-  
 </ParameterList>

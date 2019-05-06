@@ -1,3 +1,4 @@
+*.demo
 *.regression
 *.regression.gold
 *.ipynb_checkpoints

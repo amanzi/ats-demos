@@ -194,6 +194,10 @@
         <Parameter name="discretization primary" type="string" value="mfd: optimized for sparsity" />
       </ParameterList>
 
+      <ParameterList name="diffusion preconditioner" type="ParameterList">
+        <Parameter name="Newton correction" type="string" value="approximate Jacobian" />
+      </ParameterList>
+
       <ParameterList name="boundary conditions" type="ParameterList">
         <ParameterList name="mass flux" type="ParameterList">
           <ParameterList name="base flow" type="ParameterList">

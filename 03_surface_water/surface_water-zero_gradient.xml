@@ -11,7 +11,7 @@
     <ParameterList name="domain" type="ParameterList">
       <Parameter name="mesh type" type="string" value="generate mesh" />
       <ParameterList name="generate mesh parameters" type="ParameterList">
-        <Parameter name="number of cells" type="Array(int)" value="{100,1}" />
+        <Parameter name="number of cells" type="Array(int)" value="{10,1}" />
         <Parameter name="domain low coordinate" type="Array(double)" value="{0.0,0.0}" />
         <Parameter name="domain high coordinate" type="Array(double)" value="{1000.0,1.0}" />
       </ParameterList>
@@ -50,15 +50,16 @@
       </ParameterList>
     </ParameterList>
   </ParameterList>
-  <ParameterList name="PKs" type="ParameterList">
 
+  <ParameterList name="PKs" type="ParameterList">
     <ParameterList name="overland flow" type="ParameterList">
       <Parameter name="PK type" type="string" value="overland flow, pressure basis" />
       <Parameter name="primary variable key" type="string" value="surface-pressure" />
       <Parameter name="domain name" type="string" value="surface" />
       <Parameter name="source term" type="bool" value="true" />
       <Parameter name="debug cells" type="Array(int)" value="{0,9}" />
-      <Parameter name="initial time step" type="double" value="10.0" />
+      <Parameter name="initial time step" type="double" value="60.0" />
+      <Parameter name="mass source in meters" type="bool" value="true" />
       <Parameter name="source term is differentiable" type="bool" value="true" />
       <ParameterList name="verbose object" type="ParameterList">
         <Parameter name="verbosity level" type="string" value="high" />
@@ -91,15 +92,17 @@
 
       <ParameterList name="time integrator" type="ParameterList">
         <Parameter name="extrapolate initial guess" type="bool" value="true" />
-        <Parameter name="solver type" type="string" value="nka" />
+        <Parameter name="solver type" type="string" value="nka_bt_ats" />
         <Parameter name="timestep controller type" type="string" value="smarter" />
-        <ParameterList name="nka parameters" type="ParameterList">
-          <Parameter name="max error growth factor" type="double" value="1000.0" />
-          <Parameter name="modify correction" type="bool" value="true" />
-          <Parameter name="monitor" type="string" value="monitor residual" />
-          <Parameter name="nonlinear tolerance" type="double" value="1e-10" />
-          <Parameter name="diverged tolerance" type="double" value="1000.0" />
-          <Parameter name="limit iterations" type="int" value="51" />
+        <ParameterList name="nka_bt_ats parameters" type="ParameterList">
+          <Parameter name="nka lag iterations" type="int" value="2" />
+          <Parameter name="max backtrack steps" type="int" value="5" />
+          <Parameter name="backtrack lag" type="int" value="0" />
+          <Parameter name="backtrack factor" type="double" value="0.5" />
+          <Parameter name="backtrack tolerance" type="double" value="1" />
+          <Parameter name="nonlinear tolerance" type="double" value="1e-06" />
+          <Parameter name="diverged tolerance" type="double" value="100000.0" />
+          <Parameter name="limit iterations" type="int" value="21" />
           <ParameterList name="verbose object" type="ParameterList">
             <Parameter name="verbosity level" type="string" value="high" />
           </ParameterList>
@@ -111,8 +114,8 @@
           <Parameter name="max iterations" type="int" value="18" />
           <Parameter name="min iterations" type="int" value="10" />
           <Parameter name="time step reduction factor" type="double" value="0.5" />
-          <Parameter name="time step increase factor" type="double" value="1.5" />
-          <Parameter name="max time step" type="double" value="3000000.0" />
+          <Parameter name="time step increase factor" type="double" value="1.25" />
+          <Parameter name="max time step" type="double" value="10000000000.0" />
           <Parameter name="min time step" type="double" value="1e-10" />
           <Parameter name="growth wait after fail" type="int" value="2" />
           <Parameter name="count before increasing increase factor" type="int" value="2" />
@@ -149,7 +152,7 @@
       <ParameterList name="overland conductivity evaluator" type="ParameterList">
         <ParameterList name="overland conductivity model" type="ParameterList">
           <Parameter name="Manning exponent" type="double" value="0.666666666667" />
-          <Parameter name="slope regularization epsilon" type="double" value="0.01" />
+          <Parameter name="slope regularization epsilon" type="double" value="0." />
         </ParameterList>
       </ParameterList>
 
@@ -205,7 +208,7 @@
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-tabular" type="ParameterList">
                 <Parameter name="x values" type="Array(double)" value="{0.0,3600.0}" />
-                <Parameter name="y values" type="Array(double)" value="{3e-05,0.0}" />
+                <Parameter name="y values" type="Array(double)" value="{3e-06,0.0}" />
                 <Parameter name="forms" type="Array(string)" value="{constant}" />
               </ParameterList>
             </ParameterList>
@@ -250,7 +253,6 @@
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
                 <Parameter name="value" type="double" value="3.6e-3" />
-                <!-- corresponds to 1.0e-6 m^-1/3 * hour -->
               </ParameterList>
             </ParameterList>
           </ParameterList>
@@ -313,5 +315,17 @@
       <Parameter name="observation output filename" type="string" value="surface_outlet_flux.dat" />
       <Parameter name="times start period stop" type="Array(double)" value="{0.0,300.0,-1.0}" />
     </ParameterList>
+    <ParameterList name="surface water" type="ParameterList">
+      <Parameter name="variable" type="string" value="surface-water_content" />
+      <Parameter name="region" type="string" value="surface domain" />
+      <Parameter name="functional" type="string" value="observation data: extensive integral" />
+      <Parameter name="delimiter" type="string" value=" " />
+      <Parameter name="location name" type="string" value="cell" />
+      <Parameter name="write interval" type="int" value="1" />
+      <Parameter name="observation output filename" type="string" value="surface_water_content.dat" />
+      <Parameter name="times start period stop" type="Array(double)" value="{0.0,300.0,-1.0}" />
+    </ParameterList>
   </ParameterList>
+
+
 </ParameterList>

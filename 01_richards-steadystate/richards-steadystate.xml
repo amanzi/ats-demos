@@ -83,10 +83,10 @@
 
       <ParameterList name="time integrator" type="ParameterList">
         <Parameter name="extrapolate initial guess" type="bool" value="true" />
-        <Parameter name="solver type" type="string" value="nka" />
+        <Parameter name="solver type" type="string" value="nka_bt_ats" />
         <Parameter name="timestep controller type" type="string" value="smarter" />
         <Parameter name="initial time step" type="double" value="86400.0" />
-        <ParameterList name="nka parameters" type="ParameterList">
+        <ParameterList name="nka_bt_ats parameters" type="ParameterList">
           <Parameter name="max error growth factor" type="double" value="1000.0" />
           <Parameter name="modify correction" type="bool" value="true" />
           <Parameter name="monitor" type="string" value="monitor residual" />

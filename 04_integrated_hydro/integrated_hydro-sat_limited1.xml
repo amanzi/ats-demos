@@ -212,7 +212,7 @@
           </ParameterList>
         </ParameterList>
 -->
-        <ParameterList name="critical flow" type="ParameterList">
+        <ParameterList name="critical depth" type="ParameterList">
           <ParameterList name="outlet" type="ParameterList">
             <Parameter name="regions" type="Array(string)" value="{surface outlet}" />
           </ParameterList>

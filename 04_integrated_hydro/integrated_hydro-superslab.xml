@@ -70,17 +70,10 @@
     </ParameterList>
   </ParameterList>
 
-  <ParameterList name="coordinator" type="ParameterList">
-    <Parameter name="start time" type="double" value="0.0" />
-    <Parameter name="start time units" type="string" value="s" />
-    <Parameter name="end time" type="double" value="43200.0" />
-    <Parameter name="end time units" type="string" value="s" />
-  </ParameterList>
-
   <ParameterList name="cycle driver" type="ParameterList">
     <Parameter name="start time" type="double" value="0.0" />
     <Parameter name="start time units" type="string" value="s" />
-    <Parameter name="end time" type="double" value="43200.0" />
+    <Parameter name="end time" type="double" value="18000.0" />
     <Parameter name="end time units" type="string" value="s" />
     <ParameterList name="PK tree" type="ParameterList">
       <ParameterList name="Top level MPC" type="ParameterList">
@@ -94,46 +87,46 @@
       </ParameterList>
     </ParameterList>
   </ParameterList>
-  <ParameterList name="observations" type="ParameterList">
-    <ParameterList name="surface outlet flux" type="ParameterList">
-      <Parameter name="variable" type="string" value="surface-mass_flux" />
-      <Parameter name="direction normalized flux" type="bool" value="true" />
-      <Parameter name="region" type="string" value="surface outlet" />
-      <Parameter name="functional" type="string" value="observation data: extensive integral" />
-      <Parameter name="delimiter" type="string" value=" " />
-      <Parameter name="location name" type="string" value="face" />
-      <Parameter name="write interval" type="int" value="1" />
-      <Parameter name="observation output filename" type="string" value="surface_outlet_flux.dat" />
-      <Parameter name="times start period stop" type="Array(double)" value="{0.0,180.0,-1.0}" />
-    </ParameterList>
-  </ParameterList>
+
   <ParameterList name="PKs" type="ParameterList">
 
     <ParameterList name="Top level MPC" type="ParameterList">
       <Parameter name="PK type" type="string" value="coupled water" />
       <Parameter name="PKs order" type="Array(string)" value="{subsurface flow,surface flow}" />
-      <ParameterList name="VerboseObject" type="ParameterList">
-        <Parameter name="Verbosity Level" type="string" value="high" />
+      <ParameterList name="verbose object" type="ParameterList">
+        <Parameter name="verbosity level" type="string" value="high" />
       </ParameterList>
 
       <ParameterList name="water delegate" type="ParameterList">
         <Parameter name="modify predictor damp and cap the water spurt" type="bool" value="true" />
         <Parameter name="damp and cap the water spurt" type="bool" value="true" />
-        <Parameter name="cap over atmospheric" type="double" value="0.1" />
+        <Parameter name="cap over atmospheric" type="double" value="0.001" />
         <Parameter name="debug cells" type="Array(int)" value="{1}" />
-        <ParameterList name="VerboseObject" type="ParameterList">
-          <Parameter name="Verbosity Level" type="string" value="high" />
+        <ParameterList name="verbose object" type="ParameterList">
+          <Parameter name="verbosity level" type="string" value="high" />
         </ParameterList>
       </ParameterList>
 
       <ParameterList name="preconditioner" type="ParameterList">
+        <Parameter name="preconditioner type" type="string" value="boomer amg" />
+        <ParameterList name="boomer amg parameters" type="ParameterList">
+          <Parameter name="cycle applications" type="int" value="1" />
+          <Parameter name="smoother sweeps" type="int" value="2" />
+          <Parameter name="strong threshold" type="double" value="0.85" />
+          <Parameter name="tolerance" type="double" value="0.0" />
+          <Parameter name="number of functions" type="int" value="1" />
+        </ParameterList>
+      </ParameterList>
+<!--
+      <ParameterList name="preconditioner" type="ParameterList">
         <Parameter name="preconditioner type" type="string" value="block ilu" />
       </ParameterList>
+-->
 
       <ParameterList name="linear solver" type="ParameterList">
         <Parameter name="iterative method" type="string" value="gmres" />
-        <ParameterList name="VerboseObject" type="ParameterList">
-          <Parameter name="Verbosity Level" type="string" value="medium" />
+        <ParameterList name="verbose object" type="ParameterList">
+          <Parameter name="verbosity level" type="string" value="medium" />
         </ParameterList>
         <ParameterList name="gmres parameters" type="ParameterList">
           <Parameter name="preconditioning strategy" type="string" value="left" />
@@ -152,12 +145,12 @@
           <Parameter name="max backtrack steps" type="int" value="5" />
           <Parameter name="backtrack lag" type="int" value="0" />
           <Parameter name="backtrack factor" type="double" value="0.5" />
-          <Parameter name="backtrack tolerance" type="double" value="0.0001" />
+          <Parameter name="backtrack tolerance" type="double" value="1." />
           <Parameter name="nonlinear tolerance" type="double" value="1e-06" />
           <Parameter name="diverged tolerance" type="double" value="100000.0" />
           <Parameter name="limit iterations" type="int" value="21" />
-          <ParameterList name="VerboseObject" type="ParameterList">
-            <Parameter name="Verbosity Level" type="string" value="extreme" />
+          <ParameterList name="verbose object" type="ParameterList">
+            <Parameter name="verbosity level" type="string" value="extreme" />
           </ParameterList>
         </ParameterList>
         <ParameterList name="timestep controller smarter parameters" type="ParameterList">
@@ -181,12 +174,16 @@
       <Parameter name="relative permeability method" type="string" value="upwind with Darcy flux" />
       <Parameter name="permeability rescaling" type="double" value="10000000.0" />
       <Parameter name="debug cells" type="Array(int)" value="{1}" />
-      <ParameterList name="VerboseObject" type="ParameterList">
-        <Parameter name="Verbosity Level" type="string" value="extreme" />
+      <ParameterList name="verbose object" type="ParameterList">
+        <Parameter name="verbosity level" type="string" value="extreme" />
       </ParameterList>
 
       <ParameterList name="diffusion" type="ParameterList">
         <Parameter name="discretization primary" type="string" value="mfd: optimized for sparsity" />
+      </ParameterList>
+
+      <ParameterList name="diffusion preconditioner" type="ParameterList">
+        <Parameter name="Newton correction" type="string" value="approximate Jacobian" />
       </ParameterList>
 
       <ParameterList name="boundary conditions" type="ParameterList">
@@ -250,8 +247,8 @@
       <Parameter name="initial time step" type="double" value="60.0" />
       <Parameter name="debug cells" type="Array(int)" value="{0}" />
       <Parameter name="source term is differentiable" type="bool" value="true" />
-      <ParameterList name="VerboseObject" type="ParameterList">
-        <Parameter name="Verbosity Level" type="string" value="high" />
+      <ParameterList name="verbose object" type="ParameterList">
+        <Parameter name="verbosity level" type="string" value="high" />
       </ParameterList>
 
       <ParameterList name="diffusion" type="ParameterList">
@@ -263,13 +260,26 @@
       </ParameterList>
 
       <ParameterList name="boundary conditions" type="ParameterList">
+        <ParameterList name="seepage face head" type="ParameterList">
+          <ParameterList name="outlet" type="ParameterList">
+            <Parameter name="regions" type="Array(string)" value="{surface outlet}" />
+            <ParameterList name="boundary head" type="ParameterList">
+              <ParameterList name="function-constant" type="ParameterList">
+                <Parameter name="value" type="double" value="0.05" />
+              </ParameterList>
+            </ParameterList>
+          </ParameterList>
+        </ParameterList>
+      </ParameterList>
+<!--
+      <ParameterList name="boundary conditions" type="ParameterList">
         <ParameterList name="critical depth" type="ParameterList">
           <ParameterList name="outlet" type="ParameterList">
             <Parameter name="regions" type="Array(string)" value="{surface outlet}" />
           </ParameterList>
         </ParameterList>
       </ParameterList>
-
+-->
       <ParameterList name="initial condition" type="ParameterList">
         <Parameter name="initialize surface head from subsurface" type="bool" value="true" />
       </ParameterList>
@@ -278,7 +288,7 @@
         <ParameterList name="overland conductivity model" type="ParameterList">
           <Parameter name="overland conductivity type" type="string" value="manning harmonic mean" />
           <Parameter name="Manning exponent" type="double" value="0.666666666667" />
-          <Parameter name="slope regularization epsilon" type="double" value="0.01" />
+          <Parameter name="slope regularization epsilon" type="double" value="0." />
         </ParameterList>
       </ParameterList>
 
@@ -298,8 +308,8 @@
             <Parameter name="component" type="string" value="cell" />
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-tabular" type="ParameterList">
-                <Parameter name="x values" type="Array(double)" value="{0.0,10800.0}" />
-                <Parameter name="y values" type="Array(double)" value="{1.39e-05,0.0}" />
+                <Parameter name="x values" type="Array(double)" value="{0.0, 12000.0}"/>
+                <Parameter name="y values" type="Array(double)" value="{5.5e-6, 0.0}"/>
                 <Parameter name="forms" type="Array(string)" value="{constant}" />
               </ParameterList>
             </ParameterList>
@@ -447,10 +457,10 @@
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="surface" type="ParameterList">
             <Parameter name="region" type="string" value="surface domain" />
-            <Parameter name="component" type="string" value="cell" />
+            <Parameter name="components" type="Array(string)" value="{cell,boundary_face}" />
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
-                <Parameter name="value" type="double" value="0.0036" />
+                <Parameter name="value" type="double" value="0.01986"/>
               </ParameterList>
             </ParameterList>
           </ParameterList>
@@ -466,7 +476,7 @@
             <Parameter name="component" type="string" value="cell" />
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
-                <Parameter name="value" type="double" value="0.1" />
+                <Parameter name="value" type="double" value="0.4" />
               </ParameterList>
             </ParameterList>
           </ParameterList>
@@ -475,7 +485,7 @@
             <Parameter name="component" type="string" value="cell" />
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
-                <Parameter name="value" type="double" value="0.1" />
+                <Parameter name="value" type="double" value="0.4" />
               </ParameterList>
             </ParameterList>
           </ParameterList>
@@ -489,8 +499,8 @@
             </ParameterList>
           </ParameterList>
         </ParameterList>
-        <ParameterList name="VerboseObject" type="ParameterList">
-          <Parameter name="Verbosity Level" type="string" value="low" />
+        <ParameterList name="verbose object" type="ParameterList">
+          <Parameter name="verbosity level" type="string" value="low" />
         </ParameterList>
       </ParameterList>
 
@@ -499,18 +509,18 @@
         <ParameterList name="compressible porosity model parameters" type="ParameterList">
           <ParameterList name="rest domain" type="ParameterList">
             <Parameter name="region" type="string" value="computational domain rest" />
-            <Parameter name="pore compressibility [Pa^-1]" type="double" value="1.0228e-09" />
-            <Parameter name="pore compressibility [Pa^-1] inflection point" type="double" value="0.0" />
+            <Parameter name="pore compressibility [Pa^-1]" type="double" value="5.113922e-8" />
+            <Parameter name="pore compressibility inflection point [Pa^-1]" type="double" value="0.0" />
           </ParameterList>
           <ParameterList name="first slab" type="ParameterList">
             <Parameter name="region" type="string" value="computational domain first slab" />
-            <Parameter name="pore compressibility [Pa^-1]" type="double" value="1.0228e-09" />
-            <Parameter name="pore compressibility [Pa^-1] inflection point" type="double" value="0.0" />
+            <Parameter name="pore compressibility [Pa^-1]" type="double" value="5.113922e-8" />
+            <Parameter name="pore compressibility inflection point [Pa^-1]" type="double" value="0.0" />
           </ParameterList>
           <ParameterList name="second slab" type="ParameterList">
             <Parameter name="region" type="string" value="computational domain second slab" />
-            <Parameter name="pore compressibility [Pa^-1]" type="double" value="1.0228e-09" />
-            <Parameter name="pore compressibility [Pa^-1] inflection point" type="double" value="0.0" />
+            <Parameter name="pore compressibility [Pa^-1]" type="double" value="5.113922e-8" />
+            <Parameter name="pore compressibility inflection point [Pa^-1]" type="double" value="0.0" />
           </ParameterList>
         </ParameterList>
       </ParameterList>
@@ -524,7 +534,7 @@
             <Parameter name="component" type="string" value="cell" />
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
-                <Parameter name="value" type="double" value="2.8468e-10" />
+                <Parameter name="value" type="double" value="2.8468e-11" />
               </ParameterList>
             </ParameterList>
           </ParameterList>
@@ -570,6 +580,7 @@
 
     </ParameterList>
   </ParameterList>
+
   <ParameterList name="visualization">
     <ParameterList name="domain" type="ParameterList">
       <Parameter name="file name base" type="string" value="visdump" />
@@ -577,6 +588,20 @@
     </ParameterList>
     <ParameterList name="surface" type="ParameterList">
       <Parameter name="file name base" type="string" value="visdump_surface" />
+      <Parameter name="times start period stop" type="Array(double)" value="{0.0,180.0,-1.0}" />
+    </ParameterList>
+  </ParameterList>
+
+  <ParameterList name="observations" type="ParameterList">
+    <ParameterList name="surface outlet flux" type="ParameterList">
+      <Parameter name="variable" type="string" value="surface-mass_flux" />
+      <Parameter name="direction normalized flux" type="bool" value="true" />
+      <Parameter name="region" type="string" value="surface outlet" />
+      <Parameter name="functional" type="string" value="observation data: extensive integral" />
+      <Parameter name="delimiter" type="string" value=" " />
+      <Parameter name="location name" type="string" value="face" />
+      <Parameter name="write interval" type="int" value="1" />
+      <Parameter name="observation output filename" type="string" value="surface_outlet_flux.dat" />
       <Parameter name="times start period stop" type="Array(double)" value="{0.0,180.0,-1.0}" />
     </ParameterList>
   </ParameterList>

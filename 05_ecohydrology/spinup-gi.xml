@@ -9,7 +9,7 @@
      <ParameterList name="domain">
        <Parameter name="mesh type" type="string" value="read mesh file" />
        <ParameterList name="read mesh file parameters">
-         <Parameter name="file" type="string" value="../../data/hillslope_noduff.exo" />
+         <Parameter name="file" type="string" value="../data/hillslope_noduff.exo" />
          <Parameter name="format" type="string" value="Exodus II" />
        </ParameterList>
      </ParameterList>
@@ -26,7 +26,7 @@
      <ParameterList name="surface">
        <ParameterList name="region: labeled set">
          <Parameter name="label" type="string" value="2" />
-         <Parameter name="file" type="string" value="../../data/hillslope_noduff.exo" />
+         <Parameter name="file" type="string" value="../data/hillslope_noduff.exo" />
          <Parameter name="format" type="string" value="Exodus II" />
          <Parameter name="entity" type="string" value="Face" />
        </ParameterList>
@@ -34,7 +34,7 @@
      <ParameterList name="bottom">
        <ParameterList name="region: labeled set">
          <Parameter name="label" type="string" value="1" />
-         <Parameter name="file" type="string" value="../../data/hillslope_noduff.exo" />
+         <Parameter name="file" type="string" value="../data/hillslope_noduff.exo" />
          <Parameter name="format" type="string" value="Exodus II" />
          <Parameter name="entity" type="string" value="Face" />
        </ParameterList>
@@ -178,7 +178,7 @@
        <ParameterList name="initial condition">
          <Parameter name="initialize faces from cells" type="bool" value="true" />
          <ParameterList name="initialize from 1D column">
-           <Parameter name="file" type="string" value="../../data/column_data.h5" />
+           <Parameter name="file" type="string" value="../data/column_data.h5" />
            <Parameter name="z header" type="string" value="/z" />
            <Parameter name="f header" type="string" value="/pressure" />
            <Parameter name="coordinate orientation" type="string" value="depth" />

@@ -51,7 +51,7 @@
   <ParameterList name="cycle driver" type="ParameterList">
     <Parameter name="start time" type="double" value="0.0" />
     <Parameter name="start time units" type="string" value="s" />
-    <Parameter name="end time" type="double" value="101.0" />
+    <Parameter name="end time" type="double" value="50.0" />
     <Parameter name="end time units" type="string" value="noleap" />
     <ParameterList name="PK tree" type="ParameterList">
       <ParameterList name="carbon" type="ParameterList">

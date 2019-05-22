@@ -26,15 +26,11 @@
 
   <ParameterList name="regions" type="ParameterList">
     <ParameterList name="subsurface domain" type="ParameterList">
-      <ParameterList name="region: box" type="ParameterList">
-        <Parameter name="low coordinate" type="Array(double)" value="{0.0,0.0,-45.0}" />
-        <Parameter name="high coordinate" type="Array(double)" value="{1.0,1.0,10.0}" />
+      <ParameterList name="region: all" type="ParameterList">
       </ParameterList>
     </ParameterList>
     <ParameterList name="surface domain" type="ParameterList">
-      <ParameterList name="region: box" type="ParameterList">
-        <Parameter name="low coordinate" type="Array(double)" value="{-1000.0,-1000.0}" />
-        <Parameter name="high coordinate" type="Array(double)" value="{1000.0,1000.0}" />
+      <ParameterList name="region: all" type="ParameterList">
       </ParameterList>
     </ParameterList>
     <ParameterList name="subsurface domain peat" type="ParameterList">
@@ -252,31 +248,18 @@
           <ParameterList name="peat" type="ParameterList">
             <Parameter name="region" type="string" value="subsurface domain peat" />
             <Parameter name="WRM Type" type="string" value="van Genuchten" />
-
-            <Parameter name="van Genuchten alpha" type="double" value="0.00051" />
-            <Parameter name="van Genuchten m" type="double" value="0.19" />
-            <Parameter name="residual saturation" type="double" value="0.0" />
-            <Parameter name="smoothing interval width [saturation]" type="double" value="0.1" />
-<!--
             <Parameter name="van Genuchten alpha" type="double" value="0.0005" />
             <Parameter name="van Genuchten n" type="double" value="1.39" />
             <Parameter name="residual saturation" type="double" value="0.05" />
             <Parameter name="smoothing interval width [saturation]" type="double" value="0.05" />
--->
           </ParameterList>
           <ParameterList name="mineral" type="ParameterList">
             <Parameter name="region" type="string" value="subsurface domain mineral" />
             <Parameter name="WRM Type" type="string" value="van Genuchten" />
-            <Parameter name="van Genuchten alpha" type="double" value="0.00033" />
-            <Parameter name="van Genuchten m" type="double" value="0.2481" />
-            <Parameter name="residual saturation" type="double" value="0.2" />
-	    <Parameter name="smoothing interval width [saturation]" type="double" value="0.1" />
-<!--
             <Parameter name="van Genuchten alpha" type="double" value="2.e-5" />
             <Parameter name="van Genuchten n" type="double" value="1.58" />
             <Parameter name="residual saturation" type="double" value="0.2" />
             <Parameter name="smoothing interval width [saturation]" type="double" value="0.05" />
--->
           </ParameterList>
         </ParameterList>
         <ParameterList name="permafrost model parameters" type="ParameterList">
@@ -364,32 +347,19 @@
           <ParameterList name="peat" type="ParameterList">
             <Parameter name="region" type="string" value="subsurface domain peat" />
             <Parameter name="thermal conductivity type" type="string" value="three-phase wet/dry" />
-            <Parameter name="thermal conductivity, saturated (unfrozen) [W/(m-K)]" type="double" value="0.6" />
-            <Parameter name="thermal conductivity, dry [W/(m-K)]" type="double" value="0.1" />
-	    <Parameter name="saturated beta frozen [-]" type="double" value="0.6" />
-            <Parameter name="unsaturated alpha frozen [-]" type="double" value="1.0" />
-            <Parameter name="unsaturated alpha unfrozen [-]" type="double" value="0.5" />
-<!--
             <Parameter name="thermal conductivity, saturated (unfrozen) [W/(m-K)]" type="double" value="0.67" />
             <Parameter name="thermal conductivity, dry [W/(m-K)]" type="double" value="0.07" />
             <Parameter name="unsaturated alpha frozen [-]" type="double" value="1.0" />
             <Parameter name="unsaturated alpha unfrozen [-]" type="double" value="0.5" />
--->
+
           </ParameterList>
           <ParameterList name="mineral" type="ParameterList">
             <Parameter name="region" type="string" value="subsurface domain mineral" />
             <Parameter name="thermal conductivity type" type="string" value="three-phase wet/dry" />
-            <Parameter name="thermal conductivity, saturated (unfrozen) [W/(m-K)]" type="double" value="1.1" />
-            <Parameter name="thermal conductivity, dry [W/(m-K)]" type="double" value="0.3" />
-            <Parameter name="saturated beta frozen [-]" type="double" value="0.65" />
-            <Parameter name="unsaturated alpha frozen [-]" type="double" value="1.0" />
-            <Parameter name="unsaturated alpha unfrozen [-]" type="double" value="0.5" />
-<!--
             <Parameter name="thermal conductivity, saturated (unfrozen) [W/(m-K)]" type="double" value="1.0" />
             <Parameter name="thermal conductivity, dry [W/(m-K)]" type="double" value="0.29" />
             <Parameter name="unsaturated alpha frozen [-]" type="double" value="1.0" />
             <Parameter name="unsaturated alpha unfrozen [-]" type="double" value="0.5" />
--->
           </ParameterList>
         </ParameterList>
       </ParameterList>
@@ -514,7 +484,6 @@
       </ParameterList>
 
       <ParameterList name="surface-ponded_depth" type="ParameterList">
-<!--        <Parameter name="field evaluator type" type="string" value="icy ponded depth" />-->
         <Parameter name="field evaluator type" type="string" value="ponded depth" />
       </ParameterList>
 
@@ -599,19 +568,6 @@
           <Parameter name="EOS type" type="string" value="ice" />
         </ParameterList>
       </ParameterList>
-
-<!--
-      <ParameterList name="surface-mass_density_ice" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="eos" />
-        <Parameter name="EOS basis" type="string" value="both" />
-        <Parameter name="molar density key" type="string" value="surface-molar_density_ice" />
-        <Parameter name="mass density key" type="string" value="surface-mass_density_ice" />
-        <Parameter name="pressure key" type="string" value="surface-effective_pressure" />
-        <ParameterList name="EOS parameters" type="ParameterList">
-          <Parameter name="EOS type" type="string" value="ice" />
-        </ParameterList>
-      </ParameterList>
--->
 
       <ParameterList name="internal_energy_liquid" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="iem" />
@@ -719,7 +675,7 @@
         </ParameterList>
       </ParameterList>
 
-      <ParameterList name="permeability" type="ParameterList">
+       <ParameterList name="permeability" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
         <Parameter name="constant in time" type="bool" value="true" />
         <ParameterList name="function" type="ParameterList">

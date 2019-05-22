@@ -11,9 +11,7 @@
 
   <ParameterList name="regions" type="ParameterList">
     <ParameterList name="subsurface domain" type="ParameterList">
-      <ParameterList name="region: box" type="ParameterList">
-        <Parameter name="low coordinate" type="Array(double)" value="{0.0,0.0,-45.0}" />
-        <Parameter name="high coordinate" type="Array(double)" value="{1.0,1.0,10.0}" />
+      <ParameterList name="region: all" type="ParameterList">
       </ParameterList>
     </ParameterList>
     <ParameterList name="subsurface domain peat" type="ParameterList">

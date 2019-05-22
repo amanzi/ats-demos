@@ -125,7 +125,7 @@
       </ParameterList>
 
       <ParameterList name="diffusion preconditioner" type="ParameterList">
-        <Parameter name="Newton approximation" type="string" value="true Jacobian" />
+        <Parameter name="include Newton correction" type="bool" value="true" />
       </ParameterList>
 
       <ParameterList name="preconditioner" type="ParameterList">
@@ -167,10 +167,11 @@
       </ParameterList>
 
       <ParameterList name="initial condition" type="ParameterList">
+        <Parameter name="initialize faces from cells" type="bool" value="true" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="initial pressure cells" type="ParameterList">
             <Parameter name="region" type="string" value="computational domain" />
-            <Parameter name="components" type="Array(string)" value="{cell,boundary_face}" />
+            <Parameter name="components" type="Array(string)" value="{cell}" />
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-linear" type="ParameterList">
                 <Parameter name="x0" type="Array(double)" value="{0.0,0.0,0.0,7.0}" />

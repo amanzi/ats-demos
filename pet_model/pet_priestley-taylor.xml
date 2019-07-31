@@ -10,7 +10,7 @@
       <Parameter name="mesh type" type="string" value="read mesh file" />
       <Parameter name="build columns from set" type="string" value="surface" />
       <ParameterList name="read mesh file parameters" type="ParameterList">
-        <Parameter name="file" type="string" value="../../../meshes/coweeta/coweeta-column-clm.exo" />
+        <Parameter name="file" type="string" value="../data/coweeta-column-clm.exo" />
         <Parameter name="format" type="string" value="Exodus II" />
       </ParameterList>
     </ParameterList>
@@ -28,7 +28,7 @@
     <ParameterList name="surface" type="ParameterList">
       <ParameterList name="region: labeled set" type="ParameterList">
         <Parameter name="label" type="string" value="2" />
-        <Parameter name="file" type="string" value="../../../meshes/coweeta/coweeta-column-clm.exo" />
+        <Parameter name="file" type="string" value="../data/coweeta-column-clm.exo" />
         <Parameter name="format" type="string" value="Exodus II" />
         <Parameter name="entity" type="string" value="Face" />
       </ParameterList>
@@ -36,7 +36,7 @@
     <ParameterList name="bottom face" type="ParameterList">
       <ParameterList name="region: labeled set" type="ParameterList">
         <Parameter name="label" type="string" value="1" />
-        <Parameter name="file" type="string" value="../../../meshes/coweeta/coweeta-column-clm.exo" />
+        <Parameter name="file" type="string" value="../data/coweeta-column-clm.exo" />
         <Parameter name="format" type="string" value="Exodus II" />
         <Parameter name="entity" type="string" value="Face" />
       </ParameterList>
@@ -52,7 +52,8 @@
   <ParameterList name="cycle driver" type="ParameterList">
     <Parameter name="start time" type="double" value="0.0" />
     <Parameter name="start time units" type="string" value="s" />
-    <Parameter name="end time" type="double" value="12043.0" />
+    <Parameter name="Eend time" type="double" value="12043.0" />
+    <Parameter name="end time" type="double" value="365.0" />
     <Parameter name="end time units" type="string" value="d" />
     <ParameterList name="PK tree" type="ParameterList">
       <ParameterList name="surface-subsurface coupler" type="ParameterList">
@@ -167,7 +168,7 @@
       </ParameterList>
 
       <ParameterList name="initial condition" type="ParameterList">
-        <Parameter name="restart file" type="string" value="../spinup-gi/checkpoint_final.h5" />
+        <Parameter name="restart file" type="string" value="../spinup/checkpoint_final.h5" />
       </ParameterList>
 
       <ParameterList name="water retention evaluator" type="ParameterList">
@@ -261,7 +262,7 @@
             <Parameter name="component" type="string" value="cell" />
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-tabular" type="ParameterList">
-                <Parameter name="file" type="string" value="../../../forcing_data/coweeta/coweeta1985-2017-daymet-CS1-inter.h5" />
+		<Parameter name="file" type="string" value="../data/coweeta1985-2017-daymet-CS1-inter.h5" />
                 <Parameter name="x header" type="string" value="time [s]" />
                 <Parameter name="y header" type="string" value="precipitation rain [m s^-1]" />
               </ParameterList>
@@ -276,7 +277,22 @@
           <Parameter name="verbosity level" type="string" value="none" />
         </ParameterList>
       </ParameterList>
+      
+      <ParameterList name="surface-total_transpiration" type="ParameterList">
+        <Parameter name="field evaluator type" type="string" value="column sum evaluator" />
+	<Parameter name="evaluator dependency" type="string" value="transpiration" />
+      </ParameterList>
 
+      <ParameterList name="surface-manning_coefficient">
+       <Parameter name="field evaluator type" type="string" value="secondary variable from function"/>
+       <Parameter name="evaluator dependencies" type="Array(string)" value="{surface-total_transpiration}"/>
+       <ParameterList name="function">
+         <ParameterList name="function-constant">
+           <Parameter name="value" type="double" value="100.0" />
+         </ParameterList>
+       </ParameterList>
+     </ParameterList>
+     
       <ParameterList name="transpiration" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="transpiration distribution via rooting depth" />
       </ParameterList>
@@ -297,12 +313,12 @@
         <Parameter name="field evaluator type" type="string" value="depth" />
       </ParameterList>
 
-      <ParameterList name="surface-transpiration" type="ParameterList">
+      <ParameterList name="surface-potential_transpiration" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="multiplicative evaluator" />
-        <Parameter name="evaluator dependencies" type="Array(string)" value="{surface-transpiration_mps,surface-molar_density_liquid}" />
+        <Parameter name="evaluator dependencies" type="Array(string)" value="{surface-potential_transpiration_mps,surface-molar_density_liquid}" />
       </ParameterList>
       
-      <ParameterList name="surface-transpiration_mps" type="ParameterList">
+      <ParameterList name="surface-potential_transpiration_mps" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="potential evapotranspiration" />
       </ParameterList>
 
@@ -314,7 +330,7 @@
             <Parameter name="component" type="string" value="cell" />
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-tabular" type="ParameterList">
-                <Parameter name="file" type="string" value="../../../forcing_data/coweeta/coweeta1985-2017-daymet-CS1-inter.h5" />
+                <Parameter name="file" type="string" value="../data/coweeta1985-2017-daymet-CS1-inter.h5" />
                 <Parameter name="x header" type="string" value="time [s]" />
                 <Parameter name="y header" type="string" value="air temperature [K]" />
               </ParameterList>
@@ -331,7 +347,7 @@
             <Parameter name="component" type="string" value="cell" />
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-tabular" type="ParameterList">
-                <Parameter name="file" type="string" value="../../../forcing_data/coweeta/coweeta1985-2017-daymet-CS1-inter.h5" />
+                <Parameter name="file" type="string" value="../data/coweeta1985-2017-daymet-CS1-inter.h5" />
                 <Parameter name="x header" type="string" value="previous time [s]" />
                 <Parameter name="y header" type="string" value="air temperature [K]" />
               </ParameterList>
@@ -348,7 +364,7 @@
             <Parameter name="component" type="string" value="cell" />
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-tabular" type="ParameterList">
-                <Parameter name="file" type="string" value="../../../forcing_data/coweeta/coweeta1985-2017-daymet-CS1-inter.h5" />
+                <Parameter name="file" type="string" value="../data/coweeta1985-2017-daymet-CS1-inter.h5" />
                 <Parameter name="x header" type="string" value="time [s]" />
                 <Parameter name="y header" type="string" value="relative humidity [-]" />
               </ParameterList>
@@ -364,7 +380,7 @@
             <Parameter name="component" type="string" value="cell" />
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-tabular" type="ParameterList">
-                <Parameter name="file" type="string" value="../../../forcing_data/coweeta/coweeta1985-2017-daymet-CS1-inter.h5" />
+                <Parameter name="file" type="string" value="../data/coweeta1985-2017-daymet-CS1-inter.h5" />
                 <Parameter name="x header" type="string" value="time [s]" />
                 <Parameter name="y header" type="string" value="incoming shortwave radiation [W m^-2]" />
               </ParameterList>
@@ -372,26 +388,8 @@
           </ParameterList>
         </ParameterList>
       </ParameterList>
-      <!--
-      <ParameterList name="surface-transpiration_mps" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="independent variable" />
-        <ParameterList name="function" type="ParameterList">
-          <ParameterList name="domain" type="ParameterList">
-            <Parameter name="region" type="string" value="surface domain" />
-            <Parameter name="component" type="string" value="cell" />
-            <ParameterList name="function" type="ParameterList">
-              <ParameterList name="function-tabular" type="ParameterList">
-                <Parameter name="file" type="string" value="../data/prescribed_pet.h5" />
-                <Parameter name="x header" type="string" value="time [s]" />
-                <Parameter name="y header" type="string" value="transpiration [m s^-1]" />
-              </ParameterList>
-            </ParameterList>
-          </ParameterList>
-        </ParameterList>
-      </ParameterList>
-      -->
 
-      <ParameterList name="surface-manning_coefficient" type="ParameterList">
+      <ParameterList name="SSsurface-manning_coefficient" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
         <Parameter name="constant in time" type="bool" value="true" />
         <ParameterList name="function" type="ParameterList">
@@ -416,7 +414,7 @@
             <Parameter name="component" type="string" value="cell" />
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
-                <Parameter name="value" type="double" value="0.25" />
+                <Parameter name="value" type="double" value="0.4" />
               </ParameterList>
             </ParameterList>
           </ParameterList>
@@ -445,7 +443,7 @@
             <Parameter name="component" type="string" value="cell" />
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
-                <Parameter name="value" type="double" value="2.5e-12" />
+                <Parameter name="value" type="double" value="1.0e-12" />
               </ParameterList>
             </ParameterList>
           </ParameterList>
@@ -588,7 +586,7 @@
       <Parameter name="verbosity level" type="string" value="none" />
     </ParameterList>
   </ParameterList>
-  <!--
+  
   <ParameterList name="visualization">
     <ParameterList name="domain" type="ParameterList">
       <Parameter name="file name base" type="string" value="visdump" />
@@ -599,7 +597,7 @@
       <Parameter name="times start period stop" type="Array(double)" value="{0.0,86400.0,-1.0}" />
     </ParameterList>
   </ParameterList>
--->
+
   <ParameterList name="observations" type="ParameterList">
     <ParameterList name="surface outlet flux" type="ParameterList">
       <Parameter name="variable" type="string" value="surface-mass_flux" />
@@ -610,29 +608,30 @@
       <Parameter name="location name" type="string" value="face" />
       <Parameter name="write interval" type="int" value="30" />
       <Parameter name="observation output filename" type="string" value="surface_outlet_flux.dat" />
-      <Parameter name="times start period stop" type="Array(double)" value="{0.0,8640.0,-1.0}" />
+      <Parameter name="times start period stop" type="Array(double)" value="{0.0,86400.0,-1.0}" />
     </ParameterList>
     <ParameterList name="surface-transpiration_mps" type="ParameterList">
-      <Parameter name="variable" type="string" value="surface-transpiration_mps" />
+      <Parameter name="variable" type="string" value="surface-potential_transpiration_mps" />
       <Parameter name="direction normalized flux" type="bool" value="true" />
       <Parameter name="region" type="string" value="surface" />
       <Parameter name="functional" type="string" value="observation data: extensive integral" />
       <Parameter name="delimiter" type="string" value=" " />
       <Parameter name="location name" type="string" value="cell" />
       <Parameter name="write interval" type="int" value="1" />
-      <Parameter name="observation output filename" type="string" value="surface-transpiration_mps.dat" />
-      <Parameter name="times start period stop" type="Array(double)" value="{0.0,8640.0,-1.0}" />
+      <Parameter name="observation output filename" type="string" value="surface-potential_transpiration_mps.dat" />
+      <Parameter name="times start period stop" type="Array(double)" value="{0.0,86400.0,-1.0}" />
     </ParameterList>
-    <ParameterList name="surface-transpiration" type="ParameterList">
-      <Parameter name="variable" type="string" value="surface-transpiration" />
+    
+    <ParameterList name="total_transpiration" type="ParameterList">
+      <Parameter name="variable" type="string" value="surface-total_transpiration" />
       <Parameter name="direction normalized flux" type="bool" value="true" />
       <Parameter name="region" type="string" value="surface" />
       <Parameter name="functional" type="string" value="observation data: extensive integral" />
       <Parameter name="delimiter" type="string" value=" " />
       <Parameter name="location name" type="string" value="cell" />
       <Parameter name="write interval" type="int" value="1" />
-      <Parameter name="observation output filename" type="string" value="surface-transpiration.dat" />
-      <Parameter name="times start period stop" type="Array(double)" value="{0.0,8640.0,-1.0}" />
+      <Parameter name="observation output filename" type="string" value="surface-total_transpiration.dat" />
+      <Parameter name="times start period stop" type="Array(double)" value="{0.0,86400.0,-1.0}" />
     </ParameterList>
   </ParameterList>
 

@@ -145,7 +145,7 @@
       <Parameter name="PK type" type="string" value="richards flow" />
       <Parameter name="primary variable key" type="string" value="pressure" />
       <Parameter name="source term" type="bool" value="true" />
-      <Parameter name="source key" type="string" value="transpiration" />
+      <Parameter name="source key" type="string" value="mass_source" />
       <Parameter name="initial time step" type="double" value="10.0" />
       <Parameter name="permeability rescaling" type="double" value="10000000.0" />
       <Parameter name="clobber surface rel perm" type="bool" value="false" />
@@ -283,6 +283,12 @@
         <Parameter name=" key" type="string" value="saturation_liquid" />
       </ParameterList>
 
+      <ParameterList name="mass_source" type="ParameterList">
+        <Parameter name="field evaluator type" type="string" value="additive evaluator" />
+        <Parameter name="evaluator dependencies" type="Array(string)" value="{transpiration}" />
+        <Parameter name="transpiration coefficient" type="double" value="-1" />
+      </ParameterList>
+      
       <ParameterList name="rooting_depth_fraction" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="rooting depth fraction" />
         <ParameterList name="rooting_depth_fraction parameters" type="ParameterList">

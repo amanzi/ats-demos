@@ -279,6 +279,8 @@
 
       <ParameterList name="transpiration" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="transpiration distribution via rooting depth" />
+        <Parameter name="water potential fraction key" type="string" value="saturation_liquid" />
+        <Parameter name=" key" type="string" value="saturation_liquid" />
       </ParameterList>
 
       <ParameterList name="rooting_depth_fraction" type="ParameterList">
@@ -297,12 +299,12 @@
         <Parameter name="field evaluator type" type="string" value="depth" />
       </ParameterList>
 
-      <ParameterList name="surface-transpiration" type="ParameterList">
+      <ParameterList name="surface-potential_transpiration" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="multiplicative evaluator" />
-        <Parameter name="evaluator dependencies" type="Array(string)" value="{surface-transpiration_mps,surface-molar_density_liquid}" />
+        <Parameter name="evaluator dependencies" type="Array(string)" value="{surface-potential_transpiration_mps,surface-molar_density_liquid}" />
       </ParameterList>
 
-      <ParameterList name="surface-transpiration_mps" type="ParameterList">
+      <ParameterList name="surface-potential_transpiration_mps" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="domain" type="ParameterList">

@@ -177,9 +177,9 @@
           <ParameterList name="computation domain" type="ParameterList">
             <Parameter name="region" type="string" value="computational domain" />
             <Parameter name="WRM Type" type="string" value="van Genuchten" />
-            <Parameter name="van Genuchten alpha" type="double" value="0.000545" />
-            <Parameter name="van Genuchten m" type="double" value="0.74" />
-            <Parameter name="residual saturation" type="double" value="0.1" />
+            <Parameter name="van Genuchten alpha" type="double" value="5.e-4" />
+            <Parameter name="van Genuchten n" type="double" value="1.39" />
+            <Parameter name="residual saturation" type="double" value="0.18" />
             <Parameter name="smoothing interval width [saturation]" type="double" value="0.1" />
           </ParameterList>
         </ParameterList>
@@ -274,17 +274,16 @@
         <Parameter name="field evaluator type" type="string" value="capillary pressure, atmospheric gas over liquid" />
       </ParameterList>
 
-      <ParameterList name="transpiration" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="transpiration distribution via rooting depth" />
-        <Parameter name="water potential fraction key" type="string" value="saturation_liquid" />
-      </ParameterList>
-
       <ParameterList name="mass_source" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="additive evaluator" />
         <Parameter name="evaluator dependencies" type="Array(string)" value="{transpiration}" />
         <Parameter name="transpiration coefficient" type="double" value="-1" />
       </ParameterList>
-      
+
+      <ParameterList name="transpiration" type="ParameterList">
+        <Parameter name="field evaluator type" type="string" value="transpiration distribution via rooting depth" />
+      </ParameterList>
+
       <ParameterList name="rooting_depth_fraction" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="rooting depth fraction" />
         <ParameterList name="rooting_depth_fraction parameters" type="ParameterList">
@@ -292,6 +291,17 @@
             <Parameter name="alpha" type="double" value="7" />
             <Parameter name="beta" type="double" value="1.75" />
             <Parameter name="max rooting depth [m]" type="double" value="1.5" />
+          </ParameterList>
+        </ParameterList>
+      </ParameterList>
+
+      <ParameterList name="plant_wilting_factor" type="ParameterList">
+        <Parameter name="field evaluator type" type="string" value="plant wilting factor" />
+        <ParameterList name="plant_wilting_factor parameters" type="ParameterList">
+          <ParameterList name="broadleaf_deciduous" type="ParameterList">
+            <Parameter name="region" type="string" value="surface domain" />
+            <Parameter name="capillary pressure at fully open stomates [Pa]" type="double" value=".35e6" />
+            <Parameter name="capillary pressure at wilting point [Pa]" type="double" value="2.24e6" />
           </ParameterList>
         </ParameterList>
       </ParameterList>

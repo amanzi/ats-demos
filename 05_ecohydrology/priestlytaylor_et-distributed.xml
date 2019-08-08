@@ -177,9 +177,9 @@
           <ParameterList name="computation domain" type="ParameterList">
             <Parameter name="region" type="string" value="computational domain" />
             <Parameter name="WRM Type" type="string" value="van Genuchten" />
-            <Parameter name="van Genuchten alpha" type="double" value="0.000545" />
-            <Parameter name="van Genuchten m" type="double" value="0.74" />
-            <Parameter name="residual saturation" type="double" value="0.1" />
+            <Parameter name="van Genuchten alpha" type="double" value="5.e-4" />
+            <Parameter name="van Genuchten n" type="double" value="1.39" />
+            <Parameter name="residual saturation" type="double" value="0.18" />
             <Parameter name="smoothing interval width [saturation]" type="double" value="0.1" />
           </ParameterList>
         </ParameterList>
@@ -581,10 +581,12 @@
   <ParameterList name="visualization">
     <ParameterList name="domain" type="ParameterList">
       <Parameter name="file name base" type="string" value="visdump" />
+      <Parameter name="cycles start period stop" type="Array(int)" value="{0,1,-1}" />
       <Parameter name="times start period stop" type="Array(double)" value="{0.0,86400.0,-1.0}" />
     </ParameterList>
     <ParameterList name="surface" type="ParameterList">
       <Parameter name="file name base" type="string" value="visdump_surface" />
+      <Parameter name="cycles start period stop" type="Array(int)" value="{0,1,-1}" />
       <Parameter name="times start period stop" type="Array(double)" value="{0.0,86400.0,-1.0}" />
     </ParameterList>
   </ParameterList>

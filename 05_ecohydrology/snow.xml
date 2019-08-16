@@ -58,7 +58,8 @@
   <ParameterList name="cycle driver" type="ParameterList">
     <Parameter name="start time" type="double" value="0.0" />
     <Parameter name="start time units" type="string" value="s" />
-    <Parameter name="end time" type="double" value="20.0" />
+    <Parameter name="end cycle" type="int" value="200" />
+    <Parameter name="end time" type="double" value="365.0" />
     <Parameter name="end time units" type="string" value="d" />
     <ParameterList name="PK tree" type="ParameterList">
       <ParameterList name="water balance" type="ParameterList">
@@ -92,6 +93,7 @@
       <Parameter name="domain name" type="string" value="snow" />
       <Parameter name="source term" type="bool" value="true" />
       <Parameter name="source key" type="string" value="snow-source_sink" />
+      <Parameter name="modify predictor positivity preserving" type="bool" value="true" />
       <Parameter name="initial time step" type="double" value="10.0" />
 
       <ParameterList name="initial condition" type="ParameterList">
@@ -389,7 +391,6 @@
      
       <ParameterList name="transpiration" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="transpiration distribution via rooting depth" />
-        <Parameter name="water potential fraction key" type="string" value="saturation_liquid" />
       </ParameterList>
 
       <ParameterList name="mass_source" type="ParameterList">
@@ -688,12 +689,17 @@
     <ParameterList name="domain" type="ParameterList">
       <Parameter name="file name base" type="string" value="visdump" />
       <Parameter name="cycles start period stop" type="Array(int)" value="{0,1,-1}" />
-      <Parameter name="times start period stop" type="Array(double)" value="{0.0,86400.0,-1.0}" />
+<!--      <Parameter name="times start period stop" type="Array(double)" value="{0.0,86400.0,-1.0}" />-->
     </ParameterList>
     <ParameterList name="surface" type="ParameterList">
       <Parameter name="file name base" type="string" value="visdump_surface" />
       <Parameter name="cycles start period stop" type="Array(int)" value="{0,1,-1}" />
-      <Parameter name="times start period stop" type="Array(double)" value="{0.0,86400.0,-1.0}" />
+<!--      <Parameter name="times start period stop" type="Array(double)" value="{0.0,86400.0,-1.0}" />-->
+    </ParameterList>
+    <ParameterList name="snow" type="ParameterList">
+      <Parameter name="file name base" type="string" value="visdump_surface" />
+      <Parameter name="cycles start period stop" type="Array(int)" value="{0,1,-1}" />
+<!--      <Parameter name="times start period stop" type="Array(double)" value="{0.0,86400.0,-1.0}" />-->
     </ParameterList>
   </ParameterList>
 
@@ -707,7 +713,7 @@
       <Parameter name="location name" type="string" value="face" />
       <Parameter name="write interval" type="int" value="30" />
       <Parameter name="observation output filename" type="string" value="surface_outlet_flux.dat" />
-      <Parameter name="times start period stop" type="Array(double)" value="{0.0,8640.0,-1.0}" />
+      <Parameter name="times start period stop" type="Array(double)" value="{0.0,86400.0,-1.0}" />
     </ParameterList>
     <ParameterList name="surface-transpiration_mps" type="ParameterList">
       <Parameter name="variable" type="string" value="surface-potential_transpiration_mps" />
@@ -717,7 +723,7 @@
       <Parameter name="location name" type="string" value="cell" />
       <Parameter name="write interval" type="int" value="30" />
       <Parameter name="observation output filename" type="string" value="surface-potential_transpiration_mps.dat" />
-      <Parameter name="times start period stop" type="Array(double)" value="{0.0,8640.0,-1.0}" />
+      <Parameter name="times start period stop" type="Array(double)" value="{0.0,86400.0,-1.0}" />
     </ParameterList>
     
     <ParameterList name="total_transpiration" type="ParameterList">
@@ -728,7 +734,7 @@
       <Parameter name="location name" type="string" value="cell" />
       <Parameter name="write interval" type="int" value="30" />
       <Parameter name="observation output filename" type="string" value="surface-total_transpiration.dat" />
-      <Parameter name="times start period stop" type="Array(double)" value="{0.0,8640.0,-1.0}" />
+      <Parameter name="times start period stop" type="Array(double)" value="{0.0,86400.0,-1.0}" />
     </ParameterList>
   </ParameterList>
 

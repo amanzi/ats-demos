@@ -385,7 +385,7 @@
               <Parameter name="regions" type="Array(string)" value="{top face}" />
               <ParameterList name="boundary concentration">
                 <Parameter name="field_out_key" type="string" value="surface-total_component_concentration" />
-                <Parameter name="copy_field_out_key" type="string" value="with source" />
+                <Parameter name="copy_field_out_key" type="string" value="default" />
               </ParameterList>
             </ParameterList>
           </ParameterList>
@@ -444,7 +444,7 @@
                 <Parameter name="field_out_key" type="string" value="total_component_concentration" />
                 <Parameter name="copy_field_out_key" type="string" value="default" />
                 <Parameter name="field_in_key" type="string" value="surface-total_component_concentration" />
-                <Parameter name="copy_field_in_key" type="string" value="with source" />
+                <Parameter name="copy_field_in_key" type="string" value="default" />
               </ParameterList>
             </ParameterList>
           </ParameterList>
@@ -671,7 +671,7 @@
         <ParameterList name="function">
           <ParameterList name="domain">
             <Parameter name="region" type="string" value="surface domain" />
-            <Parameter name="component" type="string" value="cell" />
+            <Parameter name="components" type="Array(string)" value="{cell,boundary_face}" />
             <ParameterList name="function">
               <ParameterList name="function-constant">
                 <Parameter name="value" type="double" value="274.65" />
@@ -721,11 +721,11 @@
     <ParameterList name="initial conditions">
 
       <ParameterList name="pressure">
-        <Parameter name="restart file" type="string" value="../data/restart_coupled_with_rain_src.h5" />
+        <Parameter name="restart file" type="string" value="../data/restart_coupled_with_rain_src_new.h5" />
       </ParameterList>
 
       <ParameterList name="surface-pressure">
-        <Parameter name="restart file" type="string" value="../data/restart_coupled_with_rain_src.h5" />
+        <Parameter name="restart file" type="string" value="../data/restart_coupled_with_rain_src_new.h5" />
       </ParameterList>
 
       <ParameterList name="atmospheric_pressure">

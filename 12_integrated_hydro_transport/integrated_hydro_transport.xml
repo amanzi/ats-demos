@@ -669,7 +669,7 @@
         <ParameterList name="function">
           <ParameterList name="domain">
             <Parameter name="region" type="string" value="surface domain" />
-            <Parameter name="component" type="string" value="cell" />
+	    <Parameter name="components" type="Array(string)" value="{cell,boundary_face}" />
             <ParameterList name="function">
               <ParameterList name="function-constant">
                 <Parameter name="value" type="double" value="274.65" />
@@ -719,11 +719,11 @@
     <ParameterList name="initial conditions">
 
       <ParameterList name="pressure">
-        <Parameter name="restart file" type="string" value="../data/restart_coupled.h5" />
+        <Parameter name="restart file" type="string" value="../data/restart_coupled_new.h5" />
       </ParameterList>
 
       <ParameterList name="surface-pressure">
-        <Parameter name="restart file" type="string" value="../data/restart_coupled.h5" />
+        <Parameter name="restart file" type="string" value="../data/restart_coupled_new.h5" />
       </ParameterList>
 
       <ParameterList name="atmospheric_pressure">

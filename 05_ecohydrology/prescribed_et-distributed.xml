@@ -283,6 +283,17 @@
         <Parameter name=" key" type="string" value="saturation_liquid" />
       </ParameterList>
 
+      <ParameterList name="plant_wilting_factor" type="ParameterList">
+        <Parameter name="field evaluator type" type="string" value="plant wilting factor" />
+        <ParameterList name="plant_wilting_factor parameters" type="ParameterList">
+          <ParameterList name="surface" type="ParameterList">
+            <Parameter name="region" type="string" value="surface domain" />
+            <Parameter name="capillary pressure at fully open stomates [Pa]" type="double" value="350000.0" />
+            <Parameter name="capillary pressure at wilting point [Pa]" type="double" value="2240000.0" />
+          </ParameterList>
+        </ParameterList>
+      </ParameterList>
+      
       <ParameterList name="mass_source" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="additive evaluator" />
         <Parameter name="evaluator dependencies" type="Array(string)" value="{transpiration}" />

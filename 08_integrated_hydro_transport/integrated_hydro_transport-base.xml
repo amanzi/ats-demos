@@ -121,7 +121,7 @@
     </ParameterList>
     <ParameterList name="PK tree">
       <ParameterList name="Flow and Reactive Transport">
-        <Parameter name="PK type" type="string" value="flow reactive transport ATS" />
+        <Parameter name="PK type" type="string" value="flow reactive transport" />
         <ParameterList name="surface-subsurface flow coupler">
           <Parameter name="PK type" type="string" value="coupled water" />
           <ParameterList name="flow">
@@ -157,7 +157,7 @@
   <ParameterList name="PKs">
 
     <ParameterList name="Flow and Reactive Transport">
-      <Parameter name="PK type" type="string" value="flow reactive transport ATS" />
+      <Parameter name="PK type" type="string" value="flow reactive transport" />
       <Parameter name="PKs order" type="Array(string)" value="{surface-subsurface flow coupler, surface-subsurface transport coupler}" />
       <Parameter name="master PK index" type="int" value="0" />
       <ParameterList name="verbose object">
@@ -348,6 +348,7 @@
 
     <ParameterList name="subsurface transport">
       <Parameter name="PK type" type="string" value="transport ats" />
+      <Parameter name="primary variable key" type="string" value="total_component_concentration" />      
       <Parameter name="saturation liquid key" type="string" value="saturation_liquid" />
       <Parameter name="previous saturation liquid key" type="string" value="prev_saturation_liquid" />
       <Parameter name="flux_key" type="string" value="mass_flux" />
@@ -396,6 +397,7 @@
 
     <ParameterList name="surface transport">
       <Parameter name="PK type" type="string" value="transport ats" />
+      <Parameter name="primary variable key" type="string" value="total_component_concentration"/>            
       <Parameter name="domain name" type="string" value="surface" />
       <Parameter name="saturation liquid key" type="string" value="surface-ponded_depth" />
       <Parameter name="previous saturation liquid key" type="string" value="surface-prev_ponded_depth" />

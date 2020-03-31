@@ -1,5 +1,6 @@
 <ParameterList name="Main" type="ParameterList">
   <ParameterList name="mesh" type="ParameterList">
+                <Parameter name="value" type="double" value="2" />
     <ParameterList name="surface" type="ParameterList">
       <Parameter name="mesh type" type="string" value="surface" />
       <ParameterList name="Expert" type="ParameterList">
@@ -227,7 +228,7 @@
             <Parameter name="component" type="string" value="cell" />
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
-                <Parameter name="value" type="double" value="2" />
+                <Parameter name="value" type="double" value="370" />
               </ParameterList>              
             </ParameterList>
           </ParameterList>

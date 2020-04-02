@@ -1,6 +1,5 @@
 <ParameterList name="Main" type="ParameterList">
   <ParameterList name="mesh" type="ParameterList">
-                <Parameter name="value" type="double" value="2" />
     <ParameterList name="surface" type="ParameterList">
       <Parameter name="mesh type" type="string" value="surface" />
       <ParameterList name="Expert" type="ParameterList">

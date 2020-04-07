@@ -63,7 +63,7 @@
       <Parameter name="PK type" type="string" value="FATES" />
       <Parameter name="primary variable key" type="string" value="surface-biomass" />
       <Parameter name="domain name" type="string" value="surface" />
-      <Parameter name="fates parameter file" type="string" value="../parameter_files/fates_params_default_c20200213.saltmarsh.update.nc" />
+      <Parameter name="fates parameter file" type="string" value="../parameter_files/fates_params_default_c20200213.saltmarsh.update1.nc" />
       <Parameter name="clm parameter file" type="string" value="../parameter_files/clm_params_c180301.nc" />
       <Parameter name="latitude" type="double" value="33.335" />
       <Parameter name="longitude" type="double" value="280.81" />            

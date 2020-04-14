@@ -206,7 +206,7 @@
       <Parameter name="chemistry model" type="string" value="Alquimia" />
       <Parameter name="saturation liquid key suffix" type="string" value="ponded_depth" />
       <Parameter name="domain name" type="string" value="surface" />
-      <Parameter name="engine input file" type="string" value="../data/pflotran_in/denitrification_reach_srun4b.in" />
+      <Parameter name="engine input file" type="string" value="../data/pflotran_in/denitrification_reach.in" />
       <Parameter name="activity model" type="string" value="unit" />
       <Parameter name="maximum Newton iterations" type="int" value="100" />
       <Parameter name="tolerance" type="double" value="1e-12" />

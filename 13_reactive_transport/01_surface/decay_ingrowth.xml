@@ -315,11 +315,6 @@
       <ParameterList name="atmospheric_pressure" type="ParameterList">
         <Parameter name="value" type="double" value="101325.0" />
       </ParameterList>
-      
-      <!--
-      <ParameterList name="surface-pressure" type="ParameterList">
-        <Parameter name="restart file" type="string" value="../data/restart_run_surface_flow2.h5" />
-      </ParameterList>-->
 
       <ParameterList name="gravity" type="ParameterList">
         <Parameter name="value" type="Array(double)" value="{0.0,0.0,-9.80665}" />
@@ -330,30 +325,10 @@
           <Parameter name="regions" type="Array(string)" value="{surface domain}" />
         </ParameterList>
       </ParameterList>
-
       
-      <!--
-      <ParameterList name="surface-total_component_concentration" type="ParameterList">
-        <ParameterList name="function" type="ParameterList">
-          <ParameterList name="All" type="ParameterList">
-            <Parameter name="regions" type="Array(string)" value="{surface domain}" />
-            <Parameter name="component" type="string" value="cell" />
-            <ParameterList name="function" type="ParameterList">
-              <Parameter name="number of dofs" type="int" value="1" />
-              <Parameter name="function type" type="string" value="composite function" />
-              <ParameterList name="dof 1 function" type="ParameterList">
-                <ParameterList name="function-constant" type="ParameterList">
-                  <Parameter name="value" type="double" value="0.0" />
-                </ParameterList>
-              </ParameterList>
-            </ParameterList>
-          </ParameterList>
-        </ParameterList>
-      </ParameterList>
-      -->
     </ParameterList>
   </ParameterList>
-   <ParameterList name="solvers">
+  <ParameterList name="solvers">
     <ParameterList name="PCG with Hypre AMG">
       <Parameter name="preconditioner" type="string" value="Hypre AMG"/>
       <Parameter name="iterative method" type="string" value="pcg"/>

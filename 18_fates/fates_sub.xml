@@ -67,6 +67,7 @@
       <Parameter name="clm parameter file" type="string" value="../parameter_files/clm_params_c180301.nc" />
       <Parameter name="latitude" type="double" value="33.335" />
       <Parameter name="longitude" type="double" value="280.81" />            
+      <Parameter name="number of patches" type="int" value="10" />            
       
       <ParameterList name="initial condition" type="ParameterList">
         <ParameterList name="function" type="ParameterList">

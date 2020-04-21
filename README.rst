@@ -33,20 +33,30 @@ some of, and maybe all of, the following components:
 Running the demos
 ---------------------
 
+You will need to have Amanzi and ATS built and in your path. A Dockerfile
+is included with this repository that will provide a container with everything
+set up and ready.
+
 Running all of the demos can take some time, but individual demos are
 often fairly quick.  To run a given demo, make sure `ats` is compiled
 and (preferably) in your path, and then:
 
-```python run_demos.py path_to_suite.cfg```
+```
+python run_demos.py path_to_suite.cfg
+```
 
 or
 
-```python run_demos.py path_to_suite.cfg -t suite_name-test_name```
+```
+python run_demos.py path_to_suite.cfg -t suite_name-test_name
+```
 
 Note that some individual runs may depend upon results from previous
 runs in that suite, and so all demos in that suite should be run.
 This is particularly true for demos that show a full workflow, such as
 `ecohydrology` or `arctic_hydrology`.
+
+To run all of the demos sequentially, run the `run_all.sh` script.
 
 
 Visualizing the results
@@ -56,6 +66,8 @@ Inside each subdirectory is a jupyter notebook.  Jupyter comes fairly
 standard with most comprehensive python installations.  Anaconda
 python is the one most ATS developers use, and its default
 installation includes nearly all python packages used by ATS.
+
+You will also need `h5py`
 
 
 Demonstration Problems

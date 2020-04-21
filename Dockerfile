@@ -1,4 +1,4 @@
-FROM continuumio/miniconda3 as conda
+FROM continuumio/miniconda2 as conda
 
 RUN conda install jupyter numpy matplotlib h5py
 

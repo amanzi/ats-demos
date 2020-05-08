@@ -11,7 +11,7 @@
       <ParameterList name="logical mesh parameters" type="ParameterList">
         <ParameterList name="segments" type="ParameterList">
 	  <ParameterList name="Stream" type="ParameterList">
-            <Parameter name="number of cells" type="int" value="1" />
+            <Parameter name="number of cells" type="int" value="100" />
 	    <Parameter name="total length" type="double" value="1000" />
             <Parameter name="cross sectional area [m^2]" type="double" value="1.0" />
             <Parameter name="first tip" type="Array(double)" value="{0.0,0.0,0.0}" />
@@ -56,7 +56,7 @@
     <ParameterList name="surface domain" type="ParameterList">
       <ParameterList name="region: all" type="ParameterList"/>
     </ParameterList>
-
+    
     <ParameterList name="surface west" type="ParameterList">
       <ParameterList name="region: enumerated set" type="ParameterList">
         <Parameter name="entity" type="string" value="cell" />
@@ -130,7 +130,7 @@
     <ParameterList name="surface-component_concentration">
       <Parameter name="variable" type="string" value="surface-total_component_concentration"/>
       <Parameter name="direction normalized flux" type="bool" value="true" />
-      <Parameter name="functional" type="string" value="observation data: extensive integral"/>
+      <Parameter name="functional" type="string" value="observation data: point"/>
       <Parameter name="region" type="string" value="surface east"/>
       <Parameter name="delimiter" type="string" value=" "/>
       <Parameter name="location name" type="string" value="cell"/>
@@ -167,7 +167,7 @@
       <Parameter name="PKs order" type="Array(string)" value="{surface chemistry, surface transport}" />
       <Parameter name="transport index" type="int" value="1" />
       <ParameterList name="verbose object" type="ParameterList">
-        <Parameter name="verbosity level" type="string" value="high" />
+        <Parameter name="verbosity level" type="string" value="low" />
       </ParameterList>
     </ParameterList>
     
@@ -190,7 +190,7 @@
       <Parameter name="number of gaseous components" type="int" value="0" />
       <Parameter name="runtime diagnostics: regions" type="Array(string)" value="{}" />
       <ParameterList name="verbose object" type="ParameterList">
-        <Parameter name="verbosity level" type="string" value="high" />
+        <Parameter name="verbosity level" type="string" value="low" />
         <Parameter name="name" type="string" value="Transport" />
       </ParameterList>
       <Parameter name="debug cells" type="Array(int)" value="{0,99}" />
@@ -269,7 +269,7 @@
             </ParameterList>
             
           </ParameterList>
-
+	  
 	  <ParameterList name="Tracer2" type="ParameterList">
             
             <ParameterList name="SINK: to subgrid" type="ParameterList">
@@ -289,7 +289,7 @@
               <Parameter name="regions" type="Array(string)" value="{surface domain}" />
               <Parameter name="spatial distribution method" type="string" value="subgrid return" />
               <ParameterList name="sink" type="ParameterList">
-                <Parameter name="subgrid field suffix" type="string" value="total_component_concentration" /><!--?? -->
+                <Parameter name="subgrid field suffix" type="string" value="total_component_concentration" />
                 <Parameter name="domain subgrid field" type="string" value="subgrid" />
                 <ParameterList name="function" type="ParameterList">
                   <ParameterList name="function-constant" type="ParameterList">
@@ -334,7 +334,7 @@
       <Parameter name="initial conditions time" type="double" value="0.0" />
       <Parameter name="number of component concentrations" type="int" value="2" />
       <ParameterList name="verbose object" type="ParameterList">
-        <Parameter name="verbosity level" type="string" value="high" />
+        <Parameter name="verbosity level" type="string" value="low" />
       </ParameterList>
       <Parameter name="debug cells" type="Array(int)" value="{0,99}" />
 
@@ -379,8 +379,9 @@
       <Parameter name="number of aqueous components" type="int" value="2" />
       <Parameter name="number of gaseous components" type="int" value="0" />
       <Parameter name="runtime diagnostics: regions" type="Array(string)" value="{}" />
+       <Parameter name="debug cells" type="Array(int)" value="{0}" />
       <ParameterList name="verbose object" type="ParameterList">
-        <Parameter name="verbosity level" type="string" value="none" />
+        <Parameter name="verbosity level" type="string" value="low" />
         <Parameter name="name" type="string" value="Transport" />
       </ParameterList>
 
@@ -569,7 +570,7 @@
         <Parameter name="constant in time" type="bool" value="true" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="rest domain" type="ParameterList">
-            <Parameter name="region" type="string" value="tau_space" />
+            <Parameter name="region" type="string" value="ENTIRE_MESH_REGION" />
             <Parameter name="components" type="Array(string)" value="{cell}" />
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
@@ -586,7 +587,7 @@
         <Parameter name="constant in time" type="bool" value="true" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="rest domain" type="ParameterList">
-            <Parameter name="region" type="string" value="tau_space" />
+            <Parameter name="region" type="string" value="ENTIRE_MESH_REGION" />
             <Parameter name="components" type="Array(string)" value="{face}" />
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
@@ -630,7 +631,7 @@
         <Parameter name="constant in time" type="bool" value="true" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="rest domain" type="ParameterList">
-            <Parameter name="region" type="string" value="tau_space" />
+            <Parameter name="region" type="string" value="ENTIRE_MESH_REGION" />
             <Parameter name="components" type="Array(string)" value="{cell}" />
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
@@ -646,7 +647,7 @@
         <Parameter name="constant in time" type="bool" value="true" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="rest domain" type="ParameterList">
-            <Parameter name="region" type="string" value="tau_space" />
+            <Parameter name="region" type="string" value="ENTIRE_MESH_REGION" />
             <Parameter name="components" type="Array(string)" value="{cell}" />
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
@@ -662,7 +663,7 @@
         <Parameter name="constant in time" type="bool" value="true" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="rest domain" type="ParameterList">
-            <Parameter name="region" type="string" value="tau_space" />
+            <Parameter name="region" type="string" value="ENTIRE_MESH_REGION" />
             <Parameter name="components" type="Array(string)" value="{cell}" />
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
@@ -687,6 +688,12 @@
       <ParameterList name="surface-geochemical conditions" type="ParameterList">
         <ParameterList name="initial" type="ParameterList">
           <Parameter name="regions" type="Array(string)" value="{surface domain}" />
+        </ParameterList>
+      </ParameterList>
+
+      <ParameterList name="subgrid_*-geochemical conditions" type="ParameterList">
+        <ParameterList name="initial" type="ParameterList">
+          <Parameter name="regions" type="Array(string)" value="{tau_space}" />
         </ParameterList>
       </ParameterList>
       

@@ -28,7 +28,7 @@ GAS_SPECIES
   # DOM aerobic respiration
   MICROBIAL_REACTION
     REACTION 1.0e+00 DOM1  + 1.0e+00 O2(aq)  -> 1.0e+00 HCO3- + 1.0 H+ 
-    RATE_CONSTANT       0.0e-08
+    RATE_CONSTANT       5.0e-08
     MONOD
       SPECIES_NAME        O2(aq)
       HALF_SATURATION_CONSTANT 3.0e-06
@@ -43,7 +43,7 @@ GAS_SPECIES
   # DOM denitrification 
   MICROBIAL_REACTION
     REACTION 1.0e+00 DOM1  + 0.8e+00 NO3- + 0.8 H+  -> 1.0 HCO3- + 1.0 H+  + 0.4 N2(aq) 
-    RATE_CONSTANT       0.0e-08
+    RATE_CONSTANT       1.0e-08
     MONOD
       SPECIES_NAME       NO3-  
       HALF_SATURATION_CONSTANT 1.0e-05

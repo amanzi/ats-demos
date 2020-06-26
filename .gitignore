@@ -4,3 +4,4 @@
 *.ipynb_checkpoints
 LOGS/
 *.pyc
+.DS_Store

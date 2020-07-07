@@ -1,6 +1,5 @@
 <ParameterList name="Main" type="ParameterList">
   <ParameterList name="mesh" type="ParameterList">
-                <Parameter name="value" type="double" value="2" />
     <ParameterList name="surface" type="ParameterList">
       <Parameter name="mesh type" type="string" value="surface" />
       <ParameterList name="Expert" type="ParameterList">
@@ -49,7 +48,7 @@
   <ParameterList name="cycle driver" type="ParameterList">
     <Parameter name="start time" type="double" value="0" />
     <Parameter name="start time units" type="string" value="s" />
-    <Parameter name="end time" type="double" value="1" />
+    <Parameter name="end time" type="double" value="2" />
     <Parameter name="end time units" type="string" value="y" />
     <!-- <Parameter name="end cycle" type="int" value="10" />     -->
     <ParameterList name="PK tree" type="ParameterList">
@@ -68,6 +67,7 @@
       <Parameter name="clm parameter file" type="string" value="../parameter_files/clm_params_c180301.nc" />
       <Parameter name="latitude" type="double" value="33.335" />
       <Parameter name="longitude" type="double" value="280.81" />            
+      <Parameter name="number of patches" type="int" value="10" />            
       
       <ParameterList name="initial condition" type="ParameterList">
         <ParameterList name="function" type="ParameterList">
@@ -379,12 +379,12 @@
   <ParameterList name="visualization">
     <ParameterList name="domain" type="ParameterList">
       <Parameter name="file name base" type="string" value="visdump" />
-      <Parameter name="times start period stop" type="Array(double)" value="{0.0,600.0,-1.0}" />
+      <!-- <Parameter name="times start period stop" type="Array(double)" value="{0.0,600.0,-1.0}" /> -->
     </ParameterList>
     <ParameterList name="surface" type="ParameterList">
       <Parameter name="file name base" type="string" value="visdump_surface" />
-      <Parameter name="times start period stop" type="Array(double)" value="{0.0,600.0,-1.0}" />
-      <Parameter name="cycles start period stop" type="Array(int)" value="{0, 1,-1}" />            
+      <Parameter name="times start period stop" type="Array(double)" value="{0.0,86400.0,-1.0}" />
+      <!-- <Parameter name="cycles start period stop" type="Array(int)" value="{0, 1,-1}" />             -->
     </ParameterList>
   </ParameterList>
 

@@ -178,9 +178,9 @@
           <ParameterList name="computation domain" type="ParameterList">
             <Parameter name="region" type="string" value="computational domain" />
             <Parameter name="WRM Type" type="string" value="van Genuchten" />
-            <Parameter name="van Genuchten alpha" type="double" value="0.000545" />
-            <Parameter name="van Genuchten m" type="double" value="0.74" />
-            <Parameter name="residual saturation" type="double" value="0.1" />
+            <Parameter name="van Genuchten alpha [Pa^-1]" type="double" value="0.000545" />
+            <Parameter name="van Genuchten m [-]" type="double" value="0.74" />
+            <Parameter name="residual saturation [-]" type="double" value="0.1" />
             <Parameter name="smoothing interval width [saturation]" type="double" value="0.1" />
           </ParameterList>
         </ParameterList>
@@ -210,18 +210,18 @@
         <Parameter name="Newton correction" type="string" value="true Jacobian" />
       </ParameterList>
 
-       <ParameterList name="boundary conditions">
-         <ParameterList name="seepage face head">
-           <ParameterList name="surface">
-             <Parameter name="regions" type="Array(string)" value="{outlet}" />
-             <ParameterList name="boundary head">
-               <ParameterList name="function-constant">
-                 <Parameter name="value" type="double" value="5.00e-01" />
-               </ParameterList>
-             </ParameterList>
-           </ParameterList>
-         </ParameterList>
-       </ParameterList>
+      <ParameterList name="boundary conditions">
+        <ParameterList name="seepage face head">
+          <ParameterList name="surface">
+            <Parameter name="regions" type="Array(string)" value="{outlet}" />
+            <ParameterList name="boundary head">
+              <ParameterList name="function-constant">
+                <Parameter name="value" type="double" value="0.5" />
+              </ParameterList>
+            </ParameterList>
+          </ParameterList>
+        </ParameterList>
+      </ParameterList>
 
       <ParameterList name="initial condition" type="ParameterList">
         <Parameter name="initialize surface head from subsurface" type="bool" value="true" />
@@ -262,7 +262,7 @@
             <Parameter name="component" type="string" value="cell" />
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-tabular" type="ParameterList">
-		<Parameter name="file" type="string" value="../data/coweeta1985-2017-daymet-CS1-inter.h5" />
+                <Parameter name="file" type="string" value="../data/coweeta1985-2017-daymet-CS1-inter.h5" />
                 <Parameter name="x header" type="string" value="time [s]" />
                 <Parameter name="y header" type="string" value="precipitation rain [m s^-1]" />
               </ParameterList>
@@ -277,22 +277,22 @@
           <Parameter name="verbosity level" type="string" value="none" />
         </ParameterList>
       </ParameterList>
-      
+
       <ParameterList name="surface-total_transpiration" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="column sum evaluator" />
-	<Parameter name="evaluator dependency" type="string" value="transpiration" />
+        <Parameter name="evaluator dependency" type="string" value="transpiration" />
       </ParameterList>
 
       <ParameterList name="surface-manning_coefficient">
-       <Parameter name="field evaluator type" type="string" value="secondary variable from function"/>
-       <Parameter name="evaluator dependencies" type="Array(string)" value="{surface-total_transpiration}"/>
-       <ParameterList name="function">
-         <ParameterList name="function-constant">
-           <Parameter name="value" type="double" value="100.0" />
-         </ParameterList>
-       </ParameterList>
-     </ParameterList>
-     
+        <Parameter name="field evaluator type" type="string" value="secondary variable from function" />
+        <Parameter name="evaluator dependencies" type="Array(string)" value="{surface-total_transpiration}" />
+        <ParameterList name="function">
+          <ParameterList name="function-constant">
+            <Parameter name="value" type="double" value="100.0" />
+          </ParameterList>
+        </ParameterList>
+      </ParameterList>
+
       <ParameterList name="transpiration" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="transpiration distribution via rooting depth" />
       </ParameterList>
@@ -301,7 +301,7 @@
         <Parameter name="field evaluator type" type="string" value="rooting depth fraction" />
         <ParameterList name="rooting_depth_fraction parameters" type="ParameterList">
           <ParameterList name="generic PFT" type="ParameterList">
-            <Parameter name="alpha" type="double" value="7" />
+            <Parameter name="alpha" type="double" value="7.0" />
             <Parameter name="beta" type="double" value="1.75" />
             <Parameter name="max rooting depth [m]" type="double" value="1.5" />
           </ParameterList>
@@ -317,7 +317,7 @@
         <Parameter name="field evaluator type" type="string" value="multiplicative evaluator" />
         <Parameter name="evaluator dependencies" type="Array(string)" value="{surface-potential_transpiration_mps,surface-molar_density_liquid}" />
       </ParameterList>
-      
+
       <ParameterList name="surface-potential_transpiration_mps" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="potential evapotranspiration" />
       </ParameterList>
@@ -372,6 +372,7 @@
           </ParameterList>
         </ParameterList>
       </ParameterList>
+
       <ParameterList name="surface-shortwave_radiation" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
         <ParameterList name="function" type="ParameterList">
@@ -401,6 +402,7 @@
                 <Parameter name="value" type="double" value="0.15" />
               </ParameterList>
             </ParameterList>
+            <Parameter name="components" type="Array(string)" value="{cell,boundary_face}" />
           </ParameterList>
         </ParameterList>
       </ParameterList>
@@ -443,7 +445,7 @@
             <Parameter name="component" type="string" value="cell" />
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
-                <Parameter name="value" type="double" value="1.0e-12" />
+                <Parameter name="value" type="double" value="1e-12" />
               </ParameterList>
             </ParameterList>
           </ParameterList>
@@ -483,7 +485,7 @@
             <Parameter name="components" type="Array(string)" value="{cell, boundary_face}" />
             <ParameterList name="function">
               <ParameterList name="function-constant">
-                <Parameter name="value" type="double" value="55000" />
+                <Parameter name="value" type="double" value="55000.0" />
               </ParameterList>
             </ParameterList>
           </ParameterList>
@@ -499,7 +501,7 @@
             <Parameter name="component" type="string" value="cell" />
             <ParameterList name="function">
               <ParameterList name="function-constant">
-                <Parameter name="value" type="double" value="997" />
+                <Parameter name="value" type="double" value="997.0" />
               </ParameterList>
             </ParameterList>
           </ParameterList>
@@ -515,7 +517,7 @@
             <Parameter name="components" type="Array(string)" value="{cell, boundary_face}" />
             <ParameterList name="function">
               <ParameterList name="function-constant">
-                <Parameter name="value" type="double" value="8.9e-4" />
+                <Parameter name="value" type="double" value="0.00089" />
               </ParameterList>
             </ParameterList>
           </ParameterList>
@@ -531,7 +533,7 @@
             <Parameter name="components" type="Array(string)" value="{cell}" />
             <ParameterList name="function">
               <ParameterList name="function-constant">
-                <Parameter name="value" type="double" value="55000" />
+                <Parameter name="value" type="double" value="55000.0" />
               </ParameterList>
             </ParameterList>
           </ParameterList>
@@ -547,7 +549,7 @@
             <Parameter name="components" type="Array(string)" value="{cell}" />
             <ParameterList name="function">
               <ParameterList name="function-constant">
-                <Parameter name="value" type="double" value="55000" />
+                <Parameter name="value" type="double" value="55000.0" />
               </ParameterList>
             </ParameterList>
           </ParameterList>
@@ -563,13 +565,13 @@
             <Parameter name="component" type="string" value="cell" />
             <ParameterList name="function">
               <ParameterList name="function-constant">
-                <Parameter name="value" type="double" value="997" />
+                <Parameter name="value" type="double" value="997.0" />
               </ParameterList>
             </ParameterList>
           </ParameterList>
         </ParameterList>
       </ParameterList>
-      
+
     </ParameterList>
     <ParameterList name="initial conditions" type="ParameterList">
 
@@ -586,7 +588,6 @@
       <Parameter name="verbosity level" type="string" value="none" />
     </ParameterList>
   </ParameterList>
-  
   <ParameterList name="visualization">
     <ParameterList name="domain" type="ParameterList">
       <Parameter name="file name base" type="string" value="visdump" />
@@ -621,7 +622,6 @@
       <Parameter name="observation output filename" type="string" value="surface-potential_transpiration_mps.dat" />
       <Parameter name="times start period stop" type="Array(double)" value="{0.0,86400.0,-1.0}" />
     </ParameterList>
-    
     <ParameterList name="total_transpiration" type="ParameterList">
       <Parameter name="variable" type="string" value="surface-total_transpiration" />
       <Parameter name="direction normalized flux" type="bool" value="true" />
@@ -634,7 +634,4 @@
       <Parameter name="times start period stop" type="Array(double)" value="{0.0,86400.0,-1.0}" />
     </ParameterList>
   </ParameterList>
-
-
-
 </ParameterList>

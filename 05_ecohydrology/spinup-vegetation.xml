@@ -80,34 +80,20 @@
 
       <ParameterList name="pft parameters" type="ParameterList">
         <ParameterList name="deciduous">
-          <Parameter name="Vcmax25 [micromol CO2 / m^2(leaf) s]" type="double" value="60."/>
-          <Parameter name="Emax25 [micromol C / m^2(leaf) s]" type="double" value="6."/>
-          <Parameter name="SLA [m^2(leaf) / kg C" type="double" value="12."/>
-          <Parameter name="max root depth [m]" type="double" value="5."/>
-          <Parameter name="evergreen" type="bool" value="false"/>
-          <Parameter name="ratio of leaf to root [-]" type="double" value="1.0"/>
-          <Parameter name="ratio of leaf to stem [-]" type="double" value="0.05"/>
-          <Parameter name="stem longevity [yr]" type="double" value="200"/>
-          <Parameter name="leaf longevity [yr]" type="double" value="1"/>
-          <Parameter name="root longevity [yr]" type="double" value="1"/>
-          <Parameter name="height [m]" type="double" value="20"/>
-          <Parameter name="stomatal conductance to photosynthetic rate slope (mp) [?]" type="double" value="9"/>
-          <Parameter name="wood density [kg m^-3]" type="double" value=".6e3"/>
-          
+          <Parameter name="Vcmax25 [micromol CO2 / m^2(leaf) s]" type="double" value="60.0" />
+          <Parameter name="Emax25 [micromol C / m^2(leaf) s]" type="double" value="6.0" />
+          <Parameter name="SLA [m^2(leaf) / kg C" type="double" value="12.0" />
+          <Parameter name="max root depth [m]" type="double" value="5.0" />
+          <Parameter name="evergreen" type="bool" value="false" />
+          <Parameter name="ratio of leaf to root [-]" type="double" value="1.0" />
+          <Parameter name="ratio of leaf to stem [-]" type="double" value="0.05" />
+          <Parameter name="stem longevity [yr]" type="double" value="200.0" />
+          <Parameter name="leaf longevity [yr]" type="double" value="1.0" />
+          <Parameter name="root longevity [yr]" type="double" value="1.0" />
+          <Parameter name="height [m]" type="double" value="20.0" />
+          <Parameter name="stomatal conductance to photosynthetic rate slope (mp) [?]" type="double" value="9.0" />
+          <Parameter name="wood density [kg m^-3]" type="double" value="600.0" />
         </ParameterList>
-
-        <!-- <ParameterList name="grass"> -->
-        <!--   <Parameter name="Vcmax25 [micromol CO2 / m^2(leaf) s]" type="double" value="20."/> -->
-        <!--   <Parameter name="Emax25 [micromol C / m^2(leaf) s]" type="double" value="2."/> -->
-        <!--   <Parameter name="SLA [m^2(leaf) / kg C" type="double" value="30."/> -->
-        <!--   <Parameter name="max root depth [m]" type="double" value=".5"/> -->
-        <!--   <Parameter name="evergreen" type="bool" value="false"/> -->
-        <!--   <Parameter name="ratio of leaf to root [-]" type="double" value="0.8"/> -->
-        <!--   <Parameter name="ratio of leaf to stem [-]" type="double" value="0.5"/> -->
-        <!--   <Parameter name="stem longevity [yr]" type="double" value="5"/> -->
-        <!--   <Parameter name="leaf longevity [yr]" type="double" value="1"/> -->
-        <!--   <Parameter name="root longevity [yr]" type="double" value="1"/> -->
-        <!-- </ParameterList> -->
       </ParameterList>
 
       <ParameterList name="soil carbon parameters" type="ParameterList">
@@ -129,7 +115,7 @@
     </ParameterList>
     <ParameterList name="field evaluators" type="ParameterList">
 
-      <ParameterList name="pressure" type="ParameterList"><!-- constant, hydrostatic -->
+      <ParameterList name="pressure" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
         <Parameter name="constant in time" type="bool" value="true" />
         <ParameterList name="function" type="ParameterList">
@@ -140,7 +126,7 @@
               <ParameterList name="function-linear" type="ParameterList">
                 <Parameter name="x0" type="Array(double)" value="{0.0,0.0,0.0,-1.5}" />
                 <Parameter name="y0" type="double" value="101325.0" />
-                <Parameter name="gradient" type="Array(double)" value="{0.,0.,0.,-9777.23005}" />
+                <Parameter name="gradient" type="Array(double)" value="{0.0,0.0,0.0,-9777.23005}" />
               </ParameterList>
             </ParameterList>
           </ParameterList>
@@ -330,12 +316,12 @@
   </ParameterList>
   <ParameterList name="visualization">
     <ParameterList name="domain" type="ParameterList">
-      <Parameter name="times start period stop" type="Array(double)" value="{0.,.1,-1.}" />
+      <Parameter name="times start period stop" type="Array(double)" value="{0.0,0.1,-1.0}" />
       <Parameter name="times start period stop units" type="string" value="noleap" />
       <Parameter name="file name base" type="string" value="visdump" />
     </ParameterList>
     <ParameterList name="surface" type="ParameterList">
-      <Parameter name="times start period stop" type="Array(double)" value="{0.,.1,-1.}" />
+      <Parameter name="times start period stop" type="Array(double)" value="{0.0,0.1,-1.0}" />
       <Parameter name="times start period stop units" type="string" value="noleap" />
       <Parameter name="file name base" type="string" value="visdump_surface" />
     </ParameterList>

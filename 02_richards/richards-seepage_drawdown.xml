@@ -64,7 +64,7 @@
   <ParameterList name="cycle driver" type="ParameterList">
     <Parameter name="start time" type="double" value="0.0" />
     <Parameter name="start time units" type="string" value="s" />
-    <Parameter name="end time" type="double" value=".1" />
+    <Parameter name="end time" type="double" value="0.1" />
     <Parameter name="end time units" type="string" value="y" />
     <ParameterList name="PK tree" type="ParameterList">
       <ParameterList name="Richards" type="ParameterList">
@@ -185,9 +185,9 @@
           <ParameterList name="computational domain" type="ParameterList">
             <Parameter name="region" type="string" value="computational domain" />
             <Parameter name="WRM Type" type="string" value="van Genuchten" />
-            <Parameter name="van Genuchten alpha" type="double" value="0.00015" />
-            <Parameter name="van Genuchten m" type="double" value="0.8" />
-            <Parameter name="van Genuchten residual saturation" type="double" value="0.0" />
+            <Parameter name="van Genuchten alpha [Pa^-1]" type="double" value="0.00015" />
+            <Parameter name="van Genuchten m [-]" type="double" value="0.8" />
+            <Parameter name="residual saturation [-]" type="double" value="0.0" />
           </ParameterList>
         </ParameterList>
         <ParameterList name="verbose object" type="ParameterList">

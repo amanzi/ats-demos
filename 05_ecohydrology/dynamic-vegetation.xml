@@ -330,9 +330,9 @@
           <ParameterList name="computational domain" type="ParameterList">
             <Parameter name="region" type="string" value="computational domain" />
             <Parameter name="WRM Type" type="string" value="van Genuchten" />
-            <Parameter name="van Genuchten alpha" type="double" value="0.00056" />
-            <Parameter name="van Genuchten m" type="double" value="0.24" />
-            <Parameter name="residual saturation" type="double" value="0.18" />
+            <Parameter name="van Genuchten alpha [Pa^-1]" type="double" value="0.00056" />
+            <Parameter name="van Genuchten m [-]" type="double" value="0.24" />
+            <Parameter name="residual saturation [-]" type="double" value="0.18" />
             <Parameter name="smoothing interval width [saturation]" type="double" value="0.1" />
           </ParameterList>
         </ParameterList>
@@ -349,7 +349,6 @@
       </ParameterList>
     </ParameterList>
     <ParameterList name="field evaluators" type="ParameterList">
-
 
       <ParameterList name="surface-incoming_shortwave_radiation" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
@@ -410,7 +409,7 @@
           <Parameter name="verbosity level" type="string" value="low" />
         </ParameterList>
       </ParameterList>
-      
+
       <ParameterList name="surface-relative_humidity" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
         <ParameterList name="function" type="ParameterList">
@@ -598,12 +597,12 @@
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="domain" type="ParameterList">
             <Parameter name="region" type="string" value="surface domain" />
-            <Parameter name="components" type="Array(string)" value="{cell,boundary_face}" />
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
                 <Parameter name="value" type="double" value="0.15" />
               </ParameterList>
             </ParameterList>
+            <Parameter name="components" type="Array(string)" value="{cell,boundary_face}" />
           </ParameterList>
         </ParameterList>
       </ParameterList>

@@ -111,7 +111,6 @@
   </ParameterList>
 
   <ParameterList name="cycle driver">
-    <!-- <Parameter name="end cycle" type="int" value="10" /> -->
     <Parameter name="start time" type="double" value="0.0" />
     <Parameter name="start time units" type="string" value="s" />
     <Parameter name="end time" type="double" value="20.0" />
@@ -131,7 +130,6 @@
             <Parameter name="PK type" type="string" value="overland flow, pressure basis" />
           </ParameterList>
         </ParameterList>
-
         <ParameterList name="surface-subsurface transport coupler">
           <Parameter name="PK type" type="string" value="surface subsurface transport" />
           <ParameterList name="subsurface transport">
@@ -141,11 +139,9 @@
             <Parameter name="PK type" type="string" value="transport ATS" />
           </ParameterList>
         </ParameterList>
-        
-      </ParameterList>        
+      </ParameterList>
     </ParameterList>
   </ParameterList>
-  
   <ParameterList name="verbose object">
     <Parameter name="verbosity level" type="string" value="extreme" />
   </ParameterList>
@@ -163,6 +159,7 @@
       <ParameterList name="verbose object">
         <Parameter name="verbosity level" type="string" value="high" />
       </ParameterList>
+
     </ParameterList>
 
     <ParameterList name="surface-subsurface flow coupler">
@@ -281,9 +278,9 @@
           <ParameterList name="computation domain">
             <Parameter name="region" type="string" value="computational domain" />
             <Parameter name="WRM Type" type="string" value="van Genuchten" />
-            <Parameter name="van Genuchten alpha" type="double" value="0.000545" />
-            <Parameter name="van Genuchten m" type="double" value="0.190938511" />
-            <Parameter name="residual saturation" type="double" value="0.1" />
+            <Parameter name="van Genuchten alpha [Pa^-1]" type="double" value="0.000545" />
+            <Parameter name="van Genuchten m [-]" type="double" value="0.190938511" />
+            <Parameter name="residual saturation [-]" type="double" value="0.1" />
             <Parameter name="smoothing interval width [saturation]" type="double" value="0.1" />
           </ParameterList>
         </ParameterList>
@@ -432,7 +429,6 @@
 
       <ParameterList name="source terms">
         <ParameterList name="concentration">
-
           <ParameterList name="Tc-99">
             <ParameterList name="SOURCE: Tracer">
               <Parameter name="regions" type="Array(string)" value="{tracer source}" />
@@ -446,7 +442,6 @@
               </ParameterList>
             </ParameterList>
           </ParameterList>
-          
           <ParameterList name="coupling">
             <ParameterList name="Surface">
               <Parameter name="regions" type="Array(string)" value="{surface domain}" />
@@ -471,7 +466,6 @@
     <ParameterList name="verbose object">
       <Parameter name="verbosity level" type="string" value="extreme" />
     </ParameterList>
-    
     <ParameterList name="field evaluators">
 
       <ParameterList name="water_content" type="ParameterList">
@@ -514,7 +508,7 @@
         <ParameterList name="verbose object" type="ParameterList">
           <Parameter name="verbosity level" type="string" value="low" />
         </ParameterList>
-      </ParameterList>      
+      </ParameterList>
 
       <ParameterList name="surface-mass_density_liquid">
         <Parameter name="field evaluator type" type="string" value="eos" />
@@ -542,7 +536,7 @@
         <ParameterList name="verbose object" type="ParameterList">
           <Parameter name="verbosity level" type="string" value="low" />
         </ParameterList>
-      </ParameterList>      
+      </ParameterList>
 
       <ParameterList name="surface-source_molar_density">
         <Parameter name="field evaluator type" type="string" value="eos" />
@@ -556,7 +550,7 @@
           <Parameter name="verbosity level" type="string" value="low" />
         </ParameterList>
       </ParameterList>
-     
+
       <ParameterList name="molar_density_liquid">
         <Parameter name="field evaluator type" type="string" value="eos" />
         <Parameter name="EOS basis" type="string" value="both" />
@@ -596,21 +590,6 @@
         </ParameterList>
       </ParameterList>
 
-      <!-- <ParameterList name="surface-manning_coefficient"> -->
-      <!--   <Parameter name="field evaluator type" type="string" value="independent variable" /> -->
-      <!--   <ParameterList name="function"> -->
-      <!--     <ParameterList name="domain"> -->
-      <!--       <Parameter name="region" type="string" value="surface domain" /> -->
-      <!--       <Parameter name="components" type="Array(string)" value="{cell}" /> -->
-      <!--       <ParameterList name="function"> -->
-      <!--         <ParameterList name="function-constant"> -->
-      <!--           <Parameter name="value" type="double" value="0.15" /> -->
-      <!--         </ParameterList> -->
-      <!--       </ParameterList> -->
-      <!--     </ParameterList> -->
-      <!--   </ParameterList> -->
-      <!-- </ParameterList> -->
-
       <ParameterList name="surface-manning_coefficient" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
         <Parameter name="constant in time" type="bool" value="true" />
@@ -623,9 +602,10 @@
                 <Parameter name="value" type="double" value="0.15" />
               </ParameterList>
             </ParameterList>
+            <Parameter name="components" type="Array(string)" value="{cell,boundary_face}" />
           </ParameterList>
         </ParameterList>
-      </ParameterList>      
+      </ParameterList>
 
       <ParameterList name="base_porosity">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
@@ -669,7 +649,7 @@
           </ParameterList>
         </ParameterList>
       </ParameterList>
-      
+
       <ParameterList name="permeability">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
         <ParameterList name="function">
@@ -741,18 +721,13 @@
       <ParameterList name="overland_source_from_subsurface">
         <Parameter name="field evaluator type" type="string" value="overland source from subsurface via flux" />
       </ParameterList>
-            
+
     </ParameterList>
-    
     <ParameterList name="initial conditions">
 
       <ParameterList name="pressure">
         <Parameter name="restart file" type="string" value="../data/restart_coupled.h5" />
       </ParameterList>
-
-      <!-- <ParameterList name="surface-pressure"> -->
-      <!--   <Parameter name="restart file" type="string" value="../data/restart_coupled.h5" /> -->
-      <!-- </ParameterList> -->
 
       <ParameterList name="atmospheric_pressure">
         <Parameter name="value" type="double" value="101325.0" />

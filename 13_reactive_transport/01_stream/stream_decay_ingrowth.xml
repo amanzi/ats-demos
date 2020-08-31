@@ -232,7 +232,11 @@
       </ParameterList>
 
       <ParameterList name="initial conditions" type="ParameterList">
-
+        <ParameterList name="geochemical conditions" type="ParameterList">
+          <ParameterList name="initial" type="ParameterList">
+            <Parameter name="regions" type="Array(string)" value="{surface domain}" />
+          </ParameterList>
+        </ParameterList>
       </ParameterList>
 
     </ParameterList>
@@ -324,13 +328,6 @@
 
       <ParameterList name="gravity" type="ParameterList">
         <Parameter name="value" type="Array(double)" value="{0.0,0.0,-9.80665}" />
-      </ParameterList>
-
-
-      <ParameterList name="surface-geochemical conditions" type="ParameterList">
-        <ParameterList name="initial" type="ParameterList">
-          <Parameter name="regions" type="Array(string)" value="{surface domain}" />
-        </ParameterList>
       </ParameterList>
 
     </ParameterList>

@@ -87,7 +87,6 @@
       </ParameterList>
     </ParameterList>
   </ParameterList>
-
   <ParameterList name="PKs" type="ParameterList">
 
     <ParameterList name="Top level MPC" type="ParameterList">
@@ -117,11 +116,6 @@
           <Parameter name="number of functions" type="int" value="1" />
         </ParameterList>
       </ParameterList>
-<!--
-      <ParameterList name="preconditioner" type="ParameterList">
-        <Parameter name="preconditioner type" type="string" value="block ilu" />
-      </ParameterList>
--->
 
       <ParameterList name="linear solver" type="ParameterList">
         <Parameter name="iterative method" type="string" value="gmres" />
@@ -145,7 +139,7 @@
           <Parameter name="max backtrack steps" type="int" value="5" />
           <Parameter name="backtrack lag" type="int" value="0" />
           <Parameter name="backtrack factor" type="double" value="0.5" />
-          <Parameter name="backtrack tolerance" type="double" value="1." />
+          <Parameter name="backtrack tolerance" type="double" value="1.0" />
           <Parameter name="nonlinear tolerance" type="double" value="1e-06" />
           <Parameter name="diverged tolerance" type="double" value="100000.0" />
           <Parameter name="limit iterations" type="int" value="21" />
@@ -213,25 +207,25 @@
           <ParameterList name="rest domain" type="ParameterList">
             <Parameter name="region" type="string" value="computational domain rest" />
             <Parameter name="WRM Type" type="string" value="van Genuchten" />
-            <Parameter name="van Genuchten alpha" type="double" value="0.0006137" />
-            <Parameter name="van Genuchten m" type="double" value="0.5" />
-            <Parameter name="residual saturation" type="double" value="0.2" />
+            <Parameter name="van Genuchten alpha [Pa^-1]" type="double" value="0.0006137" />
+            <Parameter name="van Genuchten m [-]" type="double" value="0.5" />
+            <Parameter name="residual saturation [-]" type="double" value="0.2" />
             <Parameter name="smoothing interval width [saturation]" type="double" value="0.1" />
           </ParameterList>
           <ParameterList name="first slab" type="ParameterList">
             <Parameter name="region" type="string" value="computational domain first slab" />
             <Parameter name="WRM Type" type="string" value="van Genuchten" />
-            <Parameter name="van Genuchten alpha" type="double" value="0.0001023" />
-            <Parameter name="van Genuchten m" type="double" value="0.666666666667" />
-            <Parameter name="residual saturation" type="double" value="0.3" />
+            <Parameter name="van Genuchten alpha [Pa^-1]" type="double" value="0.0001023" />
+            <Parameter name="van Genuchten m [-]" type="double" value="0.666666666667" />
+            <Parameter name="residual saturation [-]" type="double" value="0.3" />
             <Parameter name="smoothing interval width [saturation]" type="double" value="0.1" />
           </ParameterList>
           <ParameterList name="second slab" type="ParameterList">
             <Parameter name="region" type="string" value="computational domain second slab" />
             <Parameter name="WRM Type" type="string" value="van Genuchten" />
-            <Parameter name="van Genuchten alpha" type="double" value="0.0001023" />
-            <Parameter name="van Genuchten m" type="double" value="0.666666666667" />
-            <Parameter name="residual saturation" type="double" value="0.3" />
+            <Parameter name="van Genuchten alpha [Pa^-1]" type="double" value="0.0001023" />
+            <Parameter name="van Genuchten m [-]" type="double" value="0.666666666667" />
+            <Parameter name="residual saturation [-]" type="double" value="0.3" />
             <Parameter name="smoothing interval width [saturation]" type="double" value="0.1" />
           </ParameterList>
         </ParameterList>
@@ -271,15 +265,7 @@
           </ParameterList>
         </ParameterList>
       </ParameterList>
-<!--
-      <ParameterList name="boundary conditions" type="ParameterList">
-        <ParameterList name="critical depth" type="ParameterList">
-          <ParameterList name="outlet" type="ParameterList">
-            <Parameter name="regions" type="Array(string)" value="{surface outlet}" />
-          </ParameterList>
-        </ParameterList>
-      </ParameterList>
--->
+
       <ParameterList name="initial condition" type="ParameterList">
         <Parameter name="initialize surface head from subsurface" type="bool" value="true" />
       </ParameterList>
@@ -288,7 +274,7 @@
         <ParameterList name="overland conductivity model" type="ParameterList">
           <Parameter name="overland conductivity type" type="string" value="manning harmonic mean" />
           <Parameter name="Manning exponent" type="double" value="0.666666666667" />
-          <Parameter name="slope regularization epsilon" type="double" value="0." />
+          <Parameter name="slope regularization epsilon" type="double" value="0.0" />
         </ParameterList>
       </ParameterList>
 
@@ -308,8 +294,8 @@
             <Parameter name="component" type="string" value="cell" />
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-tabular" type="ParameterList">
-                <Parameter name="x values" type="Array(double)" value="{0.0, 12000.0}"/>
-                <Parameter name="y values" type="Array(double)" value="{5.5e-6, 0.0}"/>
+                <Parameter name="x values" type="Array(double)" value="{0.0,12000.0}" />
+                <Parameter name="y values" type="Array(double)" value="{5.5e-06,0.0}" />
                 <Parameter name="forms" type="Array(string)" value="{constant}" />
               </ParameterList>
             </ParameterList>
@@ -457,12 +443,12 @@
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="surface" type="ParameterList">
             <Parameter name="region" type="string" value="surface domain" />
-            <Parameter name="components" type="Array(string)" value="{cell,boundary_face}" />
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
-                <Parameter name="value" type="double" value="0.01986"/>
+                <Parameter name="value" type="double" value="0.01986" />
               </ParameterList>
             </ParameterList>
+            <Parameter name="components" type="Array(string)" value="{cell,boundary_face}" />
           </ParameterList>
         </ParameterList>
       </ParameterList>
@@ -509,17 +495,17 @@
         <ParameterList name="compressible porosity model parameters" type="ParameterList">
           <ParameterList name="rest domain" type="ParameterList">
             <Parameter name="region" type="string" value="computational domain rest" />
-            <Parameter name="pore compressibility [Pa^-1]" type="double" value="5.113922e-8" />
+            <Parameter name="pore compressibility [Pa^-1]" type="double" value="5.113922e-08" />
             <Parameter name="pore compressibility inflection point [Pa^-1]" type="double" value="0.0" />
           </ParameterList>
           <ParameterList name="first slab" type="ParameterList">
             <Parameter name="region" type="string" value="computational domain first slab" />
-            <Parameter name="pore compressibility [Pa^-1]" type="double" value="5.113922e-8" />
+            <Parameter name="pore compressibility [Pa^-1]" type="double" value="5.113922e-08" />
             <Parameter name="pore compressibility inflection point [Pa^-1]" type="double" value="0.0" />
           </ParameterList>
           <ParameterList name="second slab" type="ParameterList">
             <Parameter name="region" type="string" value="computational domain second slab" />
-            <Parameter name="pore compressibility [Pa^-1]" type="double" value="5.113922e-8" />
+            <Parameter name="pore compressibility [Pa^-1]" type="double" value="5.113922e-08" />
             <Parameter name="pore compressibility inflection point [Pa^-1]" type="double" value="0.0" />
           </ParameterList>
         </ParameterList>
@@ -580,7 +566,6 @@
 
     </ParameterList>
   </ParameterList>
-
   <ParameterList name="visualization">
     <ParameterList name="domain" type="ParameterList">
       <Parameter name="file name base" type="string" value="visdump" />

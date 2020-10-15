@@ -23,11 +23,11 @@
       </ParameterList>
     </ParameterList>
     <ParameterList name="subgrid" type="ParameterList">
-      <Parameter name="mesh type" type="string" value="subgrid" />
-      <ParameterList name="subgrid parameters" type="ParameterList">
+      <Parameter name="mesh type" type="string" value="domain set" />
+      <ParameterList name="domain set parameters" type="ParameterList">
         <Parameter name="entity kind" type="string" value="CELL" />
         <Parameter name="parent domain" type="string" value="surface" />
-        <Parameter name="subgrid region name" type="string" value="surface domain" />
+	<Parameter name="entity set names" type="Array(string)" value="{surface domain}" />
         <ParameterList name="subgrid_*" type="ParameterList">
           <Parameter name="mesh type" type="string" value="logical mesh" />
           <ParameterList name="logical mesh parameters" type="ParameterList">

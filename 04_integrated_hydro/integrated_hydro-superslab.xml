@@ -286,7 +286,6 @@
 
       <ParameterList name="overland conductivity evaluator" type="ParameterList">
         <ParameterList name="overland conductivity model" type="ParameterList">
-          <Parameter name="overland conductivity type" type="string" value="manning harmonic mean" />
           <Parameter name="Manning exponent" type="double" value="0.666666666667" />
           <Parameter name="slope regularization epsilon" type="double" value="0." />
         </ParameterList>

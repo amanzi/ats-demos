@@ -50,8 +50,8 @@
       </ParameterList>
     </ParameterList>
   </ParameterList>
-
   <ParameterList name="PKs" type="ParameterList">
+
     <ParameterList name="overland flow" type="ParameterList">
       <Parameter name="PK type" type="string" value="overland flow, pressure basis" />
       <Parameter name="primary variable key" type="string" value="surface-pressure" />
@@ -99,7 +99,7 @@
           <Parameter name="max backtrack steps" type="int" value="5" />
           <Parameter name="backtrack lag" type="int" value="0" />
           <Parameter name="backtrack factor" type="double" value="0.5" />
-          <Parameter name="backtrack tolerance" type="double" value="1" />
+          <Parameter name="backtrack tolerance" type="double" value="1.0" />
           <Parameter name="nonlinear tolerance" type="double" value="1e-06" />
           <Parameter name="diverged tolerance" type="double" value="100000.0" />
           <Parameter name="limit iterations" type="int" value="21" />
@@ -130,8 +130,8 @@
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-linear" type="ParameterList">
                 <Parameter name="y0" type="double" value="0.0" />
-                <Parameter name="gradient" type="Array(double)" value="{0.,-0.05,0.0}" />
-                <Parameter name="x0" type="Array(double)" value="{0.,0.0,0.0}" />
+                <Parameter name="gradient" type="Array(double)" value="{0.0,-0.05,0.0}" />
+                <Parameter name="x0" type="Array(double)" value="{0.0,0.0,0.0}" />
               </ParameterList>
             </ParameterList>
           </ParameterList>
@@ -152,7 +152,7 @@
       <ParameterList name="overland conductivity evaluator" type="ParameterList">
         <ParameterList name="overland conductivity model" type="ParameterList">
           <Parameter name="Manning exponent" type="double" value="0.666666666667" />
-          <Parameter name="slope regularization epsilon" type="double" value="0." />
+          <Parameter name="slope regularization epsilon" type="double" value="0.0" />
         </ParameterList>
       </ParameterList>
 
@@ -252,7 +252,7 @@
             <Parameter name="components" type="Array(string)" value="{cell}" />
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
-                <Parameter name="value" type="double" value="3.6e-3" />
+                <Parameter name="value" type="double" value="0.0036" />
               </ParameterList>
             </ParameterList>
           </ParameterList>
@@ -326,6 +326,4 @@
       <Parameter name="times start period stop" type="Array(double)" value="{0.0,300.0,-1.0}" />
     </ParameterList>
   </ParameterList>
-
-
 </ParameterList>

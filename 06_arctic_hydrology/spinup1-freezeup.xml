@@ -137,7 +137,7 @@
           <Parameter name="min iterations" type="int" value="10" />
           <Parameter name="time step reduction factor" type="double" value="0.5" />
           <Parameter name="time step increase factor" type="double" value="1.5" />
-          <Parameter name="max time step" type="double" value="1e10" />
+          <Parameter name="max time step" type="double" value="10000000000.0" />
           <Parameter name="min time step" type="double" value="1e-10" />
           <Parameter name="growth wait after fail" type="int" value="2" />
           <Parameter name="count before increasing increase factor" type="int" value="2" />
@@ -152,7 +152,6 @@
       <Parameter name="initial time step" type="double" value="1.0" />
       <Parameter name="relative permeability method" type="string" value="upwind with Darcy flux" />
       <Parameter name="permeability rescaling" type="double" value="10000000.0" />
-<!--      <Parameter name="limit correction to pressure change [Pa]" type="double" value="40000.0" />-->
       <Parameter name="max valid change in saturation in a time step [-]" type="double" value="0.1" />
       <Parameter name="max valid change in ice saturation in a time step [-]" type="double" value="0.1" />
       <Parameter name="debug cells" type="Array(int)" value="{0,84}" />
@@ -163,6 +162,7 @@
       <ParameterList name="diffusion" type="ParameterList">
         <Parameter name="discretization primary" type="string" value="mfd: two-point flux approximation" />
       </ParameterList>
+
       <ParameterList name="diffusion preconditioner" type="ParameterList">
         <Parameter name="Newton correction" type="string" value="approximate Jacobian" />
       </ParameterList>
@@ -188,7 +188,7 @@
           <ParameterList name="mineral" type="ParameterList">
             <Parameter name="region" type="string" value="subsurface domain mineral" />
             <Parameter name="WRM Type" type="string" value="van Genuchten" />
-            <Parameter name="van Genuchten alpha" type="double" value="2.e-5" />
+            <Parameter name="van Genuchten alpha" type="double" value="2e-05" />
             <Parameter name="van Genuchten n" type="double" value="1.58" />
             <Parameter name="residual saturation" type="double" value="0.2" />
             <Parameter name="smoothing interval width [saturation]" type="double" value="0.05" />
@@ -226,7 +226,7 @@
             <Parameter name="regions" type="Array(string)" value="{bottom face}" />
             <ParameterList name="boundary temperature" type="ParameterList">
               <ParameterList name="function-tabular" type="ParameterList">
-                <Parameter name="x values" type="Array(double)" value="{0,86400000}" />
+                <Parameter name="x values" type="Array(double)" value="{0.0,86400000.0}" />
                 <Parameter name="y values" type="Array(double)" value="{273.65,264.15}" />
                 <Parameter name="forms" type="Array(string)" value="{linear}" />
               </ParameterList>

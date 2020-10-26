@@ -64,7 +64,7 @@
   <ParameterList name="cycle driver" type="ParameterList">
     <Parameter name="start time" type="double" value="0.0" />
     <Parameter name="start time units" type="string" value="s" />
-    <Parameter name="end time" type="double" value=".1" />
+    <Parameter name="end time" type="double" value="0.1" />
     <Parameter name="end time units" type="string" value="y" />
     <ParameterList name="PK tree" type="ParameterList">
       <ParameterList name="Richards" type="ParameterList">

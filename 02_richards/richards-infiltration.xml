@@ -128,8 +128,9 @@
         <Parameter name="include Newton correction" type="bool" value="true" />
       </ParameterList>
 
-      <ParameterList name="preconditioner" type="ParameterList">
-        <Parameter name="preconditioner type" type="string" value="boomer amg" />
+      <ParameterList name="inverse" type="ParameterList">
+        <Parameter name="preconditioning method" type="string" value="boomer amg" />
+        <Parameter name="iterative method" type="string" value="gmres" />
         <ParameterList name="boomer amg parameters" type="ParameterList">
           <Parameter name="cycle applications" type="int" value="1" />
           <Parameter name="smoother sweeps" type="int" value="3" />
@@ -138,10 +139,6 @@
           <Parameter name="relaxation type" type="int" value="6" />
           <Parameter name="verbosity" type="int" value="0" />
         </ParameterList>
-      </ParameterList>
-
-      <ParameterList name="linear solver" type="ParameterList">
-        <Parameter name="iterative method" type="string" value="gmres" />
         <ParameterList name="verbose object" type="ParameterList">
           <Parameter name="verbosity level" type="string" value="high" />
         </ParameterList>

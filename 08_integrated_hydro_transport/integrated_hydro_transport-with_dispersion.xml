@@ -174,18 +174,15 @@
         </ParameterList>
       </ParameterList>
 
-      <ParameterList name="preconditioner">
-        <Parameter name="preconditioner type" type="string" value="boomer amg" />
+      <ParameterList name="inverse">
+        <Parameter name="preconditioning method" type="string" value="boomer amg" />
+        <Parameter name="iterative method" type="string" value="gmres" />
         <ParameterList name="boomer amg parameters">
           <Parameter name="cycle iterations" type="int" value="3" />
           <Parameter name="smoother sweeps" type="int" value="2" />
           <Parameter name="strong threshold" type="double" value="0.5" />
           <Parameter name="tolerance" type="double" value="0.0" />
         </ParameterList>
-      </ParameterList>
-
-      <ParameterList name="linear solver">
-        <Parameter name="iterative method" type="string" value="gmres" />
         <ParameterList name="verbose object">
           <Parameter name="verbosity level" type="string" value="low" />
         </ParameterList>
@@ -318,17 +315,6 @@
         <Parameter name="initialize surface head from subsurface" type="bool" value="true" />
       </ParameterList>
 
-      <ParameterList name="overland conductivity evaluator">
-        <ParameterList name="overland conductivity model">
-          <Parameter name="overland conductivity type " type="string" value="manning" />
-          <Parameter name="Manning exponent" type="double" value="0.666666666667" />
-          <Parameter name="slope regularization epsilon" type="double" value="0.01" />
-        </ParameterList>
-        <ParameterList name="verbose object">
-          <Parameter name="verbosity level" type="string" value="low" />
-        </ParameterList>
-      </ParameterList>
-
     </ParameterList>
 
     <ParameterList name="surface-subsurface transport coupler">
@@ -382,11 +368,11 @@
         <ParameterList name="domain">
           <Parameter name="regions" type="Array(string)" value="{computational domain}" />
           <Parameter name="model" type="string" value="scalar" />
+          <Parameter name="aqueous tortuosity" type="double" value="1.0" />
+          <Parameter name="gaseous tortuosity" type="double" value="1.0" />
           <ParameterList name="parameters for scalar">
             <Parameter name="alpha" type="double" value="0.0001" />
           </ParameterList>
-          <Parameter name="aqueous tortuosity" type="double" value="1.0" />
-          <Parameter name="gaseous tortuosity" type="double" value="1.0" />
         </ParameterList>
       </ParameterList>
 
@@ -625,12 +611,12 @@
           <ParameterList name="domain" type="ParameterList">
             <Parameter name="region" type="string" value="surface domain" />
             <Parameter name="components" type="Array(string)" value="{cell}" />
+            <Parameter name="components" type="Array(string)" value="{cell,boundary_face}" />
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
                 <Parameter name="value" type="double" value="0.15" />
               </ParameterList>
             </ParameterList>
-            <Parameter name="components" type="Array(string)" value="{cell,boundary_face}" />
           </ParameterList>
         </ParameterList>
       </ParameterList>
@@ -748,6 +734,18 @@
 
       <ParameterList name="overland_source_from_subsurface">
         <Parameter name="field evaluator type" type="string" value="overland source from subsurface via flux" />
+      </ParameterList>
+
+      <ParameterList name="surface-overland_conductivity">
+        <Parameter name="field evaluator type" type="string" value="overland conductivity" />
+        <ParameterList name="overland conductivity model">
+          <Parameter name="overland conductivity type " type="string" value="manning" />
+          <Parameter name="Manning exponent" type="double" value="0.666666666667" />
+          <Parameter name="slope regularization epsilon" type="double" value="0.01" />
+        </ParameterList>
+        <ParameterList name="verbose object">
+          <Parameter name="verbosity level" type="string" value="low" />
+        </ParameterList>
       </ParameterList>
 
     </ParameterList>

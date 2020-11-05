@@ -72,7 +72,7 @@
       <Parameter name="PKs order" type="Array(string)" value="{flow,energy}" />
       <Parameter name="supress Jacobian terms: d div q / dT" type="bool" value="false" />
       <Parameter name="supress Jacobian terms: d div K grad T / dp" type="bool" value="false" />
-      <Parameter name="supress Jacobian terms: div hq / dp,T" type="bool" value="false" />
+      <Parameter name="supress Jacobian terms: d div hq / dp,T" type="bool" value="false" />
       <Parameter name="dump preconditioner" type="bool" value="false" />
       <Parameter name="predictor type" type="string" value="smart ewc" />
       <Parameter name="preconditioner type" type="string" value="picard" />
@@ -88,8 +88,9 @@
         <Parameter name="verbosity level" type="string" value="high" />
       </ParameterList>
 
-      <ParameterList name="preconditioner" type="ParameterList">
-        <Parameter name="preconditioner type" type="string" value="boomer amg" />
+      <ParameterList name="inverse" type="ParameterList">
+        <Parameter name="preconditioning method" type="string" value="boomer amg" />
+        <Parameter name="iterative method" type="string" value="gmres" />
         <ParameterList name="boomer amg parameters" type="ParameterList">
           <Parameter name="cycle applications" type="int" value="1" />
           <Parameter name="smoother sweeps" type="int" value="2" />
@@ -97,10 +98,6 @@
           <Parameter name="tolerance" type="double" value="0.0" />
           <Parameter name="number of functions" type="int" value="2" />
         </ParameterList>
-      </ParameterList>
-
-      <ParameterList name="linear solver" type="ParameterList">
-        <Parameter name="iterative method" type="string" value="gmres" />
         <ParameterList name="verbose object" type="ParameterList">
           <Parameter name="verbosity level" type="string" value="high" />
         </ParameterList>
@@ -254,16 +251,16 @@
           <ParameterList name="peat" type="ParameterList">
             <Parameter name="region" type="string" value="subsurface domain peat" />
             <Parameter name="thermal conductivity type" type="string" value="three-phase wet/dry" />
-            <Parameter name="thermal conductivity, saturated (unfrozen) [W/(m-K)]" type="double" value="0.67" />
-            <Parameter name="thermal conductivity, dry [W/(m-K)]" type="double" value="0.07" />
+            <Parameter name="thermal conductivity, saturated (unfrozen) [W m^-1 K^-1]" type="double" value="0.67" />
+            <Parameter name="thermal conductivity, dry [W m^-1 K^-1]" type="double" value="0.07" />
             <Parameter name="unsaturated alpha frozen [-]" type="double" value="1.0" />
             <Parameter name="unsaturated alpha unfrozen [-]" type="double" value="0.5" />
           </ParameterList>
           <ParameterList name="mineral" type="ParameterList">
             <Parameter name="region" type="string" value="subsurface domain mineral" />
             <Parameter name="thermal conductivity type" type="string" value="three-phase wet/dry" />
-            <Parameter name="thermal conductivity, saturated (unfrozen) [W/(m-K)]" type="double" value="1.0" />
-            <Parameter name="thermal conductivity, dry [W/(m-K)]" type="double" value="0.29" />
+            <Parameter name="thermal conductivity, saturated (unfrozen) [W m^-1 K^-1]" type="double" value="1.0" />
+            <Parameter name="thermal conductivity, dry [W m^-1 K^-1]" type="double" value="0.29" />
             <Parameter name="unsaturated alpha frozen [-]" type="double" value="1.0" />
             <Parameter name="unsaturated alpha unfrozen [-]" type="double" value="0.5" />
           </ParameterList>
@@ -303,9 +300,9 @@
         <Parameter name="field evaluator type" type="string" value="capillary pressure, water over ice" />
         <ParameterList name="capillary pressure of ice-water" type="ParameterList">
           <Parameter name="smoothing width [K]" type="double" value="0.2" />
-          <Parameter name="interfacial tension ice-water" type="double" value="33.1" />
-          <Parameter name="interfacial tension air-water" type="double" value="72.7" />
-          <Parameter name="heat of fusion of water [J/kg]" type="double" value="334000.0" />
+          <Parameter name="interfacial tension ice-water [mN m^-1]" type="double" value="33.1" />
+          <Parameter name="interfacial tension air-water [mN m^-1]" type="double" value="72.7" />
+          <Parameter name="latent heat [J kg^-1]" type="double" value="334000.0" />
         </ParameterList>
         <ParameterList name="verbose object" type="ParameterList">
           <Parameter name="verbosity level" type="string" value="low" />
@@ -368,7 +365,7 @@
         <Parameter name="internal energy key" type="string" value="internal_energy_liquid" />
         <ParameterList name="IEM parameters" type="ParameterList">
           <Parameter name="IEM type" type="string" value="linear" />
-          <Parameter name="heat capacity [J/mol-K]" type="double" value="76.0" />
+          <Parameter name="heat capacity [J mol^-1 K^-1]" type="double" value="76.0" />
         </ParameterList>
         <ParameterList name="verbose object" type="ParameterList">
           <Parameter name="verbosity level" type="string" value="low" />
@@ -380,7 +377,7 @@
         <Parameter name="internal energy key" type="string" value="internal_energy_rock" />
         <ParameterList name="IEM parameters" type="ParameterList">
           <Parameter name="IEM type" type="string" value="linear" />
-          <Parameter name="heat capacity [J/kg-K]" type="double" value="620.0" />
+          <Parameter name="heat capacity [J kg^-1 K^-1]" type="double" value="620.0" />
         </ParameterList>
         <ParameterList name="verbose object" type="ParameterList">
           <Parameter name="verbosity level" type="string" value="low" />
@@ -400,9 +397,9 @@
         <Parameter name="internal energy key" type="string" value="internal_energy_ice" />
         <ParameterList name="IEM parameters" type="ParameterList">
           <Parameter name="IEM type" type="string" value="quadratic" />
-          <Parameter name="quadratic u_0 [J/mol]" type="double" value="-6007.87" />
-          <Parameter name="quadratic a [J/mol-K]" type="double" value="37.7841" />
-          <Parameter name="quadratic b [J/mol-K^2]" type="double" value="0.131932" />
+          <Parameter name="latent heat [J mol^-1]" type="double" value="-6007.87" />
+          <Parameter name="heat capacity [J mol^-1 K^-1]" type="double" value="37.7841" />
+          <Parameter name="quadratic b [J mol^-1 K^-2]" type="double" value="0.131932" />
         </ParameterList>
         <ParameterList name="verbose object" type="ParameterList">
           <Parameter name="verbosity level" type="string" value="low" />

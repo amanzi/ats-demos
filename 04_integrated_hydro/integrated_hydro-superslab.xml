@@ -91,17 +91,19 @@
     <ParameterList name="Top level MPC" type="ParameterList">
       <Parameter name="PK type" type="string" value="coupled water" />
       <Parameter name="PKs order" type="Array(string)" value="{subsurface flow,surface flow}" />
+
       <ParameterList name="verbose object" type="ParameterList">
-        <Parameter name="verbosity level" type="string" value="high" />
+        <Parameter name="verbosity level" type="string" value="medium" />
       </ParameterList>
 
       <ParameterList name="water delegate" type="ParameterList">
         <Parameter name="modify predictor damp and cap the water spurt" type="bool" value="true" />
         <Parameter name="damp and cap the water spurt" type="bool" value="true" />
         <Parameter name="cap over atmospheric" type="double" value="0.001" />
-        <Parameter name="debug cells" type="Array(int)" value="{1}" />
+
+        <Parameter name="debug cells" type="Array(int)" value="{}" />
         <ParameterList name="verbose object" type="ParameterList">
-          <Parameter name="verbosity level" type="string" value="high" />
+          <Parameter name="verbosity level" type="string" value="medium" />
         </ParameterList>
       </ParameterList>
 
@@ -110,10 +112,9 @@
         <Parameter name="iterative method" type="string" value="gmres" />
         <ParameterList name="boomer amg parameters" type="ParameterList">
           <Parameter name="cycle applications" type="int" value="1" />
-          <Parameter name="smoother sweeps" type="int" value="2" />
+          <Parameter name="smoother sweeps" type="int" value="1" />
           <Parameter name="strong threshold" type="double" value="0.85" />
           <Parameter name="tolerance" type="double" value="0.0" />
-          <Parameter name="number of functions" type="int" value="1" />
         </ParameterList>
         <ParameterList name="verbose object" type="ParameterList">
           <Parameter name="verbosity level" type="string" value="medium" />
@@ -140,7 +141,7 @@
           <Parameter name="diverged tolerance" type="double" value="100000.0" />
           <Parameter name="limit iterations" type="int" value="21" />
           <ParameterList name="verbose object" type="ParameterList">
-            <Parameter name="verbosity level" type="string" value="extreme" />
+            <Parameter name="verbosity level" type="string" value="medium" />
           </ParameterList>
         </ParameterList>
         <ParameterList name="timestep controller smarter parameters" type="ParameterList">
@@ -164,9 +165,9 @@
       <Parameter name="relative permeability method" type="string" value="upwind with Darcy flux" />
       <Parameter name="permeability rescaling" type="double" value="10000000.0" />
       <Parameter name="surface rel perm strategy" type="string" value="clobber" />
-      <Parameter name="debug faces" type="Array(int)" value="{18462}" />
+
       <ParameterList name="verbose object" type="ParameterList">
-        <Parameter name="verbosity level" type="string" value="high" />
+        <Parameter name="verbosity level" type="string" value="medium" />
       </ParameterList>
 
       <ParameterList name="diffusion" type="ParameterList">
@@ -224,10 +225,11 @@
       <Parameter name="domain name" type="string" value="surface" />
       <Parameter name="source term" type="bool" value="true" />
       <Parameter name="initial time step" type="double" value="60.0" />
-      <Parameter name="debug cells" type="Array(int)" value="{0}" />
       <Parameter name="source term is differentiable" type="bool" value="true" />
+
+      <Parameter name="debug cells" type="Array(int)" value="{}" />
       <ParameterList name="verbose object" type="ParameterList">
-        <Parameter name="verbosity level" type="string" value="high" />
+        <Parameter name="verbosity level" type="string" value="medium" />
       </ParameterList>
 
       <ParameterList name="diffusion" type="ParameterList">
@@ -425,19 +427,16 @@
 
   <ParameterList name="visualization">
     <ParameterList name="domain" type="ParameterList">
-      <Parameter name="file name base" type="string" value="visdump" />
-      <Parameter name="times start period stop" type="Array(double)" value="{0.0,180.0,-1.0}" />
+      <Parameter name="times start period stop" type="Array(double)" value="{0.0,1800.0,-1.0}" />
     </ParameterList>
     <ParameterList name="surface" type="ParameterList">
-      <Parameter name="file name base" type="string" value="visdump_surface" />
-      <Parameter name="times start period stop" type="Array(double)" value="{0.0,180.0,-1.0}" />
+      <Parameter name="times start period stop" type="Array(double)" value="{0.0,1800.0,-1.0}" />
     </ParameterList>
   </ParameterList>
 
   <ParameterList name="checkpoint">
-    <Parameter name="times start period stop" type="Array(double)" value="{0.0,1800.0,-1.0}" />
+    <Parameter name="times start period stop" type="Array(double)" value="{0.0,3600.0,-1.0}" />
   </ParameterList>
-
   
   <ParameterList name="observations" type="ParameterList">
     <ParameterList name="surface outlet flux" type="ParameterList">
@@ -449,7 +448,7 @@
       <Parameter name="location name" type="string" value="face" />
       <Parameter name="write interval" type="int" value="1" />
       <Parameter name="observation output filename" type="string" value="surface_outlet_flux.dat" />
-      <Parameter name="times start period stop" type="Array(double)" value="{0.0,180.0,-1.0}" />
+      <Parameter name="times start period stop" type="Array(double)" value="{0.0,600.0,-1.0}" />
     </ParameterList>
   </ParameterList>
 </ParameterList>

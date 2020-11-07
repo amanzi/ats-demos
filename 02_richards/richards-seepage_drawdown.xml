@@ -2,6 +2,7 @@
   <ParameterList name="mesh" type="ParameterList">
     <ParameterList name="domain" type="ParameterList">
       <Parameter name="mesh type" type="string" value="generate mesh" />
+      <Parameter name="build columns from set" type="string" value="surface" />
       <ParameterList name="generate mesh parameters" type="ParameterList">
         <Parameter name="number of cells" type="Array(int)" value="{1,1,100}" />
         <Parameter name="domain low coordinate" type="Array(double)" value="{0.0,0.0,0.0}" />
@@ -65,15 +66,12 @@
     <Parameter name="start time" type="double" value="0.0" />
     <Parameter name="start time units" type="string" value="s" />
     <Parameter name="end time" type="double" value="0.1" />
-    <Parameter name="end time units" type="string" value="y" />
+    <Parameter name="end time units" type="string" value="noleap" />
     <ParameterList name="PK tree" type="ParameterList">
       <ParameterList name="Richards" type="ParameterList">
         <Parameter name="PK type" type="string" value="richards flow" />
       </ParameterList>
     </ParameterList>
-  </ParameterList>
-  <ParameterList name="checkpoint" type="ParameterList">
-    <Parameter name="times start period stop" type="Array(double)" value="{0.0,31557600.0,-1.0}" />
   </ParameterList>
 
   <ParameterList name="PKs" type="ParameterList">
@@ -84,6 +82,7 @@
       <Parameter name="initial time step" type="double" value="1.0" />
       <Parameter name="relative permeability method" type="string" value="upwind with Darcy flux" />
       <Parameter name="permeability rescaling" type="double" value="10000000.0" />
+      <Parameter name="modify predictor for flux BCs" type="bool" value="true" />
       <Parameter name="debug cells" type="Array(int)" value="{0,99}" />
       <ParameterList name="verbose object" type="ParameterList">
         <Parameter name="verbosity level" type="string" value="high" />
@@ -122,7 +121,7 @@
       </ParameterList>
 
       <ParameterList name="diffusion" type="ParameterList">
-        <Parameter name="discretization primary" type="string" value="fv: default" />
+        <Parameter name="discretization primary" type="string" value="mfd: default" />
       </ParameterList>
 
       <ParameterList name="inverse" type="ParameterList">
@@ -130,14 +129,13 @@
         <Parameter name="iterative method" type="string" value="gmres" />
         <ParameterList name="boomer amg parameters" type="ParameterList">
           <Parameter name="cycle applications" type="int" value="1" />
-          <Parameter name="smoother sweeps" type="int" value="3" />
-          <Parameter name="strong threshold" type="double" value="0.25" />
+          <Parameter name="smoother sweeps" type="int" value="1" />
+          <Parameter name="strong threshold" type="double" value="0.65" />
           <Parameter name="tolerance" type="double" value="0.0" />
           <Parameter name="relaxation type" type="int" value="6" />
-          <Parameter name="verbosity" type="int" value="0" />
         </ParameterList>
         <ParameterList name="verbose object" type="ParameterList">
-          <Parameter name="verbosity level" type="string" value="high" />
+          <Parameter name="verbosity level" type="string" value="medium" />
         </ParameterList>
         <ParameterList name="gmres parameters" type="ParameterList">
           <Parameter name="preconditioning strategy" type="string" value="left" />
@@ -161,20 +159,8 @@
       </ParameterList>
 
       <ParameterList name="initial condition" type="ParameterList">
-        <Parameter name="initialize faces from cells" type="bool" value="true" />
-        <ParameterList name="function" type="ParameterList">
-          <ParameterList name="initial pressure cells" type="ParameterList">
-            <Parameter name="region" type="string" value="computational domain" />
-            <Parameter name="components" type="Array(string)" value="{cell,boundary_face}" />
-            <ParameterList name="function" type="ParameterList">
-              <ParameterList name="function-linear" type="ParameterList">
-                <Parameter name="x0" type="Array(double)" value="{0.0,0.0,0.0,8.0}" />
-                <Parameter name="y0" type="double" value="101325.0" />
-                <Parameter name="gradient" type="Array(double)" value="{0.0,0.0,0.0,-9806.2306853}" />
-              </ParameterList>
-            </ParameterList>
-          </ParameterList>
-        </ParameterList>
+        <Parameter name="hydrostatic head [m]" type="double" value="-2.0" />
+        <Parameter name="hydrostatic water density [kg m^-3]" type="double" value="1000.0" />
       </ParameterList>
 
       <ParameterList name="water retention evaluator" type="ParameterList">
@@ -210,28 +196,19 @@
         </ParameterList>
       </ParameterList>
 
+      <ParameterList name="mass_density_liquid" type="ParameterList">
+        <Parameter name="field evaluator type" type="string" value="independent variable constant" />
+        <Parameter name="value" type="double" value="1000.0" />
+      </ParameterList>
+
       <ParameterList name="molar_density_liquid" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="eos" />
-        <Parameter name="EOS basis" type="string" value="both" />
-        <Parameter name="molar density key" type="string" value="molar_density_liquid" />
-        <Parameter name="mass density key" type="string" value="mass_density_liquid" />
-        <ParameterList name="EOS parameters" type="ParameterList">
-          <Parameter name="EOS type" type="string" value="liquid water" />
-        </ParameterList>
-        <ParameterList name="verbose object" type="ParameterList">
-          <Parameter name="verbosity level" type="string" value="low" />
-        </ParameterList>
+        <Parameter name="field evaluator type" type="string" value="independent variable constant" />
+        <Parameter name="value" type="double" value="55000.0" />
       </ParameterList>
 
       <ParameterList name="viscosity_liquid" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="viscosity" />
-        <Parameter name="viscosity key" type="string" value="viscosity_liquid" />
-        <ParameterList name="viscosity model parameters" type="ParameterList">
-          <Parameter name="viscosity relation type" type="string" value="liquid water" />
-        </ParameterList>
-        <ParameterList name="verbose object" type="ParameterList">
-          <Parameter name="verbosity level" type="string" value="low" />
-        </ParameterList>
+        <Parameter name="field evaluator type" type="string" value="independent variable constant" />
+        <Parameter name="value" type="double" value="0.00089" />
       </ParameterList>
 
       <ParameterList name="porosity" type="ParameterList">
@@ -272,32 +249,6 @@
         </ParameterList>
       </ParameterList>
 
-      <ParameterList name="temperature" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="independent variable" />
-        <Parameter name="constant in time" type="bool" value="true" />
-        <ParameterList name="function" type="ParameterList">
-          <ParameterList name="domain" type="ParameterList">
-            <Parameter name="region" type="string" value="computational domain" />
-            <Parameter name="components" type="Array(string)" value="{cell,boundary_face}" />
-            <ParameterList name="function" type="ParameterList">
-              <ParameterList name="function-constant" type="ParameterList">
-                <Parameter name="value" type="double" value="273.65" />
-              </ParameterList>
-            </ParameterList>
-          </ParameterList>
-        </ParameterList>
-        <ParameterList name="verbose object" type="ParameterList">
-          <Parameter name="verbosity level" type="string" value="low" />
-        </ParameterList>
-      </ParameterList>
-
-      <ParameterList name="effective_pressure" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="effective_pressure" />
-        <ParameterList name="verbose object" type="ParameterList">
-          <Parameter name="verbosity level" type="string" value="low" />
-        </ParameterList>
-      </ParameterList>
-
     </ParameterList>
     <ParameterList name="initial conditions" type="ParameterList">
 
@@ -313,8 +264,8 @@
   </ParameterList>
   <ParameterList name="visualization">
     <ParameterList name="domain" type="ParameterList">
-      <Parameter name="file name base" type="string" value="visdump" />
-      <Parameter name="times start period stop" type="Array(double)" value="{0.0,315576.0,-1.0}" />
+      <Parameter name="times start period stop" type="Array(double)" value="{0.0,0.01,-1.0}" />
+      <Parameter name="times start period stop units" type="string" value="noleap" />
     </ParameterList>
   </ParameterList>
 </ParameterList>

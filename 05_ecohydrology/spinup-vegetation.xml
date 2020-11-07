@@ -318,12 +318,10 @@
     <ParameterList name="domain" type="ParameterList">
       <Parameter name="times start period stop" type="Array(double)" value="{0.0,0.1,-1.0}" />
       <Parameter name="times start period stop units" type="string" value="noleap" />
-      <Parameter name="file name base" type="string" value="visdump" />
     </ParameterList>
     <ParameterList name="surface" type="ParameterList">
       <Parameter name="times start period stop" type="Array(double)" value="{0.0,0.1,-1.0}" />
       <Parameter name="times start period stop units" type="string" value="noleap" />
-      <Parameter name="file name base" type="string" value="visdump_surface" />
     </ParameterList>
   </ParameterList>
 </ParameterList>

@@ -270,12 +270,6 @@
         <Parameter name="discretization primary" type="string" value="fv: default" />
       </ParameterList>
 
-      <ParameterList name="upwinding" type="ParameterList">
-        <!-- <Parameter name="upwind type" type="string" value="manning upwind" />  --> <!-- total flux (default) -->
-        <Parameter name="upwind type" type="string" value="manning harmonic mean" /> <!-- Eugene special -->
-        <!-- <Parameter name="upwind type" type="string" value="manning split denominator" /> --> <!-- averages denominator as harmonic mean, numerator Eugene special? -->
-      </ParameterList>
-
       <ParameterList name="diffusion preconditioner" type="ParameterList">
         <Parameter name="include Newton correction" type="bool" value="true" />
       </ParameterList>
@@ -825,11 +819,9 @@
 
   <ParameterList name="visualization">
     <ParameterList name="domain" type="ParameterList">
-      <Parameter name="file name base" type="string" value="visdump" />
       <Parameter name="times start period stop" type="Array(double)" value="{0.0,180.0,-1.0}" />
     </ParameterList>
     <ParameterList name="surface" type="ParameterList">
-      <Parameter name="file name base" type="string" value="visdump_surface" />
       <Parameter name="times start period stop" type="Array(double)" value="{0.0,180.0,-1.0}" />
     </ParameterList>
   </ParameterList>

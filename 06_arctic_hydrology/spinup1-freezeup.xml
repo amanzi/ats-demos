@@ -534,7 +534,6 @@
   </ParameterList>
   <ParameterList name="visualization" type="ParameterList">
     <ParameterList name="domain" type="ParameterList">
-      <Parameter name="file name base" type="string" value="visdump" />
       <Parameter name="cycles start period stop" type="Array(int)" value="{0,100,-1}" />
     </ParameterList>
   </ParameterList>

@@ -1270,17 +1270,14 @@
   </ParameterList>
   <ParameterList name="visualization" type="ParameterList">
     <ParameterList name="domain" type="ParameterList">
-      <Parameter name="file name base" type="string" value="visdump" />
       <Parameter name="times start period stop 0" type="Array(double)" value="{0.0,1.0,-1.0}" />
       <Parameter name="times start period stop 0 units" type="string" value="d" />
     </ParameterList>
     <ParameterList name="surface" type="ParameterList">
-      <Parameter name="file name base" type="string" value="visdump_surface" />
       <Parameter name="times start period stop 0" type="Array(double)" value="{0.0,1.0,-1.0}" />
       <Parameter name="times start period stop 0 units" type="string" value="d" />
     </ParameterList>
     <ParameterList name="snow" type="ParameterList">
-      <Parameter name="file name base" type="string" value="visdump_snow" />
       <Parameter name="times start period stop 0" type="Array(double)" value="{0.0,1.0,-1.0}" />
       <Parameter name="times start period stop 0 units" type="string" value="d" />
     </ParameterList>

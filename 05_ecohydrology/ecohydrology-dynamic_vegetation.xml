@@ -277,7 +277,7 @@
       </ParameterList>
 
       <ParameterList name="initial condition" type="ParameterList">
-        <Parameter name="restart file" type="string" value="../spinup-gi.demo/checkpoint_final.h5" />
+        <Parameter name="restart file" type="string" value="../ecohydrology-spinup.demo/checkpoint_final.h5" />
       </ParameterList>
 
     </ParameterList>
@@ -290,7 +290,6 @@
       <Parameter name="permeability rescaling" type="double" value="10000000.0" />
       <Parameter name="surface rel perm strategy" type="string" value="clobber" />
       <Parameter name="source term" type="bool" value="true" />
-      <Parameter name="source key" type="string" value="transpiration" />
       <Parameter name="source term is differentiable" type="bool" value="false" />
 
       <Parameter name="debug faces" type="Array(int)" value="{891}" />
@@ -306,7 +305,7 @@
       </ParameterList>
 
       <ParameterList name="initial condition" type="ParameterList">
-        <Parameter name="restart file" type="string" value="../spinup-gi.demo/checkpoint_final.h5" />
+        <Parameter name="restart file" type="string" value="../ecohydrology-spinup.demo/checkpoint_final.h5" />
       </ParameterList>
 
       <ParameterList name="water retention evaluator" type="ParameterList">
@@ -550,6 +549,18 @@
         </ParameterList>
       </ParameterList>
 
+      <ParameterList name="surface-total_evapotranspiration" type="ParameterList">
+        <Parameter name="field evaluator type" type="string" value="column sum evaluator" />
+        <Parameter name="evaluator dependency key" type="string" value="transpiration" />
+        <Parameter name="divide by density" type="bool" value="false" />
+      </ParameterList>
+
+      <ParameterList name="mass_source" type="ParameterList">
+        <Parameter name="field evaluator type" type="string" value="additive evaluator" />
+        <Parameter name="evaluator dependencies" type="Array(string)" value="{transpiration}" />
+        <Parameter name="transpiration coefficient" type="double" value="-1.0" />
+      </ParameterList>
+      
       <ParameterList name="canopy-source_sink" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="additive evaluator" />
         <Parameter name="evaluator dependencies" type="Array(string)" value="{canopy-interception, canopy-drainage}" />
@@ -630,6 +641,23 @@
       <Parameter name="observation output filename" type="string" value="surface_outlet_flux.dat" />
       <Parameter name="times start period stop" type="Array(double)" value="{0.0,0.1,-1.0}" />
       <Parameter name="times start period stop units" type="string" value="d" />
+    </ParameterList>
+    <ParameterList name="transpiration" type="ParameterList">
+      <Parameter name="observation output filename" type="string" value="transpiration.dat" />
+      <Parameter name="write interval" type="int" value="1" />
+      <Parameter name="time units" type="string" value="d" />
+      <Parameter name="delimiter" type="string" value=" " />
+      <Parameter name="times start period stop" type="Array(double)" value="{0,.1,-1}" />
+      <Parameter name="times start period stop units" type="string" value="d" />
+      <ParameterList name="observed quantities" type="ParameterList">
+        <ParameterList name="surface-total_transpiration" type="ParameterList">
+          <Parameter name="variable" type="string" value="surface-total_evapotranspiration" />
+          <Parameter name="direction normalized flux" type="bool" value="true" />
+          <Parameter name="region" type="string" value="surface domain" />
+          <Parameter name="functional" type="string" value="observation data: integral" />
+          <Parameter name="location name" type="string" value="cell" />
+        </ParameterList>
+      </ParameterList>
     </ParameterList>
   </ParameterList>
 </ParameterList>

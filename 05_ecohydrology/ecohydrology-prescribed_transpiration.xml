@@ -170,7 +170,7 @@
       </ParameterList>
 
       <ParameterList name="initial condition" type="ParameterList">
-        <Parameter name="restart file" type="string" value="../spinup-gi.demo/checkpoint_final.h5" />
+        <Parameter name="restart file" type="string" value="../ecohydrology-spinup.demo/checkpoint_final.h5" />
       </ParameterList>
 
       <ParameterList name="water retention evaluator" type="ParameterList">
@@ -226,7 +226,7 @@
       </ParameterList>
 
       <ParameterList name="initial condition" type="ParameterList">
-        <Parameter name="restart file" type="string" value="../spinup-gi.demo/checkpoint_final.h5" />
+        <Parameter name="restart file" type="string" value="../ecohydrology-spinup.demo/checkpoint_final.h5" />
       </ParameterList>
 
     </ParameterList>
@@ -262,7 +262,7 @@
               <ParameterList name="function-tabular" type="ParameterList">
                 <Parameter name="file" type="string" value="../data/prescribed_pet.h5" />
                 <Parameter name="x header" type="string" value="time [s]" />
-                <Parameter name="y header" type="string" value="p_minus_e [m s^-1]" />
+                <Parameter name="y header" type="string" value="precipitation [m s^-1]" />
               </ParameterList>
             </ParameterList>
           </ParameterList>
@@ -271,6 +271,7 @@
       
       <ParameterList name="transpiration" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="transpiration distribution via rooting depth" />
+        <Parameter name="potential transpiration key" type="string" value="surface-potential_evapotranspiration" />
       </ParameterList>
 
       <ParameterList name="plant_wilting_factor" type="ParameterList">
@@ -306,11 +307,19 @@
         <Parameter name="transpiration coefficient" type="double" value="-1.0" />
       </ParameterList>
 
-      <ParameterList name="surface-potential_transpiration" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="multiplicative evaluator" />
-        <Parameter name="evaluator dependencies" type="Array(string)" value="{surface-potential_transpiration_mps,surface-molar_density_liquid}" />
+      <ParameterList name="surface-total_evapotranspiration" type="ParameterList">
+        <Parameter name="field evaluator type" type="string" value="column sum evaluator" />
+        <Parameter name="evaluator dependency key" type="string" value="transpiration" />
+        <Parameter name="divide by density" type="bool" value="false" />
       </ParameterList>
-
+      
+      <ParameterList name="surface-potential_evapotranspiration" type="ParameterList">
+        <Parameter name="field evaluator type" type="string" value="additive evaluator" />
+        <Parameter name="evaluator dependencies" type="Array(string)" value="{surface-potential_transpiration_mps,surface-potential_evaporation_mps}" />
+        <Parameter name="surface-potential_evaporation_mps coefficient" type="double" value="55000.0" />
+        <Parameter name="surface-potential_transpiration_mps coefficient" type="double" value="55000.0" />
+      </ParameterList>
+      
       <ParameterList name="surface-potential_transpiration_mps" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
         <ParameterList name="function" type="ParameterList">
@@ -328,6 +337,23 @@
         </ParameterList>
       </ParameterList>
 
+      <ParameterList name="surface-potential_evaporation_mps" type="ParameterList">
+        <Parameter name="field evaluator type" type="string" value="independent variable" />
+        <ParameterList name="function" type="ParameterList">
+          <ParameterList name="domain" type="ParameterList">
+            <Parameter name="region" type="string" value="surface domain" />
+            <Parameter name="component" type="string" value="cell" />
+            <ParameterList name="function" type="ParameterList">
+              <ParameterList name="function-tabular" type="ParameterList">
+                <Parameter name="file" type="string" value="../data/prescribed_pet.h5" />
+                <Parameter name="x header" type="string" value="time [s]" />
+                <Parameter name="y header" type="string" value="evaporation [m s^-1]" />
+              </ParameterList>
+            </ParameterList>
+          </ParameterList>
+        </ParameterList>
+      </ParameterList>
+      
       <ParameterList name="surface-manning_coefficient">
         <Parameter name="field evaluator type" type="string" value="independent variable constant" />
         <Parameter name="value" type="double" value="0.15" />
@@ -450,6 +476,31 @@
       <Parameter name="observation output filename" type="string" value="surface_flux.dat" />
       <Parameter name="times start period stop" type="Array(double)" value="{0.0,0.1,-1.0}" />
       <Parameter name="times start period stop units" type="string" value="d" />
+    </ParameterList>
+
+    <ParameterList name="transpiration" type="ParameterList">
+      <Parameter name="observation output filename" type="string" value="transpiration.dat" />
+      <Parameter name="write interval" type="int" value="1" />
+      <Parameter name="time units" type="string" value="d" />
+      <Parameter name="delimiter" type="string" value=" " />
+      <Parameter name="times start period stop" type="Array(double)" value="{0,1,-1}" />
+      <Parameter name="times start period stop units" type="string" value="d" />
+      <ParameterList name="observed quantities" type="ParameterList">
+        <ParameterList name="surface-potential_evapotranspiration" type="ParameterList">
+          <Parameter name="variable" type="string" value="surface-potential_evapotranspiration" />
+          <Parameter name="direction normalized flux" type="bool" value="true" />
+          <Parameter name="region" type="string" value="surface domain" />
+          <Parameter name="functional" type="string" value="observation data: integral" />
+          <Parameter name="location name" type="string" value="cell" />
+        </ParameterList>
+        <ParameterList name="surface-total_evapotranspiration" type="ParameterList">
+          <Parameter name="variable" type="string" value="surface-total_evapotranspiration" />
+          <Parameter name="direction normalized flux" type="bool" value="true" />
+          <Parameter name="region" type="string" value="surface domain" />
+          <Parameter name="functional" type="string" value="observation data: integral" />
+          <Parameter name="location name" type="string" value="cell" />
+        </ParameterList>
+      </ParameterList>
     </ParameterList>
   </ParameterList>
 </ParameterList>

@@ -143,8 +143,10 @@
       <Parameter name="primary variable key" type="string" value="pressure" />
       <Parameter name="initial time step" type="double" value="10.0" />
       <Parameter name="permeability rescaling" type="double" value="10000000.0" />
-      <Parameter name="clobber surface rel perm" type="bool" value="false" />
+      <Parameter name="surface rel perm strategy" type="string" value="clobber" />
+
       <Parameter name="relative permeability method" type="string" value="upwind with Darcy flux" />
+
       <Parameter name="debug cells" type="Array(int)" value="{}" />
       <ParameterList name="verbose object" type="ParameterList">
         <Parameter name="verbosity level" type="string" value="high" />
@@ -155,7 +157,7 @@
       </ParameterList>
 
       <ParameterList name="diffusion preconditioner">
-        <Parameter name="Newton correction" type="string" value="approximate Jacobian" />
+        <Parameter name="include Newton correction" type="bool" value="true" />
       </ParameterList>
 
       <ParameterList name="boundary conditions" type="ParameterList">
@@ -201,7 +203,7 @@
       </ParameterList>
 
       <ParameterList name="diffusion preconditioner" type="ParameterList">
-        <Parameter name="Newton correction" type="string" value="true Jacobian" />
+        <Parameter name="include Newton correction" type="bool" value="true" />
       </ParameterList>
 
       <ParameterList name="boundary conditions">
@@ -218,7 +220,7 @@
       </ParameterList>
 
       <ParameterList name="initial condition" type="ParameterList">
-        <Parameter name="initialize surface head from subsurface" type="bool" value="true" />
+        <Parameter name="restart file" type="string" value="../spinup-gi.demo/checkpoint_final.h5" />
       </ParameterList>
 
     </ParameterList>
@@ -234,12 +236,6 @@
 
       <ParameterList name="surface-ponded_depth" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="ponded depth" />
-      </ParameterList>
-
-      <ParameterList name="surface-ponded_depth_bar" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="ponded depth" />
-        <Parameter name="ponded depth bar" type="bool" value="true" />
-        <Parameter name="height key" type="string" value="ponded_depth_bar" />
       </ParameterList>
 
       <ParameterList name="surface-water_content" type="ParameterList">
@@ -336,39 +332,14 @@
         </ParameterList>
       </ParameterList>
 
-      <ParameterList name="surface-manning_coefficient" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="independent variable" />
-        <Parameter name="constant in time" type="bool" value="true" />
-        <ParameterList name="function" type="ParameterList">
-          <ParameterList name="domain" type="ParameterList">
-            <Parameter name="region" type="string" value="surface domain" />
-            <Parameter name="components" type="Array(string)" value="{cell,boundary_face}" />
-            <ParameterList name="function" type="ParameterList">
-              <ParameterList name="function-constant" type="ParameterList">
-                <Parameter name="value" type="double" value="0.15" />
-              </ParameterList>
-            </ParameterList>
-          </ParameterList>
-        </ParameterList>
+      <ParameterList name="surface-manning_coefficient">
+        <Parameter name="field evaluator type" type="string" value="independent variable constant" />
+        <Parameter name="value" type="double" value="0.15" />
       </ParameterList>
 
-      <ParameterList name="base_porosity" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="independent variable" />
-        <Parameter name="constant in time" type="bool" value="true" />
-        <ParameterList name="function" type="ParameterList">
-          <ParameterList name="rest domain" type="ParameterList">
-            <Parameter name="region" type="string" value="computational domain" />
-            <Parameter name="component" type="string" value="cell" />
-            <ParameterList name="function" type="ParameterList">
-              <ParameterList name="function-constant" type="ParameterList">
-                <Parameter name="value" type="double" value="0.25" />
-              </ParameterList>
-            </ParameterList>
-          </ParameterList>
-        </ParameterList>
-        <ParameterList name="verbose object" type="ParameterList">
-          <Parameter name="verbosity level" type="string" value="low" />
-        </ParameterList>
+      <ParameterList name="base_porosity">
+        <Parameter name="field evaluator type" type="string" value="independent variable constant" />
+        <Parameter name="value" type="double" value="0.4" />
       </ParameterList>
 
       <ParameterList name="porosity" type="ParameterList">
@@ -381,146 +352,49 @@
         </ParameterList>
       </ParameterList>
 
-      <ParameterList name="permeability" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="independent variable" />
-        <Parameter name="constant in time" type="bool" value="true" />
-        <ParameterList name="function" type="ParameterList">
-          <ParameterList name="domain" type="ParameterList">
-            <Parameter name="region" type="string" value="computational domain" />
-            <Parameter name="component" type="string" value="cell" />
-            <ParameterList name="function" type="ParameterList">
-              <ParameterList name="function-constant" type="ParameterList">
-                <Parameter name="value" type="double" value="2.5e-12" />
-              </ParameterList>
-            </ParameterList>
-          </ParameterList>
-        </ParameterList>
-      </ParameterList>
-
-      <ParameterList name="effective_pressure" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="effective_pressure" />
-      </ParameterList>
-
-      <ParameterList name="surface-effective_pressure" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="effective_pressure" />
+      <ParameterList name="permeability">
+        <Parameter name="field evaluator type" type="string" value="independent variable constant" />
+        <Parameter name="value" type="double" value="1.e-12" />
       </ParameterList>
 
       <ParameterList name="surface-relative_permeability" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="independent variable" />
-        <Parameter name="constant in time" type="bool" value="true" />
-        <ParameterList name="function" type="ParameterList">
-          <ParameterList name="domain" type="ParameterList">
-            <Parameter name="region" type="string" value="surface domain" />
-            <Parameter name="component" type="string" value="cell" />
-            <ParameterList name="function" type="ParameterList">
-              <ParameterList name="function-constant" type="ParameterList">
-                <Parameter name="value" type="double" value="1.0" />
-              </ParameterList>
-            </ParameterList>
-          </ParameterList>
-        </ParameterList>
+        <Parameter name="field evaluator type" type="string" value="independent variable constant" />
+        <Parameter name="value" type="double" value="1." />
       </ParameterList>
 
-      <ParameterList name="molar_density_liquid">
-        <Parameter name="field evaluator type" type="string" value="independent variable" />
-        <Parameter name="constant in time" type="bool" value="true" />
-        <ParameterList name="function">
-          <ParameterList name="rest domain">
-            <Parameter name="region" type="string" value="computational domain" />
-            <Parameter name="components" type="Array(string)" value="{cell, boundary_face}" />
-            <ParameterList name="function">
-              <ParameterList name="function-constant">
-                <Parameter name="value" type="double" value="55000.0" />
-              </ParameterList>
-            </ParameterList>
-          </ParameterList>
-        </ParameterList>
+      <ParameterList name="mass_density_liquid" type="ParameterList">
+        <Parameter name="field evaluator type" type="string" value="independent variable constant" />
+        <Parameter name="value" type="double" value="1000.0" />
       </ParameterList>
 
-      <ParameterList name="mass_density_liquid">
-        <Parameter name="field evaluator type" type="string" value="independent variable" />
-        <Parameter name="constant in time" type="bool" value="true" />
-        <ParameterList name="function">
-          <ParameterList name="rest domain">
-            <Parameter name="region" type="string" value="computational domain" />
-            <Parameter name="component" type="string" value="cell" />
-            <ParameterList name="function">
-              <ParameterList name="function-constant">
-                <Parameter name="value" type="double" value="997.0" />
-              </ParameterList>
-            </ParameterList>
-          </ParameterList>
-        </ParameterList>
+      <ParameterList name="molar_density_liquid" type="ParameterList">
+        <Parameter name="field evaluator type" type="string" value="independent variable constant" />
+        <Parameter name="value" type="double" value="55000.0" />
       </ParameterList>
 
-      <ParameterList name="viscosity_liquid">
-        <Parameter name="field evaluator type" type="string" value="independent variable" />
-        <Parameter name="constant in time" type="bool" value="true" />
-        <ParameterList name="function">
-          <ParameterList name="rest domain">
-            <Parameter name="region" type="string" value="computational domain" />
-            <Parameter name="components" type="Array(string)" value="{cell, boundary_face}" />
-            <ParameterList name="function">
-              <ParameterList name="function-constant">
-                <Parameter name="value" type="double" value="0.00089" />
-              </ParameterList>
-            </ParameterList>
-          </ParameterList>
-        </ParameterList>
+      <ParameterList name="viscosity_liquid" type="ParameterList">
+        <Parameter name="field evaluator type" type="string" value="independent variable constant" />
+        <Parameter name="value" type="double" value="0.00089" />
       </ParameterList>
 
-      <ParameterList name="surface-molar_density_liquid">
-        <Parameter name="field evaluator type" type="string" value="independent variable" />
-        <Parameter name="constant in time" type="bool" value="true" />
-        <ParameterList name="function">
-          <ParameterList name="domain">
-            <Parameter name="region" type="string" value="surface domain" />
-            <Parameter name="components" type="Array(string)" value="{cell}" />
-            <ParameterList name="function">
-              <ParameterList name="function-constant">
-                <Parameter name="value" type="double" value="55000.0" />
-              </ParameterList>
-            </ParameterList>
-          </ParameterList>
-        </ParameterList>
+      <ParameterList name="surface-molar_density_liquid" type="ParameterList">
+        <Parameter name="field evaluator type" type="string" value="independent variable constant" />
+        <Parameter name="value" type="double" value="55000.0" />
       </ParameterList>
 
-      <ParameterList name="surface-source_molar_density">
-        <Parameter name="field evaluator type" type="string" value="independent variable" />
-        <Parameter name="constant in time" type="bool" value="true" />
-        <ParameterList name="function">
-          <ParameterList name="domain">
-            <Parameter name="region" type="string" value="surface domain" />
-            <Parameter name="components" type="Array(string)" value="{cell}" />
-            <ParameterList name="function">
-              <ParameterList name="function-constant">
-                <Parameter name="value" type="double" value="55000.0" />
-              </ParameterList>
-            </ParameterList>
-          </ParameterList>
-        </ParameterList>
+      <ParameterList name="surface-mass_density_liquid" type="ParameterList">
+        <Parameter name="field evaluator type" type="string" value="independent variable constant" />
+        <Parameter name="value" type="double" value="1000.0" />
       </ParameterList>
 
-      <ParameterList name="surface-mass_density_liquid">
-        <Parameter name="field evaluator type" type="string" value="independent variable" />
-        <Parameter name="constant in time" type="bool" value="true" />
-        <ParameterList name="function">
-          <ParameterList name="rest domain">
-            <Parameter name="region" type="string" value="surface domain" />
-            <Parameter name="component" type="string" value="cell" />
-            <ParameterList name="function">
-              <ParameterList name="function-constant">
-                <Parameter name="value" type="double" value="997.0" />
-              </ParameterList>
-            </ParameterList>
-          </ParameterList>
-        </ParameterList>
+      <ParameterList name="surface-source_molar_density" type="ParameterList">
+        <Parameter name="field evaluator type" type="string" value="independent variable constant" />
+        <Parameter name="value" type="double" value="55000.0" />
       </ParameterList>
 
       <ParameterList name="surface-overland_conductivity" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="overland conductivity" />
         <ParameterList name="overland conductivity model" type="ParameterList">
-          <Parameter name="overland conductivity type " type="string" value="manning" />
           <Parameter name="Manning exponent" type="double" value="0.666666666667" />
           <Parameter name="slope regularization epsilon" type="double" value="0.01" />
         </ParameterList>
@@ -541,10 +415,12 @@
   </ParameterList>
   <ParameterList name="visualization">
     <ParameterList name="domain" type="ParameterList">
-      <Parameter name="times start period stop" type="Array(double)" value="{0.0,86400.0,-1.0}" />
+      <Parameter name="times start period stop" type="Array(double)" value="{0.0,.10,-1.0}" />
+      <Parameter name="times start period stop units" type="string" value="d" />
     </ParameterList>
     <ParameterList name="surface" type="ParameterList">
-      <Parameter name="times start period stop" type="Array(double)" value="{0.0,86400.0,-1.0}" />
+      <Parameter name="times start period stop" type="Array(double)" value="{0.0,.10,-1.0}" />
+      <Parameter name="times start period stop units" type="string" value="d" />
     </ParameterList>
   </ParameterList>
 
@@ -558,7 +434,8 @@
       <Parameter name="location name" type="string" value="face" />
       <Parameter name="write interval" type="int" value="30" />
       <Parameter name="observation output filename" type="string" value="surface_outlet_flux.dat" />
-      <Parameter name="times start period stop" type="Array(double)" value="{0.0,8640.0,-1.0}" />
+      <Parameter name="times start period stop" type="Array(double)" value="{0.0,0.1,-1.0}" />
+      <Parameter name="times start period stop units" type="string" value="d" />
     </ParameterList>
   </ParameterList>
 </ParameterList>

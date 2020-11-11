@@ -11,6 +11,7 @@
     </ParameterList>
     <ParameterList name="domain" type="ParameterList">
       <Parameter name="mesh type" type="string" value="read mesh file" />
+      <Parameter name="build columns from set" type="string" value="surface face" />
       <ParameterList name="read mesh file parameters" type="ParameterList">
         <Parameter name="file" type="string" value="../data/column.exo" />
         <Parameter name="format" type="string" value="Exodus II" />
@@ -72,7 +73,11 @@
     <Parameter name="start time" type="double" value="0.0" />
     <Parameter name="start time units" type="string" value="s" />
     <Parameter name="end time" type="double" value="1.0" />
-    <Parameter name="end time units" type="string" value="y" />
+    <Parameter name="end time units" type="string" value="noleap" />
+    <ParameterList name="required times" type="ParameterList">
+      <Parameter name="times start period stop" type="Array(double)" value="{0,1,-1}" />
+      <Parameter name="times start period stop units" type="string" value="d" />
+    </ParameterList>
     <ParameterList name="PK tree" type="ParameterList">
       <ParameterList name="Top level MPC" type="ParameterList">
         <Parameter name="PK type" type="string" value="strong MPC" />
@@ -97,8 +102,10 @@
       </ParameterList>
     </ParameterList>
   </ParameterList>
+
   <ParameterList name="checkpoint" type="ParameterList">
-    <Parameter name="cycles start period stop" type="Array(int)" value="{0,200,-1}" />
+    <Parameter name="times start period stop" type="Array(double)" value="{0,1,-1}" />
+    <Parameter name="times start period stop units" type="string" value="noleap" />
   </ParameterList>
 
   <ParameterList name="PKs" type="ParameterList">
@@ -149,6 +156,7 @@
       <Parameter name="supress Jacobian terms: d div q / dT" type="bool" value="false" />
       <Parameter name="supress Jacobian terms: d div K grad T / dp" type="bool" value="false" />
       <Parameter name="supress Jacobian terms: d div hq / dp,T" type="bool" value="true" />
+
       <Parameter name="dump preconditioner" type="bool" value="false" />
       <ParameterList name="verbose object" type="ParameterList">
         <Parameter name="verbosity level" type="string" value="high" />
@@ -185,22 +193,19 @@
         <Parameter name="iterative method" type="string" value="gmres" />
         <ParameterList name="boomer amg parameters" type="ParameterList">
           <Parameter name="cycle applications" type="int" value="1" />
-          <Parameter name="smoother sweeps" type="int" value="2" />
-          <Parameter name="strong threshold" type="double" value="0.25" />
+          <Parameter name="smoother sweeps" type="int" value="1" />
+          <Parameter name="strong threshold" type="double" value="0.65" />
           <Parameter name="tolerance" type="double" value="0.0" />
           <Parameter name="number of functions" type="int" value="2" />
         </ParameterList>
         <ParameterList name="verbose object" type="ParameterList">
-          <Parameter name="verbosity level" type="string" value="high" />
+          <Parameter name="verbosity level" type="string" value="medium" />
         </ParameterList>
         <ParameterList name="gmres parameters" type="ParameterList">
           <Parameter name="preconditioning strategy" type="string" value="left" />
           <Parameter name="error tolerance" type="double" value="1e-06" />
           <Parameter name="convergence criteria" type="Array(string)" value="{relative residual,make one iteration}" />
-          <Parameter name="maximum number of iteration" type="int" value="80" />
-          <ParameterList name="verbose object" type="ParameterList">
-            <Parameter name="verbosity level" type="string" value="high" />
-          </ParameterList>
+          <Parameter name="maximum number of iteration" type="int" value="10" />
         </ParameterList>
       </ParameterList>
 
@@ -218,6 +223,7 @@
       <Parameter name="permeability rescaling" type="double" value="10000000.0" />
       <Parameter name="max valid change in saturation in a time step [-]" type="double" value="0.1" />
       <Parameter name="max valid change in ice saturation in a time step [-]" type="double" value="0.1" />
+
       <Parameter name="debug cells" type="Array(int)" value="{0,10,84}" />
       <ParameterList name="verbose object" type="ParameterList">
         <Parameter name="verbosity level" type="string" value="high" />
@@ -228,14 +234,14 @@
       </ParameterList>
 
       <ParameterList name="diffusion preconditioner" type="ParameterList">
-        <Parameter name="Newton correction" type="string" value="approximate Jacobian" />
+        <Parameter name="include Newton correction" type="bool" value="true" />
       </ParameterList>
 
       <ParameterList name="boundary conditions" type="ParameterList">
       </ParameterList>
 
       <ParameterList name="initial condition" type="ParameterList">
-        <Parameter name="restart file" type="string" value="../spinup1-freezeup.demo/checkpoint_final.h5" />
+        <Parameter name="restart file" type="string" value="../data/arctic_hydrology_freezeup-checkpoint_final.h5" />
       </ParameterList>
 
       <ParameterList name="water retention evaluator" type="ParameterList">
@@ -328,7 +334,7 @@
       </ParameterList>
 
       <ParameterList name="initial condition" type="ParameterList">
-        <Parameter name="restart file" type="string" value="../spinup1-freezeup.demo/checkpoint_final.h5" />
+        <Parameter name="restart file" type="string" value="../data/arctic_hydrology_freezeup-checkpoint_final.h5" />
       </ParameterList>
 
       <ParameterList name="thermal conductivity evaluator" type="ParameterList">
@@ -865,15 +871,19 @@
 
     </ParameterList>
   </ParameterList>
+
   <ParameterList name="visualization" type="ParameterList">
     <ParameterList name="domain" type="ParameterList">
-      <Parameter name="times start period stop" type="Array(double)" value="{0.0,864000.0,-1.0}" />
+      <Parameter name="times start period stop" type="Array(double)" value="{0.0,1.0,-1.0}" />
+      <Parameter name="times start period stop units" type="string" value="d" />
     </ParameterList>
     <ParameterList name="surface" type="ParameterList">
-      <Parameter name="times start period stop" type="Array(double)" value="{0.0,864000.0,-1.0}" />
+      <Parameter name="times start period stop" type="Array(double)" value="{0.0,1.0,-1.0}" />
+      <Parameter name="times start period stop units" type="string" value="d" />
     </ParameterList>
     <ParameterList name="snow" type="ParameterList">
-      <Parameter name="times start period stop" type="Array(double)" value="{0.0,864000.0,-1.0}" />
+      <Parameter name="times start period stop" type="Array(double)" value="{0.0,1.0,-1.0}" />
+      <Parameter name="times start period stop units" type="string" value="d" />
     </ParameterList>
   </ParameterList>
 </ParameterList>

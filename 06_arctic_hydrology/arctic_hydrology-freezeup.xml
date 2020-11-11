@@ -1,6 +1,7 @@
 <ParameterList name="Main" type="ParameterList">
   <ParameterList name="mesh" type="ParameterList">
     <ParameterList name="domain" type="ParameterList">
+      <Parameter name="build columns from set" type="string" value="surface face" />
       <Parameter name="mesh type" type="string" value="read mesh file" />
       <ParameterList name="read mesh file parameters" type="ParameterList">
         <Parameter name="file" type="string" value="../data/column.exo" />
@@ -93,19 +94,19 @@
         <Parameter name="iterative method" type="string" value="gmres" />
         <ParameterList name="boomer amg parameters" type="ParameterList">
           <Parameter name="cycle applications" type="int" value="1" />
-          <Parameter name="smoother sweeps" type="int" value="2" />
-          <Parameter name="strong threshold" type="double" value="0.25" />
+          <Parameter name="smoother sweeps" type="int" value="1" />
+          <Parameter name="strong threshold" type="double" value="0.65" />
           <Parameter name="tolerance" type="double" value="0.0" />
           <Parameter name="number of functions" type="int" value="2" />
         </ParameterList>
         <ParameterList name="verbose object" type="ParameterList">
-          <Parameter name="verbosity level" type="string" value="high" />
+          <Parameter name="verbosity level" type="string" value="medium" />
         </ParameterList>
         <ParameterList name="gmres parameters" type="ParameterList">
           <Parameter name="preconditioning strategy" type="string" value="left" />
           <Parameter name="error tolerance" type="double" value="1e-06" />
           <Parameter name="convergence criteria" type="Array(string)" value="{relative residual,make one iteration}" />
-          <Parameter name="maximum number of iteration" type="int" value="80" />
+          <Parameter name="maximum number of iteration" type="int" value="10" />
         </ParameterList>
       </ParameterList>
 
@@ -151,6 +152,7 @@
       <Parameter name="permeability rescaling" type="double" value="10000000.0" />
       <Parameter name="max valid change in saturation in a time step [-]" type="double" value="0.1" />
       <Parameter name="max valid change in ice saturation in a time step [-]" type="double" value="0.1" />
+
       <Parameter name="debug cells" type="Array(int)" value="{0,84}" />
       <ParameterList name="verbose object" type="ParameterList">
         <Parameter name="verbosity level" type="string" value="high" />
@@ -161,14 +163,15 @@
       </ParameterList>
 
       <ParameterList name="diffusion preconditioner" type="ParameterList">
-        <Parameter name="Newton correction" type="string" value="approximate Jacobian" />
+        <Parameter name="include Newton correction" type="bool" value="true" />
       </ParameterList>
 
       <ParameterList name="boundary conditions" type="ParameterList">
       </ParameterList>
 
       <ParameterList name="initial condition" type="ParameterList">
-        <Parameter name="restart file" type="string" value="../spinup0-water_table.demo/checkpoint_final.h5" />
+        <Parameter name="hydrostatic head [m]" type="double" value="-11.0" />
+        <Parameter name="hydrostatic water density [kg m^-3]" type="double" value="1000.0" />
       </ParameterList>
 
       <ParameterList name="water retention evaluator" type="ParameterList">
@@ -208,6 +211,7 @@
       <Parameter name="supress advective terms in preconditioner" type="bool" value="true" />
       <Parameter name="source term" type="bool" value="false" />
       <Parameter name="initial time step" type="double" value="1.0" />
+
       <Parameter name="debug cells" type="Array(int)" value="{0,84}" />
       <ParameterList name="verbose object" type="ParameterList">
         <Parameter name="verbosity level" type="string" value="high" />
@@ -384,14 +388,6 @@
         </ParameterList>
       </ParameterList>
 
-      <ParameterList name="internal_energy_gas" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="iem water vapor" />
-        <Parameter name="internal energy key" type="string" value="internal_energy_gas" />
-        <ParameterList name="verbose object" type="ParameterList">
-          <Parameter name="verbosity level" type="string" value="low" />
-        </ParameterList>
-      </ParameterList>
-
       <ParameterList name="internal_energy_ice" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="iem" />
         <Parameter name="internal energy key" type="string" value="internal_energy_ice" />
@@ -400,17 +396,6 @@
           <Parameter name="latent heat [J mol^-1]" type="double" value="-6007.87" />
           <Parameter name="heat capacity [J mol^-1 K^-1]" type="double" value="37.7841" />
           <Parameter name="quadratic b [J mol^-1 K^-2]" type="double" value="0.131932" />
-        </ParameterList>
-        <ParameterList name="verbose object" type="ParameterList">
-          <Parameter name="verbosity level" type="string" value="low" />
-        </ParameterList>
-      </ParameterList>
-
-      <ParameterList name="mol_frac_gas" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="molar fraction gas" />
-        <Parameter name="molar fraction key" type="string" value="mol_frac_gas" />
-        <ParameterList name="vapor pressure model parameters" type="ParameterList">
-          <Parameter name="vapor pressure model type" type="string" value="water vapor over water/ice" />
         </ParameterList>
         <ParameterList name="verbose object" type="ParameterList">
           <Parameter name="verbosity level" type="string" value="low" />
@@ -507,13 +492,6 @@
             </ParameterList>
           </ParameterList>
         </ParameterList>
-        <ParameterList name="verbose object" type="ParameterList">
-          <Parameter name="verbosity level" type="string" value="low" />
-        </ParameterList>
-      </ParameterList>
-
-      <ParameterList name="effective_pressure" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="effective_pressure" />
         <ParameterList name="verbose object" type="ParameterList">
           <Parameter name="verbosity level" type="string" value="low" />
         </ParameterList>

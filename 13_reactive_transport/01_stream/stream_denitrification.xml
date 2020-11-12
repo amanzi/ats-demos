@@ -165,14 +165,34 @@
       <ParameterList name="operators">
         <ParameterList name="diffusion operator">
           <ParameterList name="matrix">
-            <Parameter name="discretization primary" type="string" value="fv: default"/>
-            <Parameter name="discretization secondary" type="string" value="fv: default"/>
-            <Parameter name="schema" type="Array(string)" value="{face, cell}"/>
-            <Parameter name="preconditioner schema" type="Array(string)" value="{face}"/>
+            <Parameter name="discretization primary" type="string" value="fv: default" />
+            <Parameter name="discretization secondary" type="string" value="fv: default" />
+            <Parameter name="schema" type="Array(string)" value="{face, cell}" />
+            <Parameter name="preconditioner schema" type="Array(string)" value="{face}" />
+
+            <ParameterList name="inverse">
+              <Parameter name="preconditioning method" type="string" value="boomer amg" />
+              <ParameterList name="boomer amg parameters">
+                <Parameter name="tolerance" type="double" value="0.0" />
+                <Parameter name="smoother sweeps" type="int" value="3" />
+                <Parameter name="cycle applications" type="int" value="5" />
+                <Parameter name="strong threshold" type="double" value="0.5" />
+              </ParameterList>
+              <Parameter name="iterative method" type="string" value="pcg" />
+              <ParameterList name="pcg parameters">
+                <Parameter name="maximum number of iterations" type="int" value="400" />
+                <Parameter name="error tolerance" type="double" value="1e-20" />
+                <Parameter name="convergence criteria" type="Array(string)" value="{relative rhs, make one iteration}" />
+                <Parameter name="size of Krylov space" type="int" value="5" />
+                <ParameterList name="verbose object">
+                  <Parameter name="verbosity level" type="string" value="low" />
+                </ParameterList>
+              </ParameterList>
+            </ParameterList>
+
           </ParameterList>
         </ParameterList>
       </ParameterList>
-
       
       <ParameterList name="boundary conditions" type="ParameterList">
         <ParameterList name="geochemical" type="ParameterList">
@@ -182,7 +202,6 @@
             <Parameter name="times" type="Array(double)" value="{0.0,1e+20}" />
             <Parameter name="geochemical conditions" type="Array(string)" value="{upstreambc, upstreambc}" />
             <Parameter name="time functions" type="Array(string)" value="{constant}" />
-	    <Parameter name="ats units [moles/m^3]" type="bool" value="true" />
           </ParameterList>
           <ParameterList name="east_bc" type="ParameterList">
             <Parameter name="regions" type="Array(string)" value="{surface east}" />
@@ -190,7 +209,6 @@
             <Parameter name="times" type="Array(double)" value="{0.0,1e+20}" />
             <Parameter name="geochemical conditions" type="Array(string)" value="{initial,initial}" />
             <Parameter name="time functions" type="Array(string)" value="{constant}" />
-	    <Parameter name="ats units [moles/m^3]" type="bool" value="true" />
           </ParameterList>
         </ParameterList>
       </ParameterList>
@@ -228,6 +246,11 @@
       <Parameter name="debug cells" type="Array(int)" value="{0}" />
 
       <ParameterList name="initial conditions" type="ParameterList">
+        <ParameterList name="geochemical conditions" type="ParameterList">
+          <ParameterList name="initial" type="ParameterList">
+            <Parameter name="regions" type="Array(string)" value="{surface domain}" />
+          </ParameterList>
+        </ParameterList>
       </ParameterList>
 
     </ParameterList>
@@ -332,41 +355,10 @@
       <ParameterList name="atmospheric_pressure" type="ParameterList">
         <Parameter name="value" type="double" value="101325.0" />
       </ParameterList>
-      
-      <!--
-      <ParameterList name="surface-pressure" type="ParameterList">
-        <Parameter name="restart file" type="string" value="../data/restart_run_surface_flow2.h5" />
-      </ParameterList>-->
 
       <ParameterList name="gravity" type="ParameterList">
         <Parameter name="value" type="Array(double)" value="{0.0,0.0,-9.80665}" />
       </ParameterList>
-
-      <ParameterList name="surface-geochemical conditions" type="ParameterList">
-        <ParameterList name="initial" type="ParameterList">
-          <Parameter name="regions" type="Array(string)" value="{surface domain}" />
-        </ParameterList>
-      </ParameterList>
-      
-      <!--
-      <ParameterList name="surface-total_component_concentration" type="ParameterList">
-        <ParameterList name="function" type="ParameterList">
-          <ParameterList name="All" type="ParameterList">
-            <Parameter name="regions" type="Array(string)" value="{surface domain}" />
-            <Parameter name="component" type="string" value="cell" />
-            <ParameterList name="function" type="ParameterList">
-              <Parameter name="number of dofs" type="int" value="1" />
-              <Parameter name="function type" type="string" value="composite function" />
-              <ParameterList name="dof 1 function" type="ParameterList">
-                <ParameterList name="function-constant" type="ParameterList">
-                  <Parameter name="value" type="double" value="0.0" />
-                </ParameterList>
-              </ParameterList>
-            </ParameterList>
-          </ParameterList>
-        </ParameterList>
-      </ParameterList>
-      -->
       
     </ParameterList>
     

@@ -268,7 +268,7 @@
           </ParameterList>
         </ParameterList>
       </ParameterList>
-      
+
       <ParameterList name="transpiration" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="transpiration distribution via rooting depth" />
         <Parameter name="potential transpiration key" type="string" value="surface-potential_evapotranspiration" />
@@ -300,7 +300,7 @@
         <Parameter name="constant in time" type="bool" value="true" />
         <Parameter name="field evaluator type" type="string" value="depth" />
       </ParameterList>
-      
+
       <ParameterList name="mass_source" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="additive evaluator" />
         <Parameter name="evaluator dependencies" type="Array(string)" value="{transpiration}" />
@@ -312,14 +312,14 @@
         <Parameter name="evaluator dependency key" type="string" value="transpiration" />
         <Parameter name="divide by density" type="bool" value="false" />
       </ParameterList>
-      
+
       <ParameterList name="surface-potential_evapotranspiration" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="additive evaluator" />
         <Parameter name="evaluator dependencies" type="Array(string)" value="{surface-potential_transpiration_mps,surface-potential_evaporation_mps}" />
         <Parameter name="surface-potential_evaporation_mps coefficient" type="double" value="55000.0" />
         <Parameter name="surface-potential_transpiration_mps coefficient" type="double" value="55000.0" />
       </ParameterList>
-      
+
       <ParameterList name="surface-potential_transpiration_mps" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
         <ParameterList name="function" type="ParameterList">
@@ -353,7 +353,7 @@
           </ParameterList>
         </ParameterList>
       </ParameterList>
-      
+
       <ParameterList name="surface-manning_coefficient">
         <Parameter name="field evaluator type" type="string" value="independent variable constant" />
         <Parameter name="value" type="double" value="0.15" />
@@ -363,7 +363,7 @@
         <Parameter name="field evaluator type" type="string" value="independent variable constant" />
         <Parameter name="value" type="double" value="0.4" />
       </ParameterList>
-      
+
       <ParameterList name="porosity" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="compressible porosity" />
         <ParameterList name="compressible porosity model parameters" type="ParameterList">
@@ -376,12 +376,12 @@
 
       <ParameterList name="permeability">
         <Parameter name="field evaluator type" type="string" value="independent variable constant" />
-        <Parameter name="value" type="double" value="1.e-12" />
+        <Parameter name="value" type="double" value="1e-12" />
       </ParameterList>
 
       <ParameterList name="surface-relative_permeability" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable constant" />
-        <Parameter name="value" type="double" value="1." />
+        <Parameter name="value" type="double" value="1.0" />
       </ParameterList>
 
       <ParameterList name="mass_density_liquid" type="ParameterList">
@@ -441,12 +441,12 @@
   </ParameterList>
   <ParameterList name="visualization">
     <ParameterList name="domain" type="ParameterList">
-      <Parameter name="times start period stop" type="Array(double)" value="{0.0,.10,-1.0}" />
+      <Parameter name="times start period stop" type="Array(double)" value="{0.0,0.1,-1.0}" />
       <Parameter name="times start period stop units" type="string" value="d" />
       <Parameter name="time units" type="string" value="d" />
     </ParameterList>
     <ParameterList name="surface" type="ParameterList">
-      <Parameter name="times start period stop" type="Array(double)" value="{0.0,.10,-1.0}" />
+      <Parameter name="times start period stop" type="Array(double)" value="{0.0,0.1,-1.0}" />
       <Parameter name="times start period stop units" type="string" value="d" />
       <Parameter name="time units" type="string" value="d" />
     </ParameterList>
@@ -454,50 +454,49 @@
 
   <ParameterList name="observations" type="ParameterList">
     <ParameterList name="surface flux" type="ParameterList">
-      <ParameterList name="observed quantities" type="ParameterList">
-        <ParameterList name="outlet" type="ParameterList">
-          <Parameter name="variable" type="string" value="surface-mass_flux" />
-          <Parameter name="direction normalized flux" type="bool" value="true" />
-          <Parameter name="region" type="string" value="outlet" />
-          <Parameter name="functional" type="string" value="observation data: extensive integral" />
-          <Parameter name="location name" type="string" value="face" />
-        </ParameterList>
-        <ParameterList name="inlet" type="ParameterList">
-          <Parameter name="variable" type="string" value="surface-mass_flux" />
-          <Parameter name="direction normalized flux" type="bool" value="true" />
-          <Parameter name="region" type="string" value="inlet" />
-          <Parameter name="functional" type="string" value="observation data: extensive integral" />
-          <Parameter name="location name" type="string" value="face" />
-        </ParameterList>
-      </ParameterList>
       <Parameter name="delimiter" type="string" value=" " />
       <Parameter name="write interval" type="int" value="30" />
       <Parameter name="time units" type="string" value="d" />
       <Parameter name="observation output filename" type="string" value="surface_flux.dat" />
       <Parameter name="times start period stop" type="Array(double)" value="{0.0,0.1,-1.0}" />
       <Parameter name="times start period stop units" type="string" value="d" />
+      <ParameterList name="observed quantities" type="ParameterList">
+        <ParameterList name="outlet" type="ParameterList">
+          <Parameter name="variable" type="string" value="surface-mass_flux" />
+          <Parameter name="direction normalized flux" type="bool" value="true" />
+          <Parameter name="region" type="string" value="outlet" />
+          <Parameter name="functional" type="string" value="extensive integral" />
+          <Parameter name="location name" type="string" value="face" />
+        </ParameterList>
+        <ParameterList name="inlet" type="ParameterList">
+          <Parameter name="variable" type="string" value="surface-mass_flux" />
+          <Parameter name="direction normalized flux" type="bool" value="true" />
+          <Parameter name="region" type="string" value="inlet" />
+          <Parameter name="functional" type="string" value="extensive integral" />
+          <Parameter name="location name" type="string" value="face" />
+        </ParameterList>
+      </ParameterList>
     </ParameterList>
-
     <ParameterList name="transpiration" type="ParameterList">
       <Parameter name="observation output filename" type="string" value="transpiration.dat" />
       <Parameter name="write interval" type="int" value="1" />
       <Parameter name="time units" type="string" value="d" />
       <Parameter name="delimiter" type="string" value=" " />
-      <Parameter name="times start period stop" type="Array(double)" value="{0,1,-1}" />
+      <Parameter name="times start period stop" type="Array(double)" value="{0.0,1.0,-1.0}" />
       <Parameter name="times start period stop units" type="string" value="d" />
       <ParameterList name="observed quantities" type="ParameterList">
         <ParameterList name="surface-potential_evapotranspiration" type="ParameterList">
           <Parameter name="variable" type="string" value="surface-potential_evapotranspiration" />
           <Parameter name="direction normalized flux" type="bool" value="true" />
           <Parameter name="region" type="string" value="surface domain" />
-          <Parameter name="functional" type="string" value="observation data: integral" />
+          <Parameter name="functional" type="string" value="integral" />
           <Parameter name="location name" type="string" value="cell" />
         </ParameterList>
         <ParameterList name="surface-total_evapotranspiration" type="ParameterList">
           <Parameter name="variable" type="string" value="surface-total_evapotranspiration" />
           <Parameter name="direction normalized flux" type="bool" value="true" />
           <Parameter name="region" type="string" value="surface domain" />
-          <Parameter name="functional" type="string" value="observation data: integral" />
+          <Parameter name="functional" type="string" value="integral" />
           <Parameter name="location name" type="string" value="cell" />
         </ParameterList>
       </ParameterList>

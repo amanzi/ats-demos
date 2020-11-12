@@ -144,9 +144,7 @@
       <Parameter name="initial time step" type="double" value="10.0" />
       <Parameter name="permeability rescaling" type="double" value="10000000.0" />
       <Parameter name="surface rel perm strategy" type="string" value="clobber" />
-
       <Parameter name="relative permeability method" type="string" value="upwind with Darcy flux" />
-
       <Parameter name="debug cells" type="Array(int)" value="{}" />
       <ParameterList name="verbose object" type="ParameterList">
         <Parameter name="verbosity level" type="string" value="high" />
@@ -356,12 +354,12 @@
 
       <ParameterList name="permeability">
         <Parameter name="field evaluator type" type="string" value="independent variable constant" />
-        <Parameter name="value" type="double" value="1.e-12" />
+        <Parameter name="value" type="double" value="1e-12" />
       </ParameterList>
 
       <ParameterList name="surface-relative_permeability" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable constant" />
-        <Parameter name="value" type="double" value="1." />
+        <Parameter name="value" type="double" value="1.0" />
       </ParameterList>
 
       <ParameterList name="mass_density_liquid" type="ParameterList">
@@ -417,11 +415,11 @@
   </ParameterList>
   <ParameterList name="visualization">
     <ParameterList name="domain" type="ParameterList">
-      <Parameter name="times start period stop" type="Array(double)" value="{0.0,.10,-1.0}" />
+      <Parameter name="times start period stop" type="Array(double)" value="{0.0,0.1,-1.0}" />
       <Parameter name="times start period stop units" type="string" value="d" />
     </ParameterList>
     <ParameterList name="surface" type="ParameterList">
-      <Parameter name="times start period stop" type="Array(double)" value="{0.0,.10,-1.0}" />
+      <Parameter name="times start period stop" type="Array(double)" value="{0.0,0.1,-1.0}" />
       <Parameter name="times start period stop units" type="string" value="d" />
     </ParameterList>
   </ParameterList>
@@ -431,7 +429,7 @@
       <Parameter name="variable" type="string" value="surface-mass_flux" />
       <Parameter name="direction normalized flux" type="bool" value="true" />
       <Parameter name="region" type="string" value="outlet" />
-      <Parameter name="functional" type="string" value="observation data: extensive integral" />
+      <Parameter name="functional" type="string" value="extensive integral" />
       <Parameter name="delimiter" type="string" value=" " />
       <Parameter name="location name" type="string" value="face" />
       <Parameter name="write interval" type="int" value="30" />
@@ -444,21 +442,21 @@
       <Parameter name="write interval" type="int" value="1" />
       <Parameter name="time units" type="string" value="d" />
       <Parameter name="delimiter" type="string" value=" " />
-      <Parameter name="times start period stop" type="Array(double)" value="{0,1,-1}" />
+      <Parameter name="times start period stop" type="Array(double)" value="{0.0,1.0,-1.0}" />
       <Parameter name="times start period stop units" type="string" value="d" />
       <ParameterList name="observed quantities" type="ParameterList">
         <ParameterList name="surface-potential_evapotranspiration" type="ParameterList">
           <Parameter name="variable" type="string" value="surface-potential_evapotranspiration" />
           <Parameter name="direction normalized flux" type="bool" value="true" />
           <Parameter name="region" type="string" value="surface domain" />
-          <Parameter name="functional" type="string" value="observation data: integral" />
+          <Parameter name="functional" type="string" value="integral" />
           <Parameter name="location name" type="string" value="cell" />
         </ParameterList>
         <ParameterList name="surface-total_evapotranspiration" type="ParameterList">
           <Parameter name="variable" type="string" value="surface-total_evapotranspiration" />
           <Parameter name="direction normalized flux" type="bool" value="true" />
           <Parameter name="region" type="string" value="surface domain" />
-          <Parameter name="functional" type="string" value="observation data: integral" />
+          <Parameter name="functional" type="string" value="integral" />
           <Parameter name="location name" type="string" value="cell" />
         </ParameterList>
       </ParameterList>

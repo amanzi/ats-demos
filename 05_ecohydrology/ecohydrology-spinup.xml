@@ -68,14 +68,13 @@
       </ParameterList>
     </ParameterList>
   </ParameterList>
-
   <ParameterList name="visualization">
     <ParameterList name="domain">
-      <Parameter name="times" type="Array(double)" value="{20000}" />
+      <Parameter name="times" type="Array(double)" value="{20000.0}" />
       <Parameter name="times units" type="string" value="d" />
     </ParameterList>
     <ParameterList name="surface">
-      <Parameter name="times" type="Array(double)" value="{20000}" />
+      <Parameter name="times" type="Array(double)" value="{20000.0}" />
       <Parameter name="times units" type="string" value="d" />
     </ParameterList>
   </ParameterList>
@@ -161,7 +160,6 @@
       <Parameter name="relative permeability method" type="string" value="upwind with Darcy flux" />
       <Parameter name="permeability rescaling" type="double" value="10000000.0" />
       <Parameter name="surface rel perm strategy" type="string" value="clobber" />
-
       <Parameter name="debug cells" type="Array(int)" value="{}" />
       <ParameterList name="verbose object">
         <Parameter name="verbosity level" type="string" value="medium" />
@@ -172,8 +170,8 @@
       </ParameterList>
 
       <ParameterList name="diffusion preconditioner">
-         <Parameter name="include Newton correction" type="bool" value="true" />
-      </ParameterList>>
+        <Parameter name="include Newton correction" type="bool" value="true" />
+      </ParameterList>
 
       <ParameterList name="boundary conditions">
       </ParameterList>
@@ -208,7 +206,6 @@
       <Parameter name="source key" type="string" value="surface-precipitation" />
       <Parameter name="mass source in meters" type="bool" value="true" />
       <Parameter name="initial time step" type="double" value="60.0" />
-
       <ParameterList name="verbose object">
         <Parameter name="verbosity level" type="string" value="medium" />
       </ParameterList>
@@ -218,7 +215,7 @@
       </ParameterList>
 
       <ParameterList name="diffusion preconditioner">
-         <Parameter name="include Newton correction" type="bool" value="true" />
+        <Parameter name="include Newton correction" type="bool" value="true" />
       </ParameterList>
 
       <ParameterList name="boundary conditions">
@@ -314,7 +311,7 @@
 
       <ParameterList name="surface-relative_permeability" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable constant" />
-        <Parameter name="value" type="double" value="1." />
+        <Parameter name="value" type="double" value="1.0" />
       </ParameterList>
 
       <ParameterList name="surface-manning_coefficient">
@@ -339,7 +336,7 @@
 
       <ParameterList name="permeability">
         <Parameter name="field evaluator type" type="string" value="independent variable constant" />
-        <Parameter name="value" type="double" value="1.e-12" />
+        <Parameter name="value" type="double" value="1e-12" />
       </ParameterList>
 
       <ParameterList name="surface-overland_conductivity">
@@ -363,13 +360,12 @@
 
     </ParameterList>
   </ParameterList>
-
   <ParameterList name="observations" type="ParameterList">
     <ParameterList name="surface outlet flux" type="ParameterList">
       <Parameter name="variable" type="string" value="surface-mass_flux" />
       <Parameter name="direction normalized flux" type="bool" value="true" />
       <Parameter name="region" type="string" value="outlet" />
-      <Parameter name="functional" type="string" value="observation data: extensive integral" />
+      <Parameter name="functional" type="string" value="extensive integral" />
       <Parameter name="delimiter" type="string" value=" " />
       <Parameter name="location name" type="string" value="face" />
       <Parameter name="write interval" type="int" value="10" />
@@ -379,7 +375,7 @@
     <ParameterList name="total water content" type="ParameterList">
       <Parameter name="variable" type="string" value="water_content" />
       <Parameter name="region" type="string" value="computational domain" />
-      <Parameter name="functional" type="string" value="observation data: extensive integral" />
+      <Parameter name="functional" type="string" value="extensive integral" />
       <Parameter name="delimiter" type="string" value=" " />
       <Parameter name="location name" type="string" value="cell" />
       <Parameter name="write interval" type="int" value="10" />

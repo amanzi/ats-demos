@@ -1,5 +1,4 @@
 <ParameterList name="Main" type="ParameterList">
-
   <ParameterList name="regions" type="ParameterList">
     <ParameterList name="subsurface domain" type="ParameterList">
       <ParameterList name="region: all" type="ParameterList">
@@ -9,7 +8,6 @@
       <ParameterList name="region: all" type="ParameterList">
       </ParameterList>
     </ParameterList>
-
     <ParameterList name="surface outlet" type="ParameterList">
       <ParameterList name="region: box" type="ParameterList">
         <Parameter name="low coordinate" type="Array(double)" value="{0.0,0.0}" />
@@ -91,7 +89,6 @@
     <ParameterList name="Top level MPC" type="ParameterList">
       <Parameter name="PK type" type="string" value="coupled water" />
       <Parameter name="PKs order" type="Array(string)" value="{subsurface flow,surface flow}" />
-
       <ParameterList name="verbose object" type="ParameterList">
         <Parameter name="verbosity level" type="string" value="medium" />
       </ParameterList>
@@ -100,7 +97,6 @@
         <Parameter name="modify predictor damp and cap the water spurt" type="bool" value="true" />
         <Parameter name="damp and cap the water spurt" type="bool" value="true" />
         <Parameter name="cap over atmospheric" type="double" value="0.001" />
-
         <Parameter name="debug cells" type="Array(int)" value="{}" />
         <ParameterList name="verbose object" type="ParameterList">
           <Parameter name="verbosity level" type="string" value="medium" />
@@ -165,7 +161,6 @@
       <Parameter name="relative permeability method" type="string" value="upwind with Darcy flux" />
       <Parameter name="permeability rescaling" type="double" value="10000000.0" />
       <Parameter name="surface rel perm strategy" type="string" value="clobber" />
-
       <ParameterList name="verbose object" type="ParameterList">
         <Parameter name="verbosity level" type="string" value="medium" />
       </ParameterList>
@@ -193,24 +188,24 @@
           <ParameterList name="rest domain" type="ParameterList">
             <Parameter name="region" type="string" value="background soil" />
             <Parameter name="WRM Type" type="string" value="van Genuchten" />
-            <Parameter name="van Genuchten alpha [Pa^-1]" type="double" value="6.116e-4" />
-            <Parameter name="van Genuchten n [-]" type="double" value="2" />
+            <Parameter name="van Genuchten alpha [Pa^-1]" type="double" value="0.0006116" />
+            <Parameter name="van Genuchten n [-]" type="double" value="2.0" />
             <Parameter name="residual saturation [-]" type="double" value="0.2" />
             <Parameter name="smoothing interval width [saturation]" type="double" value="0.1" />
           </ParameterList>
           <ParameterList name="first slab" type="ParameterList">
             <Parameter name="region" type="string" value="first slab" />
             <Parameter name="WRM Type" type="string" value="van Genuchten" />
-            <Parameter name="van Genuchten alpha [Pa^-1]" type="double" value="1.019e-4" />
-            <Parameter name="van Genuchten n [-]" type="double" value="3" />
+            <Parameter name="van Genuchten alpha [Pa^-1]" type="double" value="0.0001019" />
+            <Parameter name="van Genuchten n [-]" type="double" value="3.0" />
             <Parameter name="residual saturation [-]" type="double" value="0.3" />
             <Parameter name="smoothing interval width [saturation]" type="double" value="0.1" />
           </ParameterList>
           <ParameterList name="second slab" type="ParameterList">
             <Parameter name="region" type="string" value="second slab" />
             <Parameter name="WRM Type" type="string" value="van Genuchten" />
-            <Parameter name="van Genuchten alpha [Pa^-1]" type="double" value="1.019e-4" />
-            <Parameter name="van Genuchten n [-]" type="double" value="3" />
+            <Parameter name="van Genuchten alpha [Pa^-1]" type="double" value="0.0001019" />
+            <Parameter name="van Genuchten n [-]" type="double" value="3.0" />
             <Parameter name="residual saturation [-]" type="double" value="0.3" />
             <Parameter name="smoothing interval width [saturation]" type="double" value="0.1" />
           </ParameterList>
@@ -226,7 +221,6 @@
       <Parameter name="source term" type="bool" value="true" />
       <Parameter name="initial time step" type="double" value="60.0" />
       <Parameter name="source term is differentiable" type="bool" value="true" />
-
       <Parameter name="debug cells" type="Array(int)" value="{}" />
       <ParameterList name="verbose object" type="ParameterList">
         <Parameter name="verbosity level" type="string" value="medium" />
@@ -237,8 +231,7 @@
       </ParameterList>
 
       <ParameterList name="upwinding" type="ParameterList">
-        <Parameter name="upwind type" type="string" value="manning upwind" />  <!-- total flux (default) -->
-        <!-- <Parameter name="upwind type" type="string" value="manning harmonic mean" /> --> <!-- Eugene special -->
+        <Parameter name="upwind type" type="string" value="manning upwind" />
       </ParameterList>
 
       <ParameterList name="diffusion preconditioner" type="ParameterList">
@@ -279,7 +272,7 @@
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-tabular" type="ParameterList">
                 <Parameter name="x values" type="Array(double)" value="{0.0,12000.0}" />
-                <Parameter name="y values" type="Array(double)" value="{1.3888888e-5,0.0}" />
+                <Parameter name="y values" type="Array(double)" value="{1.3888888e-05,0.0}" />
                 <Parameter name="forms" type="Array(string)" value="{constant}" />
               </ParameterList>
             </ParameterList>
@@ -353,17 +346,17 @@
         <ParameterList name="compressible porosity model parameters" type="ParameterList">
           <ParameterList name="rest domain" type="ParameterList">
             <Parameter name="region" type="string" value="background soil" />
-            <Parameter name="pore compressibility [Pa^-1]" type="double" value="1.019368e-9" />
+            <Parameter name="pore compressibility [Pa^-1]" type="double" value="1.019368e-09" />
             <Parameter name="pore compressibility inflection point [Pa^-1]" type="double" value="0.0" />
           </ParameterList>
           <ParameterList name="first slab" type="ParameterList">
             <Parameter name="region" type="string" value="first slab" />
-            <Parameter name="pore compressibility [Pa^-1]" type="double" value="1.019368e-9" />
+            <Parameter name="pore compressibility [Pa^-1]" type="double" value="1.019368e-09" />
             <Parameter name="pore compressibility inflection point [Pa^-1]" type="double" value="0.0" />
           </ParameterList>
           <ParameterList name="second slab" type="ParameterList">
             <Parameter name="region" type="string" value="second slab" />
-            <Parameter name="pore compressibility [Pa^-1]" type="double" value="1.019368e-9" />
+            <Parameter name="pore compressibility [Pa^-1]" type="double" value="1.019368e-09" />
             <Parameter name="pore compressibility inflection point [Pa^-1]" type="double" value="0.0" />
           </ParameterList>
         </ParameterList>
@@ -424,7 +417,6 @@
 
     </ParameterList>
   </ParameterList>
-
   <ParameterList name="visualization">
     <ParameterList name="domain" type="ParameterList">
       <Parameter name="times start period stop" type="Array(double)" value="{0.0,1800.0,-1.0}" />
@@ -437,13 +429,13 @@
   <ParameterList name="checkpoint">
     <Parameter name="times start period stop" type="Array(double)" value="{0.0,3600.0,-1.0}" />
   </ParameterList>
-  
+
   <ParameterList name="observations" type="ParameterList">
     <ParameterList name="surface outlet flux" type="ParameterList">
       <Parameter name="variable" type="string" value="surface-mass_flux" />
       <Parameter name="direction normalized flux" type="bool" value="true" />
       <Parameter name="region" type="string" value="surface outlet" />
-      <Parameter name="functional" type="string" value="observation data: extensive integral" />
+      <Parameter name="functional" type="string" value="extensive integral" />
       <Parameter name="delimiter" type="string" value=" " />
       <Parameter name="location name" type="string" value="face" />
       <Parameter name="write interval" type="int" value="1" />

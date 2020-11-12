@@ -310,7 +310,7 @@
       <Parameter name="variable" type="string" value="surface-mass_flux" />
       <Parameter name="direction normalized flux" type="bool" value="true" />
       <Parameter name="region" type="string" value="right side" />
-      <Parameter name="functional" type="string" value="observation data: extensive integral" />
+      <Parameter name="functional" type="string" value="extensive integral" />
       <Parameter name="delimiter" type="string" value=" " />
       <Parameter name="location name" type="string" value="face" />
       <Parameter name="write interval" type="int" value="1" />
@@ -320,7 +320,7 @@
     <ParameterList name="surface water" type="ParameterList">
       <Parameter name="variable" type="string" value="surface-water_content" />
       <Parameter name="region" type="string" value="surface domain" />
-      <Parameter name="functional" type="string" value="observation data: extensive integral" />
+      <Parameter name="functional" type="string" value="extensive integral" />
       <Parameter name="delimiter" type="string" value=" " />
       <Parameter name="location name" type="string" value="cell" />
       <Parameter name="write interval" type="int" value="1" />

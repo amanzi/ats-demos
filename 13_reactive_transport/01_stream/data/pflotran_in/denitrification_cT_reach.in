@@ -22,7 +22,7 @@ SECONDARY_SPECIES
   OH-
   CO2(aq) 
 /
-GAS_SPECIES 
+PASSIVE_GAS_SPECIES 
   CO2(g) 
   N2(g)* 
   O2(g) 

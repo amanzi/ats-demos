@@ -64,22 +64,9 @@
   <ParameterList name="verbose object" type="ParameterList">
     <Parameter name="verbosity level" type="string" value="high" />
   </ParameterList>
-  <ParameterList name="observations" type="ParameterList">
-    <ParameterList name="surface outlet flux" type="ParameterList">
-      <Parameter name="variable" type="string" value="surface-total_component_concentration" />
-      <Parameter name="direction normalized flux" type="bool" value="true" />
-      <Parameter name="region" type="string" value="surface outlet" />
-      <Parameter name="functional" type="string" value="observation data: point" />
-      <Parameter name="delimiter" type="string" value=" " />
-      <Parameter name="location name" type="string" value="cell" />
-      <Parameter name="write interval" type="int" value="1" />
-      <Parameter name="observation output filename" type="string" value="surface-tracer1.dat" />
-      <Parameter name="times start period stop" type="Array(double)" value="{0.0,10.0,-1.0}" />
-    </ParameterList>
-  </ParameterList>
+  
   <ParameterList name="visualization" type="ParameterList">
     <ParameterList name="surface" type="ParameterList">
-      <Parameter name="file name base" type="string" value="visdump_surface" />
       <Parameter name="times start period stop" type="Array(double)" value="{0.0,240.0,-1.0}" />
     </ParameterList>
   </ParameterList>
@@ -94,6 +81,7 @@
     <ParameterList name="Reactive Transport" type="ParameterList">
       <Parameter name="PK type" type="string" value="reactive transport" />
       <Parameter name="PKs order" type="Array(string)" value="{surface chemistry, surface transport}" />
+      <Parameter name="domain name" type="string" value="surface" />
       <Parameter name="transport index" type="int" value="1" />
       <ParameterList name="verbose object" type="ParameterList">
         <Parameter name="verbosity level" type="string" value="low" />
@@ -148,34 +136,29 @@
         </ParameterList>
       </ParameterList>
 
-      <ParameterList name="operators">
-        <ParameterList name="diffusion operator">
-          <ParameterList name="matrix">
-            <Parameter name="discretization primary" type="string" value="fv: default" />
-            <Parameter name="discretization secondary" type="string" value="fv: default" />
-            <Parameter name="schema" type="Array(string)" value="{face, cell}" />
-            <Parameter name="preconditioner schema" type="Array(string)" value="{face}" />
+      <ParameterList name="diffusion">
+        <Parameter name="discretization primary" type="string" value="fv: default" />
+        <Parameter name="discretization secondary" type="string" value="fv: default" />
+        <Parameter name="schema" type="Array(string)" value="{face, cell}" />
+        <Parameter name="preconditioner schema" type="Array(string)" value="{face}" />
+      </ParameterList>
 
-            <ParameterList name="inverse">
-              <Parameter name="preconditioning method" type="string" value="boomer amg" />
-              <ParameterList name="boomer amg parameters">
-                <Parameter name="tolerance" type="double" value="0.0" />
-                <Parameter name="smoother sweeps" type="int" value="3" />
-                <Parameter name="cycle applications" type="int" value="5" />
-                <Parameter name="strong threshold" type="double" value="0.5" />
-              </ParameterList>
-              <Parameter name="iterative method" type="string" value="pcg" />
-              <ParameterList name="pcg parameters">
-                <Parameter name="maximum number of iterations" type="int" value="400" />
-                <Parameter name="error tolerance" type="double" value="1e-20" />
-                <Parameter name="convergence criteria" type="Array(string)" value="{relative rhs, make one iteration}" />
-                <Parameter name="size of Krylov space" type="int" value="5" />
-                <ParameterList name="verbose object">
-                  <Parameter name="verbosity level" type="string" value="low" />
-                </ParameterList>
-              </ParameterList>
-            </ParameterList>
-
+      <ParameterList name="inverse">
+        <Parameter name="preconditioning method" type="string" value="boomer amg" />
+        <Parameter name="iterative method" type="string" value="pcg" />
+        <ParameterList name="boomer amg parameters">
+          <Parameter name="tolerance" type="double" value="0.0" />
+          <Parameter name="smoother sweeps" type="int" value="3" />
+          <Parameter name="cycle applications" type="int" value="5" />
+          <Parameter name="strong threshold" type="double" value="0.5" />
+        </ParameterList>
+        <ParameterList name="pcg parameters">
+          <Parameter name="maximum number of iterations" type="int" value="400" />
+          <Parameter name="error tolerance" type="double" value="1e-20" />
+          <Parameter name="convergence criteria" type="Array(string)" value="{relative rhs, make one iteration}" />
+          <Parameter name="size of Krylov space" type="int" value="5" />
+          <ParameterList name="verbose object">
+            <Parameter name="verbosity level" type="string" value="low" />
           </ParameterList>
         </ParameterList>
       </ParameterList>
@@ -231,7 +214,7 @@
         <Parameter name="verbosity level" type="string" value="high" />
       </ParameterList>
 
-      <ParameterList name="initial conditions" type="ParameterList">
+      <ParameterList name="initial condition" type="ParameterList">
         <ParameterList name="geochemical conditions" type="ParameterList">
           <ParameterList name="initial" type="ParameterList">
             <Parameter name="regions" type="Array(string)" value="{surface domain}" />

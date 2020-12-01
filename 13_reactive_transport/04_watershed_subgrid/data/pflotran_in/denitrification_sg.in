@@ -81,18 +81,7 @@ CONSTRAINT forest
     NO3-                2.0e-6 
     N2(aq)              0.78 G N2(g)* 
   /
-END 
-
-CONSTRAINT forest_initial 
-  CONCENTRATIONS
-    DOM1                1.0e-4
-    O2(aq)              0.21 G O2(g) 
-    H+                  6.0 P
-    HCO3-               400e-6 G CO2(g)
-    NO3-                2.0e-6
-    N2(aq)              0.78 G N2(g)* 
-  /
-END 
+END
 
 #=========================== FARM constraints ============================
 CONSTRAINT farm
@@ -106,14 +95,14 @@ CONSTRAINT farm
   /
 END
 
-CONSTRAINT farm_initial 
+#=========================== initial constraints ============================
+CONSTRAINT initial
   CONCENTRATIONS
-    DOM1                1.0e-3
+    DOM1                1.0e-4
     O2(aq)              0.21 G O2(g) 
     H+                  6.0 P
     HCO3-               400e-6 G CO2(g)
-    NO3-                2.0e-4
+    NO3-                2.0e-6
     N2(aq)              0.78 G N2(g)* 
   /
 END
-

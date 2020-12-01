@@ -127,27 +127,11 @@
     </ParameterList>
   </ParameterList>
   
-  <ParameterList name="observations">
-    <ParameterList name="surface-component_concentration">
-      <Parameter name="variable" type="string" value="surface-total_component_concentration"/>
-      <Parameter name="direction normalized flux" type="bool" value="true" />
-      <Parameter name="functional" type="string" value="observation data: point"/>
-      <Parameter name="region" type="string" value="surface east"/>
-      <Parameter name="delimiter" type="string" value=" "/>
-      <Parameter name="location name" type="string" value="cell"/>
-      <Parameter name="write interval" type="int" value="1"/>
-      <Parameter name="observation output filename" type="string" value="surface-outlet.dat"/>
-      <Parameter name="times start period stop" type="Array(double)" value="{0,20.0,-1.}"/>
-    </ParameterList>
-  </ParameterList>
-  
   <ParameterList name="visualization" type="ParameterList">
     <ParameterList name="surface" type="ParameterList">
-      <Parameter name="file name base" type="string" value="visdump_surface" />
       <Parameter name="times start period stop" type="Array(double)" value="{0.0,900.0,-1.0}" />
     </ParameterList>
     <ParameterList name="subgrid_*" type="ParameterList">
-      <Parameter name="file name base" type="string" value="visdump_subgrid" />
       <Parameter name="times start period stop" type="Array(double)" value="{0.0,900.0,-1.0}" />
     </ParameterList>
   </ParameterList>
@@ -166,6 +150,7 @@
     <ParameterList name="Reactive Transport" type="ParameterList">
       <Parameter name="PK type" type="string" value="reactive transport" />
       <Parameter name="PKs order" type="Array(string)" value="{surface chemistry, surface transport}" />
+      <Parameter name="domain name" type="string" value="surface" />
       <Parameter name="transport index" type="int" value="1" />
       <ParameterList name="verbose object" type="ParameterList">
         <Parameter name="verbosity level" type="string" value="low" />
@@ -219,34 +204,30 @@
           </ParameterList>
         </ParameterList>
       </ParameterList>
-      <ParameterList name="operators">
-        <ParameterList name="diffusion operator">
-          <ParameterList name="matrix">
-            <Parameter name="discretization primary" type="string" value="fv: default" />
-            <Parameter name="discretization secondary" type="string" value="fv: default" />
-            <Parameter name="schema" type="Array(string)" value="{face, cell}" />
-            <Parameter name="preconditioner schema" type="Array(string)" value="{face}" />
+      
+      <ParameterList name="diffusion">
+        <Parameter name="discretization primary" type="string" value="fv: default" />
+        <Parameter name="discretization secondary" type="string" value="fv: default" />
+        <Parameter name="schema" type="Array(string)" value="{face, cell}" />
+        <Parameter name="preconditioner schema" type="Array(string)" value="{face}" />
+      </ParameterList>
 
-            <ParameterList name="inverse">
-              <Parameter name="preconditioning method" type="string" value="boomer amg" />
-              <ParameterList name="boomer amg parameters">
-                <Parameter name="tolerance" type="double" value="0.0" />
-                <Parameter name="smoother sweeps" type="int" value="3" />
-                <Parameter name="cycle applications" type="int" value="5" />
-                <Parameter name="strong threshold" type="double" value="0.5" />
-              </ParameterList>
-              <Parameter name="iterative method" type="string" value="pcg" />
-              <ParameterList name="pcg parameters">
-                <Parameter name="maximum number of iterations" type="int" value="400" />
-                <Parameter name="error tolerance" type="double" value="1e-20" />
-                <Parameter name="convergence criteria" type="Array(string)" value="{relative rhs, make one iteration}" />
-                <Parameter name="size of Krylov space" type="int" value="5" />
-                <ParameterList name="verbose object">
-                  <Parameter name="verbosity level" type="string" value="low" />
-                </ParameterList>
-              </ParameterList>
-            </ParameterList>
-
+      <ParameterList name="inverse">
+        <Parameter name="preconditioning method" type="string" value="boomer amg" />
+        <Parameter name="iterative method" type="string" value="pcg" />
+        <ParameterList name="boomer amg parameters">
+          <Parameter name="tolerance" type="double" value="0.0" />
+          <Parameter name="smoother sweeps" type="int" value="3" />
+          <Parameter name="cycle applications" type="int" value="5" />
+          <Parameter name="strong threshold" type="double" value="0.5" />
+        </ParameterList>
+        <ParameterList name="pcg parameters">
+          <Parameter name="maximum number of iterations" type="int" value="400" />
+          <Parameter name="error tolerance" type="double" value="1e-20" />
+          <Parameter name="convergence criteria" type="Array(string)" value="{relative rhs, make one iteration}" />
+          <Parameter name="size of Krylov space" type="int" value="5" />
+          <ParameterList name="verbose object">
+            <Parameter name="verbosity level" type="string" value="low" />
           </ParameterList>
         </ParameterList>
       </ParameterList>
@@ -261,55 +242,52 @@
             <Parameter name="time functions" type="Array(string)" value="{constant}" />
           </ParameterList>
         </ParameterList>
-
+	
 	<ParameterList name="concentration" type="ParameterList">
-          <ParameterList name="Tracers" type="ParameterList">
-            
-            <ParameterList name="SINK: to subgrid" type="ParameterList">
-              <Parameter name="regions" type="Array(string)" value="{surface domain}" />
-              <Parameter name="spatial distribution method" type="string" value="exponential decay" />
-	      <Parameter name="component names" type="Array(string)" value="{Tracer1,Tracer2}" />
-              <ParameterList name="sink" type="ParameterList">
-                <Parameter name="domain name" type="string" value="surface" />
-                <ParameterList name="function" type="ParameterList">
-		  <Parameter name="number of dofs" type="int" value="2"/>
-		  <ParameterList name="dof 1 function">
-                    <ParameterList name="function-constant" type="ParameterList">
-		      <Parameter name="value" type="double" value="1.7e-5" />
-                    </ParameterList>
+	  <ParameterList name="SINK: to subgrid" type="ParameterList">
+            <Parameter name="regions" type="Array(string)" value="{surface domain}" />
+            <Parameter name="spatial distribution method" type="string" value="exponential decay" />
+	    <Parameter name="component names" type="Array(string)" value="{Tracer1,Tracer2}" />
+	   
+	    <ParameterList name="source function" type="ParameterList">
+	      <Parameter name="domain name" type="string" value="surface" />
+	      <ParameterList name="function" type="ParameterList">
+		<Parameter name="number of dofs" type="int" value="2"/>
+		<ParameterList name="dof 1 function">
+                  <ParameterList name="function-constant" type="ParameterList">
+		    <Parameter name="value" type="double" value="1.7e-5" />
+                  </ParameterList>
+                </ParameterList>
+		<ParameterList name="dof 2 function">
+                  <ParameterList name="function-constant" type="ParameterList">
+		    <Parameter name="value" type="double" value="1.7e-5" />
+                  </ParameterList>
+                </ParameterList>
+	      </ParameterList>
+            </ParameterList>
+          </ParameterList>
+
+	  <ParameterList name="SOURCE: from subgrid" type="ParameterList">
+            <Parameter name="regions" type="Array(string)" value="{surface domain}" />
+            <Parameter name="spatial distribution method" type="string" value="subgrid return" />
+	    <Parameter name="component names" type="Array(string)" value="{Tracer1,Tracer2}" />
+            <ParameterList name="source function" type="ParameterList">
+              <Parameter name="subgrid field suffix" type="string" value="total_component_concentration" />
+              <Parameter name="domain subgrid field" type="string" value="subgrid" />
+              <ParameterList name="function" type="ParameterList">
+		<Parameter name="number of dofs" type="int" value="2"/>
+		<ParameterList name="dof 1 function">
+                  <ParameterList name="function-constant" type="ParameterList">
+		    <Parameter name="value" type="double" value="1.7e-5" />
+                  </ParameterList>
                   </ParameterList>
 		  <ParameterList name="dof 2 function">
                     <ParameterList name="function-constant" type="ParameterList">
 		      <Parameter name="value" type="double" value="1.7e-5" />
                     </ParameterList>
                   </ParameterList>
-                </ParameterList>
               </ParameterList>
             </ParameterList>
-	    
-            <ParameterList name="SOURCE: from subgrid" type="ParameterList">
-              <Parameter name="regions" type="Array(string)" value="{surface domain}" />
-              <Parameter name="spatial distribution method" type="string" value="subgrid return" />
-	      <Parameter name="component names" type="Array(string)" value="{Tracer1,Tracer2}" />
-              <ParameterList name="sink" type="ParameterList">
-                <Parameter name="subgrid field suffix" type="string" value="total_component_concentration" />
-                <Parameter name="domain subgrid field" type="string" value="subgrid" />
-                <ParameterList name="function" type="ParameterList">
-		  <Parameter name="number of dofs" type="int" value="2"/>
-		  <ParameterList name="dof 1 function">
-                    <ParameterList name="function-constant" type="ParameterList">
-		      <Parameter name="value" type="double" value="1.7e-5" />
-                    </ParameterList>
-                  </ParameterList>
-		  <ParameterList name="dof 2 function">
-                    <ParameterList name="function-constant" type="ParameterList">
-		      <Parameter name="value" type="double" value="1.7e-5" />
-                    </ParameterList>
-                  </ParameterList>
-                </ParameterList>
-              </ParameterList>
-            </ParameterList>
-            
           </ParameterList>
 	  
         </ParameterList>
@@ -349,7 +327,7 @@
         <Parameter name="verbosity level" type="string" value="high" />
       </ParameterList>
       
-      <ParameterList name="initial conditions" type="ParameterList">
+      <ParameterList name="initial condition" type="ParameterList">
         <ParameterList name="geochemical conditions" type="ParameterList">
           <ParameterList name="initial" type="ParameterList">
             <Parameter name="regions" type="Array(string)" value="{surface domain}" />
@@ -373,6 +351,7 @@
     <ParameterList name="subgrid_*-ReactiveTransport" type="ParameterList">
       <Parameter name="PK type" type="string" value="reactive transport" />
       <Parameter name="PKs order" type="Array(string)" value="{subgrid_*-chemistry, subgrid_*-transport}" />
+      <Parameter name="domain name" type="string" value="subgrid_*" />
       <Parameter name="transport index" type="int" value="1" />
       <ParameterList name="verbose object" type="ParameterList">
         <Parameter name="verbosity level" type="string" value="low" />
@@ -410,13 +389,12 @@
       <ParameterList name="boundary conditions" type="ParameterList">
         <ParameterList name="concentration" type="ParameterList">
           <ParameterList name="subgrid" type="ParameterList">
-            <ParameterList name="top face" type="ParameterList">
               <Parameter name="regions" type="Array(string)" value="{tracer source subgrid}" />
               <Parameter name="spatial distribution method" type="string" value="subgrid" />
               <ParameterList name="boundary concentration" type="ParameterList">
                 <Parameter name="field_out_key" type="string" value="surface-total_component_concentration" />
               </ParameterList>
-            </ParameterList>
+
           </ParameterList>
         </ParameterList>
       </ParameterList>
@@ -447,7 +425,7 @@
       </ParameterList>
       <Parameter name="debug cells" type="Array(int)" value="{0,99}" />
 
-      <ParameterList name="initial conditions" type="ParameterList">
+      <ParameterList name="initial condition" type="ParameterList">
         <ParameterList name="geochemical conditions" type="ParameterList">
           <ParameterList name="initial" type="ParameterList">
             <Parameter name="regions" type="Array(string)" value="{tau_space}" />
@@ -504,7 +482,7 @@
             <Parameter name="components" type="Array(string)" value="{cell}" />
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
-                <Parameter name="value" type="double" value="0.1" />
+                <Parameter name="value" type="double" value="0.001" />
               </ParameterList>
             </ParameterList>
           </ParameterList>
@@ -680,37 +658,6 @@
         <Parameter name="value" type="Array(double)" value="{0.0,0.0,-9.80665}" />
       </ParameterList>
       
-    </ParameterList>
-  </ParameterList>
-  
-  <!-- SOLVERS -->
-  <ParameterList name="solvers">
-    <ParameterList name="PCG with Hypre AMG">
-      <Parameter name="preconditioner" type="string" value="Hypre AMG"/>
-      <Parameter name="iterative method" type="string" value="pcg"/>
-      <ParameterList name="pcg parameters">
-        <Parameter name="maximum number of iterations" type="int" value="400"/>
-        <Parameter name="error tolerance" type="double" value="1e-20"/>
-        <Parameter name="convergence criteria" type="Array(string)" value="{relative rhs, make one iteration}"/>
-        <Parameter name="size of Krylov space" type="int" value="5"/>
-
-        <ParameterList name="verbose object">
-          <Parameter name="verbosity level" type="string" value="low"/>
-        </ParameterList>
-      </ParameterList>
-    </ParameterList>
-  </ParameterList>
-
-  <ParameterList name="preconditioners">
-    <ParameterList name="Hypre AMG">
-      <Parameter name="discretization method" type="string" value="optimized mfd"/>
-      <Parameter name="preconditioner type" type="string" value="boomer amg"/>
-      <ParameterList name="boomer amg parameters">
-        <Parameter name="tolerance" type="double" value="0.00000000000000000e+00"/>
-        <Parameter name="smoother sweeps" type="int" value="3"/>
-        <Parameter name="cycle applications" type="int" value="5"/>
-        <Parameter name="strong threshold" type="double" value="5.00000000000000000e-01"/>
-      </ParameterList>
     </ParameterList>
   </ParameterList>
 

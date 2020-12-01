@@ -143,10 +143,10 @@
   </ParameterList>
 
   <ParameterList name="cycle driver" type="ParameterList">
-    <Parameter name="end cycle" type="int" value="-1" />
+    <Parameter name="end cycle" type="int" value="100000" />
     <Parameter name="start time" type="double" value="0.0" />
     <Parameter name="start time units" type="string" value="s" />
-    <Parameter name="end time" type="double" value="36" />
+    <Parameter name="end time" type="double" value="16" />
     <Parameter name="end time units" type="string" value="h" />
 
     <ParameterList name="PK tree" type="ParameterList">
@@ -191,25 +191,23 @@
   <ParameterList name="observations">
     <ParameterList name="surface-component_concentration">
       <Parameter name="variable" type="string" value="surface-total_component_concentration"/>
-      <Parameter name="direction normalized flux" type="bool" value="true" />
-      <Parameter name="functional" type="string" value="observation data: point"/>
+      <Parameter name="functional" type="string" value="point"/>
       <Parameter name="region" type="string" value="surface outlet"/>
       <Parameter name="delimiter" type="string" value=" "/>
       <Parameter name="location name" type="string" value="cell"/>
       <Parameter name="write interval" type="int" value="1"/>
       <Parameter name="observation output filename" type="string" value="surface-outlet.dat"/>
-      <Parameter name="times start period stop" type="Array(double)" value="{0,40.0,-1.}"/>
+      <Parameter name="times start period stop" type="Array(double)" value="{0,20.0,-1.}"/>
+      <Parameter name="number of vectors" type="int" value="6"/>
     </ParameterList>
   </ParameterList>
   
   <ParameterList name="visualization" type="ParameterList">
     <ParameterList name="surface" type="ParameterList">
-      <Parameter name="file name base" type="string" value="visdump_surface" />
-      <Parameter name="times start period stop" type="Array(double)" value="{0.0,360.0,-1.0}" />
+      <Parameter name="times start period stop" type="Array(double)" value="{0.0,120.0,-1.0}" />
     </ParameterList>
-    <ParameterList name="subgrid_*" type="ParameterList">
-      <Parameter name="file name base" type="string" value="visdump_subgrid" />
-      <Parameter name="times start period stop" type="Array(double)" value="{0.0,360.0,-1.0}" />
+    <ParameterList name="Ssubgrid_*" type="ParameterList">
+      <Parameter name="times start period stop" type="Array(double)" value="{0.0,480.0,-1.0}" />
     </ParameterList>
   </ParameterList>
 
@@ -227,6 +225,7 @@
     <ParameterList name="Reactive Transport" type="ParameterList">
       <Parameter name="PK type" type="string" value="reactive transport" />
       <Parameter name="PKs order" type="Array(string)" value="{surface chemistry, surface transport}" />
+      <Parameter name="domain name" type="string" value="surface" />
       <Parameter name="transport index" type="int" value="1" />
       <ParameterList name="verbose object" type="ParameterList">
         <Parameter name="verbosity level" type="string" value="low" />
@@ -253,19 +252,19 @@
       <Parameter name="number of gaseous components" type="int" value="0" />
       <Parameter name="runtime diagnostics: regions" type="Array(string)" value="{}" />
       <ParameterList name="verbose object" type="ParameterList">
-        <Parameter name="verbosity level" type="string" value="low" />
+        <Parameter name="verbosity level" type="string" value="none" />
         <Parameter name="name" type="string" value="Transport" />
       </ParameterList>
-      <Parameter name="debug cells" type="Array(int)" value="{0}" />
+      <Parameter name="debug cells" type="Array(int)" value="{0,99}" />
       <ParameterList name="reconstruction" type="ParameterList">
         <Parameter name="polynomial order" type="int" value="0" />
         <Parameter name="limiter" type="string" value="tensorial" />
         <Parameter name="limiter extension for transport" type="bool" value="true" />
       </ParameterList>
 
-      <ParameterList name="molecular diffusion">
+      <ParameterList name="molecular diffusion"><!--
         <Parameter name="aqueous names" type="Array(string)" value="{DOM1,O2(aq),NO3-,HCO3-,H+,N2(aq)}"/>
-        <Parameter name="aqueous values" type="Array(double)" value="{0.1,0.1,0.1,0.1,0.1,0.1}"/>
+        <Parameter name="aqueous values" type="Array(double)" value="{0.1,0.1}"/>-->
       </ParameterList>
       
       <ParameterList name="material properties">
@@ -279,231 +278,223 @@
           </ParameterList>
         </ParameterList>
       </ParameterList>
-      <ParameterList name="operators">
-        <ParameterList name="diffusion operator">
-          <ParameterList name="matrix">
-            <Parameter name="discretization primary" type="string" value="fv: default" />
-            <Parameter name="discretization secondary" type="string" value="fv: default" />
-            <Parameter name="schema" type="Array(string)" value="{face, cell}" />
-            <Parameter name="preconditioner schema" type="Array(string)" value="{face}" />
+      <ParameterList name="diffusion">
+        <Parameter name="discretization primary" type="string" value="fv: default" />
+        <Parameter name="discretization secondary" type="string" value="fv: default" />
+        <Parameter name="schema" type="Array(string)" value="{face, cell}" />
+        <Parameter name="preconditioner schema" type="Array(string)" value="{face}" />
+      </ParameterList>
 
-            <ParameterList name="inverse">
-              <Parameter name="preconditioning method" type="string" value="boomer amg" />
-              <ParameterList name="boomer amg parameters">
-                <Parameter name="tolerance" type="double" value="0.0" />
-                <Parameter name="smoother sweeps" type="int" value="3" />
-                <Parameter name="cycle applications" type="int" value="5" />
-                <Parameter name="strong threshold" type="double" value="0.5" />
-              </ParameterList>
-              <Parameter name="iterative method" type="string" value="pcg" />
-              <ParameterList name="pcg parameters">
-                <Parameter name="maximum number of iterations" type="int" value="400" />
-                <Parameter name="error tolerance" type="double" value="1e-20" />
-                <Parameter name="convergence criteria" type="Array(string)" value="{relative rhs, make one iteration}" />
-                <Parameter name="size of Krylov space" type="int" value="5" />
-                <ParameterList name="verbose object">
-                  <Parameter name="verbosity level" type="string" value="low" />
-                </ParameterList>
-              </ParameterList>
-            </ParameterList>
-
+      <ParameterList name="inverse">
+        <Parameter name="preconditioning method" type="string" value="boomer amg" />
+        <Parameter name="iterative method" type="string" value="pcg" />
+        <ParameterList name="boomer amg parameters">
+          <Parameter name="tolerance" type="double" value="0.0" />
+          <Parameter name="smoother sweeps" type="int" value="3" />
+          <Parameter name="cycle applications" type="int" value="5" />
+          <Parameter name="strong threshold" type="double" value="0.5" />
+        </ParameterList>
+        <ParameterList name="pcg parameters">
+          <Parameter name="maximum number of iterations" type="int" value="400" />
+          <Parameter name="error tolerance" type="double" value="1e-20" />
+          <Parameter name="convergence criteria" type="Array(string)" value="{relative rhs, make one iteration}" />
+          <Parameter name="size of Krylov space" type="int" value="5" />
+          <ParameterList name="verbose object">
+            <Parameter name="verbosity level" type="string" value="low" />
           </ParameterList>
         </ParameterList>
       </ParameterList>
-      
+
       <ParameterList name="source terms" type="ParameterList">
         <ParameterList name="geochemical" type="ParameterList">
 	  
           <ParameterList name="west_bc_3_10" type="ParameterList">
             <Parameter name="regions" type="Array(string)" value="{tracer source stream_3_10}" />
-            <Parameter name="solutes" type="Array(string)" value="{DOM1,O2(aq),NO3-,HCO3-,H+,N2(aq)}" />
-            <Parameter name="times" type="Array(double)" value="{0.0,43200}" />
+	    <Parameter name="solutes" type="Array(string)" value="{DOM1,O2(aq),NO3-,HCO3-,H+,N2(aq)}" />
+            <Parameter name="times" type="Array(double)" value="{0.0,28800}" />
             <Parameter name="geochemical conditions" type="Array(string)" value="{forest, farm}" />
             <Parameter name="time functions" type="Array(string)" value="{constant}" />
           </ParameterList>
 	  
 	  <ParameterList name="west_bc_5_6" type="ParameterList">
             <Parameter name="regions" type="Array(string)" value="{tracer source stream_5_6}" />
-            <Parameter name="solutes" type="Array(string)" value="{DOM1,O2(aq),NO3-,HCO3-,H+,N2(aq)}" />
-            <Parameter name="times" type="Array(double)" value="{0.0,43200}" />
+	    <Parameter name="solutes" type="Array(string)" value="{DOM1,O2(aq),NO3-,HCO3-,H+,N2(aq)}" />
+            <Parameter name="times" type="Array(double)" value="{0.0,28800}" />
             <Parameter name="geochemical conditions" type="Array(string)" value="{forest, farm}" />
             <Parameter name="time functions" type="Array(string)" value="{constant}" />
           </ParameterList>
 
 	  <ParameterList name="west_bc_5_7" type="ParameterList">
             <Parameter name="regions" type="Array(string)" value="{tracer source stream_5_7}" />
-            <Parameter name="solutes" type="Array(string)" value="{DOM1,O2(aq),NO3-,HCO3-,H+,N2(aq)}" />
-            <Parameter name="times" type="Array(double)" value="{0.0,43200}" />
+	    <Parameter name="solutes" type="Array(string)" value="{DOM1,O2(aq),NO3-,HCO3-,H+,N2(aq)}" />
+            <Parameter name="times" type="Array(double)" value="{0.0,28800}" />
             <Parameter name="geochemical conditions" type="Array(string)" value="{forest, farm}" />
             <Parameter name="time functions" type="Array(string)" value="{constant}" />
           </ParameterList>
 
 	  <ParameterList name="west_bc_8_9" type="ParameterList">
             <Parameter name="regions" type="Array(string)" value="{tracer source stream_8_9}" />
-            <Parameter name="solutes" type="Array(string)" value="{DOM1,O2(aq),NO3-,HCO3-,H+,N2(aq)}" />
-            <Parameter name="times" type="Array(double)" value="{0.0,43200}" />
+	    <Parameter name="solutes" type="Array(string)" value="{DOM1,O2(aq),NO3-,HCO3-,H+,N2(aq)}" />
+            <Parameter name="times" type="Array(double)" value="{0.0,28800}" />
             <Parameter name="geochemical conditions" type="Array(string)" value="{forest, farm}" />
             <Parameter name="time functions" type="Array(string)" value="{constant}" />
           </ParameterList>
 
 	  <ParameterList name="west_bc_11_12" type="ParameterList">
             <Parameter name="regions" type="Array(string)" value="{tracer source stream_11_12}" />
-            <Parameter name="solutes" type="Array(string)" value="{DOM1,O2(aq),NO3-,HCO3-,H+,N2(aq)}" />
-            <Parameter name="times" type="Array(double)" value="{0.0,43200}" />
+	    <Parameter name="solutes" type="Array(string)" value="{DOM1,O2(aq),NO3-,HCO3-,H+,N2(aq)}" />
+            <Parameter name="times" type="Array(double)" value="{0.0,28800}" />
             <Parameter name="geochemical conditions" type="Array(string)" value="{forest, farm}" />
             <Parameter name="time functions" type="Array(string)" value="{constant}" />
           </ParameterList>
 
 	  <ParameterList name="west_bc_14_15" type="ParameterList">
             <Parameter name="regions" type="Array(string)" value="{tracer source stream_14_15}" />
-            <Parameter name="solutes" type="Array(string)" value="{DOM1,O2(aq),NO3-,HCO3-,H+,N2(aq)}" />
-            <Parameter name="times" type="Array(double)" value="{0.0,43200}" />
+	    <Parameter name="solutes" type="Array(string)" value="{DOM1,O2(aq),NO3-,HCO3-,H+,N2(aq)}" />
+            <Parameter name="times" type="Array(double)" value="{0.0,28800}" />
             <Parameter name="geochemical conditions" type="Array(string)" value="{forest, farm}" />
             <Parameter name="time functions" type="Array(string)" value="{constant}" />
           </ParameterList>
 
 	  <ParameterList name="west_bc_16_20" type="ParameterList">
             <Parameter name="regions" type="Array(string)" value="{tracer source stream_16_20}" />
-            <Parameter name="solutes" type="Array(string)" value="{DOM1,O2(aq),NO3-,HCO3-,H+,N2(aq)}" />
-            <Parameter name="times" type="Array(double)" value="{0.0,43200}" />
+	    <Parameter name="solutes" type="Array(string)" value="{DOM1,O2(aq),NO3-,HCO3-,H+,N2(aq)}" />
+            <Parameter name="times" type="Array(double)" value="{0.0,28800}" />
             <Parameter name="geochemical conditions" type="Array(string)" value="{forest, farm}" />
             <Parameter name="time functions" type="Array(string)" value="{constant}" />
           </ParameterList>
 
 	  <ParameterList name="west_bc_17_18" type="ParameterList">
             <Parameter name="regions" type="Array(string)" value="{tracer source stream_17_18}" />
-            <Parameter name="solutes" type="Array(string)" value="{DOM1,O2(aq),NO3-,HCO3-,H+,N2(aq)}" />
-            <Parameter name="times" type="Array(double)" value="{0.0,43200}" />
+	    <Parameter name="solutes" type="Array(string)" value="{DOM1,O2(aq),NO3-,HCO3-,H+,N2(aq)}" />
+            <Parameter name="times" type="Array(double)" value="{0.0,28800}" />
             <Parameter name="geochemical conditions" type="Array(string)" value="{forest, farm}" />
             <Parameter name="time functions" type="Array(string)" value="{constant}" />
           </ParameterList>
 
 	  <ParameterList name="west_bc_17_19" type="ParameterList">
             <Parameter name="regions" type="Array(string)" value="{tracer source stream_17_19}" />
-            <Parameter name="solutes" type="Array(string)" value="{DOM1,O2(aq),NO3-,HCO3-,H+,N2(aq)}" />
-            <Parameter name="times" type="Array(double)" value="{0.0,43200}" />
+	    <Parameter name="solutes" type="Array(string)" value="{DOM1,O2(aq),NO3-,HCO3-,H+,N2(aq)}" />
+            <Parameter name="times" type="Array(double)" value="{0.0,28800}" />
             <Parameter name="geochemical conditions" type="Array(string)" value="{forest, farm}" />
             <Parameter name="time functions" type="Array(string)" value="{constant}" />
           </ParameterList>
 
 	  <ParameterList name="west_bc_21_22" type="ParameterList">
             <Parameter name="regions" type="Array(string)" value="{tracer source stream_21_22}" />
-            <Parameter name="solutes" type="Array(string)" value="{DOM1,O2(aq),NO3-,HCO3-,H+,N2(aq)}" />
-            <Parameter name="times" type="Array(double)" value="{0.0,43200}" />
+	    <Parameter name="solutes" type="Array(string)" value="{DOM1,O2(aq),NO3-,HCO3-,H+,N2(aq)}" />
+            <Parameter name="times" type="Array(double)" value="{0.0,28800}" />
             <Parameter name="geochemical conditions" type="Array(string)" value="{forest, farm}" />
             <Parameter name="time functions" type="Array(string)" value="{constant}" />
           </ParameterList>
 
 	  <ParameterList name="west_bc_21_23" type="ParameterList">
             <Parameter name="regions" type="Array(string)" value="{tracer source stream_21_23}" />
-            <Parameter name="solutes" type="Array(string)" value="{DOM1,O2(aq),NO3-,HCO3-,H+,N2(aq)}" />
-            <Parameter name="times" type="Array(double)" value="{0.0,43200}" />
+	    <Parameter name="solutes" type="Array(string)" value="{DOM1,O2(aq),NO3-,HCO3-,H+,N2(aq)}" />
+            <Parameter name="times" type="Array(double)" value="{0.0,28800}" />
             <Parameter name="geochemical conditions" type="Array(string)" value="{forest, farm}" />
             <Parameter name="time functions" type="Array(string)" value="{constant}" />
           </ParameterList>
 	  
         </ParameterList>
-	
-	<ParameterList name="concentration" type="ParameterList">
-          <ParameterList name="Tracers" type="ParameterList">
-            
-            <ParameterList name="SINK: to subgrid" type="ParameterList">
-              <Parameter name="regions" type="Array(string)" value="{surface domain}" />
-              <Parameter name="spatial distribution method" type="string" value="exponential decay" />
-	      <Parameter name="component names" type="Array(string)" value="{DOM1,O2(aq),NO3-,HCO3-,H+,N2(aq)}" />
-              <ParameterList name="sink" type="ParameterList">
-                <Parameter name="domain name" type="string" value="surface" />
-                <ParameterList name="function" type="ParameterList">
-		  <Parameter name="number of dofs" type="int" value="6"/>
-		  <ParameterList name="dof 1 function">
-                    <ParameterList name="function-constant" type="ParameterList">
-		      <Parameter name="value" type="double" value="1.e-4" />
-                    </ParameterList>
+
+	<ParameterList name="concentration" type="ParameterList"> 
+          <ParameterList name="SINK: to subgrid" type="ParameterList">
+            <Parameter name="regions" type="Array(string)" value="{surface domain}" />
+            <Parameter name="spatial distribution method" type="string" value="exponential decay" />
+	    <Parameter name="component names" type="Array(string)" value="{DOM1,O2(aq),NO3-,HCO3-,H+,N2(aq)}" />
+	    <ParameterList name="source function" type="ParameterList">
+              <Parameter name="domain name" type="string" value="surface" />
+              <ParameterList name="function" type="ParameterList">
+		<Parameter name="number of dofs" type="int" value="6"/>
+		<ParameterList name="dof 1 function">
+		  <ParameterList name="function-constant" type="ParameterList">
+		    <Parameter name="value" type="double" value="5.0e-5" />
+		  </ParameterList>
+                </ParameterList>
+		<ParameterList name="dof 2 function">
+		  <ParameterList name="function-constant" type="ParameterList">
+		    <Parameter name="value" type="double" value="5.0e-5" />
+		  </ParameterList>
+                </ParameterList>
+		<ParameterList name="dof 3 function">
+		  <ParameterList name="function-constant" type="ParameterList">
+		    <Parameter name="value" type="double" value="5.0e-5" />
+		  </ParameterList>
+                </ParameterList>
+		<ParameterList name="dof 4 function">
+		  <ParameterList name="function-constant" type="ParameterList">
+		    <Parameter name="value" type="double" value="5.0e-5" />
+		  </ParameterList>
+                </ParameterList>
+		<ParameterList name="dof 5 function">
+		  <ParameterList name="function-constant" type="ParameterList">
+		    <Parameter name="value" type="double" value="5.0e-5" />
+		  </ParameterList>
+                </ParameterList>
+		<ParameterList name="dof 6 function">
+		  <ParameterList name="function-constant" type="ParameterList">
+		    <Parameter name="value" type="double" value="5.0e-5" />
+		  </ParameterList>
+                </ParameterList>
+              </ParameterList>
+	    </ParameterList>
+	  </ParameterList>
+	  
+          <ParameterList name="SOURCE: from subgrid" type="ParameterList">
+            <Parameter name="regions" type="Array(string)" value="{surface domain}" />
+            <Parameter name="spatial distribution method" type="string" value="subgrid return" />
+	    <Parameter name="component names" type="Array(string)" value="{DOM1,O2(aq),NO3-,HCO3-,H+,N2(aq)}" />
+            <ParameterList name="source function" type="ParameterList">
+              <Parameter name="subgrid field suffix" type="string" value="total_component_concentration" />
+              <Parameter name="domain subgrid field" type="string" value="subgrid" />
+              <ParameterList name="function" type="ParameterList">
+		<Parameter name="number of dofs" type="int" value="6"/>
+		<ParameterList name="dof 1 function">
+                  <ParameterList name="function-constant" type="ParameterList">
+		    <Parameter name="value" type="double" value="5.0e-5" />
                   </ParameterList>
-		  <ParameterList name="dof 2 function">
-                    <ParameterList name="function-constant" type="ParameterList">
-		      <Parameter name="value" type="double" value="1.e-4" />
-                    </ParameterList>
+                </ParameterList>
+		<ParameterList name="dof 2 function">
+                  <ParameterList name="function-constant" type="ParameterList">
+		    <Parameter name="value" type="double" value="5.0e-5" />
                   </ParameterList>
-		  <ParameterList name="dof 3 function">
-                    <ParameterList name="function-constant" type="ParameterList">
-		      <Parameter name="value" type="double" value="1.e-4" />
-                    </ParameterList>
+                </ParameterList>
+		<ParameterList name="dof 3 function">
+                  <ParameterList name="function-constant" type="ParameterList">
+		    <Parameter name="value" type="double" value="5.0e-5" />
                   </ParameterList>
-		  <ParameterList name="dof 4 function">
-                    <ParameterList name="function-constant" type="ParameterList">
-		      <Parameter name="value" type="double" value="1.e-4" />
-                    </ParameterList>
+                </ParameterList>
+		<ParameterList name="dof 4 function">
+                  <ParameterList name="function-constant" type="ParameterList">
+		    <Parameter name="value" type="double" value="5.0e-5" />
                   </ParameterList>
-		  <ParameterList name="dof 5 function">
-                    <ParameterList name="function-constant" type="ParameterList">
-		      <Parameter name="value" type="double" value="1.e-4" />
-                    </ParameterList>
+                </ParameterList>
+		<ParameterList name="dof 5 function">
+                  <ParameterList name="function-constant" type="ParameterList">
+		    <Parameter name="value" type="double" value="5.0e-5" />
                   </ParameterList>
-		  <ParameterList name="dof 6 function">
-                    <ParameterList name="function-constant" type="ParameterList">
-		      <Parameter name="value" type="double" value="1.e-4" />
-                    </ParameterList>
+                </ParameterList>
+		<ParameterList name="dof 6 function">
+                  <ParameterList name="function-constant" type="ParameterList">
+		    <Parameter name="value" type="double" value="5.0e-5" />
                   </ParameterList>
                 </ParameterList>
               </ParameterList>
             </ParameterList>
-	    
-            <ParameterList name="SOURCE: from subgrid" type="ParameterList">
-              <Parameter name="regions" type="Array(string)" value="{surface domain}" />
-              <Parameter name="spatial distribution method" type="string" value="subgrid return" />
-	      <Parameter name="component names" type="Array(string)" value="{DOM1,O2(aq),NO3-,HCO3-,H+,N2(aq)}" />
-              <ParameterList name="sink" type="ParameterList">
-                <Parameter name="subgrid field suffix" type="string" value="total_component_concentration" />
-                <Parameter name="domain subgrid field" type="string" value="subgrid" />
-                <ParameterList name="function" type="ParameterList">
-		  <Parameter name="number of dofs" type="int" value="6"/>
-		  <ParameterList name="dof 1 function">
-                    <ParameterList name="function-constant" type="ParameterList">
-		      <Parameter name="value" type="double" value="1.e-4" />
-                    </ParameterList>
-                  </ParameterList>
-		  <ParameterList name="dof 2 function">
-                    <ParameterList name="function-constant" type="ParameterList">
-		      <Parameter name="value" type="double" value="1.e-4" />
-                    </ParameterList>
-                  </ParameterList>
-		  <ParameterList name="dof 3 function">
-                    <ParameterList name="function-constant" type="ParameterList">
-		      <Parameter name="value" type="double" value="1.e-4" />
-                    </ParameterList>
-                  </ParameterList>
-		  <ParameterList name="dof 4 function">
-                    <ParameterList name="function-constant" type="ParameterList">
-		      <Parameter name="value" type="double" value="1.e-4" />
-                    </ParameterList>
-                  </ParameterList>
-		  <ParameterList name="dof 5 function">
-                    <ParameterList name="function-constant" type="ParameterList">
-		      <Parameter name="value" type="double" value="1.e-4" />
-                    </ParameterList>
-                  </ParameterList>
-		  <ParameterList name="dof 6 function">
-                    <ParameterList name="function-constant" type="ParameterList">
-		      <Parameter name="value" type="double" value="1.e-4" />
-                    </ParameterList>
-                  </ParameterList>
-                </ParameterList>
-              </ParameterList>
-            </ParameterList>
-            
           </ParameterList>
 	  
         </ParameterList>
 	
       </ParameterList>
-
+    
       <ParameterList name="physical models and assumptions" type="ParameterList">
         <Parameter name="effective transport porosity" type="bool" value="false" />
         <Parameter name="permeability field is required" type="bool" value="false" />
       </ParameterList>
 
     </ParameterList>
+
 
     <ParameterList name="surface chemistry" type="ParameterList">
       <Parameter name="PK type" type="string" value="chemistry alquimia" />
@@ -526,13 +517,13 @@
       <Parameter name="initial conditions time" type="double" value="0.0" />
       <Parameter name="number of component concentrations" type="int" value="6" />
       <ParameterList name="verbose object" type="ParameterList">
-        <Parameter name="verbosity level" type="string" value="low" />
+        <Parameter name="verbosity level" type="string" value="none" />
       </ParameterList>
-      <Parameter name="debug cells" type="Array(int)" value="{0}" />
+      <Parameter name="debug cells" type="Array(int)" value="{0,99}" />
 
-      <ParameterList name="initial conditions" type="ParameterList">
+      <ParameterList name="initial condition" type="ParameterList">
         <ParameterList name="geochemical conditions" type="ParameterList">
-          <ParameterList name="forest_initial" type="ParameterList">
+          <ParameterList name="initial" type="ParameterList">
             <Parameter name="regions" type="Array(string)" value="{surface domain}" />
           </ParameterList>
         </ParameterList>
@@ -547,16 +538,17 @@
       <Parameter name="parent domain" type="string" value="surface" />
       <Parameter name="subgrid region name" type="string" value="surface domain" />
       <ParameterList name="verbose object" type="ParameterList">
-        <Parameter name="verbosity level" type="string" value="low" />
+        <Parameter name="verbosity level" type="string" value="none" />
       </ParameterList>
     </ParameterList>
 
     <ParameterList name="subgrid_*-ReactiveTransport" type="ParameterList">
       <Parameter name="PK type" type="string" value="reactive transport" />
       <Parameter name="PKs order" type="Array(string)" value="{subgrid_*-chemistry, subgrid_*-transport}" />
+      <Parameter name="domain name" type="string" value="subgrid_*" />
       <Parameter name="transport index" type="int" value="1" />
       <ParameterList name="verbose object" type="ParameterList">
-        <Parameter name="verbosity level" type="string" value="low" />
+        <Parameter name="verbosity level" type="string" value="none" />
       </ParameterList>
     </ParameterList>
     
@@ -566,7 +558,7 @@
       <Parameter name="domain name" type="string" value="subgrid_*" />
       <Parameter name="component names" type="Array(string)" value="{DOM1,O2(aq),NO3-,HCO3-,H+,N2(aq)}" />
       <Parameter name="number of liquid components" type="int" value="6" />
-      <Parameter name="component molar masses" type="Array(double)" value="{1,1,1,1,1,1.0}" />
+      <Parameter name="component molar masses" type="Array(double)" value="{1.,1.,1.,1.,1.,1.0}" />
       <Parameter name="spatial discretization order" type="int" value="1" />
       <Parameter name="temporal discretization order" type="int" value="1" />
       <Parameter name="cfl" type="double" value="1.0" />
@@ -576,10 +568,10 @@
       <Parameter name="number of aqueous components" type="int" value="6" />
       <Parameter name="number of gaseous components" type="int" value="0" />
       <Parameter name="runtime diagnostics: regions" type="Array(string)" value="{}" />
-      <Parameter name="debug cells" type="Array(int)" value="{0}" />
+       <Parameter name="debug cells" type="Array(int)" value="{0}" />
       <ParameterList name="verbose object" type="ParameterList">
-        <Parameter name="verbosity level" type="string" value="low" />
-        <Parameter name="name" type="string" value="TransportSG" />
+        <Parameter name="verbosity level" type="string" value="none" />
+        <Parameter name="name" type="string" value="Transport" />
       </ParameterList>
 
       <ParameterList name="reconstruction" type="ParameterList">
@@ -587,21 +579,19 @@
         <Parameter name="limiter" type="string" value="tensorial" />
         <Parameter name="limiter extension for transport" type="bool" value="true" />
       </ParameterList>
-      
+
       <ParameterList name="boundary conditions" type="ParameterList">
         <ParameterList name="concentration" type="ParameterList">
           <ParameterList name="subgrid" type="ParameterList">
-            <ParameterList name="top face" type="ParameterList">
-              <Parameter name="regions" type="Array(string)" value="{tracer source subgrid}" />
-              <Parameter name="spatial distribution method" type="string" value="subgrid" />
-              <ParameterList name="boundary concentration" type="ParameterList">
-                <Parameter name="field_out_key" type="string" value="surface-total_component_concentration" />
-              </ParameterList>
+            <Parameter name="regions" type="Array(string)" value="{tracer source subgrid}" />
+            <Parameter name="spatial distribution method" type="string" value="subgrid" />
+            <ParameterList name="boundary concentration" type="ParameterList">
+              <Parameter name="field_out_key" type="string" value="surface-total_component_concentration" />
             </ParameterList>
           </ParameterList>
         </ParameterList>
       </ParameterList>
-  
+
     </ParameterList>
 
     <ParameterList name="subgrid_*-chemistry" type="ParameterList">
@@ -625,41 +615,28 @@
       <Parameter name="number of component concentrations" type="int" value="6" />
       <ParameterList name="verbose object" type="ParameterList">
         <Parameter name="verbosity level" type="string" value="low" />
-        <Parameter name="name" type="string" value="ChemistrySG" />
       </ParameterList>
+      <Parameter name="debug cells" type="Array(int)" value="{0,99}" />
       
-      <Parameter name="debug cells" type="Array(int)" value="{0}" />
-
-      <ParameterList name="initial conditions" type="ParameterList">
+      <ParameterList name="initial condition" type="ParameterList">
         <ParameterList name="geochemical conditions" type="ParameterList">
-          <ParameterList name="forest_initial" type="ParameterList">
+          <ParameterList name="initial" type="ParameterList">
             <Parameter name="regions" type="Array(string)" value="{tau_space}" />
           </ParameterList>
         </ParameterList>
       </ParameterList>
-
+      
     </ParameterList>
     
   </ParameterList>
-
+  
   <ParameterList name="state" type="ParameterList">
     <Parameter name="domain sets" type="Array(string)" value="{subgrid}" />
     <ParameterList name="field evaluators" type="ParameterList">
 
       <ParameterList name="surface-ponded_depth" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="independent variable" />
-        <Parameter name="constant in time" type="bool" value="true" />
-        <ParameterList name="function" type="ParameterList">
-          <ParameterList name="rest domain" type="ParameterList">
-            <Parameter name="region" type="string" value="ENTIRE_MESH_REGION" />
-            <Parameter name="components" type="Array(string)" value="{cell}" />
-            <ParameterList name="function" type="ParameterList">
-              <ParameterList name="function-constant" type="ParameterList">
-                <Parameter name="value" type="double" value="1." />
-              </ParameterList>
-            </ParameterList>
-          </ParameterList>
-        </ParameterList>
+        <Parameter name="field evaluator type" type="string" value="independent variable constant" />
+        <Parameter name="value" type="double" value="1." />
       </ParameterList>
 
       <ParameterList name="surface-mass_flux" type="ParameterList">
@@ -675,7 +652,7 @@
       <ParameterList name="surface-mass_source" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable from file" />
         <Parameter name="constant in time" type="bool" value="true" />
-	<Parameter name="filename" type="string" value="../data/implied_source/coweeta-impliedsource-100m.h5" />
+	<Parameter name="filename" type="string" value="../data/implied_source/coweeta-cellsource-100m.h5" />
 	<Parameter name="domain name" type="string" value="surface" />
         <Parameter name="variable name" type="string" value="surface-mass_src" />
         <Parameter name="component name" type="string" value="cell" />
@@ -683,68 +660,24 @@
       </ParameterList>
       
       <ParameterList name="surface-porosity" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="independent variable" />
-        <Parameter name="constant in time" type="bool" value="true" />
-        <ParameterList name="function" type="ParameterList">
-          <ParameterList name="rest domain" type="ParameterList">
-            <Parameter name="region" type="string" value="surface domain" />
-            <Parameter name="components" type="Array(string)" value="{cell}" />
-            <ParameterList name="function" type="ParameterList">
-              <ParameterList name="function-constant" type="ParameterList">
-                <Parameter name="value" type="double" value="1.0" />
-              </ParameterList>
-            </ParameterList>
-          </ParameterList>
-        </ParameterList>
+        <Parameter name="field evaluator type" type="string" value="independent variable constant" />
+        <Parameter name="value" type="double" value="1.0" />
       </ParameterList>
 
       <ParameterList name="surface-molar_density_liquid" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="independent variable" />
-        <Parameter name="constant in time" type="bool" value="true" />
-        <ParameterList name="function" type="ParameterList">
-          <ParameterList name="rest domain" type="ParameterList">
-            <Parameter name="region" type="string" value="surface domain" />
-            <Parameter name="components" type="Array(string)" value="{cell}" />
-            <ParameterList name="function" type="ParameterList">
-              <ParameterList name="function-constant" type="ParameterList">
-                <Parameter name="value" type="double" value="1.0" />
-              </ParameterList>
-            </ParameterList>
-          </ParameterList>
-        </ParameterList>
+        <Parameter name="field evaluator type" type="string" value="independent variable constant" />
+        <Parameter name="value" type="double" value="1.0" />
       </ParameterList>
 
       <ParameterList name="surface-mass_density_liquid" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="independent variable" />
-        <Parameter name="constant in time" type="bool" value="true" />
-        <ParameterList name="function" type="ParameterList">
-          <ParameterList name="rest domain" type="ParameterList">
-            <Parameter name="region" type="string" value="surface domain" />
-            <Parameter name="components" type="Array(string)" value="{cell}" />
-            <ParameterList name="function" type="ParameterList">
-              <ParameterList name="function-constant" type="ParameterList">
-                <Parameter name="value" type="double" value="1000.0" />
-              </ParameterList>
-            </ParameterList>
-          </ParameterList>
-        </ParameterList>
+        <Parameter name="field evaluator type" type="string" value="independent variable constant" />
+        <Parameter name="value" type="double" value="1000.0" />
       </ParameterList>
 
       <!--SUBGRID VAR-->
       <ParameterList name="subgrid_*-saturation_liquid" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="independent variable" />
-        <Parameter name="constant in time" type="bool" value="true" />
-        <ParameterList name="function" type="ParameterList">
-          <ParameterList name="rest domain" type="ParameterList">
-            <Parameter name="region" type="string" value="ENTIRE_MESH_REGION" />
-            <Parameter name="components" type="Array(string)" value="{cell}" />
-            <ParameterList name="function" type="ParameterList">
-              <ParameterList name="function-constant" type="ParameterList">
-                <Parameter name="value" type="double" value="1.0" />
-              </ParameterList>
-            </ParameterList>
-          </ParameterList>
-        </ParameterList>
+        <Parameter name="field evaluator type" type="string" value="independent variable constant" />
+        <Parameter name="value" type="double" value="1.0" />
       </ParameterList>
 
       <ParameterList name="subgrid_*-mass_flux" type="ParameterList">
@@ -772,72 +705,25 @@
           </ParameterList>
         </ParameterList>
       </ParameterList>
-
+      
       <ParameterList name="subgrid_*-porosity" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="independent variable" />
-        <Parameter name="constant in time" type="bool" value="true" />
-        <ParameterList name="function" type="ParameterList">
-          <ParameterList name="domain" type="ParameterList">
-            <Parameter name="region" type="string" value="tau_space" />
-            <Parameter name="component" type="string" value="cell" />
-            <ParameterList name="function" type="ParameterList">
-              <ParameterList name="function-constant" type="ParameterList">
-                <Parameter name="value" type="double" value="1.0" />
-              </ParameterList>
-            </ParameterList>
-          </ParameterList>
-        </ParameterList>
-        <ParameterList name="verbose object" type="ParameterList">
-          <Parameter name="verbosity level" type="string" value="low" />
-        </ParameterList>
+        <Parameter name="field evaluator type" type="string" value="independent variable constant" />
+        <Parameter name="value" type="double" value="1.0" />
       </ParameterList>
 
       <ParameterList name="subgrid_*-molar_density_liquid" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="independent variable" />
-        <Parameter name="constant in time" type="bool" value="true" />
-        <ParameterList name="function" type="ParameterList">
-          <ParameterList name="rest domain" type="ParameterList">
-            <Parameter name="region" type="string" value="ENTIRE_MESH_REGION" />
-            <Parameter name="components" type="Array(string)" value="{cell}" />
-            <ParameterList name="function" type="ParameterList">
-              <ParameterList name="function-constant" type="ParameterList">
-                <Parameter name="value" type="double" value="1.0" />
-              </ParameterList>
-            </ParameterList>
-          </ParameterList>
-        </ParameterList>
+        <Parameter name="field evaluator type" type="string" value="independent variable constant" />
+        <Parameter name="value" type="double" value="1.0" />
       </ParameterList>
 
       <ParameterList name="subgrid_*-mass_density_liquid" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="independent variable" />
-        <Parameter name="constant in time" type="bool" value="true" />
-        <ParameterList name="function" type="ParameterList">
-          <ParameterList name="rest domain" type="ParameterList">
-            <Parameter name="region" type="string" value="ENTIRE_MESH_REGION" />
-            <Parameter name="components" type="Array(string)" value="{cell}" />
-            <ParameterList name="function" type="ParameterList">
-              <ParameterList name="function-constant" type="ParameterList">
-                <Parameter name="value" type="double" value="1000.0" />
-              </ParameterList>
-            </ParameterList>
-          </ParameterList>
-        </ParameterList>
+        <Parameter name="field evaluator type" type="string" value="independent variable constant" />
+        <Parameter name="value" type="double" value="1000.0" />
       </ParameterList>
 
       <ParameterList name="subgrid_*-ponded_depth" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="independent variable" />
-        <Parameter name="constant in time" type="bool" value="true" />
-        <ParameterList name="function" type="ParameterList">
-          <ParameterList name="rest domain" type="ParameterList">
-            <Parameter name="region" type="string" value="ENTIRE_MESH_REGION" />
-            <Parameter name="components" type="Array(string)" value="{cell}" />
-            <ParameterList name="function" type="ParameterList">
-              <ParameterList name="function-constant" type="ParameterList">
-                <Parameter name="value" type="double" value="1.0" />
-              </ParameterList>
-            </ParameterList>
-          </ParameterList>
-        </ParameterList>
+        <Parameter name="field evaluator type" type="string" value="independent variable constant" />
+        <Parameter name="value" type="double" value="1.0" />
       </ParameterList>
       
     </ParameterList>
@@ -854,35 +740,5 @@
     </ParameterList>
   </ParameterList>
   
-  <!-- SOLVERS -->
-  <ParameterList name="solvers">
-    <ParameterList name="PCG with Hypre AMG">
-      <Parameter name="preconditioner" type="string" value="Hypre AMG"/>
-      <Parameter name="iterative method" type="string" value="pcg"/>
-      <ParameterList name="pcg parameters">
-        <Parameter name="maximum number of iterations" type="int" value="400"/>
-        <Parameter name="error tolerance" type="double" value="1e-20"/>
-        <Parameter name="convergence criteria" type="Array(string)" value="{relative rhs, make one iteration}"/>
-        <Parameter name="size of Krylov space" type="int" value="5"/>
-
-        <ParameterList name="verbose object">
-          <Parameter name="verbosity level" type="string" value="low"/>
-        </ParameterList>
-      </ParameterList>
-    </ParameterList>
-  </ParameterList>
-
-  <ParameterList name="preconditioners">
-    <ParameterList name="Hypre AMG">
-      <Parameter name="discretization method" type="string" value="optimized mfd"/>
-      <Parameter name="preconditioner type" type="string" value="boomer amg"/>
-      <ParameterList name="boomer amg parameters">
-        <Parameter name="tolerance" type="double" value="0.00000000000000000e+00"/>
-        <Parameter name="smoother sweeps" type="int" value="3"/>
-        <Parameter name="cycle applications" type="int" value="5"/>
-        <Parameter name="strong threshold" type="double" value="5.00000000000000000e-01"/>
-      </ParameterList>
-    </ParameterList>
-  </ParameterList>
 
 </ParameterList>

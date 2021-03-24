@@ -1,0 +1,327 @@
+<ParameterList name="Main" type="ParameterList">
+  <ParameterList name="mesh" type="ParameterList">
+    <ParameterList name="surface" type="ParameterList">
+      <Parameter name="mesh type" type="string" value="surface" />
+      <ParameterList name="expert" type="ParameterList">
+        <Parameter name="verify mesh" type="bool" value="false" />
+      </ParameterList>
+      <ParameterList name="surface parameters" type="ParameterList">
+        <Parameter name="surface sideset name" type="string" value="surface" />
+      </ParameterList>
+      <ParameterList name="surface">
+      </ParameterList>
+    </ParameterList>
+    <ParameterList name="domain" type="ParameterList">
+      <Parameter name="mesh type" type="string" value="read mesh file" />
+      <Parameter name="build columns from set" type="string" value="surface" />
+      <ParameterList name="read mesh file parameters" type="ParameterList">
+        <Parameter name="file" type="string" value="../data/column.exo" />
+        <Parameter name="format" type="string" value="Exodus II" />
+      </ParameterList>
+    </ParameterList>
+  </ParameterList>
+
+  <ParameterList name="regions" type="ParameterList">
+    <ParameterList name="computational domain" type="ParameterList">
+      <ParameterList name="region: all" type="ParameterList">
+      </ParameterList>
+    </ParameterList>
+    <ParameterList name="surface domain" type="ParameterList">
+      <ParameterList name="region: all" type="ParameterList">
+      </ParameterList>
+    </ParameterList>
+    <ParameterList name="surface" type="ParameterList">
+      <ParameterList name="region: labeled set" type="ParameterList">
+        <Parameter name="label" type="string" value="2" />
+        <Parameter name="file" type="string" value="../data/column.exo" />
+        <Parameter name="format" type="string" value="Exodus II" />
+        <Parameter name="entity" type="string" value="Face" />
+      </ParameterList>
+    </ParameterList>
+    <ParameterList name="bottom face" type="ParameterList">
+      <ParameterList name="region: labeled set" type="ParameterList">
+        <Parameter name="label" type="string" value="1" />
+        <Parameter name="file" type="string" value="../data/column.exo" />
+        <Parameter name="format" type="string" value="Exodus II" />
+        <Parameter name="entity" type="string" value="Face" />
+      </ParameterList>
+    </ParameterList>
+  </ParameterList>
+
+  <ParameterList name="cycle driver" type="ParameterList">
+    <Parameter name="start time" type="double" value="0.0" />
+    <Parameter name="start time units" type="string" value="s" />
+    <Parameter name="end time" type="double" value="50.0" />
+    <Parameter name="end time units" type="string" value="noleap" />
+    <ParameterList name="PK tree" type="ParameterList">
+      <ParameterList name="carbon" type="ParameterList">
+        <Parameter name="PK type" type="string" value="BGC simple" />
+      </ParameterList>
+    </ParameterList>
+  </ParameterList>
+  <ParameterList name="checkpoint" type="ParameterList">
+  </ParameterList>
+
+  <ParameterList name="PKs" type="ParameterList">
+
+    <ParameterList name="carbon" type="ParameterList">
+      <Parameter name="PK type" type="string" value="BGC simple" />
+      <Parameter name="primary variable key" type="string" value="carbon" />
+      <Parameter name="initial time step" type="double" value="86400.0" />
+      <Parameter name="soil partition name" type="string" value="all" />
+      <Parameter name="cryoturbation mixing coefficient [cm^2/yr]" type="double" value="5.0" />
+      <ParameterList name="verbose object" type="ParameterList">
+        <Parameter name="verbosity level" type="string" value="low" />
+      </ParameterList>
+
+      <ParameterList name="initial condition" type="ParameterList">
+        <Parameter name="constant" type="double" value="0.0" />
+      </ParameterList>
+
+      <ParameterList name="pft parameters" type="ParameterList">
+        <ParameterList name="deciduous">
+          <Parameter name="Vcmax25 [micromol CO2 / m^2(leaf) s]" type="double" value="60.0" />
+          <Parameter name="Emax25 [micromol C / m^2(leaf) s]" type="double" value="6.0" />
+          <Parameter name="SLA [m^2(leaf) / kg C" type="double" value="12.0" />
+          <Parameter name="max root depth [m]" type="double" value="5.0" />
+          <Parameter name="evergreen" type="bool" value="false" />
+          <Parameter name="ratio of leaf to root [-]" type="double" value="1.0" />
+          <Parameter name="ratio of leaf to stem [-]" type="double" value="0.05" />
+          <Parameter name="stem longevity [yr]" type="double" value="200.0" />
+          <Parameter name="leaf longevity [yr]" type="double" value="1.0" />
+          <Parameter name="root longevity [yr]" type="double" value="1.0" />
+          <Parameter name="height [m]" type="double" value="20.0" />
+          <Parameter name="stomatal conductance to photosynthetic rate slope (mp) [?]" type="double" value="9.0" />
+          <Parameter name="wood density [kg m^-3]" type="double" value="600.0" />
+        </ParameterList>
+      </ParameterList>
+
+      <ParameterList name="soil carbon parameters" type="ParameterList">
+        <Parameter name="mesh partition" type="string" value="all" />
+        <ParameterList name="computational domain" type="ParameterList">
+          <Parameter name="percent sand" type="double" value="40.0" />
+        </ParameterList>
+      </ParameterList>
+
+    </ParameterList>
+
+  </ParameterList>
+
+  <ParameterList name="state" type="ParameterList">
+    <ParameterList name="mesh partitions" type="ParameterList">
+      <ParameterList name="all" type="ParameterList">
+        <Parameter name="region list" type="Array(string)" value="{computational domain}" />
+      </ParameterList>
+    </ParameterList>
+    <ParameterList name="field evaluators" type="ParameterList">
+
+      <ParameterList name="pressure" type="ParameterList">
+        <Parameter name="field evaluator type" type="string" value="independent variable" />
+        <Parameter name="constant in time" type="bool" value="true" />
+        <ParameterList name="function" type="ParameterList">
+          <ParameterList name="domain" type="ParameterList">
+            <Parameter name="region" type="string" value="computational domain" />
+            <Parameter name="component" type="string" value="cell" />
+            <ParameterList name="function" type="ParameterList">
+              <ParameterList name="function-linear" type="ParameterList">
+                <Parameter name="x0" type="Array(double)" value="{0.0,0.0,0.0,-1.5}" />
+                <Parameter name="y0" type="double" value="101325.0" />
+                <Parameter name="gradient" type="Array(double)" value="{0.0,0.0,0.0,-9777.23005}" />
+              </ParameterList>
+            </ParameterList>
+          </ParameterList>
+        </ParameterList>
+      </ParameterList>
+
+      <ParameterList name="temperature" type="ParameterList">
+        <Parameter name="field evaluator type" type="string" value="independent variable" />
+        <ParameterList name="function" type="ParameterList">
+          <ParameterList name="domain" type="ParameterList">
+            <Parameter name="region" type="string" value="computational domain" />
+            <Parameter name="component" type="string" value="cell" />
+            <ParameterList name="function" type="ParameterList">
+              <ParameterList name="function-composition" type="ParameterList">
+                <ParameterList name="function2" type="ParameterList">
+                  <ParameterList name="function-standard-math" type="ParameterList">
+                    <Parameter name="operator" type="string" value="mod" />
+                    <Parameter name="parameter" type="double" value="31557600.0" />
+                  </ParameterList>
+                </ParameterList>
+                <ParameterList name="function1" type="ParameterList">
+                  <ParameterList name="function-tabular" type="ParameterList">
+                    <Parameter name="file" type="string" value="../data/spinup-10yr.h5" />
+                    <Parameter name="x header" type="string" value="time [s]" />
+                    <Parameter name="y header" type="string" value="air temperature [K]" />
+                  </ParameterList>
+                </ParameterList>
+              </ParameterList>
+            </ParameterList>
+          </ParameterList>
+        </ParameterList>
+        <ParameterList name="verbose object" type="ParameterList">
+          <Parameter name="verbosity level" type="string" value="low" />
+        </ParameterList>
+      </ParameterList>
+
+      <ParameterList name="surface-incoming_shortwave_radiation" type="ParameterList">
+        <Parameter name="field evaluator type" type="string" value="independent variable" />
+        <ParameterList name="function" type="ParameterList">
+          <ParameterList name="domain" type="ParameterList">
+            <Parameter name="region" type="string" value="surface domain" />
+            <Parameter name="component" type="string" value="cell" />
+            <ParameterList name="function" type="ParameterList">
+              <ParameterList name="function-composition" type="ParameterList">
+                <ParameterList name="function2" type="ParameterList">
+                  <ParameterList name="function-standard-math" type="ParameterList">
+                    <Parameter name="operator" type="string" value="mod" />
+                    <Parameter name="parameter" type="double" value="31557600.0" />
+                  </ParameterList>
+                </ParameterList>
+                <ParameterList name="function1" type="ParameterList">
+                  <ParameterList name="function-tabular" type="ParameterList">
+                    <Parameter name="file" type="string" value="../data/spinup-10yr.h5" />
+                    <Parameter name="x header" type="string" value="time [s]" />
+                    <Parameter name="y header" type="string" value="incoming shortwave radiation [W m^-2]" />
+                  </ParameterList>
+                </ParameterList>
+              </ParameterList>
+            </ParameterList>
+          </ParameterList>
+        </ParameterList>
+        <ParameterList name="verbose object" type="ParameterList">
+          <Parameter name="verbosity level" type="string" value="low" />
+        </ParameterList>
+      </ParameterList>
+
+      <ParameterList name="surface-air_temperature" type="ParameterList">
+        <Parameter name="field evaluator type" type="string" value="independent variable" />
+        <ParameterList name="function" type="ParameterList">
+          <ParameterList name="domain" type="ParameterList">
+            <Parameter name="region" type="string" value="surface domain" />
+            <Parameter name="component" type="string" value="cell" />
+            <ParameterList name="function" type="ParameterList">
+              <ParameterList name="function-composition" type="ParameterList">
+                <ParameterList name="function2" type="ParameterList">
+                  <ParameterList name="function-standard-math" type="ParameterList">
+                    <Parameter name="operator" type="string" value="mod" />
+                    <Parameter name="parameter" type="double" value="31557600.0" />
+                  </ParameterList>
+                </ParameterList>
+                <ParameterList name="function1" type="ParameterList">
+                  <ParameterList name="function-tabular" type="ParameterList">
+                    <Parameter name="file" type="string" value="../data/spinup-10yr.h5" />
+                    <Parameter name="x header" type="string" value="time [s]" />
+                    <Parameter name="y header" type="string" value="air temperature [K]" />
+                  </ParameterList>
+                </ParameterList>
+              </ParameterList>
+            </ParameterList>
+          </ParameterList>
+        </ParameterList>
+        <ParameterList name="verbose object" type="ParameterList">
+          <Parameter name="verbosity level" type="string" value="low" />
+        </ParameterList>
+      </ParameterList>
+
+      <ParameterList name="surface-relative_humidity" type="ParameterList">
+        <Parameter name="field evaluator type" type="string" value="independent variable" />
+        <ParameterList name="function" type="ParameterList">
+          <ParameterList name="domain" type="ParameterList">
+            <Parameter name="region" type="string" value="surface domain" />
+            <Parameter name="component" type="string" value="cell" />
+            <ParameterList name="function" type="ParameterList">
+              <ParameterList name="function-composition" type="ParameterList">
+                <ParameterList name="function2" type="ParameterList">
+                  <ParameterList name="function-standard-math" type="ParameterList">
+                    <Parameter name="operator" type="string" value="mod" />
+                    <Parameter name="parameter" type="double" value="31557600.0" />
+                  </ParameterList>
+                </ParameterList>
+                <ParameterList name="function1" type="ParameterList">
+                  <ParameterList name="function-tabular" type="ParameterList">
+                    <Parameter name="file" type="string" value="../data/spinup-10yr.h5" />
+                    <Parameter name="x header" type="string" value="time [s]" />
+                    <Parameter name="y header" type="string" value="relative humidity [-]" />
+                  </ParameterList>
+                </ParameterList>
+              </ParameterList>
+            </ParameterList>
+          </ParameterList>
+        </ParameterList>
+        <ParameterList name="verbose object" type="ParameterList">
+          <Parameter name="verbosity level" type="string" value="low" />
+        </ParameterList>
+      </ParameterList>
+
+      <ParameterList name="surface-wind_speed" type="ParameterList">
+        <Parameter name="field evaluator type" type="string" value="independent variable" />
+        <ParameterList name="function" type="ParameterList">
+          <ParameterList name="domain" type="ParameterList">
+            <Parameter name="region" type="string" value="surface domain" />
+            <Parameter name="component" type="string" value="cell" />
+            <ParameterList name="function" type="ParameterList">
+              <ParameterList name="function-composition" type="ParameterList">
+                <ParameterList name="function2" type="ParameterList">
+                  <ParameterList name="function-standard-math" type="ParameterList">
+                    <Parameter name="operator" type="string" value="mod" />
+                    <Parameter name="parameter" type="double" value="31557600.0" />
+                  </ParameterList>
+                </ParameterList>
+                <ParameterList name="function1" type="ParameterList">
+                  <ParameterList name="function-tabular" type="ParameterList">
+                    <Parameter name="file" type="string" value="../data/spinup-10yr.h5" />
+                    <Parameter name="x header" type="string" value="time [s]" />
+                    <Parameter name="y header" type="string" value="wind speed [m s^-1]" />
+                  </ParameterList>
+                </ParameterList>
+              </ParameterList>
+            </ParameterList>
+          </ParameterList>
+        </ParameterList>
+        <ParameterList name="verbose object" type="ParameterList">
+          <Parameter name="verbosity level" type="string" value="low" />
+        </ParameterList>
+      </ParameterList>
+
+      <ParameterList name="surface-co2_concentration" type="ParameterList">
+        <Parameter name="field evaluator type" type="string" value="independent variable" />
+        <ParameterList name="function" type="ParameterList">
+          <ParameterList name="domain" type="ParameterList">
+            <Parameter name="region" type="string" value="surface domain" />
+            <Parameter name="component" type="string" value="cell" />
+            <ParameterList name="function" type="ParameterList">
+              <ParameterList name="function-constant" type="ParameterList">
+                <Parameter name="value" type="double" value="400.0" />
+              </ParameterList>
+            </ParameterList>
+          </ParameterList>
+        </ParameterList>
+        <ParameterList name="verbose object" type="ParameterList">
+          <Parameter name="verbosity level" type="string" value="low" />
+        </ParameterList>
+      </ParameterList>
+
+    </ParameterList>
+    <ParameterList name="initial conditions" type="ParameterList">
+
+      <ParameterList name="atmospheric_pressure" type="ParameterList">
+        <Parameter name="value" type="double" value="101325.0" />
+      </ParameterList>
+
+      <ParameterList name="gravity" type="ParameterList">
+        <Parameter name="value" type="Array(double)" value="{0.0,0.0,-9.80665}" />
+      </ParameterList>
+
+    </ParameterList>
+  </ParameterList>
+  <ParameterList name="visualization">
+    <ParameterList name="domain" type="ParameterList">
+      <Parameter name="times start period stop" type="Array(double)" value="{0.0,0.1,-1.0}" />
+      <Parameter name="times start period stop units" type="string" value="noleap" />
+    </ParameterList>
+    <ParameterList name="surface" type="ParameterList">
+      <Parameter name="times start period stop" type="Array(double)" value="{0.0,0.1,-1.0}" />
+      <Parameter name="times start period stop units" type="string" value="noleap" />
+    </ParameterList>
+  </ParameterList>
+</ParameterList>

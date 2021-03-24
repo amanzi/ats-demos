@@ -119,8 +119,8 @@
         <Parameter name="discretization primary" type="string" value="fv: default" />
       </ParameterList>
 
-      <ParameterList name="preconditioner" type="ParameterList">
-        <Parameter name="preconditioner type" type="string" value="boomer amg" />
+      <ParameterList name="inverse" type="ParameterList">
+        <Parameter name="preconditioning method" type="string" value="boomer amg" />
         <ParameterList name="boomer amg parameters" type="ParameterList">
           <Parameter name="cycle applications" type="int" value="2" />
           <Parameter name="smoother sweeps" type="int" value="3" />
@@ -164,9 +164,9 @@
           <ParameterList name="computational domain" type="ParameterList">
             <Parameter name="region" type="string" value="computational domain" />
             <Parameter name="WRM Type" type="string" value="van Genuchten" />
-            <Parameter name="van Genuchten alpha" type="double" value="0.00015" />
-            <Parameter name="van Genuchten m" type="double" value="0.8" />
-            <Parameter name="van Genuchten residual saturation" type="double" value="0.0" />
+            <Parameter name="van Genuchten alpha [Pa^-1]" type="double" value="0.00015" />
+            <Parameter name="van Genuchten m [-]" type="double" value="0.8" />
+            <Parameter name="residual saturation [-]" type="double" value="0.0" />
           </ParameterList>
         </ParameterList>
         <ParameterList name="verbose object" type="ParameterList">
@@ -295,7 +295,6 @@
   </ParameterList>
   <ParameterList name="visualization">
     <ParameterList name="domain" type="ParameterList">
-      <Parameter name="file name base" type="string" value="visdump" />
       <Parameter name="times start period stop" type="Array(double)" value="{0.0,1.0,-1.0}" />
     </ParameterList>
   </ParameterList>

@@ -248,7 +248,7 @@
       <Parameter name="number of liquid components" type="int" value="1" />
       <Parameter name="component molar masses" type="Array(double)" value="{1.0}" />
       <Parameter name="spatial discretization order" type="int" value="1" />
-      <Parameter name="temporal discretization order" type="int" value="1" />
+      <Parameter name="temporal discretization order" type="int" value="2" />
       <Parameter name="cfl" type="double" value="1.0" />
       <Parameter name="flow mode" type="string" value="transient" />
       <Parameter name="transport subcycling" type="bool" value="false" />
@@ -334,7 +334,7 @@
       <Parameter name="number of liquid components" type="int" value="1" />
       <Parameter name="component molar masses" type="Array(double)" value="{1.0}" />
       <Parameter name="spatial discretization order" type="int" value="1" />
-      <Parameter name="temporal discretization order" type="int" value="1" />
+      <Parameter name="temporal discretization order" type="int" value="2" />
       <Parameter name="cfl" type="double" value="1.0" />
       <Parameter name="water tolerance" type="double" value="0.001" />
       <Parameter name="transport subcycling" type="bool" value="false" />

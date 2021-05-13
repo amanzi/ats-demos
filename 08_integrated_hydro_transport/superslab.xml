@@ -105,7 +105,6 @@
       <ParameterList name="verbose object">
         <Parameter name="verbosity level" type="string" value="high" />
       </ParameterList>
-
     </ParameterList>
 
     <ParameterList name="flow coupler" type="ParameterList">
@@ -128,19 +127,9 @@
       <ParameterList name="inverse" type="ParameterList">
         <Parameter name="preconditioning method" type="string" value="block ilu" />
         <Parameter name="iterative method" type="string" value="gmres" />
-        <ParameterList name="boomer amg parameters" type="ParameterList">
-          <Parameter name="cycle applications" type="int" value="1" />
-          <Parameter name="smoother sweeps" type="int" value="2" />
-          <Parameter name="strong threshold" type="double" value="0.85" />
-          <Parameter name="tolerance" type="double" value="0.0" />
-          <Parameter name="number of functions" type="int" value="1" />
-        </ParameterList>
-        <ParameterList name="verbose object" type="ParameterList">
-          <Parameter name="verbosity level" type="string" value="medium" />
-        </ParameterList>
         <ParameterList name="gmres parameters" type="ParameterList">
           <Parameter name="preconditioning strategy" type="string" value="left" />
-          <Parameter name="error tolerance" type="double" value="1e-06" />
+          <Parameter name="error tolerance" type="double" value="1e-10" />
           <Parameter name="convergence criteria" type="Array(string)" value="{relative residual,make one iteration}" />
           <Parameter name="maximum number of iteration" type="int" value="10" />
         </ParameterList>
@@ -302,7 +291,6 @@
       <Parameter name="spatial discretization order" type="int" value="1" />
       <Parameter name="temporal discretization order" type="int" value="1" />
       <Parameter name="cfl" type="double" value="1.0" />
-      <Parameter name="enable internal tests" type="string" value="no" />
       <Parameter name="transport subcycling" type="bool" value="false" />
       <Parameter name="number of aqueous components" type="int" value="1" />
       <Parameter name="number of gaseous components" type="int" value="0" />
@@ -373,7 +361,6 @@
       <Parameter name="temporal discretization order" type="int" value="1" />
       <Parameter name="cfl" type="double" value="1.0" />
       <Parameter name="water tolerance" type="double" value="0.001" />
-      <Parameter name="enable internal tests" type="string" value="no" />
       <Parameter name="transport subcycling" type="bool" value="false" />
       <Parameter name="number of aqueous components" type="int" value="1" />
       <Parameter name="number of gaseous components" type="int" value="0" />
@@ -451,7 +438,7 @@
   <ParameterList name="state" type="ParameterList">
     <ParameterList name="field evaluators" type="ParameterList">
 
-      <ParameterList name="surface-mass_source" type="ParameterList">
+      <ParameterList name="surface-water_source" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
         <Parameter name="constant in time" type="bool" value="true" />
         <ParameterList name="function" type="ParameterList">

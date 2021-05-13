@@ -68,7 +68,7 @@
     </ParameterList>
   </ParameterList>
   <ParameterList name="checkpoint" type="ParameterList">
-    <Parameter name="times start period stop" type="Array(double)" value="{0,1,-1}" />
+    <Parameter name="times start period stop" type="Array(double)" value="{0.0,1.0,-1.0}" />
     <Parameter name="times start period stop units" type="string" value="noleap" />
   </ParameterList>
 
@@ -128,24 +128,6 @@
 
       <ParameterList name="inverse" type="ParameterList">
         <Parameter name="direct method" type="string" value="amesos: KLU" />
-<!--        <Parameter name="iterative method" type="string" value="gmres" />
-        <ParameterList name="boomer amg parameters" type="ParameterList">
-          <Parameter name="cycle applications" type="int" value="1" />
-          <Parameter name="smoother sweeps" type="int" value="1" />
-          <Parameter name="strong threshold" type="double" value="0.65" />
-          <Parameter name="tolerance" type="double" value="0.0" />
-          <Parameter name="verbosity" type="int" value="0" />
-        </ParameterList>
-        <ParameterList name="verbose object" type="ParameterList">
-          <Parameter name="verbosity level" type="string" value="high" />
-        </ParameterList>
-        <ParameterList name="gmres parameters" type="ParameterList">
-          <Parameter name="preconditioning strategy" type="string" value="left" />
-          <Parameter name="error tolerance" type="double" value="1e-06" />
-          <Parameter name="convergence criteria" type="Array(string)" value="{relative residual,make one iteration}" />
-          <Parameter name="maximum number of iteration" type="int" value="80" />
-        </ParameterList>
--->
       </ParameterList>
 
       <ParameterList name="boundary conditions" type="ParameterList">
@@ -239,7 +221,7 @@
           </ParameterList>
         </ParameterList>
       </ParameterList>
-      
+
       <ParameterList name="permeability" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
         <Parameter name="constant in time" type="bool" value="true" />

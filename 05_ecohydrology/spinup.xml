@@ -204,7 +204,7 @@
       <Parameter name="domain name" type="string" value="surface" />
       <Parameter name="source term" type="bool" value="true" />
       <Parameter name="source key" type="string" value="surface-precipitation" />
-      <Parameter name="mass source in meters" type="bool" value="true" />
+      <Parameter name="water source in meters" type="bool" value="true" />
       <Parameter name="initial time step" type="double" value="60.0" />
       <ParameterList name="verbose object">
         <Parameter name="verbosity level" type="string" value="medium" />

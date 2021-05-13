@@ -74,7 +74,7 @@
     </ParameterList>
   </ParameterList>
   <ParameterList name="checkpoint" type="ParameterList">
-    <Parameter name="times start period stop" type="Array(double)" value="{0,1,-1}" />
+    <Parameter name="times start period stop" type="Array(double)" value="{0.0,1.0,-1.0}" />
     <Parameter name="times start period stop units" type="string" value="noleap" />
   </ParameterList>
 
@@ -128,37 +128,12 @@
         <Parameter name="discretization primary" type="string" value="mfd: default" />
       </ParameterList>
 
-      <!-- note direct methods are good for small problems only -->
       <ParameterList name="inverse" type="ParameterList">
         <Parameter name="direct method" type="string" value="amesos" />
         <ParameterList name="amesos parameters" type="ParameterList">
           <Parameter name="solver name" type="string" value="Klu" />
         </ParameterList>
       </ParameterList>
-
-<!--
-      <ParameterList name="inverse" type="ParameterList">
-        <Parameter name="preconditioning method" type="string" value="boomer amg" />
-        <Parameter name="iterative method" type="string" value="gmres" />
-        <ParameterList name="boomer amg parameters" type="ParameterList">
-          <Parameter name="cycle applications" type="int" value="1" />
-          <Parameter name="smoother sweeps" type="int" value="1" />
-          <Parameter name="strong threshold" type="double" value="0.65" />
-          <Parameter name="tolerance" type="double" value="0.0" />
-          <Parameter name="relaxation type" type="int" value="6" />
-          <Parameter name="verbosity" type="int" value="0" />
-        </ParameterList>
-        <ParameterList name="verbose object" type="ParameterList">
-          <Parameter name="verbosity level" type="string" value="high" />
-        </ParameterList>
-        <ParameterList name="gmres parameters" type="ParameterList">
-          <Parameter name="preconditioning strategy" type="string" value="left" />
-          <Parameter name="error tolerance" type="double" value="1e-06" />
-          <Parameter name="convergence criteria" type="Array(string)" value="{relative residual,make one iteration}" />
-          <Parameter name="maximum number of iteration" type="int" value="80" />
-        </ParameterList>
-      </ParameterList>
--->
 
       <ParameterList name="boundary conditions" type="ParameterList">
         <ParameterList name="seepage face pressure" type="ParameterList">
@@ -199,7 +174,7 @@
         <Parameter name="hydrostatic head [m]" type="double" value="-3.0" />
         <Parameter name="hydrostatic water density [kg m^-3]" type="double" value="1000.0" />
       </ParameterList>
-      
+
       <ParameterList name="water retention evaluator" type="ParameterList">
         <ParameterList name="WRM parameters" type="ParameterList">
           <ParameterList name="computational domain" type="ParameterList">

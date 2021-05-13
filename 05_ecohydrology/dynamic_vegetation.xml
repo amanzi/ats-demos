@@ -250,8 +250,8 @@
       <Parameter name="primary variable key" type="string" value="surface-pressure" />
       <Parameter name="domain name" type="string" value="surface" />
       <Parameter name="source term" type="bool" value="true" />
-      <Parameter name="mass source in meters" type="bool" value="false" />
-      <Parameter name="source key" type="string" value="surface-mass_source" />
+      <Parameter name="water source in meters" type="bool" value="false" />
+      <Parameter name="source key" type="string" value="surface-water_source" />
       <Parameter name="initial time step" type="double" value="8640.0" />
       <Parameter name="debug cells" type="Array(int)" value="{99}" />
       <Parameter name="source term is differentiable" type="bool" value="true" />
@@ -586,7 +586,7 @@
         <Parameter name="area index key" type="string" value="surface-total_leaf_area_index" />
       </ParameterList>
 
-      <ParameterList name="surface-mass_source" type="ParameterList">
+      <ParameterList name="surface-water_source" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="additive evaluator" />
         <Parameter name="evaluator dependencies" type="Array(string)" value="{surface-precipitation_rain, canopy-interception, canopy-drainage}" />
         <Parameter name="surface-precipitation_rain coefficient" type="double" value="55000.0" />

@@ -153,7 +153,6 @@
       <Parameter name="permeability rescaling" type="double" value="10000000.0" />
       <Parameter name="max valid change in saturation in a time step [-]" type="double" value="0.1" />
       <Parameter name="max valid change in ice saturation in a time step [-]" type="double" value="0.1" />
-
       <Parameter name="debug cells" type="Array(int)" value="{0,84}" />
       <ParameterList name="verbose object" type="ParameterList">
         <Parameter name="verbosity level" type="string" value="high" />
@@ -212,7 +211,6 @@
       <Parameter name="supress advective terms in preconditioner" type="bool" value="true" />
       <Parameter name="source term" type="bool" value="false" />
       <Parameter name="initial time step" type="double" value="1.0" />
-
       <Parameter name="debug cells" type="Array(int)" value="{0,84}" />
       <ParameterList name="verbose object" type="ParameterList">
         <Parameter name="verbosity level" type="string" value="high" />

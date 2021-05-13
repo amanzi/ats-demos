@@ -75,7 +75,7 @@
     <Parameter name="end time" type="double" value="1.0" />
     <Parameter name="end time units" type="string" value="noleap" />
     <ParameterList name="required times" type="ParameterList">
-      <Parameter name="times start period stop" type="Array(double)" value="{0,1,-1}" />
+      <Parameter name="times start period stop" type="Array(double)" value="{0.0,1.0,-1.0}" />
       <Parameter name="times start period stop units" type="string" value="d" />
     </ParameterList>
     <ParameterList name="PK tree" type="ParameterList">
@@ -102,9 +102,8 @@
       </ParameterList>
     </ParameterList>
   </ParameterList>
-
   <ParameterList name="checkpoint" type="ParameterList">
-    <Parameter name="times start period stop" type="Array(double)" value="{0,1,-1}" />
+    <Parameter name="times start period stop" type="Array(double)" value="{0.0,1.0,-1.0}" />
     <Parameter name="times start period stop units" type="string" value="noleap" />
   </ParameterList>
 
@@ -215,7 +214,7 @@
       <Parameter name="PK type" type="string" value="permafrost flow" />
       <Parameter name="primary variable key" type="string" value="pressure" />
       <Parameter name="source term" type="bool" value="true" />
-      <Parameter name="source key" type="string" value="mass_source" />
+      <Parameter name="source key" type="string" value="water_source" />
       <Parameter name="source term is differentiable" type="bool" value="false" />
       <Parameter name="initial time step" type="double" value="86400.0" />
       <Parameter name="relative permeability method" type="string" value="upwind with Darcy flux" />
@@ -223,7 +222,6 @@
       <Parameter name="permeability rescaling" type="double" value="10000000.0" />
       <Parameter name="max valid change in saturation in a time step [-]" type="double" value="0.1" />
       <Parameter name="max valid change in ice saturation in a time step [-]" type="double" value="0.1" />
-
       <Parameter name="debug cells" type="Array(int)" value="{0,10,84}" />
       <ParameterList name="verbose object" type="ParameterList">
         <Parameter name="verbosity level" type="string" value="high" />
@@ -281,9 +279,9 @@
       <Parameter name="primary variable key" type="string" value="surface-pressure" />
       <Parameter name="domain name" type="string" value="surface" />
       <Parameter name="source term" type="bool" value="true" />
-      <Parameter name="source key" type="string" value="surface-mass_source" />
+      <Parameter name="source key" type="string" value="surface-water_source" />
       <Parameter name="source term is differentiable" type="bool" value="false" />
-      <Parameter name="mass source in meters" type="bool" value="true" />
+      <Parameter name="water source in meters" type="bool" value="true" />
       <Parameter name="initial time step" type="double" value="86400.0" />
       <Parameter name="debug cells" type="Array(int)" value="{0}" />
       <ParameterList name="verbose object" type="ParameterList">
@@ -871,7 +869,6 @@
 
     </ParameterList>
   </ParameterList>
-
   <ParameterList name="visualization" type="ParameterList">
     <ParameterList name="domain" type="ParameterList">
       <Parameter name="times start period stop" type="Array(double)" value="{0.0,1.0,-1.0}" />

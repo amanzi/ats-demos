@@ -45,7 +45,7 @@ or
 
 or (with docker):
 
-```python run_demos.py path_to_suite.cfg -e metsi/ats:latest test_name```
+```python run_demos.py path_to_suite.cfg -e metsi/ats:latest -t test_name```
 
 Note that some individual runs may depend upon results from previous
 runs in that suite, and so all demos in that suite should be run.

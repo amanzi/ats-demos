@@ -299,11 +299,9 @@
   </ParameterList>
   <ParameterList name="visualization">
     <ParameterList name="domain" type="ParameterList">
-      <Parameter name="file name base" type="string" value="visdump" />
       <Parameter name="times start period stop" type="Array(double)" value="{0.0,600.0,-1.0}" />
     </ParameterList>
     <ParameterList name="surface" type="ParameterList">
-      <Parameter name="file name base" type="string" value="visdump_surface" />
       <Parameter name="times start period stop" type="Array(double)" value="{0.0,600.0,-1.0}" />
     </ParameterList>
   </ParameterList>
@@ -314,7 +312,6 @@
       <Parameter name="direction normalized flux" type="bool" value="true" />
       <Parameter name="region" type="string" value="right side" />
       <Parameter name="functional" type="string" value="extensive integral" />
-      <Parameter name="delimiter" type="string" value=" " />
       <Parameter name="location name" type="string" value="face" />
       <Parameter name="write interval" type="int" value="1" />
       <Parameter name="observation output filename" type="string" value="surface_outlet_flux.dat" />
@@ -324,7 +321,6 @@
       <Parameter name="variable" type="string" value="surface-water_content" />
       <Parameter name="region" type="string" value="surface domain" />
       <Parameter name="functional" type="string" value="extensive integral" />
-      <Parameter name="delimiter" type="string" value=" " />
       <Parameter name="location name" type="string" value="cell" />
       <Parameter name="write interval" type="int" value="1" />
       <Parameter name="observation output filename" type="string" value="surface_water_content.dat" />

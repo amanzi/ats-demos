@@ -169,7 +169,7 @@
       </ParameterList>
 
       <ParameterList name="initial condition" type="ParameterList">
-        <Parameter name="restart file" type="string" value="../ecohydrology-spinup.demo/checkpoint_final.h5" />
+        <Parameter name="restart file" type="string" value="../data/spinup_checkpoint_final.h5" />
       </ParameterList>
 
       <ParameterList name="water retention evaluator" type="ParameterList">
@@ -225,7 +225,7 @@
       </ParameterList>
 
       <ParameterList name="initial condition" type="ParameterList">
-        <Parameter name="restart file" type="string" value="../ecohydrology-spinup.demo/checkpoint_final.h5" />
+        <Parameter name="restart file" type="string" value="../data/spinup_checkpoint_final.h5" />
       </ParameterList>
 
     </ParameterList>
@@ -453,21 +453,20 @@
 
   <ParameterList name="observations" type="ParameterList">
     <ParameterList name="surface flux" type="ParameterList">
-      <Parameter name="delimiter" type="string" value=" " />
       <Parameter name="write interval" type="int" value="30" />
       <Parameter name="time units" type="string" value="d" />
-      <Parameter name="observation output filename" type="string" value="surface_flux.dat" />
+      <Parameter name="observation output filename" type="string" value="surface_outlet_flux.dat" />
       <Parameter name="times start period stop" type="Array(double)" value="{0.0,0.1,-1.0}" />
       <Parameter name="times start period stop units" type="string" value="d" />
       <ParameterList name="observed quantities" type="ParameterList">
-        <ParameterList name="outlet" type="ParameterList">
+        <ParameterList name="surface outlet flux" type="ParameterList">
           <Parameter name="variable" type="string" value="surface-mass_flux" />
           <Parameter name="direction normalized flux" type="bool" value="true" />
           <Parameter name="region" type="string" value="outlet" />
           <Parameter name="functional" type="string" value="extensive integral" />
           <Parameter name="location name" type="string" value="face" />
         </ParameterList>
-        <ParameterList name="inlet" type="ParameterList">
+        <ParameterList name="surface inlet flux" type="ParameterList">
           <Parameter name="variable" type="string" value="surface-mass_flux" />
           <Parameter name="direction normalized flux" type="bool" value="true" />
           <Parameter name="region" type="string" value="inlet" />
@@ -480,7 +479,6 @@
       <Parameter name="observation output filename" type="string" value="transpiration.dat" />
       <Parameter name="write interval" type="int" value="1" />
       <Parameter name="time units" type="string" value="d" />
-      <Parameter name="delimiter" type="string" value=" " />
       <Parameter name="times start period stop" type="Array(double)" value="{0.0,0.1,-1.0}" />
       <Parameter name="times start period stop units" type="string" value="d" />
       <ParameterList name="observed quantities" type="ParameterList">

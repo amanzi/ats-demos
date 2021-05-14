@@ -181,7 +181,7 @@
       <Parameter name="source term" type="bool" value="true" />
       <Parameter name="initial time step" type="double" value="60.0" />
       <Parameter name="debug cells" type="Array(int)" value="{0}" />
-      <Parameter name="mass source in meters" type="bool" value="true" />
+      <Parameter name="water source in meters" type="bool" value="true" />
       <Parameter name="source term is differentiable" type="bool" value="true" />
       <ParameterList name="verbose object" type="ParameterList">
         <Parameter name="verbosity level" type="string" value="high" />
@@ -214,7 +214,7 @@
   <ParameterList name="state" type="ParameterList">
     <ParameterList name="field evaluators" type="ParameterList">
 
-      <ParameterList name="surface-mass_source" type="ParameterList">
+      <ParameterList name="surface-water_source" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="domain" type="ParameterList">
@@ -471,7 +471,6 @@
       <Parameter name="direction normalized flux" type="bool" value="true" />
       <Parameter name="region" type="string" value="surface outlet" />
       <Parameter name="functional" type="string" value="extensive integral" />
-      <Parameter name="delimiter" type="string" value=" " />
       <Parameter name="location name" type="string" value="face" />
       <Parameter name="write interval" type="int" value="1" />
       <Parameter name="observation output filename" type="string" value="surface_outlet_flux.dat" />

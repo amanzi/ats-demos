@@ -298,7 +298,7 @@
         <Parameter name="field evaluator type" type="string" value="overland pressure water content" />
       </ParameterList>
 
-      <ParameterList name="surface-mass_source" type="ParameterList">
+      <ParameterList name="surface-water_source" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="domain rain" type="ParameterList">

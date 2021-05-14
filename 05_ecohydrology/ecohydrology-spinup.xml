@@ -10,7 +10,7 @@
       <Parameter name="mesh type" type="string" value="read mesh file" />
       <Parameter name="build columns from set" type="string" value="surface" />
       <ParameterList name="read mesh file parameters">
-        <Parameter name="file" type="string" value="../data/hillslope_noduff.exo" />
+        <Parameter name="file" type="string" value="../mesh/hillslope.exo" />
         <Parameter name="format" type="string" value="Exodus II" />
       </ParameterList>
     </ParameterList>
@@ -28,7 +28,7 @@
     <ParameterList name="surface">
       <ParameterList name="region: labeled set">
         <Parameter name="label" type="string" value="2" />
-        <Parameter name="file" type="string" value="../data/hillslope_noduff.exo" />
+        <Parameter name="file" type="string" value="../mesh/hillslope.exo" />
         <Parameter name="format" type="string" value="Exodus II" />
         <Parameter name="entity" type="string" value="Face" />
       </ParameterList>
@@ -36,7 +36,7 @@
     <ParameterList name="bottom">
       <ParameterList name="region: labeled set">
         <Parameter name="label" type="string" value="1" />
-        <Parameter name="file" type="string" value="../data/hillslope_noduff.exo" />
+        <Parameter name="file" type="string" value="../mesh/hillslope.exo" />
         <Parameter name="format" type="string" value="Exodus II" />
         <Parameter name="entity" type="string" value="Face" />
       </ParameterList>
@@ -181,17 +181,17 @@
         <Parameter name="hydrostatic water density [kg m^-3]" type="double" value="1000.0" />
       </ParameterList>
 
-      <ParameterList name="water retention evaluator">
+     <ParameterList name="water retention evaluator">
         <Parameter name="minimum rel perm cutoff" type="double" value="0.0" />
         <Parameter name="use surface rel perm" type="bool" value="true" />
         <ParameterList name="WRM parameters">
           <ParameterList name="computational domain">
             <Parameter name="region" type="string" value="computational domain" />
             <Parameter name="WRM Type" type="string" value="van Genuchten" />
-            <Parameter name="van Genuchten alpha [Pa^-1]" type="double" value="0.00015" />
-            <Parameter name="van Genuchten m [-]" type="double" value="0.8" />
-            <Parameter name="residual saturation [-]" type="double" value="0.0" />
-            <Parameter name="smoothing interval width [saturation]" type="double" value="0.0" />
+            <Parameter name="van Genuchten alpha [Pa^-1]" type="double" value="0.0092" />
+            <Parameter name="van Genuchten m [-]" type="double" value="0.24" />
+            <Parameter name="residual saturation [-]" type="double" value="0.12" />
+            <Parameter name="smoothing interval width [saturation]" type="double" value="0.1"/>
           </ParameterList>
         </ParameterList>
       </ParameterList>
@@ -268,7 +268,7 @@
             <Parameter name="component" type="string" value="cell" />
             <ParameterList name="function">
               <ParameterList name="function-constant">
-                <Parameter name="value" type="double" value="1.576e-09" />
+                <Parameter name="value" type="double" value="9.6-09" />
               </ParameterList>
             </ParameterList>
           </ParameterList>
@@ -316,7 +316,7 @@
 
       <ParameterList name="surface-manning_coefficient">
         <Parameter name="field evaluator type" type="string" value="independent variable constant" />
-        <Parameter name="value" type="double" value="0.15" />
+        <Parameter name="value" type="double" value="1" />
       </ParameterList>
 
       <ParameterList name="base_porosity">
@@ -329,7 +329,7 @@
         <ParameterList name="compressible porosity model parameters">
           <ParameterList name="computational domain">
             <Parameter name="region" type="string" value="computational domain" />
-            <Parameter name="pore compressibility [Pa^-1]" type="double" value="1e-09" />
+            <Parameter name="pore compressibility [Pa^-1]" type="double" value="1e-08" />
           </ParameterList>
         </ParameterList>
       </ParameterList>

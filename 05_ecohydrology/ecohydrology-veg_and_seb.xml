@@ -64,8 +64,8 @@
         </ParameterList>
         <ParameterList name="water budget" type="ParameterList">
           <Parameter name="PK type" type="string" value="strong MPC" />
-          <ParameterList name="canopy water" type="ParameterList">
-            <Parameter name="PK type" type="string" value="general surface balance" />
+          <ParameterList name="snow SEB" type="ParameterList">
+            <Parameter name="PK type" type="string" value="surface balance implicit subgrid" />
           </ParameterList>
           <ParameterList name="surface subsurface water" type="ParameterList">
             <Parameter name="PK type" type="string" value="coupled water" />
@@ -136,7 +136,7 @@
 
     <ParameterList name="water budget" type="ParameterList">
       <Parameter name="PK type" type="string" value="strong MPC" />
-      <Parameter name="PKs order" type="Array(string)" value="{canopy water,surface subsurface water}" />
+      <Parameter name="PKs order" type="Array(string)" value="{snow SEB,surface subsurface water}" />
       <ParameterList name="verbose object" type="ParameterList">
         <Parameter name="verbosity level" type="string" value="medium" />
       </ParameterList>
@@ -172,39 +172,35 @@
           <Parameter name="count before increasing increase factor" type="int" value="2" />
         </ParameterList>
       </ParameterList>
-
     </ParameterList>
 
-    <ParameterList name="canopy water" type="ParameterList">
-      <Parameter name="PK type" type="string" value="general surface balance" />
-      <Parameter name="primary variable key" type="string" value="canopy-water_content" />
-      <Parameter name="conserved quantity key" type="string" value="canopy-water_content" />
-      <Parameter name="layer name" type="string" value="canopy" />
-      <Parameter name="domain name" type="string" value="surface" />
-      <Parameter name="initial time step" type="double" value="8640.0" />
-      <Parameter name="debug cells" type="Array(int)" value="{99}" />
-      <ParameterList name="verbose object" type="ParameterList">
-        <Parameter name="verbosity level" type="string" value="high" />
-      </ParameterList>
+
+    <ParameterList name="SEB" type="ParameterList">
+      <Parameter name="PK type" type="string" value="surface balance implicit subgrid" />
+      <Parameter name="layer name" type="string" value="snow" />
+      <Parameter name="domain name" type="string" value="snow" />
+      <Parameter name="primary variable key" type="string" value="snow-depth" />
+      <Parameter name="conserved quantity key" type="string" value="snow-water_equivalent" />
+      <Parameter name="source key" type="string" value="snow-source_sink" />
+      <Parameter name="source term is differentiable" type="bool" value="false" />
 
       <ParameterList name="initial condition" type="ParameterList">
-        <Parameter name="value" type="double" value="0.0" />
+        <ParameterList name="function" type="ParameterList">
+          <ParameterList name="initial head" type="ParameterList">
+            <Parameter name="region" type="string" value="surface domain" />
+            <Parameter name="component" type="string" value="cell" />
+            <ParameterList name="function" type="ParameterList">
+              <ParameterList name="function-constant" type="ParameterList">
+                <Parameter name="value" type="double" value="0.02" />
+              </ParameterList>
+            </ParameterList>
+          </ParameterList>
+        </ParameterList>
       </ParameterList>
 
       <ParameterList name="inverse" type="ParameterList">
-        <Parameter name="preconditioning method" type="string" value="identity" />
-        <Parameter name="iterative method" type="string" value="gmres" />
-        <ParameterList name="verbose object" type="ParameterList">
-          <Parameter name="verbosity level" type="string" value="medium" />
-        </ParameterList>
-        <ParameterList name="gmres parameters" type="ParameterList">
-          <Parameter name="preconditioning strategy" type="string" value="left" />
-          <Parameter name="error tolerance" type="double" value="1e-06" />
-          <Parameter name="convergence criteria" type="Array(string)" value="{relative residual,make one iteration}" />
-          <Parameter name="maximum number of iteration" type="int" value="80" />
-        </ParameterList>
+        <Parameter name="preconditioning method" type="string" value="block ilu" />
       </ParameterList>
-
     </ParameterList>
 
     <ParameterList name="surface subsurface water" type="ParameterList">
@@ -649,6 +645,7 @@
       <ParameterList name="observed quantities" type="ParameterList">
         <ParameterList name="surface-total_transpiration" type="ParameterList">
           <Parameter name="variable" type="string" value="surface-total_evapotranspiration" />
+          <Parameter name="direction normalized flux" type="bool" value="true" />
           <Parameter name="region" type="string" value="surface domain" />
           <Parameter name="functional" type="string" value="integral" />
           <Parameter name="location name" type="string" value="cell" />

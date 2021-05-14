@@ -14,7 +14,7 @@ everything needed to get started using ATS.  Any given run contains
 some of, and maybe all of, the following components:
 
 * An input file: an `.xml` file read by ATS via `ats
-  --xml_file=../my_file.xml` **required**
+  ../my_file.xml` **required**
 
 * A mesh file for non-trivial meshes: typically an `.exo` file.  Most
   meshes have included a python script or ipython notebook used to
@@ -35,13 +35,17 @@ Running the demos
 
 Running all of the demos can take some time, but individual demos are
 often fairly quick.  To run a given demo, make sure `ats` is compiled
-and (preferably) in your path, and then:
+and (preferably) in your path, or that you have a docker container ready to go, and then:
 
 ```python run_demos.py path_to_suite.cfg```
 
 or
 
-```python run_demos.py path_to_suite.cfg -t suite_name-test_name```
+```python run_demos.py path_to_suite.cfg -t test_name```
+
+or (with docker):
+
+```python run_demos.py path_to_suite.cfg -e metsi/ats:latest test_name```
 
 Note that some individual runs may depend upon results from previous
 runs in that suite, and so all demos in that suite should be run.

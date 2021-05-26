@@ -93,7 +93,7 @@
       <Parameter name="relative permeability method" type="string" value="upwind with Darcy flux" />
       <Parameter name="permeability rescaling" type="double" value="10000000.0" />
 
-      <!-- debug cells, when used with the command line option "--verbosity=high", write info about 
+      <!-- debug cells, when used with the command line option "verbosity=high", write info about 
            the cell to the logfile -->
       <Parameter name="debug cells" type="Array(int)" value="{0,99}" />
 

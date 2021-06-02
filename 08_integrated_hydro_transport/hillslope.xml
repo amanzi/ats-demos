@@ -77,7 +77,6 @@
       </ParameterList>
     </ParameterList>
   </ParameterList>
-
   <ParameterList name="PKs">
 
     <ParameterList name="flow and transport">
@@ -87,12 +86,12 @@
       <ParameterList name="verbose object">
         <Parameter name="verbosity level" type="string" value="high" />
       </ParameterList>
+
     </ParameterList>
 
     <ParameterList name="surface-subsurface flow coupler">
       <Parameter name="PK type" type="string" value="coupled water" />
       <Parameter name="PKs order" type="Array(string)" value="{flow, overland flow}" />
-
       <ParameterList name="water delegate" type="ParameterList">
         <Parameter name="modify predictor damp and cap the water spurt" type="bool" value="true" />
         <Parameter name="damp and cap the water spurt" type="bool" value="true" />
@@ -169,7 +168,6 @@
       <Parameter name="initial time step" type="double" value="60.0" />
       <Parameter name="permeability rescaling" type="double" value="10000000.0" />
       <Parameter name="relative permeability method" type="string" value="upwind with Darcy flux" />
-
       <Parameter name="debug cells" type="Array(int)" value="{0}" />
       <ParameterList name="verbose object">
         <Parameter name="verbosity level" type="string" value="high" />
@@ -177,12 +175,13 @@
 
       <ParameterList name="initial condition" type="ParameterList">
         <Parameter name="hydrostatic head [m]" type="double" value="-1.0" />
-        <Parameter name="hydrostatic water density [kg m^-3]" type="double" value="1000" />
+        <Parameter name="hydrostatic water density [kg m^-3]" type="double" value="1000.0" />
       </ParameterList>
 
       <ParameterList name="diffusion">
         <Parameter name="discretization primary" type="string" value="mfd: two-point flux approximation" />
       </ParameterList>
+
       <ParameterList name="diffusion preconditioner">
         <Parameter name="include Newton correction" type="bool" value="true" />
       </ParameterList>
@@ -198,8 +197,7 @@
       <Parameter name="domain name" type="string" value="surface" />
       <Parameter name="source term" type="bool" value="true" />
       <Parameter name="water source in meters" type="bool" value="true" />
-      <Parameter name="initial time step" type="double" value="60." />
-
+      <Parameter name="initial time step" type="double" value="60.0" />
       <Parameter name="debug cells" type="Array(int)" value="{0}" />
       <ParameterList name="verbose object">
         <Parameter name="verbosity level" type="string" value="low" />
@@ -208,6 +206,7 @@
       <ParameterList name="diffusion">
         <Parameter name="discretization primary" type="string" value="fv: default" />
       </ParameterList>
+
       <ParameterList name="diffusion preconditioner">
         <Parameter name="include Newton correction" type="bool" value="true" />
       </ParameterList>
@@ -341,7 +340,6 @@
       <Parameter name="number of aqueous components" type="int" value="1" />
       <Parameter name="number of gaseous components" type="int" value="0" />
       <Parameter name="runtime diagnostics: regions" type="Array(string)" value="{}" />
-
       <ParameterList name="initial condition" type="ParameterList">
         <Parameter name="constant" type="double" value="0.0" />
       </ParameterList>
@@ -393,7 +391,7 @@
                 <Parameter name="y values" type="Array(double)" value="{1.0,0.0}" />
               </ParameterList>
             </ParameterList>
-          </ParameterList>          
+          </ParameterList>
         </ParameterList>
       </ParameterList>
 
@@ -506,12 +504,6 @@
         <Parameter name="value" type="double" value="1.0" />
       </ParameterList>
 
-      <!--
-      <ParameterList name="overland_source_from_subsurface">
-        <Parameter name="field evaluator type" type="string" value="overland source from subsurface via flux" />
-      </ParameterList>
-      -->
-
       <ParameterList name="saturation_liquid" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="WRM" />
         <Parameter name="checkpoint" type="bool" value="true" />
@@ -525,7 +517,7 @@
           </ParameterList>
         </ParameterList>
       </ParameterList>
-      
+
       <ParameterList name="surface-overland_conductivity">
         <Parameter name="field evaluator type" type="string" value="overland conductivity" />
         <ParameterList name="overland conductivity model">
@@ -551,13 +543,12 @@
 
     </ParameterList>
   </ParameterList>
-
   <ParameterList name="visualization">
     <ParameterList name="domain">
-      <Parameter name="times start period stop" type="Array(double)" value="{0,600,-1}" />
+      <Parameter name="times start period stop" type="Array(double)" value="{0.0,600.0,-1.0}" />
     </ParameterList>
     <ParameterList name="surface">
-      <Parameter name="times start period stop" type="Array(double)" value="{0,600,-1}" />
+      <Parameter name="times start period stop" type="Array(double)" value="{0.0,600.0,-1.0}" />
     </ParameterList>
   </ParameterList>
 
@@ -565,5 +556,4 @@
     <Parameter name="file name base" type="string" value="checkpoint" />
     <Parameter name="cycles start period stop" type="Array(int)" value="{0,50,-1}" />
   </ParameterList>
-
 </ParameterList>

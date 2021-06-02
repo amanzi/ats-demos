@@ -1,6 +1,4 @@
 <ParameterList name="Main" type="ParameterList">
-
-  <!-- a list of all the meshes to be used in this problem -->
   <ParameterList name="mesh" type="ParameterList">
     <ParameterList name="domain" type="ParameterList">
       <Parameter name="mesh type" type="string" value="generate mesh" />
@@ -12,8 +10,6 @@
     </ParameterList>
   </ParameterList>
 
-  <!-- A "geometric model" describes the geometry, independent of a mesh, and allows the user 
-       to specify "regions" on which things like parameters and boundary conditions are defined. -->
   <ParameterList name="regions" type="ParameterList">
     <ParameterList name="computational domain" type="ParameterList">
       <ParameterList name="region: box" type="ParameterList">
@@ -59,12 +55,9 @@
     </ParameterList>
   </ParameterList>
 
-  <!-- The "cycle driver" controls the overall timestepping of the run, and 
-       provides a high level look of the PK tree, which includes PDEs and their couplers. -->
   <ParameterList name="cycle driver" type="ParameterList">
     <Parameter name="start time" type="double" value="0.0" />
     <Parameter name="start time units" type="string" value="s" />
-    <!-- in a steady-state problem, we don't really have a true "end time" -->
     <Parameter name="end time" type="double" value="1.0" />
     <Parameter name="end time units" type="string" value="s" />
     <ParameterList name="PK tree" type="ParameterList">
@@ -76,27 +69,20 @@
   <ParameterList name="checkpoint" type="ParameterList">
   </ParameterList>
 
-  <!-- visualization controls when we write output to files -->
   <ParameterList name="visualization">
     <ParameterList name="domain" type="ParameterList">
       <Parameter name="times start period stop" type="Array(double)" value="{0.0,1.0,-1.0}" />
     </ParameterList>
   </ParameterList>
-  
-  <!-- Process Kernels, or PKs, are the PDEs and their couplers -->
+
   <ParameterList name="PKs" type="ParameterList">
 
     <ParameterList name="Richards" type="ParameterList">
       <Parameter name="PK type" type="string" value="richards steady state" />
-      <!-- the primary variable is the quantity to be solved for in this PDE -->
       <Parameter name="primary variable key" type="string" value="pressure" />
       <Parameter name="relative permeability method" type="string" value="upwind with Darcy flux" />
       <Parameter name="permeability rescaling" type="double" value="10000000.0" />
-
-      <!-- debug cells, when used with the command line option "verbosity=high", write info about 
-           the cell to the logfile -->
       <Parameter name="debug cells" type="Array(int)" value="{0,99}" />
-
       <ParameterList name="time integrator" type="ParameterList">
         <Parameter name="extrapolate initial guess" type="bool" value="true" />
         <Parameter name="solver type" type="string" value="nka_bt_ats" />
@@ -195,7 +181,6 @@
   </ParameterList>
 
   <ParameterList name="state" type="ParameterList">
-    <!-- field evaluators are the way we embed constitutive models and other quantities into the PDE in a flexible way -->
     <ParameterList name="field evaluators" type="ParameterList">
 
       <ParameterList name="water_content" type="ParameterList">
@@ -247,8 +232,8 @@
         <Parameter name="field evaluator type" type="string" value="independent variable constant" />
         <Parameter name="value" type="double" value="275.15" />
       </ParameterList>
-    </ParameterList>
 
+    </ParameterList>
     <ParameterList name="initial conditions" type="ParameterList">
 
       <ParameterList name="atmospheric_pressure" type="ParameterList">
@@ -261,5 +246,4 @@
 
     </ParameterList>
   </ParameterList>
-
 </ParameterList>

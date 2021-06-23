@@ -11,7 +11,7 @@
     <ParameterList name="surface" type="ParameterList">
       <Parameter name="mesh type" type="string" value="aliased" />
       <ParameterList name="aliased parameters" type="ParameterList">
-        <Parameter name="alias" type="string" value="domain" />
+        <Parameter name="target" type="string" value="domain" />
       </ParameterList>
     </ParameterList>
   </ParameterList>
@@ -79,7 +79,6 @@
       <Parameter name="domain name" type="string" value="surface" />
       <Parameter name="PKs order" type="Array(string)" value="{overland flow,surface energy}" />
       <Parameter name="supress Jacobian terms: d div surface q / dT" type="bool" value="false" />
-
       <ParameterList name="surface ewc delegate" type="ParameterList">
         <Parameter name="predictor type" type="string" value="smart ewc" />
         <ParameterList name="verbose object" type="ParameterList">
@@ -200,7 +199,6 @@
       <Parameter name="domain name" type="string" value="surface" />
       <Parameter name="initial time step" type="double" value="10.0" />
       <Parameter name="explicit advection" type="bool" value="true" />
-      <!-- <Parameter name="supress advective terms in preconditioner" type="bool" value="true" />-->
       <Parameter name="upwind conductivity method" type="string" value="arithmetic mean" />
       <Parameter name="source term" type="bool" value="true" />
       <Parameter name="source term key" type="string" value="surface-total_energy_source" />

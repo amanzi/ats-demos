@@ -53,7 +53,7 @@
         <Parameter name="entity" type="string" value="Face" />
       </ParameterList>
     </ParameterList>
-    <ParameterList name="outlet" type="ParameterList">
+    <ParameterList name="surface boundary" type="ParameterList">
       <ParameterList name="region: plane" type="ParameterList">
         <Parameter name="point" type="Array(double)" value="{1000.0,0.0}" />
         <Parameter name="normal" type="Array(double)" value="{1.0,0.0}" />
@@ -301,7 +301,7 @@
       <ParameterList name="boundary conditions">
         <ParameterList name="seepage face head">
           <ParameterList name="surface">
-            <Parameter name="regions" type="Array(string)" value="{outlet}" />
+            <Parameter name="regions" type="Array(string)" value="{surface boundary}" />
             <ParameterList name="boundary head">
               <ParameterList name="function-constant">
                 <Parameter name="value" type="double" value="0.5" />
@@ -417,7 +417,7 @@
         <Parameter name="canopy temperature key" type="string" value="surface-temperature" />
         <Parameter name="incoming shortwave radiation key" type="string" value="surface-incident_shortwave_radiation" />
         <Parameter name="incoming longwave radiation key" type="string" value="surface-incoming_longwave_radiation" />
-        <Parameter name="snow area fraction key" type="string" value="surface-area_fractions" />
+        <Parameter name="area fractions key" type="string" value="surface-area_fractions" />
         <Parameter name="leaf area index key" type="string" value="canopy-leaf_area_index" />        
         <Parameter name="units" type="string" value="W m^-2" />
       </ParameterList>
@@ -874,7 +874,7 @@
         <ParameterList name="runoff generation [mol d^-1]" type="ParameterList">
           <Parameter name="variable" type="string" value="surface-mass_flux" />
           <Parameter name="direction normalized flux" type="bool" value="true" />
-          <Parameter name="region" type="string" value="outlet" />
+          <Parameter name="region" type="string" value="surface boundary" />
           <Parameter name="functional" type="string" value="extensive integral" />
           <Parameter name="location name" type="string" value="face" />
 	  <Parameter name="time integrated" type="bool" value="true" />

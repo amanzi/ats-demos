@@ -273,8 +273,8 @@
           <ParameterList name="computation domain" type="ParameterList">
             <Parameter name="region" type="string" value="computational domain" />
             <Parameter name="WRM Type" type="string" value="van Genuchten" />
-            <Parameter name="van Genuchten alpha [Pa^-1]" type="double" value="8.9e-5" />
-            <Parameter name="van Genuchten n [-]" type="double" value="1.422" />
+            <Parameter name="van Genuchten alpha [Pa^-1]" type="double" value="2e-05" />
+            <Parameter name="van Genuchten n [-]" type="double" value="1.58" />
             <Parameter name="residual saturation [-]" type="double" value="0.2" />
             <Parameter name="smoothing interval width [saturation]" type="double" value="0.05" />
           </ParameterList>
@@ -714,7 +714,7 @@
         <Parameter name="EOS basis" type="string" value="molar" />
         <Parameter name="molar density key" type="string" value="molar_density_ice" />
         <ParameterList name="EOS parameters" type="ParameterList">
-          <Parameter name="EOS type" type="string" value="liquid water" />
+          <Parameter name="EOS type" type="string" value="ice" />
         </ParameterList>
       </ParameterList>
 

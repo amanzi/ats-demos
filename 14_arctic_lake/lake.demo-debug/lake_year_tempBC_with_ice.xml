@@ -75,8 +75,11 @@
     </ParameterList>
   </ParameterList>
   <ParameterList name="checkpoint" type="ParameterList">
-    <Parameter name="times start period stop" type="Array(double)" value="{0.0,1.,-1.0}" />
+    <Parameter name="times start period stop" type="Array(double)" value="{0.,1.,-1.0}" />
     <Parameter name="times start period stop units" type="string" value="d" />
+    <ParameterList name="verbose object" type="ParameterList">
+      <Parameter name="verbosity level" type="string" value="high" />
+    </ParameterList>
   </ParameterList>
 
   <ParameterList name="PKs" type="ParameterList">
@@ -135,7 +138,7 @@
           <Parameter name="min iterations" type="int" value="10" />
           <Parameter name="time step reduction factor" type="double" value="0.75" />
           <Parameter name="time step increase factor" type="double" value="1.5" />
-          <Parameter name="max time step" type="double" value="86400.0" />
+          <Parameter name="max time step" type="double" value="400000.0" />
           <Parameter name="min time step" type="double" value="1e-10" />
           <Parameter name="growth wait after fail" type="int" value="2" />
           <Parameter name="count before increasing increase factor" type="int" value="2" />
@@ -162,51 +165,51 @@
         </ParameterList>
       </ParameterList>
 
-    <ParameterList name="boundary conditions">
-      <ParameterList name="diffusive flux">
-        <ParameterList name="bottom">
-          <Parameter name="regions" type="Array(string)" value="{bottom face}"/>
-          <ParameterList name="outward diffusive flux">
-            <ParameterList name="function-exprtk">
-              <Parameter name="number of arguments" type="int" value="3"/>
-              <Parameter name="formula" type="string" value=" 100.*sin(2.*3.1415*t/(86400.*365.))"/>
-            </ParameterList>
-          </ParameterList>
-        </ParameterList>
-      </ParameterList>
-      <ParameterList name="temperature">
-        <ParameterList name="top">
-          <Parameter name="regions" type="Array(string)" value="{surface}"/>
-          <ParameterList name="boundary temperature">
-            <ParameterList name="function-constant">
-              <Parameter name="value" type="double" value="283.15"/>
-            </ParameterList>
-          </ParameterList>
-        </ParameterList>
-      </ParameterList>
-    </ParameterList>
-
-<!--      <ParameterList name="boundary conditions">-->
-<!--        <ParameterList name="temperature">-->
-<!--          <ParameterList name="bottom">-->
-<!--            <Parameter name="regions" type="Array(string)" value="{bottom face}"/>-->
-<!--            <ParameterList name="boundary temperature">-->
-<!--                <ParameterList name="function-exprtk">-->
-<!--                  <Parameter name="number of arguments" type="int" value="3"/>-->
-<!--                    <Parameter name="formula" type="string" value="268.15 - 20.*sin(2.*3.1415*t/5400.)"/>-->
-<!--                </ParameterList>-->
-<!--            </ParameterList>-->
-<!--          </ParameterList>-->
-<!--          <ParameterList name="top">-->
-<!--            <Parameter name="regions" type="Array(string)" value="{surface}"/>-->
-<!--            <ParameterList name="boundary temperature">-->
-<!--              <ParameterList name="function-constant">-->
-<!--                <Parameter name="value" type="double" value="283.15"/>-->
-<!--              </ParameterList>-->
+<!--    <ParameterList name="boundary conditions">-->
+<!--      <ParameterList name="diffusive flux">-->
+<!--        <ParameterList name="bottom">-->
+<!--          <Parameter name="regions" type="Array(string)" value="{bottom face}"/>-->
+<!--          <ParameterList name="outward diffusive flux">-->
+<!--            <ParameterList name="function-exprtk">-->
+<!--              <Parameter name="number of arguments" type="int" value="3"/>-->
+<!--              <Parameter name="formula" type="string" value=" 100.*sin(2.*3.1415*t/(86400.*365.))"/>-->
 <!--            </ParameterList>-->
 <!--          </ParameterList>-->
 <!--        </ParameterList>-->
 <!--      </ParameterList>-->
+<!--      <ParameterList name="temperature">-->
+<!--        <ParameterList name="top">-->
+<!--          <Parameter name="regions" type="Array(string)" value="{surface}"/>-->
+<!--          <ParameterList name="boundary temperature">-->
+<!--            <ParameterList name="function-constant">-->
+<!--              <Parameter name="value" type="double" value="283.15"/>-->
+<!--            </ParameterList>-->
+<!--          </ParameterList>-->
+<!--        </ParameterList>-->
+<!--      </ParameterList>-->
+<!--    </ParameterList>-->
+
+      <ParameterList name="boundary conditions">
+        <ParameterList name="temperature">
+          <ParameterList name="bottom">
+            <Parameter name="regions" type="Array(string)" value="{bottom face}"/>
+            <ParameterList name="boundary temperature">
+                <ParameterList name="function-exprtk">
+                  <Parameter name="number of arguments" type="int" value="3"/>
+                    <Parameter name="formula" type="string" value="10.*sin(t/(55.*86400.)-250.*86400.)+273.15"/>
+                </ParameterList>
+            </ParameterList>
+          </ParameterList>
+          <ParameterList name="top">
+            <Parameter name="regions" type="Array(string)" value="{surface}"/>
+            <ParameterList name="boundary temperature">
+              <ParameterList name="function-constant">
+                <Parameter name="value" type="double" value="274.15"/>
+              </ParameterList>
+            </ParameterList>
+          </ParameterList>
+        </ParameterList>
+      </ParameterList>
 
       <ParameterList name="initial condition" type="ParameterList">
         <Parameter name="initial temperature [K]" type="double" value="274.15" />
@@ -224,6 +227,11 @@
             </ParameterList>
           </ParameterList>
         </ParameterList>
+      </ParameterList>
+      
+      <ParameterList name="parameters" type="ParameterList">
+          <Parameter name="precipitation" type="double" value="1e-7" />
+          <Parameter name="evaporation" type="double" value="0.0" />
       </ParameterList>
       
       <ParameterList name="thermal conductivity evaluator" type="ParameterList">
@@ -282,7 +290,8 @@
   <ParameterList name="visualization">
     <ParameterList name="domain" type="ParameterList">
       <Parameter name="file name base" type="string" value="visdump" />
-      <Parameter name="times start period stop" type="Array(double)" value="{{0., 3600., -1}}" />
+      <Parameter name="times start period stop" type="Array(double)" value="{{0., 1., -1}}" />
+      <Parameter name="times start period stop units" type="string" value="d" />
     </ParameterList>
   </ParameterList>
 </ParameterList>

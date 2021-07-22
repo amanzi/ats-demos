@@ -14,13 +14,26 @@
         </ParameterList>
       </ParameterList>
     </ParameterList>
+    <ParameterList name="soil" type="ParameterList">
+      <Parameter name="mesh type" type="string" value="generate mesh" />
+      <ParameterList name="generate mesh parameters" type="ParameterList">
+        <Parameter name="number of cells" type="Array(int)" value="{1,1,40}" />
+        <Parameter name="domain low coordinate" type="Array(double)" value="{0.0,0.0,-2.0}" />
+        <Parameter name="domain high coordinate" type="Array(double)" value="{1.0,1.0,0.0}" />
+        <Parameter name="Number of mesh blocks" type="int" value="1" />
+        <ParameterList name="Mesh block 1" type="ParameterList">
+          <Parameter name="Z0" type="double" value="0.0" />
+          <Parameter name="Z1" type="double" value="1.0" />
+        </ParameterList>
+      </ParameterList>
+    </ParameterList>
   </ParameterList>
 
   <ParameterList name="regions" type="ParameterList">
     <ParameterList name="computational domain" type="ParameterList">
       <ParameterList name="region: box" type="ParameterList">
-        <Parameter name="low coordinate" type="Array(double)" value="{0.0,0.0,0.0}" />
-        <Parameter name="high coordinate" type="Array(double)" value="{1.0,1.0,1.0}" />
+        <Parameter name="low coordinate" type="Array(double)" value="{0.0,0.0,-2.0}" />
+        <Parameter name="high coordinate" type="Array(double)" value="{1.0,1.0,0.0}" />
       </ParameterList>
     </ParameterList>
     <ParameterList name="east face" type="ParameterList">
@@ -49,13 +62,13 @@
     </ParameterList>
     <ParameterList name="bottom face" type="ParameterList">
       <ParameterList name="region: plane" type="ParameterList">
-        <Parameter name="point" type="Array(double)" value="{0.5,0.5,0.0}" />
-        <Parameter name="normal" type="Array(double)" value="{0.0,0.0,-1.0}" />
+        <Parameter name="point" type="Array(double)" value="{0.5,0.5,-2.0}" />
+        <Parameter name="normal" type="Array(double)" value="{0.0,0.0,-2.0}" />
       </ParameterList>
     </ParameterList>
     <ParameterList name="surface" type="ParameterList">
       <ParameterList name="region: plane" type="ParameterList">
-        <Parameter name="point" type="Array(double)" value="{0.5,0.5,1.0}" />
+        <Parameter name="point" type="Array(double)" value="{0.5,0.5,0.0}" />
         <Parameter name="normal" type="Array(double)" value="{0.0,0.0,1.0}" />
       </ParameterList>
     </ParameterList>
@@ -69,8 +82,8 @@
     <Parameter name="end cycle" type="int" value="-1" />
 <!--    <Parameter  name="restart from checkpoint file" type="string" value="checkpoint7603277.h5"/>-->
     <ParameterList name="PK tree" type="ParameterList">
-      <ParameterList name="lake thermo" type="ParameterList">
-        <Parameter name="PK type" type="string" value="lake thermo" />
+      <ParameterList name="soil thermo" type="ParameterList">
+        <Parameter name="PK type" type="string" value="soil thermo" />
       </ParameterList>
     </ParameterList>
   </ParameterList>
@@ -82,13 +95,14 @@
   <ParameterList name="PKs" type="ParameterList">
       
     <ParameterList name="verbose object" type="ParameterList">
-      <Parameter name="verbosity level" type="string" value="low" />
+      <Parameter name="verbosity level" type="string" value="high" />
     </ParameterList>
 
-    <ParameterList name="lake thermo" type="ParameterList">
-      <Parameter name="PK type" type="string" value="lake thermo" />
-      <Parameter name="primary variable key" type="string" value="temperature" />
-      <Parameter name="conserved quantity key" type="string" value="temperature" />
+    <ParameterList name="soil thermo" type="ParameterList">
+      <Parameter name="PK type" type="string" value="soil thermo" />
+      <Parameter name="primary variable key" type="string" value="soil_temperature" />
+      <Parameter name="conserved quantity key" type="string" value="soil_temperature" />
+      <Parameter name="domain name" type="string" value="soil" />
       <Parameter name="absolute error tolerance" type="double" value="0.001" />
       <Parameter name="relative error tolerance" type="double" value="0.001" />
       <Parameter name="source term" type="bool" value="true" />
@@ -105,7 +119,7 @@
       <Parameter name="debug cells" type="Array(int)" value="{0,5}" />
       
       <ParameterList name="verbose object" type="ParameterList">
-        <Parameter name="verbosity level" type="string" value="low" />
+        <Parameter name="verbosity level" type="string" value="high" />
       </ParameterList>
 
       <ParameterList name="time integrator" type="ParameterList">
@@ -124,11 +138,11 @@
           <Parameter name="diverged tolerance" type="double" value="1000000.0" />
           <Parameter name="limit iterations" type="int" value="21" />
           <ParameterList name="verbose object" type="ParameterList">
-            <Parameter name="verbosity level" type="string" value="low" />
+            <Parameter name="verbosity level" type="string" value="high" />
           </ParameterList>
         </ParameterList>
         <ParameterList name="verbose object" type="ParameterList">
-          <Parameter name="verbosity level" type="string" value="low" />
+          <Parameter name="verbosity level" type="string" value="high" />
         </ParameterList>
         <ParameterList name="timestep controller smarter parameters" type="ParameterList">
           <Parameter name="max iterations" type="int" value="18" />
@@ -143,7 +157,7 @@
       </ParameterList>
 
       <ParameterList name="diffusion" type="ParameterList">
-        <Parameter name="discretization primary" type="string" value="fv: default" />
+        <Parameter name="discretization primary" type="string" value="mfd: default" />
       </ParameterList>
 
       <ParameterList name="diffusion preconditioner" type="ParameterList">
@@ -162,54 +176,54 @@
         </ParameterList>
       </ParameterList>
 
-    <ParameterList name="boundary conditions">
-      <ParameterList name="diffusive flux">
-        <ParameterList name="bottom">
-          <Parameter name="regions" type="Array(string)" value="{bottom face}"/>
-          <ParameterList name="outward diffusive flux">
-            <ParameterList name="function-exprtk">
-              <Parameter name="number of arguments" type="int" value="3"/>
-              <Parameter name="formula" type="string" value=" 100.*sin(2.*3.1415*t/(86400.*365.))"/>
-            </ParameterList>
-          </ParameterList>
-        </ParameterList>
-      </ParameterList>
-      <ParameterList name="temperature">
-        <ParameterList name="top">
-          <Parameter name="regions" type="Array(string)" value="{surface}"/>
-          <ParameterList name="boundary temperature">
-            <ParameterList name="function-constant">
-              <Parameter name="value" type="double" value="283.15"/>
-            </ParameterList>
-          </ParameterList>
-        </ParameterList>
-      </ParameterList>
-    </ParameterList>
-
-<!--      <ParameterList name="boundary conditions">-->
-<!--        <ParameterList name="temperature">-->
-<!--          <ParameterList name="bottom">-->
-<!--            <Parameter name="regions" type="Array(string)" value="{bottom face}"/>-->
-<!--            <ParameterList name="boundary temperature">-->
-<!--                <ParameterList name="function-exprtk">-->
-<!--                  <Parameter name="number of arguments" type="int" value="3"/>-->
-<!--                    <Parameter name="formula" type="string" value="268.15 - 20.*sin(2.*3.1415*t/5400.)"/>-->
-<!--                </ParameterList>-->
-<!--            </ParameterList>-->
-<!--          </ParameterList>-->
-<!--          <ParameterList name="top">-->
-<!--            <Parameter name="regions" type="Array(string)" value="{surface}"/>-->
-<!--            <ParameterList name="boundary temperature">-->
-<!--              <ParameterList name="function-constant">-->
-<!--                <Parameter name="value" type="double" value="283.15"/>-->
-<!--              </ParameterList>-->
+<!--    <ParameterList name="boundary conditions">-->
+<!--      <ParameterList name="diffusive flux">-->
+<!--        <ParameterList name="bottom">-->
+<!--          <Parameter name="regions" type="Array(string)" value="{bottom face}"/>-->
+<!--          <ParameterList name="outward diffusive flux">-->
+<!--            <ParameterList name="function-exprtk">-->
+<!--              <Parameter name="number of arguments" type="int" value="3"/>-->
+<!--              <Parameter name="formula" type="string" value=" 100.*sin(2.*3.1415*t/(86400.*365.))"/>-->
 <!--            </ParameterList>-->
 <!--          </ParameterList>-->
 <!--        </ParameterList>-->
 <!--      </ParameterList>-->
+<!--      <ParameterList name="temperature">-->
+<!--        <ParameterList name="top">-->
+<!--          <Parameter name="regions" type="Array(string)" value="{surface}"/>-->
+<!--          <ParameterList name="boundary temperature">-->
+<!--            <ParameterList name="function-constant">-->
+<!--              <Parameter name="value" type="double" value="283.15"/>-->
+<!--            </ParameterList>-->
+<!--          </ParameterList>-->
+<!--        </ParameterList>-->
+<!--      </ParameterList>-->
+<!--    </ParameterList>-->
+
+      <ParameterList name="boundary conditions">
+        <ParameterList name="temperature">
+          <ParameterList name="bottom">
+            <Parameter name="regions" type="Array(string)" value="{bottom face}"/>
+            <ParameterList name="boundary temperature">
+                <ParameterList name="function-exprtk">
+                  <Parameter name="number of arguments" type="int" value="3"/>
+                    <Parameter name="formula" type="string" value="10.*sin(t/(55.*86400.)-250.*86400.)+293.15"/>
+                </ParameterList>
+            </ParameterList>
+          </ParameterList>
+          <ParameterList name="top">
+            <Parameter name="regions" type="Array(string)" value="{surface}"/>
+            <ParameterList name="boundary temperature">
+              <ParameterList name="function-constant">
+                <Parameter name="value" type="double" value="294.15"/>
+              </ParameterList>
+            </ParameterList>
+          </ParameterList>
+        </ParameterList>
+      </ParameterList>
 
       <ParameterList name="initial condition" type="ParameterList">
-        <Parameter name="initial temperature [K]" type="double" value="274.15" />
+        <Parameter name="initial temperature [K]" type="double" value="294.15" />
         <Parameter name="initialize faces from cells" type="bool" value="true" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="initial pressure cells" type="ParameterList">
@@ -226,8 +240,13 @@
         </ParameterList>
       </ParameterList>
       
-      <ParameterList name="thermal conductivity evaluator" type="ParameterList">
-        <ParameterList name="thermal conductivity parameters" type="ParameterList">
+      <ParameterList name="parameters" type="ParameterList">
+          <Parameter name="precipitation" type="double" value="0.0" />
+          <Parameter name="evaporation" type="double" value="0.0" />
+      </ParameterList>
+      
+      <ParameterList name="soil thermal conductivity evaluator" type="ParameterList">
+        <ParameterList name="soil thermal conductivity parameters" type="ParameterList">
           <ParameterList name="peat" type="ParameterList">
             <Parameter name="region" type="string" value="subsurface domain peat" />
             <Parameter name="thermal conductivity type" type="string" value="three-phase wet/dry" />
@@ -253,9 +272,9 @@
   </ParameterList>
 
   <ParameterList name="state" type="ParameterList">
-      
+            
     <ParameterList name="verbose object">
-      <Parameter name="verbosity level" type="string" value="low"/>
+      <Parameter name="verbosity level" type="string" value="high"/>
     </ParameterList>
     
     <ParameterList name="field evaluators" type="ParameterList">
@@ -280,7 +299,7 @@
   </ParameterList>
   
   <ParameterList name="visualization">
-    <ParameterList name="domain" type="ParameterList">
+    <ParameterList name="soil" type="ParameterList">
       <Parameter name="file name base" type="string" value="visdump" />
       <Parameter name="times start period stop" type="Array(double)" value="{{0., 3600., -1}}" />
     </ParameterList>

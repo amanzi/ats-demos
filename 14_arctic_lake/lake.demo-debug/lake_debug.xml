@@ -4,13 +4,13 @@
     <ParameterList name="domain" type="ParameterList">
       <Parameter name="mesh type" type="string" value="generate mesh" />
       <ParameterList name="generate mesh parameters" type="ParameterList">
-        <Parameter name="number of cells" type="Array(int)" value="{1,1,40}" />
-        <Parameter name="domain low coordinate" type="Array(double)" value="{0.0,0.0,0.0}" />
-        <Parameter name="domain high coordinate" type="Array(double)" value="{1.0,1.0,1.0}" />
+        <Parameter name="number of cells" type="Array(int)" value="{1,1,20}" />
+        <Parameter name="domain low coordinate" type="Array(double)" value="{1.0,1.0,1.0}" />
+        <Parameter name="domain high coordinate" type="Array(double)" value="{2.0,2.0,2.0}" />
         <Parameter name="Number of mesh blocks" type="int" value="1" />
         <ParameterList name="Mesh block 1" type="ParameterList">
           <Parameter name="Z0" type="double" value="0.0" />
-          <Parameter name="Z1" type="double" value="1.0" />
+          <Parameter name="Z1" type="double" value="2.0" />
         </ParameterList>
       </ParameterList>
     </ParameterList>
@@ -19,43 +19,43 @@
   <ParameterList name="regions" type="ParameterList">
     <ParameterList name="computational domain" type="ParameterList">
       <ParameterList name="region: box" type="ParameterList">
-        <Parameter name="low coordinate" type="Array(double)" value="{0.0,0.0,0.0}" />
-        <Parameter name="high coordinate" type="Array(double)" value="{1.0,1.0,1.0}" />
+        <Parameter name="low coordinate" type="Array(double)" value="{1.0,1.0,1.0}" />
+        <Parameter name="high coordinate" type="Array(double)" value="{2.0,2.0,2.0}" />
       </ParameterList>
     </ParameterList>
     <ParameterList name="east face" type="ParameterList">
       <ParameterList name="region: plane" type="ParameterList">
-        <Parameter name="point" type="Array(double)" value="{1.0,1.0,0.0}" />
+        <Parameter name="point" type="Array(double)" value="{2.0,2.0,1.0}" />
         <Parameter name="normal" type="Array(double)" value="{1.0,0.0,0.0}" />
       </ParameterList>
     </ParameterList>
     <ParameterList name="west face" type="ParameterList">
       <ParameterList name="region: plane" type="ParameterList">
-        <Parameter name="point" type="Array(double)" value="{0.0,0.0,0.0}" />
+        <Parameter name="point" type="Array(double)" value="{1.0,1.0,1.0}" />
         <Parameter name="normal" type="Array(double)" value="{-1.0,0.0,0.0}" />
       </ParameterList>
     </ParameterList>
     <ParameterList name="north face" type="ParameterList">
       <ParameterList name="region: plane" type="ParameterList">
-        <Parameter name="point" type="Array(double)" value="{1.0,1.0,0.0}" />
+        <Parameter name="point" type="Array(double)" value="{2.0,2.0,1.0}" />
         <Parameter name="normal" type="Array(double)" value="{0.0,1.0,0.0}" />
       </ParameterList>
     </ParameterList>
     <ParameterList name="south face" type="ParameterList">
       <ParameterList name="region: plane" type="ParameterList">
-        <Parameter name="point" type="Array(double)" value="{0.0,0.0,0.0}" />
+        <Parameter name="point" type="Array(double)" value="{1.0,1.0,1.0}" />
         <Parameter name="normal" type="Array(double)" value="{0.0,-1.0,0.0}" />
       </ParameterList>
     </ParameterList>
     <ParameterList name="bottom face" type="ParameterList">
       <ParameterList name="region: plane" type="ParameterList">
-        <Parameter name="point" type="Array(double)" value="{0.5,0.5,0.0}" />
+        <Parameter name="point" type="Array(double)" value="{1.5,1.5,1.0}" />
         <Parameter name="normal" type="Array(double)" value="{0.0,0.0,-1.0}" />
       </ParameterList>
     </ParameterList>
     <ParameterList name="surface" type="ParameterList">
       <ParameterList name="region: plane" type="ParameterList">
-        <Parameter name="point" type="Array(double)" value="{0.5,0.5,1.0}" />
+        <Parameter name="point" type="Array(double)" value="{1.5,1.5,2.0}" />
         <Parameter name="normal" type="Array(double)" value="{0.0,0.0,1.0}" />
       </ParameterList>
     </ParameterList>
@@ -63,9 +63,9 @@
 
   <ParameterList name="cycle driver" type="ParameterList">
     <Parameter name="start time" type="double" value="0.0" />
-    <Parameter name="start time units" type="string" value="d" />
-    <Parameter name="end time" type="double" value="365." />
-    <Parameter name="end time units" type="string" value="d" />
+    <Parameter name="start time units" type="string" value="s" />
+    <Parameter name="end time" type="double" value="100." />
+    <Parameter name="end time units" type="string" value="s" />
     <Parameter name="end cycle" type="int" value="-1" />
 <!--    <Parameter  name="restart from checkpoint file" type="string" value="checkpoint7603277.h5"/>-->
     <ParameterList name="PK tree" type="ParameterList">
@@ -76,7 +76,7 @@
   </ParameterList>
   <ParameterList name="checkpoint" type="ParameterList">
     <Parameter name="times start period stop" type="Array(double)" value="{0.0,1.,-1.0}" />
-    <Parameter name="times start period stop units" type="string" value="d" />
+    <Parameter name="times start period stop units" type="string" value="s" />
   </ParameterList>
 
   <ParameterList name="PKs" type="ParameterList">
@@ -111,7 +111,7 @@
       <ParameterList name="time integrator" type="ParameterList">
         <Parameter name="extrapolate initial guess" type="bool" value="false" />
         <Parameter name="solver type" type="string" value="nka" />
-        <Parameter name="timestep controller type" type="string" value="smarter" />
+<!--        <Parameter name="timestep controller type" type="string" value="smarter" />-->
         <ParameterList name="nka parameters" type="ParameterList">
           <Parameter name="nka lag iterations" type="int" value="2" />
           <Parameter name="max backtrack steps" type="int" value="10" />
@@ -120,30 +120,44 @@
           <Parameter name="last backtrack iteration" type="int" value="10" />
           <Parameter name="backtrack factor" type="double" value="0.25" />
           <Parameter name="backtrack tolerance" type="double" value="0.0" />
-          <Parameter name="nonlinear tolerance" type="double" value="0.00001" />
+          <Parameter name="nonlinear tolerance" type="double" value="1e-5" />
           <Parameter name="diverged tolerance" type="double" value="1000000.0" />
-          <Parameter name="limit iterations" type="int" value="21" />
+          <Parameter name="limit iterations" type="int" value="101" />
           <ParameterList name="verbose object" type="ParameterList">
-            <Parameter name="verbosity level" type="string" value="low" />
+            <Parameter name="verbosity level" type="string" value="high" />
           </ParameterList>
         </ParameterList>
+
         <ParameterList name="verbose object" type="ParameterList">
-          <Parameter name="verbosity level" type="string" value="low" />
+          <Parameter name="verbosity level" type="string" value="high" />
         </ParameterList>
-        <ParameterList name="timestep controller smarter parameters" type="ParameterList">
-          <Parameter name="max iterations" type="int" value="18" />
-          <Parameter name="min iterations" type="int" value="10" />
-          <Parameter name="time step reduction factor" type="double" value="0.75" />
-          <Parameter name="time step increase factor" type="double" value="1.5" />
-          <Parameter name="max time step" type="double" value="86400.0" />
-          <Parameter name="min time step" type="double" value="1e-10" />
-          <Parameter name="growth wait after fail" type="int" value="2" />
-          <Parameter name="count before increasing increase factor" type="int" value="2" />
+<!--        <ParameterList name="timestep controller smarter parameters" type="ParameterList">-->
+<!--          <Parameter name="max iterations" type="int" value="18" />-->
+<!--          <Parameter name="min iterations" type="int" value="10" />-->
+<!--          <Parameter name="time step reduction factor" type="double" value="0.75" />-->
+<!--          <Parameter name="time step increase factor" type="double" value="1.5" />-->
+<!--          <Parameter name="max time step" type="double" value="86400.0" />-->
+<!--          <Parameter name="min time step" type="double" value="1e-10" />-->
+<!--          <Parameter name="growth wait after fail" type="int" value="2" />-->
+<!--          <Parameter name="count before increasing increase factor" type="int" value="2" />-->
+<!--        </ParameterList>-->
+        <Parameter name="timestep controller type" type="string" value="standard"/>
+        <ParameterList name="timestep controller standard parameters">
+          <Parameter name="min iterations" type="int" value="8"/>
+          <Parameter name="max iterations" type="int" value="10"/>
+          <Parameter name="time step increase factor" type="double" value="1.25"/>
+          <Parameter name="time step reduction factor" type="double" value="0.8"/>
+          <Parameter name="max time step" type="double" value="1.0e+4"/>
+          <Parameter name="min time step" type="double" value="0.0"/>
+          <ParameterList name="verbose object">
+            <Parameter name="verbosity level" type="string" value="extreme"/>
+          </ParameterList>
         </ParameterList>
       </ParameterList>
 
       <ParameterList name="diffusion" type="ParameterList">
-        <Parameter name="discretization primary" type="string" value="fv: default" />
+<!--          <Parameter name="discretization primary" type="string" value="fv: default" />-->
+        <Parameter name="discretization primary" type="string" value="mfd: optimized for sparsity" />
       </ParameterList>
 
       <ParameterList name="diffusion preconditioner" type="ParameterList">
@@ -158,28 +172,36 @@
           <Parameter name="strong threshold" type="double" value="0.25" />
           <Parameter name="tolerance" type="double" value="0.0" />
           <Parameter name="relaxation type" type="int" value="6" />
-          <Parameter name="verbosity" type="int" value="0" />
+          <Parameter name="verbosity" type="int" value="3" />
         </ParameterList>
       </ParameterList>
 
     <ParameterList name="boundary conditions">
       <ParameterList name="diffusive flux">
-        <ParameterList name="bottom">
-          <Parameter name="regions" type="Array(string)" value="{bottom face}"/>
+        <ParameterList name="top">
+          <Parameter name="regions" type="Array(string)" value="{surface}"/>
           <ParameterList name="outward diffusive flux">
             <ParameterList name="function-exprtk">
               <Parameter name="number of arguments" type="int" value="3"/>
-              <Parameter name="formula" type="string" value=" 100.*sin(2.*3.1415*t/(86400.*365.))"/>
+                <Parameter name="formula" type="string" value="-16."/>
             </ParameterList>
           </ParameterList>
         </ParameterList>
       </ParameterList>
       <ParameterList name="temperature">
-        <ParameterList name="top">
-          <Parameter name="regions" type="Array(string)" value="{surface}"/>
+<!--        <ParameterList name="top">-->
+<!--          <Parameter name="regions" type="Array(string)" value="{surface}"/>-->
+<!--          <ParameterList name="boundary temperature">-->
+<!--            <ParameterList name="function-constant">-->
+<!--              <Parameter name="value" type="double" value="2."/>-->
+<!--            </ParameterList>-->
+<!--          </ParameterList>-->
+<!--        </ParameterList>-->
+        <ParameterList name="bottom">
+          <Parameter name="regions" type="Array(string)" value="{bottom face}"/>
           <ParameterList name="boundary temperature">
             <ParameterList name="function-constant">
-              <Parameter name="value" type="double" value="283.15"/>
+              <Parameter name="value" type="double" value="1."/>
             </ParameterList>
           </ParameterList>
         </ParameterList>
@@ -193,7 +215,7 @@
 <!--            <ParameterList name="boundary temperature">-->
 <!--                <ParameterList name="function-exprtk">-->
 <!--                  <Parameter name="number of arguments" type="int" value="3"/>-->
-<!--                    <Parameter name="formula" type="string" value="268.15 - 20.*sin(2.*3.1415*t/5400.)"/>-->
+<!--                    <Parameter name="formula" type="string" value="0."/>-->
 <!--                </ParameterList>-->
 <!--            </ParameterList>-->
 <!--          </ParameterList>-->
@@ -201,7 +223,7 @@
 <!--            <Parameter name="regions" type="Array(string)" value="{surface}"/>-->
 <!--            <ParameterList name="boundary temperature">-->
 <!--              <ParameterList name="function-constant">-->
-<!--                <Parameter name="value" type="double" value="283.15"/>-->
+<!--                <Parameter name="value" type="double" value="1."/>-->
 <!--              </ParameterList>-->
 <!--            </ParameterList>-->
 <!--          </ParameterList>-->
@@ -209,7 +231,7 @@
 <!--      </ParameterList>-->
 
       <ParameterList name="initial condition" type="ParameterList">
-        <Parameter name="initial temperature [K]" type="double" value="274.15" />
+        <Parameter name="initial temperature [K]" type="double" value="1." />
         <Parameter name="initialize faces from cells" type="bool" value="true" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="initial pressure cells" type="ParameterList">
@@ -224,6 +246,11 @@
             </ParameterList>
           </ParameterList>
         </ParameterList>
+      </ParameterList>
+      
+      <ParameterList name="parameters" type="ParameterList">
+          <Parameter name="precipitation" type="double" value="0.0" />
+          <Parameter name="evaporation" type="double" value="0.0" />
       </ParameterList>
       
       <ParameterList name="thermal conductivity evaluator" type="ParameterList">
@@ -282,7 +309,8 @@
   <ParameterList name="visualization">
     <ParameterList name="domain" type="ParameterList">
       <Parameter name="file name base" type="string" value="visdump" />
-      <Parameter name="times start period stop" type="Array(double)" value="{{0., 3600., -1}}" />
+      <Parameter name="cycles start period stop" type="Array(int)" value="{0,1,-1}" />
+<!--      <Parameter name="times start period stop" type="Array(double)" value="{{0., 3600., -1}}" />-->
     </ParameterList>
   </ParameterList>
 </ParameterList>

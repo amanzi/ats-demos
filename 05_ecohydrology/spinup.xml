@@ -10,7 +10,7 @@
       <Parameter name="mesh type" type="string" value="read mesh file" />
       <Parameter name="build columns from set" type="string" value="surface" />
       <ParameterList name="read mesh file parameters">
-        <Parameter name="file" type="string" value="../data/hillslope.exo" />
+        <Parameter name="file" type="string" value="../data/hillslope2.exo" />
         <Parameter name="format" type="string" value="Exodus II" />
       </ParameterList>
     </ParameterList>
@@ -28,7 +28,7 @@
     <ParameterList name="surface">
       <ParameterList name="region: labeled set">
         <Parameter name="label" type="string" value="2" />
-        <Parameter name="file" type="string" value="../data/hillslope.exo" />
+        <Parameter name="file" type="string" value="../data/hillslope2.exo" />
         <Parameter name="format" type="string" value="Exodus II" />
         <Parameter name="entity" type="string" value="Face" />
       </ParameterList>
@@ -36,23 +36,23 @@
     <ParameterList name="bottom">
       <ParameterList name="region: labeled set">
         <Parameter name="label" type="string" value="1" />
-        <Parameter name="file" type="string" value="../data/hillslope.exo" />
+        <Parameter name="file" type="string" value="../data/hillslope2.exo" />
         <Parameter name="format" type="string" value="Exodus II" />
         <Parameter name="entity" type="string" value="Face" />
       </ParameterList>
     </ParameterList>
     <ParameterList name="outlet" type="ParameterList">
       <ParameterList name="region: plane" type="ParameterList">
-        <Parameter name="point" type="Array(double)" value="{1000.0,0.0}" />
-        <Parameter name="normal" type="Array(double)" value="{1.0,0.0}" />
+        <Parameter name="point" type="Array(double)" value="{1000, 0}" />
+        <Parameter name="normal" type="Array(double)" value="{ 1, 0}" />
       </ParameterList>
     </ParameterList>
   </ParameterList>
 
   <ParameterList name="cycle driver">
-    <Parameter name="start time" type="double" value="0.0" />
+    <Parameter name="start time" type="double" value=" 0" />
     <Parameter name="start time units" type="string" value="s" />
-    <Parameter name="end time" type="double" value="20000.0" />
+    <Parameter name="end time" type="double" value="20000" />
     <Parameter name="end time units" type="string" value="d" />
     <Parameter name="end cycle" type="int" value="800" />
     <Parameter name="wallclock duration [hrs]" type="double" value="13.4" />
@@ -70,11 +70,11 @@
   </ParameterList>
   <ParameterList name="visualization">
     <ParameterList name="domain">
-      <Parameter name="times" type="Array(double)" value="{20000.0}" />
+      <Parameter name="times" type="Array(double)" value="{20000}" />
       <Parameter name="times units" type="string" value="d" />
     </ParameterList>
     <ParameterList name="surface">
-      <Parameter name="times" type="Array(double)" value="{20000.0}" />
+      <Parameter name="times" type="Array(double)" value="{20000}" />
       <Parameter name="times units" type="string" value="d" />
     </ParameterList>
   </ParameterList>
@@ -104,7 +104,7 @@
           <Parameter name="cycle applications" type="int" value="1" />
           <Parameter name="smoother sweeps" type="int" value="1" />
           <Parameter name="strong threshold" type="double" value="0.85" />
-          <Parameter name="tolerance" type="double" value="0.0" />
+          <Parameter name="tolerance" type="double" value=" 0" />
           <Parameter name="verbosity" type="int" value="0" />
         </ParameterList>
         <ParameterList name="verbose object">
@@ -130,7 +130,7 @@
           <Parameter name="backtrack factor" type="double" value="0.5" />
           <Parameter name="backtrack tolerance" type="double" value="0.0001" />
           <Parameter name="nonlinear tolerance" type="double" value="1e-06" />
-          <Parameter name="diverged tolerance" type="double" value="100000.0" />
+          <Parameter name="diverged tolerance" type="double" value="100000" />
           <Parameter name="limit iterations" type="int" value="21" />
           <ParameterList name="verbose object">
             <Parameter name="verbosity level" type="string" value="high" />
@@ -144,7 +144,7 @@
           <Parameter name="min iterations" type="int" value="7" />
           <Parameter name="time step reduction factor" type="double" value="0.75" />
           <Parameter name="time step increase factor" type="double" value="1.25" />
-          <Parameter name="max time step" type="double" value="10000000000.0" />
+          <Parameter name="max time step" type="double" value="1e+10" />
           <Parameter name="min time step" type="double" value="1.04e-10" />
           <Parameter name="growth wait after fail" type="int" value="2" />
           <Parameter name="count before increasing increase factor" type="int" value="2" />
@@ -156,9 +156,9 @@
     <ParameterList name="subsurface flow">
       <Parameter name="PK type" type="string" value="richards flow" />
       <Parameter name="primary variable key" type="string" value="pressure" />
-      <Parameter name="initial time step" type="double" value="5.0" />
+      <Parameter name="initial time step" type="double" value=" 5" />
       <Parameter name="relative permeability method" type="string" value="upwind with Darcy flux" />
-      <Parameter name="permeability rescaling" type="double" value="10000000.0" />
+      <Parameter name="permeability rescaling" type="double" value="10000000" />
       <Parameter name="surface rel perm strategy" type="string" value="clobber" />
       <Parameter name="debug cells" type="Array(int)" value="{}" />
       <ParameterList name="verbose object">
@@ -166,7 +166,7 @@
       </ParameterList>
 
       <ParameterList name="diffusion">
-        <Parameter name="discretization primary" type="string" value="mfd: default" />
+        <Parameter name="discretization primary" type="string" value="mfd: two-point flux approximation" />
       </ParameterList>
 
       <ParameterList name="diffusion preconditioner">
@@ -177,21 +177,21 @@
       </ParameterList>
 
       <ParameterList name="initial condition">
-        <Parameter name="hydrostatic head [m]" type="double" value="-1.0" />
-        <Parameter name="hydrostatic water density [kg m^-3]" type="double" value="1000.0" />
+        <Parameter name="hydrostatic head [m]" type="double" value="-1" />
+        <Parameter name="hydrostatic water density [kg m^-3]" type="double" value="1000" />
       </ParameterList>
 
       <ParameterList name="water retention evaluator">
-        <Parameter name="minimum rel perm cutoff" type="double" value="0.0" />
+        <Parameter name="minimum rel perm cutoff" type="double" value=" 0" />
         <Parameter name="use surface rel perm" type="bool" value="true" />
         <ParameterList name="WRM parameters">
           <ParameterList name="computational domain">
             <Parameter name="region" type="string" value="computational domain" />
             <Parameter name="WRM Type" type="string" value="van Genuchten" />
-            <Parameter name="van Genuchten alpha [Pa^-1]" type="double" value="0.00015" />
-            <Parameter name="van Genuchten m [-]" type="double" value="0.8" />
-            <Parameter name="residual saturation [-]" type="double" value="0.0" />
-            <Parameter name="smoothing interval width [saturation]" type="double" value="0.0" />
+            <Parameter name="van Genuchten alpha [Pa^-1]" type="double" value="8.9e-05" />
+            <Parameter name="van Genuchten n [-]" type="double" value="1.422" />
+            <Parameter name="residual saturation [-]" type="double" value="0.2" />
+            <Parameter name="smoothing interval width [saturation]" type="double" value="0.05" />
           </ParameterList>
         </ParameterList>
       </ParameterList>
@@ -205,7 +205,7 @@
       <Parameter name="source term" type="bool" value="true" />
       <Parameter name="source key" type="string" value="surface-precipitation" />
       <Parameter name="water source in meters" type="bool" value="true" />
-      <Parameter name="initial time step" type="double" value="60.0" />
+      <Parameter name="initial time step" type="double" value="60" />
       <ParameterList name="verbose object">
         <Parameter name="verbosity level" type="string" value="medium" />
       </ParameterList>
@@ -224,7 +224,7 @@
             <Parameter name="regions" type="Array(string)" value="{outlet}" />
             <ParameterList name="boundary head">
               <ParameterList name="function-constant">
-                <Parameter name="value" type="double" value="0.5" />
+                <Parameter name="value" type="double" value="0." />
               </ParameterList>
             </ParameterList>
           </ParameterList>
@@ -281,27 +281,27 @@
 
       <ParameterList name="surface-source_molar_density" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable constant" />
-        <Parameter name="value" type="double" value="55000.0" />
+        <Parameter name="value" type="double" value="55000" />
       </ParameterList>
 
       <ParameterList name="surface-molar_density_liquid" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable constant" />
-        <Parameter name="value" type="double" value="55000.0" />
+        <Parameter name="value" type="double" value="55000" />
       </ParameterList>
 
       <ParameterList name="surface-mass_density_liquid" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable constant" />
-        <Parameter name="value" type="double" value="1000.0" />
+        <Parameter name="value" type="double" value="1000" />
       </ParameterList>
 
       <ParameterList name="mass_density_liquid" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable constant" />
-        <Parameter name="value" type="double" value="1000.0" />
+        <Parameter name="value" type="double" value="1000" />
       </ParameterList>
 
       <ParameterList name="molar_density_liquid" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable constant" />
-        <Parameter name="value" type="double" value="55000.0" />
+        <Parameter name="value" type="double" value="55000" />
       </ParameterList>
 
       <ParameterList name="viscosity_liquid" type="ParameterList">
@@ -311,7 +311,7 @@
 
       <ParameterList name="surface-relative_permeability" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable constant" />
-        <Parameter name="value" type="double" value="1.0" />
+        <Parameter name="value" type="double" value=" 1" />
       </ParameterList>
 
       <ParameterList name="surface-manning_coefficient">
@@ -342,7 +342,7 @@
       <ParameterList name="surface-overland_conductivity">
         <Parameter name="field evaluator type" type="string" value="overland conductivity" />
         <ParameterList name="overland conductivity model">
-          <Parameter name="Manning exponent" type="double" value="0.66666666666" />
+          <Parameter name="Manning exponent" type="double" value="0.66666667" />
           <Parameter name="slope regularization epsilon" type="double" value="0.01" />
         </ParameterList>
       </ParameterList>
@@ -351,11 +351,11 @@
     <ParameterList name="initial conditions">
 
       <ParameterList name="atmospheric_pressure">
-        <Parameter name="value" type="double" value="101325.0" />
+        <Parameter name="value" type="double" value="101325" />
       </ParameterList>
 
       <ParameterList name="gravity">
-        <Parameter name="value" type="Array(double)" value="{0.0,0.0,-9.81}" />
+        <Parameter name="value" type="Array(double)" value="{ 0, 0,-9.81}" />
       </ParameterList>
 
     </ParameterList>

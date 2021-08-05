@@ -832,6 +832,7 @@
       <Parameter name="times start period stop" type="Array(double)" value="{ 0,10,-1}" />
       <Parameter name="times start period stop units" type="string" value="d" />
       <Parameter name="time units" type="string" value="d" />
+      <Parameter name="aliased domains" type="Array(string)" value="{snow, canopy}" />
     </ParameterList>
   </ParameterList>
 

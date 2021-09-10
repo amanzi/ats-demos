@@ -729,7 +729,7 @@
         <ParameterList name="compressible porosity model parameters" type="ParameterList">
           <ParameterList name="computational domain" type="ParameterList">
             <Parameter name="region" type="string" value="computational domain" />
-            <Parameter name="pore compressibility [Pa^-1]" type="double" value="1e-09" />
+            <Parameter name="pore compressibility [Pa^-1]" type="double" value="1e-08" />
           </ParameterList>
         </ParameterList>
       </ParameterList>
@@ -803,7 +803,7 @@
           <Parameter name="mafic potential at fully open stomata [Pa]" type="double" value="35000" />
           <Parameter name="Priestley-Taylor alpha of snow [-]" type="double" value="1.26" />
           <Parameter name="Priestley-Taylor alpha of canopy [-]" type="double" value="1.26" />
-          <Parameter name="Priestley-Taylor alpha of transpiration [-]" type="double" value="0.63" />
+          <Parameter name="Priestley-Taylor alpha of transpiration [-]" type="double" value="1.26" />
           <Parameter name="Priestley-Taylor alpha of bare ground [-]" type="double" value="1.26" />
           <Parameter name="Manning's n [?]" type="double" value="0.1" />
           <Parameter name="leaf on time [doy]" type="double" value="-1" />
@@ -832,10 +832,16 @@
       <Parameter name="times start period stop" type="Array(double)" value="{ 0,10,-1}" />
       <Parameter name="times start period stop units" type="string" value="d" />
       <Parameter name="time units" type="string" value="d" />
-      <Parameter name="aliased domains" type="Array(string)" value="{snow, canopy}" />
+      <Parameter name="aliased domains" type="Array(string)" value="{snow,canopy}" />
     </ParameterList>
   </ParameterList>
 
+  <ParameterList name="checkpoint" type="ParameterList">
+    <Parameter name="times start period stop" type="Array(double)" value="{ 274,20,-1}" />
+    <Parameter name="times start period stop units" type="string" value="d" />
+    <Parameter name="time units" type="string" value="d" />
+  </ParameterList>
+  
   <ParameterList name="observations" type="ParameterList">
     <ParameterList name="fluxes" type="ParameterList">
       <Parameter name="observation output filename" type="string" value="water_balance.dat" />

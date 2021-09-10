@@ -21,7 +21,6 @@
       </ParameterList>
     </ParameterList>
   </ParameterList>
-
   <ParameterList name="regions" type="ParameterList">
     <ParameterList name="computational domain" type="ParameterList">
       <ParameterList name="region: all" type="ParameterList">
@@ -98,13 +97,11 @@
   </ParameterList>
 
   <ParameterList name="PKs" type="ParameterList">
-
     <ParameterList name="water balance" type="ParameterList">
       <Parameter name="PK type" type="string" value="weak MPC" />
       <Parameter name="PKs order" type="Array(string)" value="{snow storage, surface-subsurface coupler}" />
 
     </ParameterList>
-
     <ParameterList name="snow storage" type="ParameterList">
       <Parameter name="PK type" type="string" value="general surface balance" />
       <Parameter name="primary variable key" type="string" value="snow-water_equivalent" />
@@ -151,7 +148,6 @@
       </ParameterList>
 
     </ParameterList>
-
     <ParameterList name="surface-subsurface coupler" type="ParameterList">
       <Parameter name="PK type" type="string" value="coupled water" />
       <Parameter name="PKs order" type="Array(string)" value="{flow, overland flow}" />
@@ -205,7 +201,6 @@
       </ParameterList>
 
     </ParameterList>
-
     <ParameterList name="flow" type="ParameterList">
       <Parameter name="PK type" type="string" value="richards flow" />
       <Parameter name="primary variable key" type="string" value="pressure" />
@@ -247,7 +242,6 @@
       </ParameterList>
 
     </ParameterList>
-
     <ParameterList name="overland flow" type="ParameterList">
       <Parameter name="PK type" type="string" value="overland flow, pressure basis" />
       <Parameter name="primary variable key" type="string" value="surface-pressure" />
@@ -282,7 +276,6 @@
       </ParameterList>
 
     </ParameterList>
-
   </ParameterList>
 
   <ParameterList name="state" type="ParameterList">
@@ -530,7 +523,7 @@
         <ParameterList name="compressible porosity model parameters" type="ParameterList">
           <ParameterList name="computational domain" type="ParameterList">
             <Parameter name="region" type="string" value="computational domain" />
-            <Parameter name="pore compressibility [Pa^-1]" type="double" value="1e-09" />
+            <Parameter name="pore compressibility [Pa^-1]" type="double" value="1e-08" />
           </ParameterList>
         </ParameterList>
       </ParameterList>
@@ -607,11 +600,16 @@
           <Parameter name="rooting profile beta [-]" type="double" value="1.75" />
           <Parameter name="mafic potential at fully closed stomata [Pa]" type="double" value="255000" />
           <Parameter name="mafic potential at fully open stomata [Pa]" type="double" value="35000" />
-          <Parameter name="Priestley-Taylor alpha of transpiration [-]" type="double" value="0.63" />
+          <Parameter name="Priestley-Taylor alpha of transpiration [-]" type="double" value="1.26" />
         </ParameterList>
       </ParameterList>
 
     </ParameterList>
+  </ParameterList>
+
+  <ParameterList name="checkpoint">
+    <Parameter name="times start period stop" type="Array(double)" value="{ 274,365,-1}" />
+    <Parameter name="times start period stop units" type="string" value="d" />
   </ParameterList>
   <ParameterList name="visualization">
     <ParameterList name="domain" type="ParameterList">
@@ -625,7 +623,6 @@
       <Parameter name="time units" type="string" value="d" />
     </ParameterList>
   </ParameterList>
-
   <ParameterList name="observations" type="ParameterList">
     <ParameterList name="fluxes" type="ParameterList">
       <Parameter name="observation output filename" type="string" value="water_balance.dat" />

@@ -562,7 +562,7 @@
             <Parameter name="regions" type="Array(string)" value="{bottom face}" />
             <ParameterList name="outward mass flux" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
-                <Parameter name="value" type="double" value="0.04" />
+                <Parameter name="value" type="double" value="0.0" />
               </ParameterList>
             </ParameterList>
           </ParameterList>
@@ -578,7 +578,7 @@
               <ParameterList name="function-linear" type="ParameterList">
                 <Parameter name="x0" type="Array(double)" value="{0.0,0.0,0.0,9.0}" />
                 <Parameter name="y0" type="double" value="101325.0" />
-                <Parameter name="gradient" type="Array(double)" value="{0.0,0.0,0.0,-9806.2306853}" />
+                <Parameter name="gradient" type="Array(double)" value="{0.0,0.0,0.0,0.0}" />
               </ParameterList>
             </ParameterList>
           </ParameterList>
@@ -642,15 +642,23 @@
 <!--        <Parameter name="Newton correction" type="string" value="true Jacobian" />-->
 <!--      </ParameterList>-->
 
-      <ParameterList name="preconditioner" type="ParameterList">
-        <Parameter name="preconditioner type" type="string" value="boomer amg" />
+      <ParameterList name="inverse" type="ParameterList">
+        <Parameter name="preconditioning method" type="string" value="boomer amg" />
+        <Parameter name="iterative method" type="string" value="gmres" />
         <ParameterList name="boomer amg parameters" type="ParameterList">
-          <Parameter name="cycle applications" type="int" value="1" />
-          <Parameter name="smoother sweeps" type="int" value="3" />
-          <Parameter name="strong threshold" type="double" value="0.25" />
+          <Parameter name="cycle iterations" type="int" value="3" />
+          <Parameter name="smoother sweeps" type="int" value="2" />
+          <Parameter name="strong threshold" type="double" value="0.5" />
           <Parameter name="tolerance" type="double" value="0.0" />
-          <Parameter name="relaxation type" type="int" value="6" />
-          <Parameter name="verbosity" type="int" value="3" />
+        </ParameterList>
+        <ParameterList name="verbose object" type="ParameterList">
+          <Parameter name="verbosity level" type="string" value="high" />
+        </ParameterList>
+        <ParameterList name="gmres parameters" type="ParameterList">
+          <Parameter name="preconditioning strategy" type="string" value="left" />
+          <Parameter name="error tolerance" type="double" value="1e-06" />
+          <Parameter name="convergence criteria" type="Array(string)" value="{relative residual,make one iteration}" />
+          <Parameter name="maximum number of iteration" type="int" value="80" />
         </ParameterList>
       </ParameterList>
 
@@ -662,10 +670,6 @@
                 <ParameterList name="function-constant">
                   <Parameter name="value" type="double" value="294.15"/>
                 </ParameterList>
-<!--                <ParameterList name="function-exprtk">-->
-<!--                  <Parameter name="number of arguments" type="int" value="3"/>-->
-<!--                    <Parameter name="formula" type="string" value="10.*sin(t/(55.*86400.)-250.*86400.)+273.15"/>-->
-<!--                </ParameterList>-->
             </ParameterList>
           </ParameterList>
 <!--          <ParameterList name="top">-->

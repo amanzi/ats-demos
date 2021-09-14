@@ -11,7 +11,7 @@
       <ParameterList name="domain" type="ParameterList">
         <Parameter name="mesh type" type="string" value="generate mesh" />
         <ParameterList name="generate mesh parameters" type="ParameterList">
-          <Parameter name="number of cells" type="Array(int)" value="{1,1,100}" />
+          <Parameter name="number of cells" type="Array(int)" value="{1,1,40}" />
           <Parameter name="domain low coordinate" type="Array(double)" value="{0.0,0.0,0.0}" />
           <Parameter name="domain high coordinate" type="Array(double)" value="{1.0,1.0,10.0}" />
         </ParameterList>
@@ -19,7 +19,7 @@
       <ParameterList name="soil" type="ParameterList">
         <Parameter name="mesh type" type="string" value="generate mesh" />
         <ParameterList name="generate mesh parameters" type="ParameterList">
-          <Parameter name="number of cells" type="Array(int)" value="{1,1,100}" />
+          <Parameter name="number of cells" type="Array(int)" value="{1,1,40}" />
           <Parameter name="domain low coordinate" type="Array(double)" value="{0.0,0.0,0.0}" />
           <Parameter name="domain high coordinate" type="Array(double)" value="{1.0,1.0,10.0}" />
         </ParameterList>
@@ -166,7 +166,7 @@
           <Parameter name="tolerance" type="double" value="0.0" />
         </ParameterList>
         <ParameterList name="verbose object" type="ParameterList">
-          <Parameter name="verbosity level" type="string" value="high" />
+          <Parameter name="verbosity level" type="string" value="medium" />
         </ParameterList>
         <ParameterList name="gmres parameters" type="ParameterList">
           <Parameter name="preconditioning strategy" type="string" value="left" />
@@ -185,7 +185,6 @@
     <ParameterList name="flow" type="ParameterList">
       <Parameter name="PK type" type="string" value="richards flow" />
       <Parameter name="primary variable key" type="string" value="pressure" />
-<!--      <Parameter name="domain name" type="string" value="soil" />-->
       <Parameter name="initial time step" type="double" value="10.0" />
       <Parameter name="permeability rescaling" type="double" value="10000000.0" />
       <Parameter name="relative permeability method" type="string" value="upwind with Darcy flux" />
@@ -194,11 +193,31 @@
       </ParameterList>
 
       <ParameterList name="diffusion" type="ParameterList">
-        <Parameter name="discretization primary" type="string" value="fv: default" />
+        <Parameter name="discretization primary" type="string" value="mfd: default" />
       </ParameterList>
 
       <ParameterList name="diffusion preconditioner" type="ParameterList">
-        <Parameter name="Newton correction" type="string" value="true Jacobian" />
+        <Parameter name="Newton correction" type="string" value="approximate Jacobian" />
+      </ParameterList>
+      
+      <ParameterList name="inverse" type="ParameterList">
+        <Parameter name="preconditioning method" type="string" value="boomer amg" />
+        <Parameter name="iterative method" type="string" value="gmres" />
+        <ParameterList name="boomer amg parameters" type="ParameterList">
+          <Parameter name="cycle iterations" type="int" value="3" />
+          <Parameter name="smoother sweeps" type="int" value="2" />
+          <Parameter name="strong threshold" type="double" value="0.5" />
+          <Parameter name="tolerance" type="double" value="0.0" />
+        </ParameterList>
+        <ParameterList name="verbose object" type="ParameterList">
+          <Parameter name="verbosity level" type="string" value="high" />
+        </ParameterList>
+        <ParameterList name="gmres parameters" type="ParameterList">
+          <Parameter name="preconditioning strategy" type="string" value="left" />
+          <Parameter name="error tolerance" type="double" value="1e-06" />
+          <Parameter name="convergence criteria" type="Array(string)" value="{relative residual,make one iteration}" />
+          <Parameter name="maximum number of iteration" type="int" value="80" />
+        </ParameterList>
       </ParameterList>
 
       <ParameterList name="boundary conditions" type="ParameterList">
@@ -218,7 +237,7 @@
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="initial pressure cells" type="ParameterList">
             <Parameter name="region" type="string" value="computational domain" />
-            <Parameter name="components" type="Array(string)" value="{cell}" />
+            <Parameter name="components" type="Array(string)" value="{cell,face}" />
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-linear" type="ParameterList">
                 <Parameter name="x0" type="Array(double)" value="{0.0,0.0,0.0,9.0}" />
@@ -269,13 +288,14 @@
       <Parameter name="relative permeability method" type="string" value="upwind with Darcy flux" />
       <Parameter name="permeability rescaling" type="double" value="10000000.0" />
       <Parameter name="debug cells" type="Array(int)" value="{0,5}" />
+      <Parameter name="coupled with richards" type="bool" value="true" />
       
       <ParameterList name="verbose object" type="ParameterList">
         <Parameter name="verbosity level" type="string" value="high" />
       </ParameterList>s
 
       <ParameterList name="diffusion" type="ParameterList">
-        <Parameter name="discretization primary" type="string" value="fv: default" />
+        <Parameter name="discretization primary" type="string" value="mfd: default" />
       </ParameterList>
 
       <ParameterList name="diffusion preconditioner" type="ParameterList">
@@ -334,7 +354,7 @@
               <ParameterList name="function-linear" type="ParameterList">
                 <Parameter name="x0" type="Array(double)" value="{0.0,0.0,0.0,7.0}" />
                 <Parameter name="y0" type="double" value="101325.0" />
-                <Parameter name="gradient" type="Array(double)" value="{0.0,0.0,0.0,-9806.2306853}" />
+                <Parameter name="gradient" type="Array(double)" value="{0.0,0.0,0.0,0.0}" />
               </ParameterList>
             </ParameterList>
           </ParameterList>
@@ -412,7 +432,7 @@
       <ParameterList name="capillary_pressure_gas_liq" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="capillary pressure, atmospheric gas over liquid" />
         <ParameterList name="verbose object" type="ParameterList">
-          <Parameter name="verbosity level" type="string" value="low" />
+          <Parameter name="verbosity level" type="string" value="high" />
         </ParameterList>
       </ParameterList>
 

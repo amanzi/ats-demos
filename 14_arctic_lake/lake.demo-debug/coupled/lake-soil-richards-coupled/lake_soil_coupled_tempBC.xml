@@ -4,7 +4,7 @@
     <ParameterList name="domain" type="ParameterList">
       <Parameter name="mesh type" type="string" value="generate mesh" />
       <ParameterList name="generate mesh parameters" type="ParameterList">
-        <Parameter name="number of cells" type="Array(int)" value="{1,1,160}" />
+        <Parameter name="number of cells" type="Array(int)" value="{1,1,8}" />
         <Parameter name="domain low coordinate" type="Array(double)" value="{0.0,0.0,-1.0}" />
         <Parameter name="domain high coordinate" type="Array(double)" value="{1.0,1.0,1.0}" />
         <Parameter name="Number of mesh blocks" type="int" value="1" />
@@ -17,7 +17,7 @@
     <ParameterList name="lake" type="ParameterList">
       <Parameter name="mesh type" type="string" value="generate mesh" />
       <ParameterList name="generate mesh parameters" type="ParameterList">
-        <Parameter name="number of cells" type="Array(int)" value="{1,1,80}" />
+        <Parameter name="number of cells" type="Array(int)" value="{1,1,4}" />
         <Parameter name="domain low coordinate" type="Array(double)" value="{0.0,0.0,0.0}" />
         <Parameter name="domain high coordinate" type="Array(double)" value="{1.0,1.0,1.0}" />
         <Parameter name="Number of mesh blocks" type="int" value="1" />
@@ -30,7 +30,7 @@
     <ParameterList name="soil" type="ParameterList">
       <Parameter name="mesh type" type="string" value="generate mesh" />
       <ParameterList name="generate mesh parameters" type="ParameterList">
-        <Parameter name="number of cells" type="Array(int)" value="{1,1,80}" />
+        <Parameter name="number of cells" type="Array(int)" value="{1,1,4}" />
         <Parameter name="domain low coordinate" type="Array(double)" value="{0.0,0.0,-1.0}" />
         <Parameter name="domain high coordinate" type="Array(double)" value="{1.0,1.0,0.0}" />
         <Parameter name="Number of mesh blocks" type="int" value="1" />
@@ -419,6 +419,7 @@
       <Parameter name="relative permeability method" type="string" value="upwind with Darcy flux" />
       <Parameter name="permeability rescaling" type="double" value="10000000.0" />
       <Parameter name="debug cells" type="Array(int)" value="{0,5}" />
+      <Parameter name="coupled with richards" type="bool" value="false" />
       
       <ParameterList name="verbose object" type="ParameterList">
         <Parameter name="verbosity level" type="string" value="high" />

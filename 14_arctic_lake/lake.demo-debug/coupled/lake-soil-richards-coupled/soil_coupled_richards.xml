@@ -11,7 +11,7 @@
       <ParameterList name="domain" type="ParameterList">
         <Parameter name="mesh type" type="string" value="generate mesh" />
         <ParameterList name="generate mesh parameters" type="ParameterList">
-          <Parameter name="number of cells" type="Array(int)" value="{1,1,40}" />
+          <Parameter name="number of cells" type="Array(int)" value="{1,1,4}" />
           <Parameter name="domain low coordinate" type="Array(double)" value="{0.0,0.0,0.0}" />
           <Parameter name="domain high coordinate" type="Array(double)" value="{1.0,1.0,10.0}" />
         </ParameterList>
@@ -19,7 +19,7 @@
       <ParameterList name="soil" type="ParameterList">
         <Parameter name="mesh type" type="string" value="generate mesh" />
         <ParameterList name="generate mesh parameters" type="ParameterList">
-          <Parameter name="number of cells" type="Array(int)" value="{1,1,40}" />
+          <Parameter name="number of cells" type="Array(int)" value="{1,1,4}" />
           <Parameter name="domain low coordinate" type="Array(double)" value="{0.0,0.0,0.0}" />
           <Parameter name="domain high coordinate" type="Array(double)" value="{1.0,1.0,10.0}" />
         </ParameterList>
@@ -193,11 +193,11 @@
       </ParameterList>
 
       <ParameterList name="diffusion" type="ParameterList">
-        <Parameter name="discretization primary" type="string" value="mfd: default" />
+        <Parameter name="discretization primary" type="string" value="fv: default" />
       </ParameterList>
 
       <ParameterList name="diffusion preconditioner" type="ParameterList">
-        <Parameter name="Newton correction" type="string" value="approximate Jacobian" />
+        <Parameter name="Newton correction" type="string" value="true Jacobian" />
       </ParameterList>
       
       <ParameterList name="inverse" type="ParameterList">
@@ -237,7 +237,7 @@
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="initial pressure cells" type="ParameterList">
             <Parameter name="region" type="string" value="computational domain" />
-            <Parameter name="components" type="Array(string)" value="{cell,face}" />
+            <Parameter name="components" type="Array(string)" value="{cell}" />
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-linear" type="ParameterList">
                 <Parameter name="x0" type="Array(double)" value="{0.0,0.0,0.0,9.0}" />
@@ -295,7 +295,7 @@
       </ParameterList>s
 
       <ParameterList name="diffusion" type="ParameterList">
-        <Parameter name="discretization primary" type="string" value="mfd: default" />
+        <Parameter name="discretization primary" type="string" value="fv: default" />
       </ParameterList>
 
       <ParameterList name="diffusion preconditioner" type="ParameterList">

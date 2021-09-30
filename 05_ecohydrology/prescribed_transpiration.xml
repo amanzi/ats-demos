@@ -449,7 +449,7 @@
     </ParameterList>
   </ParameterList>
 
-  <ParameterList name="observations" type="ParameterList">
+  <!--ParameterList name="observations" type="ParameterList">
     <ParameterList name="fluxes" type="ParameterList">
       <Parameter name="observation output filename" type="string" value="water_balance.dat" />
       <Parameter name="write interval" type="int" value="1" />
@@ -513,5 +513,5 @@
         </ParameterList>
       </ParameterList>
     </ParameterList>
-  </ParameterList>
+  </ParameterList-->
 </ParameterList>

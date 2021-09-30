@@ -245,7 +245,7 @@
       </ParameterList>
 
       <ParameterList name="initial condition" type="ParameterList">
-        <Parameter name="restart file" type="string" value="../data/checkpoint_final.h5" />
+        <Parameter name="restart file" type="string" value="../data/spinup_checkpoint_final.h5" />
       </ParameterList>
 
       <ParameterList name="water retention evaluator" type="ParameterList">
@@ -303,7 +303,7 @@
       </ParameterList>
 
       <ParameterList name="initial condition" type="ParameterList">
-        <Parameter name="restart file" type="string" value="../data/checkpoint_final.h5" />
+        <Parameter name="restart file" type="string" value="../data/spinup_checkpoint_final.h5" />
       </ParameterList>
 
     </ParameterList>

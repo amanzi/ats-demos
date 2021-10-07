@@ -4,7 +4,7 @@
     <ParameterList name="domain" type="ParameterList">
       <Parameter name="mesh type" type="string" value="generate mesh" />
       <ParameterList name="generate mesh parameters" type="ParameterList">
-        <Parameter name="number of cells" type="Array(int)" value="{1,1,160}" />
+        <Parameter name="number of cells" type="Array(int)" value="{1,1,80}" />
         <Parameter name="domain low coordinate" type="Array(double)" value="{0.0,0.0,-1.0}" />
         <Parameter name="domain high coordinate" type="Array(double)" value="{1.0,1.0,1.0}" />
         <Parameter name="Number of mesh blocks" type="int" value="1" />
@@ -17,7 +17,7 @@
     <ParameterList name="lake" type="ParameterList">
       <Parameter name="mesh type" type="string" value="generate mesh" />
       <ParameterList name="generate mesh parameters" type="ParameterList">
-        <Parameter name="number of cells" type="Array(int)" value="{1,1,80}" />
+        <Parameter name="number of cells" type="Array(int)" value="{1,1,40}" />
         <Parameter name="domain low coordinate" type="Array(double)" value="{0.0,0.0,0.0}" />
         <Parameter name="domain high coordinate" type="Array(double)" value="{1.0,1.0,1.0}" />
         <Parameter name="Number of mesh blocks" type="int" value="1" />
@@ -30,7 +30,7 @@
     <ParameterList name="soil" type="ParameterList">
       <Parameter name="mesh type" type="string" value="generate mesh" />
       <ParameterList name="generate mesh parameters" type="ParameterList">
-        <Parameter name="number of cells" type="Array(int)" value="{1,1,80}" />
+        <Parameter name="number of cells" type="Array(int)" value="{1,1,40}" />
         <Parameter name="domain low coordinate" type="Array(double)" value="{0.0,0.0,-1.0}" />
         <Parameter name="domain high coordinate" type="Array(double)" value="{1.0,1.0,0.0}" />
         <Parameter name="Number of mesh blocks" type="int" value="1" />
@@ -111,7 +111,7 @@
     </ParameterList>
     <Parameter name="start time" type="double" value="0.0" />
     <Parameter name="start time units" type="string" value="d" />
-    <Parameter name="end time" type="double" value="30." />
+    <Parameter name="end time" type="double" value="365." />
     <Parameter name="end time units" type="string" value="d" />
     <Parameter name="end cycle" type="int" value="-1" />
 <!--    <Parameter  name="restart from checkpoint file" type="string" value="checkpoint7603277.h5"/>-->
@@ -345,8 +345,9 @@
           <ParameterList name="top">
             <Parameter name="regions" type="Array(string)" value="{surface}"/>
             <ParameterList name="boundary temperature">
-              <ParameterList name="function-constant">
-                <Parameter name="value" type="double" value="303.15"/>
+              <ParameterList name="function-exprtk">
+                <Parameter name="number of arguments" type="int" value="3"/>
+                  <Parameter name="formula" type="string" value="10.*sin(t/(55.*86400.)-250.*86400.)+273.15"/>
               </ParameterList>
             </ParameterList>
           </ParameterList>
@@ -354,7 +355,7 @@
       </ParameterList>
 
       <ParameterList name="initial condition" type="ParameterList">
-        <Parameter name="initial temperature [K]" type="double" value="294.15" />
+        <Parameter name="initial temperature [K]" type="double" value="274.15" />
         <Parameter name="initialize faces from cells" type="bool" value="true" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="initial pressure cells" type="ParameterList">
@@ -484,7 +485,7 @@
             <Parameter name="regions" type="Array(string)" value="{bottom face soil}"/>
             <ParameterList name="boundary temperature">
                 <ParameterList name="function-constant">
-                  <Parameter name="value" type="double" value="264.15"/>
+                  <Parameter name="value" type="double" value="274.15"/>
                 </ParameterList>
             </ParameterList>
           </ParameterList>
@@ -500,7 +501,7 @@
       </ParameterList>
 
       <ParameterList name="initial condition" type="ParameterList">
-        <Parameter name="initial temperature [K]" type="double" value="294.15" />
+        <Parameter name="initial temperature [K]" type="double" value="274.15" />
         <Parameter name="initialize faces from cells" type="bool" value="true" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="initial pressure cells" type="ParameterList">
@@ -578,11 +579,13 @@
   <ParameterList name="visualization">
     <ParameterList name="lake" type="ParameterList">
       <Parameter name="file name base" type="string" value="visdump_lake" />
-      <Parameter name="times start period stop" type="Array(double)" value="{{0., 3600., -1}}" />
+      <Parameter name="times start period stop" type="Array(double)" value="{{0., 1., -1}}" />
+      <Parameter name="times start period stop units" type="string" value="d" />
     </ParameterList>
     <ParameterList name="soil" type="ParameterList">
       <Parameter name="file name base" type="string" value="visdump_soil" />
-      <Parameter name="times start period stop" type="Array(double)" value="{{0., 3600., -1}}" />
+      <Parameter name="times start period stop" type="Array(double)" value="{{0., 1., -1}}" />
+      <Parameter name="times start period stop units" type="string" value="d" />
     </ParameterList>
   </ParameterList>
 </ParameterList>

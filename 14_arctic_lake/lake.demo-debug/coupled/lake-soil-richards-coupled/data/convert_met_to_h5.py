@@ -29,10 +29,12 @@ def convert(filename):
     hf.create_dataset('time', data=times_sec)
     hf.create_dataset('T', data=dtxt[:,0])
     hf.create_dataset('precip', data=dtxt[:,7])
+    hf.create_dataset('solar_rad', data=dtxt[:,3])
+    hf.create_dataset('atm_down_rad', data=dtxt[:,2])
     
     hf.close()
         
-    plt.plot(times_sec,dtxt[:,0])
+    plt.plot(times_sec,dtxt[:,2])
     plt.show()
 
 if __name__ == "__main__":

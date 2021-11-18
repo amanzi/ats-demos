@@ -426,7 +426,7 @@
           <ParameterList name="precipitation" type="ParameterList">
 <!--              <ParameterList name="function-exprtk">-->
 <!--                <Parameter name="number of arguments" type="int" value="1"/>-->
-<!--                <Parameter name="formula" type="string" value="0.1*sin(t/(55.*86400.)-0.05*86400.)+0.15"/>-->
+<!--                <Parameter name="formula" type="string" value="1000.*sin(t/(55.*86400.)-0.05*86400.)+0.15"/>-->
 <!--              </ParameterList>-->
                 <ParameterList name="function-tabular" type="ParameterList">
                   <Parameter name="file" type="string" value="data/FoxDen.h5" />
@@ -438,7 +438,7 @@
           <ParameterList name="evaporation" type="ParameterList">
               <ParameterList name="function-exprtk">
                 <Parameter name="number of arguments" type="int" value="1"/>
-                <Parameter name="formula" type="string" value="0.1*sin(t/(55.*86400.)-0.02*86400.)+0.15"/>
+                <Parameter name="formula" type="string" value="0."/>
               </ParameterList>
           </ParameterList>
       </ParameterList>

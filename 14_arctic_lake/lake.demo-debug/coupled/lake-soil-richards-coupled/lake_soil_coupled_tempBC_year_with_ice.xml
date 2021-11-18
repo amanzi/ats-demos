@@ -372,10 +372,26 @@
         </ParameterList>
       </ParameterList>
       
-      <ParameterList name="parameters" type="ParameterList">
-          <Parameter name="precipitation" type="double" value="0.0" />
-          <Parameter name="evaporation" type="double" value="0.0" />
-      </ParameterList>
+    <ParameterList name="parameters" type="ParameterList">
+        <ParameterList name="precipitation" type="ParameterList">
+            <ParameterList name="function-exprtk">
+              <Parameter name="number of arguments" type="int" value="1"/>
+              <Parameter name="formula" type="string" value="1000.*sin(t/(55.*86400.)-0.05*86400.)+0.15"/>
+            </ParameterList>
+<!--                <ParameterList name="function-tabular" type="ParameterList">-->
+<!--                  <Parameter name="file" type="string" value="data/FoxDen.h5" />-->
+<!--                  <Parameter name="x coordinate" type="string" value="t"/>-->
+<!--                  <Parameter name="x header" type="string" value="time" />-->
+<!--                  <Parameter name="y header" type="string" value="precip" />-->
+<!--                </ParameterList>-->
+        </ParameterList>
+        <ParameterList name="evaporation" type="ParameterList">
+            <ParameterList name="function-exprtk">
+              <Parameter name="number of arguments" type="int" value="1"/>
+              <Parameter name="formula" type="string" value="0."/>
+            </ParameterList>
+        </ParameterList>
+    </ParameterList>
       
       <ParameterList name="thermal conductivity evaluator" type="ParameterList">
         <ParameterList name="thermal conductivity parameters" type="ParameterList">

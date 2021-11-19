@@ -136,6 +136,7 @@
 
     <ParameterList name="snow" type="ParameterList">
       <Parameter name="PK type" type="string" value="surface balance implicit subgrid" />
+      <Parameter name="initial time step" type="double" value="86400" />
       <Parameter name="domain name" type="string" value="snow" />
       <Parameter name="primary variable key" type="string" value="snow-depth" />
       <Parameter name="conserved quantity key" type="string" value="snow-water_content_meters" />
@@ -218,7 +219,7 @@
       </ParameterList>
 
       <ParameterList name="initial condition" type="ParameterList">
-        <Parameter name="restart file" type="string" value="../data/checkpoint_final.h5" />
+        <Parameter name="restart file" type="string" value="../data/spinup_checkpoint_final.h5" />
       </ParameterList>
 
       <ParameterList name="water retention evaluator" type="ParameterList">
@@ -270,7 +271,7 @@
       </ParameterList>
 
       <ParameterList name="initial condition" type="ParameterList">
-        <Parameter name="restart file" type="string" value="../data/checkpoint_final.h5" />
+        <Parameter name="restart file" type="string" value="../data/spinup_checkpoint_final.h5" />
       </ParameterList>
 
     </ParameterList>
@@ -545,20 +546,8 @@
       </ParameterList>
 
       <ParameterList name="surface-wind_speed" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="independent variable" />
-        <ParameterList name="function" type="ParameterList">
-          <ParameterList name="domain" type="ParameterList">
-            <Parameter name="region" type="string" value="surface domain" />
-            <Parameter name="component" type="string" value="cell" />
-            <ParameterList name="function" type="ParameterList">
-              <ParameterList name="function-tabular" type="ParameterList">
-                <Parameter name="file" type="string" value="../data/daymet.h5" />
-                <Parameter name="x header" type="string" value="time [s]" />
-                <Parameter name="y header" type="string" value="wind speed [m s^-1]" />
-              </ParameterList>
-            </ParameterList>
-          </ParameterList>
-        </ParameterList>
+        <Parameter name="field evaluator type" type="string" value="independent variable constant" />
+        <Parameter name="value" type="double" value="2" />
       </ParameterList>
 
       <ParameterList name="depth" type="ParameterList">
@@ -581,7 +570,7 @@
         <ParameterList name="compressible porosity model parameters" type="ParameterList">
           <ParameterList name="computational domain" type="ParameterList">
             <Parameter name="region" type="string" value="computational domain" />
-            <Parameter name="pore compressibility [Pa^-1]" type="double" value="1e-09" />
+            <Parameter name="pore compressibility [Pa^-1]" type="double" value="1e-08" />
           </ParameterList>
         </ParameterList>
       </ParameterList>
@@ -600,39 +589,38 @@
         <Parameter name="field evaluator type" type="string" value="eos" />
         <Parameter name="EOS basis" type="string" value="both" />
         <ParameterList name="EOS parameters" type="ParameterList">
-          <Parameter name="EOS type" type="string" value="liquid water" />
+          <Parameter name="EOS type" type="string" value="constant" />
+          <Parameter name="molar mass [kg/mol]" type="double" value="0.01818181818181818" />
+          <Parameter name="density [mol/m^3]" type="double" value="55000" />
         </ParameterList>
       </ParameterList>
-
+      <ParameterList name="molar_density_ice" type="ParameterList"> <!-- same as liquid -->
+        <Parameter name="field evaluator type" type="string" value="eos" />
+        <Parameter name="EOS basis" type="string" value="both" />
+        <ParameterList name="EOS parameters" type="ParameterList">
+          <Parameter name="EOS type" type="string" value="constant" />
+          <Parameter name="molar mass [kg/mol]" type="double" value="0.01818181818181818" />
+          <Parameter name="density [mol/m^3]" type="double" value="55000" />
+        </ParameterList>
+      </ParameterList>
       <ParameterList name="surface-molar_density_liquid" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="eos" />
         <Parameter name="EOS basis" type="string" value="both" />
         <ParameterList name="EOS parameters" type="ParameterList">
-          <Parameter name="EOS type" type="string" value="liquid water" />
-        </ParameterList>
-      </ParameterList>
-
-      <ParameterList name="surface-source_molar_density" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="eos" />
-        <Parameter name="EOS basis" type="string" value="both" />
-        <ParameterList name="EOS parameters" type="ParameterList">
-          <Parameter name="EOS type" type="string" value="liquid water" />
-        </ParameterList>
-      </ParameterList>
-
-      <ParameterList name="surface-mass_density_liquid" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="eos" />
-        <Parameter name="EOS basis" type="string" value="both" />
-        <ParameterList name="EOS parameters" type="ParameterList">
-          <Parameter name="EOS type" type="string" value="liquid water" />
+          <Parameter name="EOS type" type="string" value="constant" />
+          <Parameter name="molar mass [kg/mol]" type="double" value="0.01818181818181818" />
+          <Parameter name="density [mol/m^3]" type="double" value="55000" />
         </ParameterList>
       </ParameterList>
 
       <ParameterList name="viscosity_liquid" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="viscosity" />
-        <ParameterList name="viscosity model parameters" type="ParameterList">
-          <Parameter name="viscosity relation type" type="string" value="liquid water" />
-        </ParameterList>
+        <Parameter name="field evaluator type" type="string" value="independent variable constant" />
+        <Parameter name="value" type="double" value="0.00089" />
+      </ParameterList>
+
+      <ParameterList name="surface-source_molar_density" type="ParameterList">
+        <Parameter name="field evaluator type" type="string" value="independent variable constant" />
+        <Parameter name="value" type="double" value="55000" />
       </ParameterList>
 
       <ParameterList name="surface-relative_permeability" type="ParameterList">
@@ -641,15 +629,6 @@
           <Parameter name="surface rel perm model type" type="string" value="unfrozen fraction rel perm, limit one" />
           <Parameter name="unfrozen rel perm cutoff pressure [Pa]" type="double" value="10" />
           <Parameter name="unfrozen rel perm cutoff pressure, below [Pa]" type="double" value="-100" />
-        </ParameterList>
-      </ParameterList>
-
-      <ParameterList name="molar_density_ice" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="eos" />
-        <Parameter name="EOS basis" type="string" value="molar" />
-        <Parameter name="molar density key" type="string" value="molar_density_ice" />
-        <ParameterList name="EOS parameters" type="ParameterList">
-          <Parameter name="EOS type" type="string" value="ice" />
         </ParameterList>
       </ParameterList>
 
@@ -740,12 +719,12 @@
   </ParameterList>
   <ParameterList name="visualization">
     <ParameterList name="domain" type="ParameterList">
-      <Parameter name="times start period stop" type="Array(double)" value="{ 0,10,-1}" />
+      <Parameter name="times start period stop" type="Array(double)" value="{ 274,10,-1}" />
       <Parameter name="times start period stop units" type="string" value="d" />
       <Parameter name="time units" type="string" value="d" />
     </ParameterList>
     <ParameterList name="surface" type="ParameterList">
-      <Parameter name="times start period stop" type="Array(double)" value="{ 0,10,-1}" />
+      <Parameter name="times start period stop" type="Array(double)" value="{ 274,10,-1}" />
       <Parameter name="times start period stop units" type="string" value="d" />
       <Parameter name="time units" type="string" value="d" />
       <Parameter name="aliased domains" type="Array(string)" value="{canopy, snow}" />

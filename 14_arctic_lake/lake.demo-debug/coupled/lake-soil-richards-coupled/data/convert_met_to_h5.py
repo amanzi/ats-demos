@@ -27,10 +27,13 @@ def convert(filename):
     times_days = np.arange(dtxt.shape[0])
     times_sec = times_days[:]*24.*3600.
     hf.create_dataset('time', data=times_sec)
-    hf.create_dataset('T', data=dtxt[:,0])
-    hf.create_dataset('precip', data=dtxt[:,7])
-    hf.create_dataset('solar_rad', data=dtxt[:,3])
+    hf.create_dataset('T_air', data=dtxt[:,0])
+    hf.create_dataset('pres', data=dtxt[:,1])
     hf.create_dataset('atm_down_rad', data=dtxt[:,2])
+    hf.create_dataset('solar_rad', data=dtxt[:,3])
+    hf.create_dataset('hum_air', data=dtxt[:,6])
+    hf.create_dataset('precip', data=dtxt[:,7])
+
     
     hf.close()
         

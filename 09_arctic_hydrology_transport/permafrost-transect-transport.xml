@@ -935,7 +935,7 @@
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="cells" type="ParameterList">
             <Parameter name="region" type="string" value="surface domain" />
-            <Parameter name="components" type="Array(string)" value="{cell,boundary_face}" />
+            <Parameter name="components" type="Array(string)" value="{cell}" />
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
                 <Parameter name="value" type="double" value=" 1" />
@@ -1206,7 +1206,7 @@
       </ParameterList>
 
       <ParameterList name="surface-overland_conductivity" type="ParameterList">
-        <Parameter name="depth key" type="string" value="surface-unfrozen_effective_depth" />
+        <Parameter name="mobile depth key" type="string" value="surface-unfrozen_effective_depth" />
         <Parameter name="field evaluator type" type="string" value="overland conductivity" />
         <ParameterList name="overland conductivity model" type="ParameterList">
           <Parameter name="Manning exponent" type="double" value="0.66666667" />

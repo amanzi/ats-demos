@@ -401,7 +401,7 @@
         <Parameter name="evaluator type" type="string" value="overland conductivity" />
         <Parameter name="mobile depth key" type="string" value="surface-unfrozen_effective_depth" />
         <ParameterList name="overland conductivity model" type="ParameterList">
-          <Parameter name="Manning exponent" type="double" value="0.666666666667" />
+          <Parameter name="Manning exponent" type="double" value="0.66666667" />
           <Parameter name="slope regularization epsilon" type="double" value="0.01" />
         </ParameterList>
       </ParameterList>

@@ -88,13 +88,22 @@ def main(options):
     # read the appropriate config file and run the various tests.
     start = time.time()
     report = {}
-    for config_file in config_file_list:
+    for config_file in sorted(config_file_list):
         # try:
             # NOTE(bja): the try block is inside this loop so that if
             # a single test throws an exception in a large batch of
             # tests, we can recover and at least try running the other
             # config files.
             print(80 * '=', file=testlog)
+            print(f'Running {config_file}', file=testlog)
+
+            d,f = os.path.split(config_file)
+            d1,header = os.path.split(d)
+            if len(header) > 20:
+                header = header[:20]
+            else:
+                header = header + ' '*(20-len(header))
+            print(f'{header} | ', end='')
 
             # get the absolute path of the directory
             test_dir = os.path.dirname(config_file)

@@ -1,5 +1,13 @@
 <ParameterList name="Main" type="ParameterList">
   <ParameterList name="mesh" type="ParameterList">
+    <ParameterList name="domain" type="ParameterList">
+      <Parameter name="mesh type" type="string" value="read mesh file" />
+      <Parameter name="build columns from set" type="string" value="surface" />
+      <ParameterList name="read mesh file parameters" type="ParameterList">
+        <Parameter name="file" type="string" value="../data/hillslope2.exo" />
+        <Parameter name="format" type="string" value="Exodus II" />
+      </ParameterList>
+    </ParameterList>
     <ParameterList name="surface" type="ParameterList">
       <Parameter name="mesh type" type="string" value="surface" />
       <ParameterList name="surface parameters" type="ParameterList">
@@ -12,16 +20,7 @@
         <Parameter name="target" type="string" value="surface" />
       </ParameterList>
     </ParameterList>
-    <ParameterList name="domain" type="ParameterList">
-      <Parameter name="mesh type" type="string" value="read mesh file" />
-      <Parameter name="build columns from set" type="string" value="surface" />
-      <ParameterList name="read mesh file parameters" type="ParameterList">
-        <Parameter name="file" type="string" value="../data/hillslope2.exo" />
-        <Parameter name="format" type="string" value="Exodus II" />
-      </ParameterList>
-    </ParameterList>
   </ParameterList>
-
   <ParameterList name="regions" type="ParameterList">
     <ParameterList name="computational domain" type="ParameterList">
       <ParameterList name="region: all" type="ParameterList">
@@ -51,6 +50,18 @@
       <ParameterList name="region: plane" type="ParameterList">
         <Parameter name="point" type="Array(double)" value="{1000, 0}" />
         <Parameter name="normal" type="Array(double)" value="{ 1, 0}" />
+      </ParameterList>
+    </ParameterList>
+    <ParameterList name="evergreen forest" type="ParameterList">
+      <ParameterList name="region: box" type="ParameterList">
+        <Parameter name="low coordinate" type="Array(double)" value="{ 0,-10}" />
+        <Parameter name="high coordinate" type="Array(double)" value="{800,10}" />
+      </ParameterList>
+    </ParameterList>
+    <ParameterList name="grassy meadow" type="ParameterList">
+      <ParameterList name="region: box" type="ParameterList">
+        <Parameter name="low coordinate" type="Array(double)" value="{800,-10}" />
+        <Parameter name="high coordinate" type="Array(double)" value="{1000,10}" />
       </ParameterList>
     </ParameterList>
   </ParameterList>
@@ -85,7 +96,6 @@
     </ParameterList>
   </ParameterList>
   <ParameterList name="PKs" type="ParameterList">
-
     <ParameterList name="water balance" type="ParameterList">
       <Parameter name="PK type" type="string" value="weak MPC" />
       <Parameter name="PKs order" type="Array(string)" value="{snow storage, surface-subsurface coupler}" />
@@ -136,7 +146,6 @@
           <Parameter name="initial time step [s]" type="double" value="86400" />
         </ParameterList>
       </ParameterList>
-
     </ParameterList>
 
     <ParameterList name="surface-subsurface coupler" type="ParameterList">
@@ -193,7 +202,6 @@
       </ParameterList>
 
     </ParameterList>
-
     <ParameterList name="flow" type="ParameterList">
       <Parameter name="PK type" type="string" value="richards flow" />
       <Parameter name="primary variable key" type="string" value="pressure" />
@@ -202,9 +210,9 @@
       <Parameter name="permeability rescaling" type="double" value="10000000" />
       <Parameter name="surface rel perm strategy" type="string" value="clobber" />
       <Parameter name="relative permeability method" type="string" value="upwind with Darcy flux" />
-      <Parameter name="debug cells" type="Array(int)" value="{0}" />
+      <Parameter name="debug cells" type="Array(int)" value="{1674}" />
       <ParameterList name="diffusion" type="ParameterList">
-        <Parameter name="discretization primary" type="string" value="mfd: default" />
+        <Parameter name="discretization primary" type="string" value="mfd: two-point flux approximation" />
       </ParameterList>
 
       <ParameterList name="diffusion preconditioner">
@@ -235,7 +243,6 @@
       </ParameterList>
 
     </ParameterList>
-
     <ParameterList name="overland flow" type="ParameterList">
       <Parameter name="PK type" type="string" value="overland flow, pressure basis" />
       <Parameter name="primary variable key" type="string" value="surface-pressure" />
@@ -246,6 +253,7 @@
       <ParameterList name="diffusion" type="ParameterList">
         <Parameter name="discretization primary" type="string" value="fv: default" />
       </ParameterList>
+      <Parameter name="debug cells" type="Array(int)" value="{93}" />
 
       <ParameterList name="diffusion preconditioner" type="ParameterList">
         <Parameter name="include Newton correction" type="bool" value="true" />
@@ -265,11 +273,10 @@
       </ParameterList>
 
       <ParameterList name="initial condition" type="ParameterList">
-        <Parameter name="initialize surface head from subsurface" type="bool" value="true" />
+        <Parameter name="restart file" type="string" value="../data/spinup_checkpoint_final.h5" />
       </ParameterList>
 
     </ParameterList>
-
   </ParameterList>
 
   <ParameterList name="state" type="ParameterList">
@@ -295,11 +302,13 @@
         <Parameter name="dependencies" type="Array(string)" value="{snow-cell_volume, snow-water_equivalent, surface-molar_density_liquid}" />
         <Parameter name="units" type="string" value="mol" />
       </ParameterList>
+
       <ParameterList name="snow-source" type="ParameterList">
         <Parameter name="evaluator type" type="string" value="multiplicative evaluator" />
         <Parameter name="dependencies" type="Array(string)" value="{snow-source_mps, surface-molar_density_liquid}" />
         <Parameter name="units" type="string" value="mol m^-2 s^-1" />
       </ParameterList>
+
       <ParameterList name="snow-source_mps" type="ParameterList">
         <Parameter name="evaluator type" type="string" value="additive evaluator" />
         <Parameter name="dependencies" type="Array(string)" value="{snow-precipitation, snow-melt}" />
@@ -330,6 +339,7 @@
           </ParameterList>
         </ParameterList>
       </ParameterList>
+
       <ParameterList name="surface-water_source" type="ParameterList">
         <Parameter name="evaluator type" type="string" value="additive evaluator" />
         <Parameter name="dependencies" type="Array(string)" value="{snow-melt, surface-precipitation_rain}" />
@@ -353,6 +363,7 @@
           </ParameterList>
         </ParameterList>
       </ParameterList>
+
       <ParameterList name="surface-total_evapotranspiration" type="ParameterList">
         <Parameter name="evaluator type" type="string" value="column sum evaluator" />
         <Parameter name="summed key" type="string" value="transpiration" />
@@ -413,6 +424,7 @@
           </ParameterList>
         </ParameterList>
       </ParameterList>
+
       <ParameterList name="surface-temperature" type="ParameterList">
         <Parameter name="evaluator type" type="string" value="independent variable" />
         <Parameter name="units" type="string" value="K" />
@@ -444,6 +456,10 @@
 
       <ParameterList name="surface-shortwave_radiation" type="ParameterList">
         <Parameter name="evaluator type" type="string" value="independent variable" />
+      </ParameterList>
+
+      <ParameterList name="surface-shortwave_radiation" type="ParameterList">
+        <Parameter name="field evaluator type" type="string" value="independent variable" />
         <Parameter name="units" type="string" value="W m^-2" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="domain" type="ParameterList">
@@ -459,11 +475,13 @@
           </ParameterList>
         </ParameterList>
       </ParameterList>
+
       <ParameterList name="surface-manning_coefficient">
         <Parameter name="evaluator type" type="string" value="independent variable constant" />
         <Parameter name="value" type="double" value=" 1" />
         <Parameter name="units" type="string" value="-" />
       </ParameterList>
+
       <ParameterList name="base_porosity">
         <Parameter name="evaluator type" type="string" value="independent variable constant" />
         <Parameter name="value" type="double" value="0.4" />
@@ -475,7 +493,7 @@
         <ParameterList name="compressible porosity model parameters" type="ParameterList">
           <ParameterList name="computational domain" type="ParameterList">
             <Parameter name="region" type="string" value="computational domain" />
-            <Parameter name="pore compressibility [Pa^-1]" type="double" value="1e-09" />
+            <Parameter name="pore compressibility [Pa^-1]" type="double" value="1e-08" />
           </ParameterList>
         </ParameterList>
       </ParameterList>
@@ -517,7 +535,7 @@
         <Parameter name="evaluator type" type="string" value="overland conductivity" />
         <ParameterList name="overland conductivity model" type="ParameterList">
           <Parameter name="overland conductivity type " type="string" value="manning" />
-          <Parameter name="Manning exponent" type="double" value="0.666666666667" />
+          <Parameter name="Manning exponent" type="double" value="0.66666667" />
           <Parameter name="slope regularization epsilon" type="double" value="0.01" />
         </ParameterList>
       </ParameterList>
@@ -548,19 +566,24 @@
 
     </ParameterList>
   </ParameterList>
+
+  <ParameterList name="checkpoint">
+    <Parameter name="times start period stop" type="Array(double)" value="{ 274,365,-1}" />
+    <Parameter name="times start period stop units" type="string" value="d" />
+  </ParameterList>
+
   <ParameterList name="visualization">
     <ParameterList name="domain" type="ParameterList">
-      <Parameter name="times start period stop" type="Array(double)" value="{ 0,10,-1}" />
+      <Parameter name="times start period stop" type="Array(double)" value="{ 274,1,-1}" />
       <Parameter name="times start period stop units" type="string" value="d" />
       <Parameter name="time units" type="string" value="d" />
     </ParameterList>
     <ParameterList name="surface" type="ParameterList">
-      <Parameter name="times start period stop" type="Array(double)" value="{ 0,10,-1}" />
+      <Parameter name="times start period stop" type="Array(double)" value="{ 274,1,-1}" />
       <Parameter name="times start period stop units" type="string" value="d" />
       <Parameter name="time units" type="string" value="d" />
     </ParameterList>
   </ParameterList>
-
   <ParameterList name="observations" type="ParameterList">
     <ParameterList name="fluxes" type="ParameterList">
       <Parameter name="observation output filename" type="string" value="water_balance.dat" />

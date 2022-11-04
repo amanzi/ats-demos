@@ -151,4 +151,5 @@ Integrated hydrology and Reactive Transport
 ATS is unique in the its ability to simulate reactive transport in integrated
 hydrology problems. In other words, it is capable of simulating muticomponent
 reactive transport in both surface and subsurface compartments using a novel
-coupling approach, and levering powerful, external geochemical engines [Molins et al (2022) WRR] (https://doi.org/10.1029/2022WR032074)
+coupling approach, and levering powerful, external geochemical engines
+`Molins et al (2022) WRR <https://doi.org/10.1029/2022WR032074>`_

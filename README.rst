@@ -53,7 +53,7 @@ This is particularly true for demos that show a full workflow, such as
 `ecohydrology` or `arctic_hydrology`.
 
 Also, if you want to run the demos without using these python scripts,
-be sure to check out the FAQs on our [Wiki](https://github.com/amanzi/ats/wiki)
+be sure to check out the FAQs on our `Wiki <https://github.com/amanzi/ats/wiki>`_
 
 
 Visualizing the results

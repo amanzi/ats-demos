@@ -59,6 +59,12 @@
         <Parameter name="normal" type="Array(double)" value="{1, 0}" />
       </ParameterList>
     </ParameterList>
+    <ParameterList name="outlet cell" type="ParameterList">
+      <ParameterList name="region: box" type="ParameterList">
+        <Parameter name="low coordinate" type="Array(double)" value="{ 990, -10}" />
+        <Parameter name="high coordinate" type="Array(double)" value="{1000, 10}" />
+      </ParameterList>
+    </ParameterList>
     <ParameterList name="downstream gauge" type="ParameterList">
       <ParameterList name="region: point" type="ParameterList">
         <Parameter name="coordinate" type="Array(double)" value="{955,0.1}" />

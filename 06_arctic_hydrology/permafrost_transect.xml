@@ -124,12 +124,12 @@
       </ParameterList>
     </ParameterList>
   </ParameterList>
-
   <ParameterList name="PKs" type="ParameterList">
 
     <ParameterList name="Top level MPC" type="ParameterList">
       <Parameter name="PK type" type="string" value="weak MPC" />
       <Parameter name="PKs order" type="Array(string)" value="{snow distribution,coupled SEB and permafrost}" />
+
     </ParameterList>
 
     <ParameterList name="snow distribution" type="ParameterList">
@@ -213,6 +213,7 @@
           </ParameterList>
         </ParameterList>
       </ParameterList>
+
     </ParameterList>
 
     <ParameterList name="coupled SEB and permafrost" type="ParameterList">
@@ -224,10 +225,8 @@
         <Parameter name="timestep controller type" type="string" value="smarter" />
         <ParameterList name="nka_bt_ats parameters" type="ParameterList">
           <Parameter name="nka lag iterations" type="int" value="2" />
-          <Parameter name="max backtrack steps" type="int" value="10" />
-          <Parameter name="max total backtrack steps" type="int" value="20" />
+          <Parameter name="backtrack max steps" type="int" value="10" />
           <Parameter name="backtrack lag" type="int" value="0" />
-          <Parameter name="last backtrack iteration" type="int" value="20" />
           <Parameter name="backtrack factor" type="double" value="0.25" />
           <Parameter name="backtrack tolerance" type="double" value="0.0001" />
           <Parameter name="nonlinear tolerance" type="double" value="1e-05" />
@@ -260,9 +259,6 @@
 
       <ParameterList name="ewc delegate" type="ParameterList">
         <Parameter name="predictor type" type="string" value="smart ewc" />
-        <!-- this is a numerical parameter, unclear what the right value is -->
-        <!--   <Parameter name="freeze-thaw cusp width [K]" type="double" value=" 1" />-->
-        <!--   <Parameter name="freeze-thaw cusp width [K]" type="double" value="0.1" />-->
       </ParameterList>
 
       <ParameterList name="water delegate" type="ParameterList">
@@ -286,7 +282,7 @@
           <Parameter name="preconditioning strategy" type="string" value="left" />
           <Parameter name="error tolerance" type="double" value="1e-06" />
           <Parameter name="convergence criteria" type="Array(string)" value="{relative residual,make one iteration}" />
-          <Parameter name="maximum number of iteration" type="int" value="80" />
+          <Parameter name="maximum number of iteration" type="int" value="10" />
         </ParameterList>
       </ParameterList>
     </ParameterList>
@@ -299,15 +295,14 @@
       <Parameter name="source term is differentiable" type="bool" value="false" />
       <Parameter name="max valid change in saturation in a time step [-]" type="double" value="0.1" />
       <Parameter name="max valid change in ice saturation in a time step [-]" type="double" value="0.1" />
-
       <Parameter name="relative permeability method" type="string" value="upwind with Darcy flux" />
       <Parameter name="surface rel perm strategy" type="string" value="clobber" />
       <Parameter name="permeability rescaling" type="double" value="10000000" />
       <Parameter name="debug cells" type="Array(int)" value="{3423}" />
-
       <ParameterList name="diffusion" type="ParameterList">
         <Parameter name="discretization primary" type="string" value="mfd: two-point flux approximation" />
       </ParameterList>
+
       <ParameterList name="diffusion preconditioner" type="ParameterList">
         <Parameter name="Newton correction" type="string" value="approximate Jacobian" />
       </ParameterList>
@@ -363,7 +358,6 @@
       <Parameter name="source term is differentiable" type="bool" value="false" />
       <Parameter name="water source in meters" type="bool" value="true" />
       <Parameter name="debug cells" type="Array(int)" value="{0}" />
-
       <ParameterList name="diffusion" type="ParameterList">
         <Parameter name="discretization primary" type="string" value="fv: default" />
       </ParameterList>
@@ -378,7 +372,7 @@
             <Parameter name="regions" type="Array(string)" value="{east,west}" />
             <ParameterList name="boundary head" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
-                <Parameter name="value" type="double" value="0.3" />
+                <Parameter name="value" type="double" value="0." />
               </ParameterList>
             </ParameterList>
           </ParameterList>
@@ -396,19 +390,11 @@
       <Parameter name="source term" type="bool" value="true" />
       <Parameter name="source key" type="string" value="total_energy_source" />
       <Parameter name="source term is differentiable" type="bool" value="false" />
-      <!-- turn this off if turning on the term for div hq -->
       <Parameter name="supress advective terms in preconditioner" type="bool" value="false" />
       <Parameter name="debug cells" type="Array(int)" value="{3423}" />
-
       <ParameterList name="diffusion" type="ParameterList">
         <Parameter name="discretization primary" type="string" value="mfd: two-point flux approximation" />
       </ParameterList>
-      <!-- this term is dK/dT term, probably not that helpful -->
-      <!--
-      <ParameterList name="diffusion preconditioner" type="ParameterList">
-        <Parameter name="include Newton correction" type="bool" value="true" />
-      </ParameterList>
-      -->
 
       <ParameterList name="boundary conditions" type="ParameterList">
         <ParameterList name="temperature" type="ParameterList">
@@ -458,6 +444,7 @@
       <ParameterList name="enthalpy evaluator" type="ParameterList">
         <Parameter name="include work term" type="bool" value="false" />
       </ParameterList>
+
     </ParameterList>
 
     <ParameterList name="surface energy" type="ParameterList">
@@ -472,7 +459,6 @@
       <Parameter name="supress advective terms in preconditioner" type="bool" value="false" />
       <Parameter name="upwind conductivity method" type="string" value="arithmetic mean" />
       <Parameter name="debug cells" type="Array(int)" value="{0}" />
-
       <ParameterList name="diffusion" type="ParameterList">
         <Parameter name="discretization primary" type="string" value="fv: default" />
       </ParameterList>
@@ -503,6 +489,7 @@
       <ParameterList name="enthalpy evaluator" type="ParameterList">
         <Parameter name="include work term" type="bool" value="false" />
       </ParameterList>
+
     </ParameterList>
 
     <ParameterList name="SEB" type="ParameterList">
@@ -513,7 +500,6 @@
       <Parameter name="source term" type="bool" value="true" />
       <Parameter name="source key" type="string" value="snow-source_sink" />
       <Parameter name="source term is differentiable" type="bool" value="false" />
-
       <ParameterList name="initial condition" type="ParameterList">
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="initial head" type="ParameterList">
@@ -530,17 +516,8 @@
 
       <ParameterList name="inverse" type="ParameterList">
         <Parameter name="preconditioning method" type="string" value="diagonal" />
-        <!-- may not be needed, diagonal may be good enough for nonlinear convergence -->
-        <!--
-        <Parameter name="iterative method" type="string" value="gmres" />
-        <ParameterList name="gmres parameters" type="ParameterList">
-          <Parameter name="preconditioning strategy" type="string" value="left" />
-          <Parameter name="error tolerance" type="double" value="1e-06" />
-          <Parameter name="convergence criteria" type="Array(string)" value="{relative residual,make one iteration}" />
-          <Parameter name="maximum number of iteration" type="int" value="80" />
-        </ParameterList>
-        -->
       </ParameterList>
+
     </ParameterList>
 
   </ParameterList>
@@ -558,8 +535,6 @@
       </ParameterList>
       <ParameterList name="surface-energy" type="ParameterList">
         <Parameter name="evaluator type" type="string" value="surface ice energy" />
-        <!-- for the surface, density of ice = density of water is fine, because it would only result
-             in tradeoffs with height, not water amount -->
         <Parameter name="molar density ice key suffix" type="string" value="molar_density_liquid" />
       </ParameterList>
       <ParameterList name="surface-ponded_depth" type="ParameterList">
@@ -901,17 +876,14 @@
         <Parameter name="dependencies" type="Array(string)" value="{snow-depth,snow-density}" />
         <Parameter name="coefficient" type="double" value="0.001" />
       </ParameterList>
-
       <ParameterList name="snow-water_volume" type="ParameterList">
         <Parameter name="evaluator type" type="string" value="multiplicative evaluator" />
         <Parameter name="dependencies" type="Array(string)" value="{snow-water_equivalent, snow-cell_volume}" />
       </ParameterList>
-
       <ParameterList name="snow-water_content" type="ParameterList">
         <Parameter name="evaluator type" type="string" value="multiplicative evaluator" />
         <Parameter name="dependencies" type="Array(string)" value="{snow-water_volume, surface-molar_density_liquid}" />
       </ParameterList>
-
       <ParameterList name="snow-source_sink" type="ParameterList">
         <Parameter name="evaluator type" type="string" value="surface energy balance, three components" />
         <Parameter name="save diagnostic data" type="bool" value="true" />
@@ -948,13 +920,12 @@
           <Parameter name="water transition depth [m]" type="double" value="0.02" />
           <Parameter name="albedo of bare ground [-]" type="double" value="0.135" />
           <Parameter name="emissivity of bare ground [-]" type="double" value="0.92" />
-          <Parameter name="Clapp and Hornberger b [-]" type="double" value="1" />
+          <Parameter name="Clapp and Hornberger b [-]" type="double" value="3" />
         </ParameterList>
       </ParameterList>
 
     </ParameterList>
   </ParameterList>
-
   <ParameterList name="visualization" type="ParameterList">
     <ParameterList name="domain" type="ParameterList">
       <Parameter name="times start period stop 0" type="Array(double)" value="{ 0, 1,-1}" />
@@ -968,7 +939,7 @@
   </ParameterList>
 
   <ParameterList name="checkpoint" type="ParameterList">
-    <Parameter name="times start period stop 0" type="Array(double)" value="{ 0,1,-1}" />
+    <Parameter name="times start period stop 0" type="Array(double)" value="{ 0, 1,-1}" />
     <Parameter name="times start period stop 0 units" type="string" value="noleap" />
   </ParameterList>
 
@@ -1054,5 +1025,4 @@
       </ParameterList>
     </ParameterList>
   </ParameterList>
-
 </ParameterList>

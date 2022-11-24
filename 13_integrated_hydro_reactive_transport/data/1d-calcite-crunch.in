@@ -9,7 +9,7 @@ timestep_init   1.E-10
 time_tolerance  0.01
 correction_max  1.0
 debye-huckel    true
-database        ./data/calcite.dbs
+database        ../data/calcite.dbs
 master          tracer
 speciate_only   false
 database_sweep  false

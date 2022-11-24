@@ -80,14 +80,6 @@
       <Parameter name="preconditioner type" type="string" value="picard" />
       <ParameterList name="ewc delegate" type="ParameterList">
         <Parameter name="predictor type" type="string" value="smart ewc" />
-        <Parameter name="preconditioner type" type="string" value="none" />
-        <ParameterList name="verbose object" type="ParameterList">
-          <Parameter name="verbosity level" type="string" value="high" />
-        </ParameterList>
-      </ParameterList>
-
-      <ParameterList name="verbose object" type="ParameterList">
-        <Parameter name="verbosity level" type="string" value="high" />
       </ParameterList>
 
       <ParameterList name="inverse" type="ParameterList">
@@ -99,9 +91,6 @@
           <Parameter name="strong threshold" type="double" value="0.65" />
           <Parameter name="tolerance" type="double" value=" 0" />
           <Parameter name="number of functions" type="int" value="2" />
-        </ParameterList>
-        <ParameterList name="verbose object" type="ParameterList">
-          <Parameter name="verbosity level" type="string" value="medium" />
         </ParameterList>
         <ParameterList name="gmres parameters" type="ParameterList">
           <Parameter name="preconditioning strategy" type="string" value="left" />
@@ -117,51 +106,40 @@
         <Parameter name="timestep controller type" type="string" value="smarter" />
         <ParameterList name="nka_bt_ats parameters" type="ParameterList">
           <Parameter name="nka lag iterations" type="int" value="2" />
-          <Parameter name="max backtrack steps" type="int" value="5" />
+          <Parameter name="backtrack max steps" type="int" value="5" />
           <Parameter name="backtrack lag" type="int" value="0" />
           <Parameter name="backtrack factor" type="double" value="0.5" />
           <Parameter name="backtrack tolerance" type="double" value="0.0001" />
           <Parameter name="nonlinear tolerance" type="double" value="1e-05" />
           <Parameter name="diverged tolerance" type="double" value="100000" />
           <Parameter name="limit iterations" type="int" value="21" />
-          <ParameterList name="verbose object" type="ParameterList">
-            <Parameter name="verbosity level" type="string" value="high" />
-          </ParameterList>
-        </ParameterList>
-        <ParameterList name="verbose object" type="ParameterList">
-          <Parameter name="verbosity level" type="string" value="high" />
         </ParameterList>
         <ParameterList name="timestep controller smarter parameters" type="ParameterList">
           <Parameter name="max iterations" type="int" value="18" />
           <Parameter name="min iterations" type="int" value="10" />
           <Parameter name="time step reduction factor" type="double" value="0.5" />
           <Parameter name="time step increase factor" type="double" value="1.5" />
-          <Parameter name="max time step" type="double" value="1e+10" />
+          <Parameter name="max time step" type="double" value="10000000000" />
           <Parameter name="min time step" type="double" value="1e-10" />
           <Parameter name="growth wait after fail" type="int" value="2" />
           <Parameter name="count before increasing increase factor" type="int" value="2" />
+          <Parameter name="initial time step [s]" type="double" value=" 1" />
         </ParameterList>
       </ParameterList>
-
     </ParameterList>
 
     <ParameterList name="flow" type="ParameterList">
       <Parameter name="PK type" type="string" value="permafrost flow" />
       <Parameter name="primary variable key" type="string" value="pressure" />
-      <Parameter name="initial time step" type="double" value=" 1" />
       <Parameter name="relative permeability method" type="string" value="upwind with Darcy flux" />
       <Parameter name="permeability rescaling" type="double" value="10000000" />
       <Parameter name="max valid change in saturation in a time step [-]" type="double" value="0.1" />
       <Parameter name="max valid change in ice saturation in a time step [-]" type="double" value="0.1" />
       <Parameter name="debug cells" type="Array(int)" value="{0,84}" />
-      <ParameterList name="verbose object" type="ParameterList">
-        <Parameter name="verbosity level" type="string" value="high" />
-      </ParameterList>
 
       <ParameterList name="diffusion" type="ParameterList">
         <Parameter name="discretization primary" type="string" value="mfd: two-point flux approximation" />
       </ParameterList>
-
       <ParameterList name="diffusion preconditioner" type="ParameterList">
         <Parameter name="include Newton correction" type="bool" value="true" />
       </ParameterList>
@@ -198,11 +176,7 @@
           <Parameter name="permafrost WRM type" type="string" value="fpd permafrost model" />
           <Parameter name="minimum dsi_dpressure magnitude" type="double" value="1e-12" />
         </ParameterList>
-        <ParameterList name="verbose object" type="ParameterList">
-          <Parameter name="verbosity level" type="string" value="low" />
-        </ParameterList>
       </ParameterList>
-
     </ParameterList>
 
     <ParameterList name="energy" type="ParameterList">
@@ -210,11 +184,7 @@
       <Parameter name="primary variable key" type="string" value="temperature" />
       <Parameter name="supress advective terms in preconditioner" type="bool" value="true" />
       <Parameter name="source term" type="bool" value="false" />
-      <Parameter name="initial time step" type="double" value=" 1" />
       <Parameter name="debug cells" type="Array(int)" value="{0,84}" />
-      <ParameterList name="verbose object" type="ParameterList">
-        <Parameter name="verbosity level" type="string" value="high" />
-      </ParameterList>
 
       <ParameterList name="diffusion" type="ParameterList">
         <Parameter name="discretization primary" type="string" value="mfd: two-point flux approximation" />
@@ -236,17 +206,7 @@
       </ParameterList>
 
       <ParameterList name="initial condition" type="ParameterList">
-        <ParameterList name="function" type="ParameterList">
-          <ParameterList name="initial temperature cells" type="ParameterList">
-            <Parameter name="region" type="string" value="subsurface domain" />
-            <Parameter name="components" type="Array(string)" value="{face,cell}" />
-            <ParameterList name="function" type="ParameterList">
-              <ParameterList name="function-constant" type="ParameterList">
-                <Parameter name="value" type="double" value="273.65" />
-              </ParameterList>
-            </ParameterList>
-          </ParameterList>
-        </ParameterList>
+        <Parameter name="value" type="double" value="273.65" />
       </ParameterList>
 
       <ParameterList name="thermal conductivity evaluator" type="ParameterList">
@@ -268,76 +228,53 @@
             <Parameter name="unsaturated alpha unfrozen [-]" type="double" value="0.5" />
           </ParameterList>
         </ParameterList>
-        <ParameterList name="verbose object" type="ParameterList">
-          <Parameter name="verbosity level" type="string" value="low" />
-        </ParameterList>
       </ParameterList>
 
       <ParameterList name="enthalpy evaluator" type="ParameterList">
         <Parameter name="include work term" type="bool" value="false" />
       </ParameterList>
-
     </ParameterList>
 
   </ParameterList>
 
   <ParameterList name="state" type="ParameterList">
-    <ParameterList name="field evaluators" type="ParameterList">
-
+    <ParameterList name="evaluators" type="ParameterList">
       <ParameterList name="water_content" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="liquid+ice water content" />
+        <Parameter name="evaluator type" type="string" value="liquid+ice water content" />
       </ParameterList>
-
       <ParameterList name="energy" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="liquid+ice energy" />
+        <Parameter name="evaluator type" type="string" value="liquid+ice energy" />
       </ParameterList>
-
       <ParameterList name="capillary_pressure_gas_liq" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="capillary pressure, atmospheric gas over liquid" />
-        <ParameterList name="verbose object" type="ParameterList">
-          <Parameter name="verbosity level" type="string" value="low" />
-        </ParameterList>
+        <Parameter name="evaluator type" type="string" value="capillary pressure, atmospheric gas over liquid" />
       </ParameterList>
-
       <ParameterList name="capillary_pressure_liq_ice" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="capillary pressure, water over ice" />
+        <Parameter name="evaluator type" type="string" value="capillary pressure, water over ice" />
         <ParameterList name="capillary pressure of ice-water" type="ParameterList">
           <Parameter name="smoothing width [K]" type="double" value="0.2" />
           <Parameter name="interfacial tension ice-water [mN m^-1]" type="double" value="33.1" />
           <Parameter name="interfacial tension air-water [mN m^-1]" type="double" value="72.7" />
           <Parameter name="latent heat [J kg^-1]" type="double" value="334000" />
         </ParameterList>
-        <ParameterList name="verbose object" type="ParameterList">
-          <Parameter name="verbosity level" type="string" value="low" />
-        </ParameterList>
       </ParameterList>
-
       <ParameterList name="molar_density_liquid" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="eos" />
+        <Parameter name="evaluator type" type="string" value="eos" />
         <Parameter name="EOS basis" type="string" value="both" />
         <Parameter name="molar density key" type="string" value="molar_density_liquid" />
         <Parameter name="mass density key" type="string" value="mass_density_liquid" />
         <ParameterList name="EOS parameters" type="ParameterList">
           <Parameter name="EOS type" type="string" value="liquid water" />
         </ParameterList>
-        <ParameterList name="verbose object" type="ParameterList">
-          <Parameter name="verbosity level" type="string" value="low" />
-        </ParameterList>
       </ParameterList>
-
       <ParameterList name="viscosity_liquid" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="viscosity" />
+        <Parameter name="evaluator type" type="string" value="viscosity" />
         <Parameter name="viscosity key" type="string" value="viscosity_liquid" />
         <ParameterList name="viscosity model parameters" type="ParameterList">
           <Parameter name="viscosity relation type" type="string" value="liquid water" />
         </ParameterList>
-        <ParameterList name="verbose object" type="ParameterList">
-          <Parameter name="verbosity level" type="string" value="low" />
-        </ParameterList>
       </ParameterList>
-
       <ParameterList name="molar_density_gas" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="eos" />
+        <Parameter name="evaluator type" type="string" value="eos" />
         <Parameter name="EOS basis" type="string" value="molar" />
         <Parameter name="molar density key" type="string" value="molar_density_gas" />
         <ParameterList name="EOS parameters" type="ParameterList">
@@ -346,49 +283,33 @@
             <Parameter name="EOS type" type="string" value="ideal gas" />
           </ParameterList>
         </ParameterList>
-        <ParameterList name="verbose object" type="ParameterList">
-          <Parameter name="verbosity level" type="string" value="low" />
-        </ParameterList>
       </ParameterList>
-
       <ParameterList name="molar_density_ice" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="eos" />
+        <Parameter name="evaluator type" type="string" value="eos" />
         <Parameter name="EOS basis" type="string" value="molar" />
         <Parameter name="molar density key" type="string" value="molar_density_ice" />
         <ParameterList name="EOS parameters" type="ParameterList">
           <Parameter name="EOS type" type="string" value="ice" />
         </ParameterList>
-        <ParameterList name="verbose object" type="ParameterList">
-          <Parameter name="verbosity level" type="string" value="low" />
-        </ParameterList>
       </ParameterList>
-
       <ParameterList name="internal_energy_liquid" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="iem" />
+        <Parameter name="evaluator type" type="string" value="iem" />
         <Parameter name="internal energy key" type="string" value="internal_energy_liquid" />
         <ParameterList name="IEM parameters" type="ParameterList">
           <Parameter name="IEM type" type="string" value="linear" />
           <Parameter name="heat capacity [J mol^-1 K^-1]" type="double" value="76" />
         </ParameterList>
-        <ParameterList name="verbose object" type="ParameterList">
-          <Parameter name="verbosity level" type="string" value="low" />
-        </ParameterList>
       </ParameterList>
-
       <ParameterList name="internal_energy_rock" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="iem" />
+        <Parameter name="evaluator type" type="string" value="iem" />
         <Parameter name="internal energy key" type="string" value="internal_energy_rock" />
         <ParameterList name="IEM parameters" type="ParameterList">
           <Parameter name="IEM type" type="string" value="linear" />
           <Parameter name="heat capacity [J kg^-1 K^-1]" type="double" value="620" />
         </ParameterList>
-        <ParameterList name="verbose object" type="ParameterList">
-          <Parameter name="verbosity level" type="string" value="low" />
-        </ParameterList>
       </ParameterList>
-
       <ParameterList name="internal_energy_ice" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="iem" />
+        <Parameter name="evaluator type" type="string" value="iem" />
         <Parameter name="internal energy key" type="string" value="internal_energy_ice" />
         <ParameterList name="IEM parameters" type="ParameterList">
           <Parameter name="IEM type" type="string" value="quadratic" />
@@ -396,13 +317,10 @@
           <Parameter name="heat capacity [J mol^-1 K^-1]" type="double" value="37.7841" />
           <Parameter name="quadratic b [J mol^-1 K^-2]" type="double" value="0.131932" />
         </ParameterList>
-        <ParameterList name="verbose object" type="ParameterList">
-          <Parameter name="verbosity level" type="string" value="low" />
-        </ParameterList>
       </ParameterList>
 
       <ParameterList name="base_porosity" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="independent variable" />
+        <Parameter name="evaluator type" type="string" value="independent variable" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="peat" type="ParameterList">
             <Parameter name="region" type="string" value="subsurface domain peat" />
@@ -423,13 +341,9 @@
             </ParameterList>
           </ParameterList>
         </ParameterList>
-        <ParameterList name="verbose object" type="ParameterList">
-          <Parameter name="verbosity level" type="string" value="low" />
-        </ParameterList>
       </ParameterList>
-
       <ParameterList name="porosity" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="compressible porosity" />
+        <Parameter name="evaluator type" type="string" value="compressible porosity" />
         <ParameterList name="compressible porosity model parameters" type="ParameterList">
           <ParameterList name="peat" type="ParameterList">
             <Parameter name="region" type="string" value="subsurface domain peat" />
@@ -441,9 +355,8 @@
           </ParameterList>
         </ParameterList>
       </ParameterList>
-
       <ParameterList name="permeability" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="independent variable" />
+        <Parameter name="evaluator type" type="string" value="independent variable" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="peat" type="ParameterList">
             <Parameter name="region" type="string" value="subsurface domain peat" />
@@ -464,13 +377,9 @@
             </ParameterList>
           </ParameterList>
         </ParameterList>
-        <ParameterList name="verbose object" type="ParameterList">
-          <Parameter name="verbosity level" type="string" value="low" />
-        </ParameterList>
       </ParameterList>
-
       <ParameterList name="density_rock" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="independent variable" />
+        <Parameter name="evaluator type" type="string" value="independent variable" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="peat" type="ParameterList">
             <Parameter name="region" type="string" value="subsurface domain peat" />
@@ -491,11 +400,7 @@
             </ParameterList>
           </ParameterList>
         </ParameterList>
-        <ParameterList name="verbose object" type="ParameterList">
-          <Parameter name="verbosity level" type="string" value="low" />
-        </ParameterList>
       </ParameterList>
-
     </ParameterList>
     <ParameterList name="initial conditions" type="ParameterList">
 

@@ -526,6 +526,7 @@
         <Parameter name="evaluator type" type="string" value="column sum evaluator" />
         <Parameter name="evaluator dependency key" type="string" value="transpiration" />
         <Parameter name="divide by density" type="bool" value="false" />
+        <Parameter name="include volume to surface area factor" type="bool" value="true" />
       </ParameterList>
       <ParameterList name="mass_source" type="ParameterList">
         <Parameter name="evaluator type" type="string" value="additive evaluator" />

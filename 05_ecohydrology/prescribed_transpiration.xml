@@ -270,6 +270,7 @@
         <Parameter name="evaluator type" type="string" value="column sum evaluator" />
         <Parameter name="summed key" type="string" value="transpiration" />
         <Parameter name="divide by density" type="bool" value="false" />
+        <Parameter name="include volume to surface area factor" type="bool" value="true" />
       </ParameterList>
 
       <ParameterList name="surface-potential_evapotranspiration" type="ParameterList">

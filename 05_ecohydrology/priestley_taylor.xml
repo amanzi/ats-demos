@@ -379,6 +379,7 @@
         <Parameter name="evaluator type" type="string" value="column sum evaluator" />
         <Parameter name="summed key" type="string" value="transpiration" />
         <Parameter name="divide by density" type="bool" value="true" />
+        <Parameter name="include volume to surface area factor" type="bool" value="true" />
         <Parameter name="units" type="string" value="m s^-1" />
       </ParameterList>
       <ParameterList name="transpiration" type="ParameterList">

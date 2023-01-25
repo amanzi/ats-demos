@@ -392,7 +392,7 @@
         <Parameter name="units" type="string" value="m s^-1" />
       </ParameterList>
 
-      <ParameterList name="canopy-fracwet" type="ParameterList">
+      <ParameterList name="canopy-drainage" type="ParameterList">
         <Parameter name="evaluator type" type="string" value="canopy drainage" />
         <Parameter name="drainage key" type="string" value="canopy-drainage" />
         <Parameter name="fraction wet key" type="string" value="canopy-fracwet" />
@@ -523,6 +523,7 @@
         <Parameter name="evaluator type" type="string" value="transpiration distribution via rooting depth" />
         <Parameter name="potential transpiration key" type="string" value="canopy-potential_transpiration_mols" />
       </ParameterList>
+
       <ParameterList name="plant_wilting_factor" type="ParameterList">
         <Parameter name="evaluator type" type="string" value="plant wilting factor" />
       </ParameterList>
@@ -550,6 +551,7 @@
         <Parameter name="evaluator type" type="string" value="column sum evaluator" />
         <Parameter name="evaluator dependency key" type="string" value="transpiration" />
         <Parameter name="divide by density" type="bool" value="true" />
+        <Parameter name="include volume to surface area factor" type="bool" value="true" />
       </ParameterList>
 
       <ParameterList name="surface-total_evapotranspiration" type="ParameterList">
@@ -843,6 +845,33 @@
       <Parameter name="times start period stop" type="Array(double)" value="{ 0, 1,-1}" />
       <Parameter name="times start period stop units" type="string" value="d" />
       <ParameterList name="observed quantities" type="ParameterList">
+        <!-- water content [mol] -->
+        <ParameterList name="surface water content [mol]" type="ParameterList">
+          <Parameter name="variable" type="string" value="surface-water_content" />
+          <Parameter name="region" type="string" value="surface domain" />
+          <Parameter name="functional" type="string" value="extensive integral" />
+          <Parameter name="location name" type="string" value="cell" />
+        </ParameterList>
+        <ParameterList name="subsurface water content [mol]" type="ParameterList">
+          <Parameter name="variable" type="string" value="water_content" />
+          <Parameter name="region" type="string" value="computational domain" />
+          <Parameter name="functional" type="string" value="extensive integral" />
+          <Parameter name="location name" type="string" value="cell" />
+        </ParameterList>
+        <ParameterList name="snow water content [mol]" type="ParameterList">
+          <Parameter name="variable" type="string" value="snow-water_content" />
+          <Parameter name="region" type="string" value="surface domain" />
+          <Parameter name="functional" type="string" value="extensive integral" />
+          <Parameter name="location name" type="string" value="cell" />
+        </ParameterList>
+        <ParameterList name="canopy water content [mol]" type="ParameterList">
+          <Parameter name="variable" type="string" value="canopy-water_content" />
+          <Parameter name="region" type="string" value="surface domain" />
+          <Parameter name="functional" type="string" value="extensive integral" />
+          <Parameter name="location name" type="string" value="cell" />
+        </ParameterList>
+
+        <!-- global fluxes -->
         <ParameterList name="runoff generation [mol d^-1]" type="ParameterList">
           <Parameter name="variable" type="string" value="surface-water_flux" />
           <Parameter name="direction normalized flux" type="bool" value="true" />
@@ -872,53 +901,33 @@
           <Parameter name="location name" type="string" value="cell" />
           <Parameter name="time integrated" type="bool" value="true" />
         </ParameterList>
-        <ParameterList name="surface water content [mol]" type="ParameterList">
-          <Parameter name="variable" type="string" value="surface-water_content" />
-          <Parameter name="region" type="string" value="surface domain" />
-          <Parameter name="functional" type="string" value="extensive integral" />
-          <Parameter name="location name" type="string" value="cell" />
-        </ParameterList>
-        <ParameterList name="subsurface water content [mol]" type="ParameterList">
-          <Parameter name="variable" type="string" value="water_content" />
-          <Parameter name="region" type="string" value="computational domain" />
-          <Parameter name="functional" type="string" value="extensive integral" />
-          <Parameter name="location name" type="string" value="cell" />
-        </ParameterList>
-        <ParameterList name="snow water content [mol]" type="ParameterList">
-          <Parameter name="variable" type="string" value="snow-water_content" />
-          <Parameter name="region" type="string" value="surface domain" />
-          <Parameter name="functional" type="string" value="extensive integral" />
-          <Parameter name="location name" type="string" value="cell" />
-        </ParameterList>
-        <ParameterList name="canopy water content [mol]" type="ParameterList">
-          <Parameter name="variable" type="string" value="canopy-water_content" />
-          <Parameter name="region" type="string" value="surface domain" />
-          <Parameter name="functional" type="string" value="extensive integral" />
-          <Parameter name="location name" type="string" value="cell" />
-        </ParameterList>
-        <ParameterList name="snow evaporation [m d^-1]" type="ParameterList">
-          <Parameter name="variable" type="string" value="snow-evaporation" />
-          <Parameter name="region" type="string" value="surface domain" />
-          <Parameter name="functional" type="string" value="average" />
-          <Parameter name="location name" type="string" value="cell" />
-          <Parameter name="time integrated" type="bool" value="true" />
-        </ParameterList>
-        <ParameterList name="surface evaporation [m d^-1]" type="ParameterList">
-          <Parameter name="variable" type="string" value="surface-evaporation" />
-          <Parameter name="region" type="string" value="surface domain" />
-          <Parameter name="functional" type="string" value="average" />
-          <Parameter name="location name" type="string" value="cell" />
-          <Parameter name="time integrated" type="bool" value="true" />
-        </ParameterList>
-        <ParameterList name="transpiration [m d^-1]" type="ParameterList">
-          <Parameter name="variable" type="string" value="surface-transpiration" />
-          <Parameter name="region" type="string" value="surface domain" />
-          <Parameter name="functional" type="string" value="average" />
-          <Parameter name="location name" type="string" value="cell" />
-          <Parameter name="time integrated" type="bool" value="true" />
-        </ParameterList>
+
+        <!-- canopy fluxes -->
         <ParameterList name="canopy evaporation [m d^-1]" type="ParameterList">
           <Parameter name="variable" type="string" value="canopy-evaporation" />
+          <Parameter name="region" type="string" value="surface domain" />
+          <Parameter name="functional" type="string" value="average" />
+          <Parameter name="location name" type="string" value="cell" />
+          <Parameter name="time integrated" type="bool" value="true" />
+        </ParameterList>
+        <ParameterList name="canopy drainage [m d^-1]" type="ParameterList">
+          <Parameter name="variable" type="string" value="canopy-drainage" />
+          <Parameter name="region" type="string" value="surface domain" />
+          <Parameter name="functional" type="string" value="average" />
+          <Parameter name="location name" type="string" value="cell" />
+          <Parameter name="time integrated" type="bool" value="true" />
+        </ParameterList>
+        <ParameterList name="canopy interception [m d^-1]" type="ParameterList">
+          <Parameter name="variable" type="string" value="canopy-interception" />
+          <Parameter name="region" type="string" value="surface domain" />
+          <Parameter name="functional" type="string" value="average" />
+          <Parameter name="location name" type="string" value="cell" />
+          <Parameter name="time integrated" type="bool" value="true" />
+        </ParameterList>
+        
+        <!-- snow fluxes -->
+        <ParameterList name="snow evaporation [m d^-1]" type="ParameterList">
+          <Parameter name="variable" type="string" value="snow-evaporation" />
           <Parameter name="region" type="string" value="surface domain" />
           <Parameter name="functional" type="string" value="average" />
           <Parameter name="location name" type="string" value="cell" />
@@ -928,6 +937,45 @@
           <Parameter name="variable" type="string" value="snow-melt" />
           <Parameter name="region" type="string" value="surface domain" />
           <Parameter name="functional" type="string" value="average" />
+          <Parameter name="location name" type="string" value="cell" />
+          <Parameter name="time integrated" type="bool" value="true" />
+        </ParameterList>
+        <ParameterList name="snow throughfall + canopy drainage [m d^-1]" type="ParameterList">
+          <Parameter name="variable" type="string" value="canopy-throughfall_drainage_snow" />
+          <Parameter name="region" type="string" value="surface domain" />
+          <Parameter name="functional" type="string" value="average" />
+          <Parameter name="location name" type="string" value="cell" />
+          <Parameter name="time integrated" type="bool" value="true" />
+        </ParameterList>
+
+        <!-- surface fluxes -->
+        <ParameterList name="surface evaporation [m d^-1]" type="ParameterList">
+          <Parameter name="variable" type="string" value="surface-evaporation" />
+          <Parameter name="region" type="string" value="surface domain" />
+          <Parameter name="functional" type="string" value="average" />
+          <Parameter name="location name" type="string" value="cell" />
+          <Parameter name="time integrated" type="bool" value="true" />
+        </ParameterList>
+        <ParameterList name="water throughfall + canopy drainage [m d^-1]" type="ParameterList">
+          <Parameter name="variable" type="string" value="canopy-throughfall_drainage_rain" />
+          <Parameter name="region" type="string" value="surface domain" />
+          <Parameter name="functional" type="string" value="average" />
+          <Parameter name="location name" type="string" value="cell" />
+          <Parameter name="time integrated" type="bool" value="true" />
+        </ParameterList>
+
+        <!-- subsurface fluxes -->
+        <ParameterList name="transpiration [m d^-1]" type="ParameterList">
+          <Parameter name="variable" type="string" value="surface-transpiration" />
+          <Parameter name="region" type="string" value="surface domain" />
+          <Parameter name="functional" type="string" value="average" />
+          <Parameter name="location name" type="string" value="cell" />
+          <Parameter name="time integrated" type="bool" value="true" />
+        </ParameterList>
+        <ParameterList name="exfiltration [mol d^-1]" type="ParameterList">
+          <Parameter name="variable" type="string" value="surface-surface_subsurface_flux" />
+          <Parameter name="region" type="string" value="surface domain" />
+          <Parameter name="functional" type="string" value="extensive integral" />
           <Parameter name="location name" type="string" value="cell" />
           <Parameter name="time integrated" type="bool" value="true" />
         </ParameterList>

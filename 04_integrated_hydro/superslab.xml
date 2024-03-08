@@ -177,37 +177,6 @@
         <Parameter name="hydrostatic water density [kg m^-3]" type="double" value="997" />
       </ParameterList>
 
-      <ParameterList name="water retention evaluator" type="ParameterList">
-        <Parameter name="minimum rel perm cutoff" type="double" value=" 0" />
-        <Parameter name="use surface rel perm" type="bool" value="true" />
-        <ParameterList name="WRM parameters" type="ParameterList">
-          <ParameterList name="rest domain" type="ParameterList">
-            <Parameter name="region" type="string" value="background soil" />
-            <Parameter name="WRM Type" type="string" value="van Genuchten" />
-            <Parameter name="van Genuchten alpha [Pa^-1]" type="double" value="0.0006116" />
-            <Parameter name="van Genuchten n [-]" type="double" value=" 2" />
-            <Parameter name="residual saturation [-]" type="double" value="0.2" />
-            <Parameter name="smoothing interval width [saturation]" type="double" value="0.05" />
-          </ParameterList>
-          <ParameterList name="slab 1" type="ParameterList">
-            <Parameter name="region" type="string" value="slab 1" />
-            <Parameter name="WRM Type" type="string" value="van Genuchten" />
-            <Parameter name="van Genuchten alpha [Pa^-1]" type="double" value="0.0001019" />
-            <Parameter name="van Genuchten n [-]" type="double" value=" 3" />
-            <Parameter name="residual saturation [-]" type="double" value="0.3" />
-            <Parameter name="smoothing interval width [saturation]" type="double" value="0.05" />
-          </ParameterList>
-          <ParameterList name="slab 2" type="ParameterList">
-            <Parameter name="region" type="string" value="slab 2" />
-            <Parameter name="WRM Type" type="string" value="van Genuchten" />
-            <Parameter name="van Genuchten alpha [Pa^-1]" type="double" value="0.0001019" />
-            <Parameter name="van Genuchten n [-]" type="double" value=" 3" />
-            <Parameter name="residual saturation [-]" type="double" value="0.3" />
-            <Parameter name="smoothing interval width [saturation]" type="double" value="0.05" />
-          </ParameterList>
-        </ParameterList>
-      </ParameterList>
-
     </ParameterList>
 
     <ParameterList name="surface flow" type="ParameterList">
@@ -361,6 +330,20 @@
           <Parameter name="slope regularization epsilon" type="double" value=" 0" />
         </ParameterList>
       </ParameterList>
+      <ParameterList name="relative_permeability" type="ParameterList">
+        <Parameter name="evaluator type" type="string" value="relative permeability, van Genuchten" />
+        <Parameter name="model parameters" type="string" value="WRM parameters" />
+        <Parameter name="minimum rel perm cutoff" type="double" value=" 0" />
+        <Parameter name="use surface rel perm" type="bool" value="true" />
+      </ParameterList>
+      <ParameterList name="saturation_liquid" type="ParameterList">
+        <Parameter name="model parameters" type="string" value="WRM parameters" />
+        <Parameter name="evaluator type" type="string" value="WRM" />
+      </ParameterList>
+      <ParameterList name="saturation_gas" type="ParameterList">
+        <Parameter name="model parameters" type="string" value="WRM parameters" />
+        <Parameter name="evaluator type" type="string" value="WRM" />
+      </ParameterList>
     </ParameterList>
     <ParameterList name="initial conditions" type="ParameterList">
 
@@ -372,6 +355,34 @@
         <Parameter name="value" type="Array(double)" value="{ 0, 0,-9.81}" />
       </ParameterList>
 
+    </ParameterList>
+    <ParameterList name="model parameters" type="ParameterList">
+      <ParameterList name="WRM parameters" type="ParameterList">
+        <ParameterList name="rest domain" type="ParameterList">
+          <Parameter name="region" type="string" value="background soil" />
+          <Parameter name="wrm type" type="string" value="van Genuchten" />
+          <Parameter name="van Genuchten alpha [Pa^-1]" type="double" value="0.0006116" />
+          <Parameter name="van Genuchten n [-]" type="double" value=" 2" />
+          <Parameter name="residual saturation [-]" type="double" value="0.2" />
+          <Parameter name="smoothing interval width [saturation]" type="double" value="0.05" />
+        </ParameterList>
+        <ParameterList name="slab 1" type="ParameterList">
+          <Parameter name="region" type="string" value="slab 1" />
+          <Parameter name="wrm type" type="string" value="van Genuchten" />
+          <Parameter name="van Genuchten alpha [Pa^-1]" type="double" value="0.0001019" />
+          <Parameter name="van Genuchten n [-]" type="double" value=" 3" />
+          <Parameter name="residual saturation [-]" type="double" value="0.3" />
+          <Parameter name="smoothing interval width [saturation]" type="double" value="0.05" />
+        </ParameterList>
+        <ParameterList name="slab 2" type="ParameterList">
+          <Parameter name="region" type="string" value="slab 2" />
+          <Parameter name="wrm type" type="string" value="van Genuchten" />
+          <Parameter name="van Genuchten alpha [Pa^-1]" type="double" value="0.0001019" />
+          <Parameter name="van Genuchten n [-]" type="double" value=" 3" />
+          <Parameter name="residual saturation [-]" type="double" value="0.3" />
+          <Parameter name="smoothing interval width [saturation]" type="double" value="0.05" />
+        </ParameterList>
+      </ParameterList>
     </ParameterList>
   </ParameterList>
   <ParameterList name="visualization">

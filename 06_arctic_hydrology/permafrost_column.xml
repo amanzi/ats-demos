@@ -131,6 +131,7 @@
           <Parameter name="initial time step [s]" type="double" value="86400" />
         </ParameterList>
       </ParameterList>
+
     </ParameterList>
 
     <ParameterList name="permafrost surface and subsurface" type="ParameterList">
@@ -172,6 +173,7 @@
           <Parameter name="maximum number of iteration" type="int" value="10" />
         </ParameterList>
       </ParameterList>
+
     </ParameterList>
 
     <ParameterList name="subsurface flow" type="ParameterList">
@@ -201,32 +203,6 @@
         <Parameter name="restart file" type="string" value="../data/arctic_hydrology_freezeup-checkpoint_final.h5" />
       </ParameterList>
 
-      <ParameterList name="water retention evaluator" type="ParameterList">
-        <Parameter name="minimum rel perm cutoff" type="double" value=" 0" />
-        <Parameter name="use surface rel perm" type="bool" value="true" />
-        <ParameterList name="WRM parameters" type="ParameterList">
-          <ParameterList name="peat" type="ParameterList">
-            <Parameter name="region" type="string" value="subsurface domain peat" />
-            <Parameter name="WRM Type" type="string" value="van Genuchten" />
-            <Parameter name="van Genuchten alpha [Pa^-1]" type="double" value="0.0005" />
-            <Parameter name="van Genuchten n [-]" type="double" value="1.39" />
-            <Parameter name="residual saturation [-]" type="double" value="0.05" />
-            <Parameter name="smoothing interval width [saturation]" type="double" value="0.05" />
-          </ParameterList>
-          <ParameterList name="mineral" type="ParameterList">
-            <Parameter name="region" type="string" value="subsurface domain mineral" />
-            <Parameter name="WRM Type" type="string" value="van Genuchten" />
-            <Parameter name="van Genuchten alpha [Pa^-1]" type="double" value="2e-05" />
-            <Parameter name="van Genuchten n [-]" type="double" value="1.58" />
-            <Parameter name="residual saturation [-]" type="double" value="0.2" />
-            <Parameter name="smoothing interval width [saturation]" type="double" value="0.05" />
-          </ParameterList>
-        </ParameterList>
-        <ParameterList name="permafrost model parameters" type="ParameterList">
-          <Parameter name="permafrost WRM type" type="string" value="fpd permafrost model" />
-          <Parameter name="minimum dsi_dpressure magnitude" type="double" value="1e-12" />
-        </ParameterList>
-      </ParameterList>
     </ParameterList>
 
     <ParameterList name="surface flow" type="ParameterList">
@@ -248,6 +224,7 @@
       <ParameterList name="initial condition" type="ParameterList">
         <Parameter name="initialize surface head from subsurface" type="bool" value="true" />
       </ParameterList>
+
     </ParameterList>
 
     <ParameterList name="subsurface energy" type="ParameterList">
@@ -303,6 +280,7 @@
       <ParameterList name="enthalpy evaluator" type="ParameterList">
         <Parameter name="include work term" type="bool" value="false" />
       </ParameterList>
+
     </ParameterList>
 
     <ParameterList name="surface energy" type="ParameterList">
@@ -337,6 +315,7 @@
       <ParameterList name="enthalpy evaluator" type="ParameterList">
         <Parameter name="include work term" type="bool" value="false" />
       </ParameterList>
+
     </ParameterList>
 
     <ParameterList name="SEB" type="ParameterList">
@@ -365,6 +344,7 @@
       <ParameterList name="inverse" type="ParameterList">
         <Parameter name="preconditioning method" type="string" value="diagonal" />
       </ParameterList>
+
     </ParameterList>
 
   </ParameterList>
@@ -731,14 +711,38 @@
           <Parameter name="slope regularization epsilon" type="double" value="0.01" />
         </ParameterList>
       </ParameterList>
-
       <ParameterList name="surface-thaw_depth" type="ParameterList">
         <Parameter name="evaluator type" type="string" value="thaw depth" />
       </ParameterList>
       <ParameterList name="surface-water_table" type="ParameterList">
         <Parameter name="evaluator type" type="string" value="water table depth" />
       </ParameterList>
-
+      <ParameterList name="surface-soil_resistance" type="ParameterList">
+        <Parameter name="evaluator type" type="string" value="soil resistance, Sakagucki-Zeng" />
+        <Parameter name="model parameters" type="string" value="WRM parameters" />
+      </ParameterList>
+      <ParameterList name="relative_permeability" type="ParameterList">
+        <Parameter name="evaluator type" type="string" value="relative permeability, van Genuchten" />
+        <Parameter name="model parameters" type="string" value="WRM parameters" />
+        <Parameter name="minimum rel perm cutoff" type="double" value=" 0" />
+        <Parameter name="use surface rel perm" type="bool" value="true" />
+      </ParameterList>
+      <ParameterList name="saturation_liquid" type="ParameterList">
+        <Parameter name="model parameters" type="string" value="WRM parameters" />
+        <Parameter name="evaluator type" type="string" value="permafrost WRM" />
+        <ParameterList name="permafrost model parameters" type="ParameterList">
+          <Parameter name="permafrost wrm type" type="string" value="fpd permafrost model" />
+          <Parameter name="minimum dsi_dpressure magnitude" type="double" value="1e-12" />
+        </ParameterList>
+      </ParameterList>
+      <ParameterList name="saturation_gas" type="ParameterList">
+        <Parameter name="model parameters" type="string" value="WRM parameters" />
+        <Parameter name="evaluator type" type="string" value="permafrost WRM" />
+        <ParameterList name="permafrost model parameters" type="ParameterList">
+          <Parameter name="permafrost wrm type" type="string" value="fpd permafrost model" />
+          <Parameter name="minimum dsi_dpressure magnitude" type="double" value="1e-12" />
+        </ParameterList>
+      </ParameterList>
     </ParameterList>
     <ParameterList name="initial conditions" type="ParameterList">
 
@@ -758,20 +762,40 @@
           <Parameter name="water transition depth [m]" type="double" value="0.02" />
           <Parameter name="albedo of bare ground [-]" type="double" value="0.135" />
           <Parameter name="emissivity of bare ground [-]" type="double" value="0.92" />
-          <Parameter name="dessicated zone thickness [m]" type="double" value="0.1" />
-          <Parameter name="Clapp and Hornberger b [-]" type="double" value=" 3" />
         </ParameterList>
       </ParameterList>
 
     </ParameterList>
+    <ParameterList name="model parameters" type="ParameterList">
+      <ParameterList name="WRM parameters" type="ParameterList">
+        <ParameterList name="peat" type="ParameterList">
+          <Parameter name="region" type="string" value="subsurface domain peat" />
+          <Parameter name="wrm type" type="string" value="van Genuchten" />
+          <Parameter name="van Genuchten alpha [Pa^-1]" type="double" value="0.0005" />
+          <Parameter name="van Genuchten n [-]" type="double" value="1.39" />
+          <Parameter name="residual saturation [-]" type="double" value="0.05" />
+          <Parameter name="smoothing interval width [saturation]" type="double" value="0.05" />
+          <Parameter name="dessicated zone thickness [m]" type="double" value="0.1" />
+        </ParameterList>
+        <ParameterList name="mineral" type="ParameterList">
+          <Parameter name="region" type="string" value="subsurface domain mineral" />
+          <Parameter name="wrm type" type="string" value="van Genuchten" />
+          <Parameter name="van Genuchten alpha [Pa^-1]" type="double" value="2e-05" />
+          <Parameter name="van Genuchten n [-]" type="double" value="1.58" />
+          <Parameter name="residual saturation [-]" type="double" value="0.2" />
+          <Parameter name="smoothing interval width [saturation]" type="double" value="0.05" />
+          <Parameter name="dessicated zone thickness [m]" type="double" value="0.1" />
+        </ParameterList>
+      </ParameterList>
+    </ParameterList>
   </ParameterList>
   <ParameterList name="visualization" type="ParameterList">
     <ParameterList name="domain" type="ParameterList">
-      <Parameter name="times start period stop" type="Array(double)" value="{ 0, 10,-1}" />
+      <Parameter name="times start period stop" type="Array(double)" value="{ 0,10,-1}" />
       <Parameter name="times start period stop units" type="string" value="d" />
     </ParameterList>
     <ParameterList name="surface" type="ParameterList">
-      <Parameter name="times start period stop" type="Array(double)" value="{ 0, 10,-1}" />
+      <Parameter name="times start period stop" type="Array(double)" value="{ 0,10,-1}" />
       <Parameter name="times start period stop units" type="string" value="d" />
       <Parameter name="aliased domains" type="Array(string)" value="{snow}" />
     </ParameterList>

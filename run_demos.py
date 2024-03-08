@@ -59,6 +59,9 @@ def commandline_options():
     parser.add_argument('-t', '--tests', nargs="+", default=[],
                         help='space separated list of test names')
 
+    parser.add_argument('--exclude', nargs="+", default=[],
+                        help='space separated list of test names to exclude')
+
     parser.add_argument('--timeout', nargs=1, default=None,
                         help="test timeout (for assuming a job has hung and "
                         "needs to be killed)")
@@ -124,6 +127,7 @@ def main(options):
             tm.generate_tests(filename,
                               options.suites,
                               options.tests,
+                              options.exclude,
                               options.timeout,
                               False,
                               testlog)

@@ -673,14 +673,14 @@
         <Parameter name="model parameters" type="string" value="WRM parameters" />
       </ParameterList>
       <ParameterList name="relative_permeability" type="ParameterList">
-        <Parameter name="evaluator type" type="string" value="relative permeability, van Genuchten" />
+        <Parameter name="evaluator type" type="string" value="relative permeability, water retention model" />
         <Parameter name="model parameters" type="string" value="WRM parameters" />
         <Parameter name="minimum rel perm cutoff" type="double" value=" 0" />
         <Parameter name="use surface rel perm" type="bool" value="true" />
       </ParameterList>
       <ParameterList name="saturation_liquid" type="ParameterList">
         <Parameter name="model parameters" type="string" value="WRM parameters" />
-        <Parameter name="evaluator type" type="string" value="permafrost WRM" />
+        <Parameter name="evaluator type" type="string" value="water retention model with ice" />
         <ParameterList name="permafrost model parameters" type="ParameterList">
           <Parameter name="permafrost wrm type" type="string" value="fpd permafrost model" />
           <Parameter name="minimum dsi_dpressure magnitude" type="double" value="1e-12" />
@@ -688,7 +688,7 @@
       </ParameterList>
       <ParameterList name="saturation_gas" type="ParameterList">
         <Parameter name="model parameters" type="string" value="WRM parameters" />
-        <Parameter name="evaluator type" type="string" value="permafrost WRM" />
+        <Parameter name="evaluator type" type="string" value="water retention model with ice" />
         <ParameterList name="permafrost model parameters" type="ParameterList">
           <Parameter name="permafrost wrm type" type="string" value="fpd permafrost model" />
           <Parameter name="minimum dsi_dpressure magnitude" type="double" value="1e-12" />
@@ -738,12 +738,12 @@
 
   <ParameterList name="visualization">
     <ParameterList name="domain" type="ParameterList">
-      <Parameter name="times start period stop" type="Array(double)" value="{274, 10,-1}" />
+      <Parameter name="times start period stop" type="Array(double)" value="{274,10,-1}" />
       <Parameter name="times start period stop units" type="string" value="d" />
       <Parameter name="time units" type="string" value="d" />
     </ParameterList>
     <ParameterList name="surface" type="ParameterList">
-      <Parameter name="times start period stop" type="Array(double)" value="{274, 10,-1}" />
+      <Parameter name="times start period stop" type="Array(double)" value="{274,10,-1}" />
       <Parameter name="times start period stop units" type="string" value="d" />
       <Parameter name="time units" type="string" value="d" />
       <Parameter name="aliased domains" type="Array(string)" value="{canopy, snow}" />

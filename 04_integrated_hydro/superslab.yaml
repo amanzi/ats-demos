@@ -1,0 +1,308 @@
+%YAML 1.1
+---
+ANONYMOUS:
+  regions: 
+    subsurface domain: 
+      'region: all': { }
+    surface domain: 
+      'region: all': { }
+    surface outlet: 
+      'region: box': 
+        low coordinate: [0.00000000000000000e+00, 0.00000000000000000e+00]
+        high coordinate: [0.00000000000000000e+00, 1.00000000000000000e+00]
+    surface: 
+      'region: labeled set': 
+        label: '2'
+        file: ../data/super_slab.exo
+        format: Exodus II
+        entity: face
+    background soil: 
+      'region: labeled set': 
+        label: '10'
+        file: ../data/super_slab.exo
+        format: Exodus II
+        entity: Cell
+    slab 1: 
+      'region: labeled set': 
+        label: '12'
+        file: ../data/super_slab.exo
+        format: Exodus II
+        entity: Cell
+    slab 1 outlet: 
+      'region: box': 
+        low coordinate: [7.99000000000000021e+00, 0.00000000000000000e+00]
+        high coordinate: [8.00999999999999979e+00, 1.00000000000000000e+00]
+    slab 2: 
+      'region: labeled set': 
+        label: '11'
+        file: ../data/super_slab.exo
+        format: Exodus II
+        entity: Cell
+    slab 2 outlet: 
+      'region: box': 
+        low coordinate: [3.99900000000000020e+01, 0.00000000000000000e+00]
+        high coordinate: [4.00099999999999980e+01, 1.00000000000000000e+00]
+  mesh: 
+    surface: 
+      mesh type: surface
+      surface parameters: 
+        surface sideset name: surface
+      surface: { }
+    domain: 
+      mesh type: read mesh file
+      build columns from set: surface
+      read mesh file parameters: 
+        file: ../data/super_slab.exo
+        format: Exodus II
+  cycle driver: 
+    start time: 0.00000000000000000e+00
+    start time units: s
+    end time: 5.00000000000000000e+00
+    end time units: h
+    PK tree: 
+      Top level MPC: 
+        PK type: coupled water
+        subsurface flow: 
+          PK type: richards flow
+        surface flow: 
+          PK type: 'overland flow, pressure basis'
+  PKs: 
+    Top level MPC: 
+      PK type: coupled water
+      PKs order: [subsurface flow, surface flow]
+      water delegate: 
+        modify predictor damp and cap the water spurt: true
+        damp and cap the water spurt: true
+        cap over atmospheric: 1.00000000000000002e-03
+      inverse: 
+        preconditioning method: block ilu
+        iterative method: gmres
+        gmres parameters: 
+          preconditioning strategy: left
+          error tolerance: 9.99999999999999955e-07
+          convergence criteria: [relative residual, make one iteration]
+          maximum number of iteration: 10
+      time integrator: 
+        extrapolate initial guess: true
+        solver type: nka_bt_ats
+        timestep controller type: smarter
+        nka_bt_ats parameters: 
+          nka lag iterations: 2
+          max backtrack steps: 5
+          backtrack lag: 0
+          backtrack factor: 5.00000000000000000e-01
+          backtrack tolerance: 1.00000000000000005e-04
+          nonlinear tolerance: 9.99999999999999955e-07
+          diverged tolerance: 1.00000000000000000e+05
+          limit iterations: 21
+        timestep controller smarter parameters: 
+          max iterations: 18
+          min iterations: 10
+          time step reduction factor: 5.00000000000000000e-01
+          time step increase factor: 1.25000000000000000e+00
+          max time step: 1.00000000000000000e+10
+          min time step: 1.00000000000000004e-10
+          growth wait after fail: 2
+          count before increasing increase factor: 2
+          'initial time step [s]': 1.00000000000000006e-01
+    subsurface flow: 
+      PK type: richards flow
+      primary variable key: pressure
+      relative permeability method: upwind with Darcy flux
+      permeability rescaling: 1.00000000000000000e+07
+      surface rel perm strategy: clobber
+      'max valid change in saturation in a time step [-]': 1.00000000000000006e-01
+      diffusion: 
+        discretization primary: 'mfd: two-point flux approximation'
+      diffusion preconditioner: 
+        include Newton correction: true
+      boundary conditions: { }
+      initial condition: 
+        'hydrostatic head [m]': -5.00000000000000000e+00
+        'hydrostatic water density [kg m^-3]': 9.97000000000000000e+02
+    surface flow: 
+      PK type: 'overland flow, pressure basis'
+      primary variable key: surface-pressure
+      domain name: surface
+      source term: true
+      source term is differentiable: true
+      diffusion: 
+        discretization primary: 'fv: default'
+      upwinding: 
+        upwind type: manning upwind
+      diffusion preconditioner: 
+        include Newton correction: true
+      boundary conditions: 
+        critical depth: 
+          outlet: 
+            regions: [surface outlet]
+      initial condition: 
+        initialize surface head from subsurface: true
+  state: 
+    evaluators: 
+      surface-water_source: 
+        evaluator type: independent variable
+        function: 
+          domain: 
+            region: surface domain
+            component: cell
+            function: 
+              function-tabular: 
+                x values: [0.00000000000000000e+00, 1.08000000000000000e+04]
+                y values: [1.38888880000000006e-05, 0.00000000000000000e+00]
+                forms: [constant]
+      surface-source_molar_density: 
+        evaluator type: independent variable constant
+        value: 5.53473782999999967e+04
+      surface-ponded_depth: 
+        evaluator type: ponded depth
+      surface-water_content: 
+        evaluator type: overland pressure water content
+      water_content: 
+        evaluator type: richards water content
+      capillary_pressure_gas_liq: 
+        evaluator type: 'capillary pressure, atmospheric gas over liquid'
+      surface-mass_density_liquid: 
+        evaluator type: independent variable constant
+        value: 9.97000000000000000e+02
+      surface-molar_density_liquid: 
+        evaluator type: independent variable constant
+        value: 5.53473782999999967e+04
+      mass_density_liquid: 
+        evaluator type: independent variable constant
+        value: 9.97000000000000000e+02
+      molar_density_liquid: 
+        evaluator type: independent variable constant
+        value: 5.53473782999999967e+04
+      viscosity_liquid: 
+        evaluator type: independent variable constant
+        value: 8.89999999999999949e-04
+      surface-relative_permeability: 
+        evaluator type: independent variable constant
+        value: 1.00000000000000000e+00
+      surface-manning_coefficient: 
+        evaluator type: independent variable constant
+        value: 3.59999999999999990e-03
+      base_porosity: 
+        evaluator type: independent variable constant
+        value: 1.00000000000000006e-01
+      porosity: 
+        evaluator type: compressible porosity
+        compressible porosity model parameters: 
+          subsurface domain: 
+            region: subsurface domain
+            'pore compressibility [Pa^-1]': 1.01936799999999995e-09
+            'pore compressibility inflection point [Pa^-1]': 0.00000000000000000e+00
+      permeability: 
+        evaluator type: independent variable
+        constant in time: true
+        function: 
+          rest domain: 
+            region: background soil
+            component: cell
+            function: 
+              function-constant: 
+                value: 2.52009999999999991e-10
+          slab 1: 
+            region: slab 1
+            component: cell
+            function: 
+              function-constant: 
+                value: 6.30019999999999975e-13
+          slab 2: 
+            region: slab 2
+            component: cell
+            function: 
+              function-constant: 
+                value: 2.52009999999999991e-14
+      surface-overland_conductivity: 
+        evaluator type: overland conductivity
+        overland conductivity model: 
+          Manning exponent: 6.66666666667000030e-01
+          slope regularization epsilon: 0.00000000000000000e+00
+      relative_permeability: 
+        evaluator type: 'relative permeability, water retention model'
+        model parameters: WRM parameters
+        minimum rel perm cutoff: 0.00000000000000000e+00
+        use surface rel perm: true
+      saturation_liquid: 
+        model parameters: WRM parameters
+        evaluator type: water retention model
+      saturation_gas: 
+        model parameters: WRM parameters
+        evaluator type: water retention model
+    initial conditions: 
+      atmospheric_pressure: 
+        value: 1.01325000000000000e+05
+      gravity: 
+        value: [0.00000000000000000e+00, 0.00000000000000000e+00, -9.81000000000000050e+00]
+    model parameters: 
+      WRM parameters: 
+        rest domain: 
+          region: background soil
+          wrm type: van Genuchten
+          'van Genuchten alpha [Pa^-1]': 6.11600000000000013e-04
+          'van Genuchten n [-]': 2.00000000000000000e+00
+          'residual saturation [-]': 2.00000000000000011e-01
+          'smoothing interval width [saturation]': 1.00000000000000002e-02
+        slab 1: 
+          region: slab 1
+          wrm type: van Genuchten
+          'van Genuchten alpha [Pa^-1]': 1.01899999999999997e-04
+          'van Genuchten n [-]': 3.00000000000000000e+00
+          'residual saturation [-]': 2.99999999999999989e-01
+          'smoothing interval width [saturation]': 1.00000000000000002e-02
+        slab 2: 
+          region: slab 2
+          wrm type: van Genuchten
+          'van Genuchten alpha [Pa^-1]': 1.01899999999999997e-04
+          'van Genuchten n [-]': 3.00000000000000000e+00
+          'residual saturation [-]': 2.99999999999999989e-01
+          'smoothing interval width [saturation]': 1.00000000000000002e-02
+  visualization: 
+    domain: 
+      times start period stop: [0.00000000000000000e+00, 1.80000000000000000e+03, -1.00000000000000000e+00]
+    surface: 
+      times start period stop: [0.00000000000000000e+00, 1.80000000000000000e+03, -1.00000000000000000e+00]
+  checkpoint: 
+    times start period stop: [0.00000000000000000e+00, 3.60000000000000000e+03, -1.00000000000000000e+00]
+  observations: 
+    benchmark: 
+      observation output filename: observations.dat
+      time units: h
+      times start period stop: [0.00000000000000000e+00, 6.00000000000000000e+02, -1.00000000000000000e+00]
+      observed quantities: 
+        'outlet discharge [mol (ten minutes)^-1]': 
+          variable: surface-water_flux
+          direction normalized flux: true
+          region: surface outlet
+          functional: extensive integral
+          location name: face
+          time integrated flux: true
+        'slab 1 flux [mol (ten minutes)^-1]': 
+          variable: surface-water_flux
+          direction normalized flux: true
+          direction normalized flux vector: [-1.00000000000000000e+00, 0.00000000000000000e+00]
+          region: slab 1 outlet
+          functional: extensive integral
+          location name: face
+          time integrated flux: true
+        'slab 2 flux [mol (ten minutes)^-1]': 
+          variable: surface-water_flux
+          direction normalized flux: true
+          direction normalized flux vector: [-1.00000000000000000e+00, 0.00000000000000000e+00]
+          region: slab 2 outlet
+          functional: extensive integral
+          location name: face
+          time integrated flux: true
+        'surface storage [mol]': 
+          variable: surface-water_content
+          region: surface domain
+          functional: extensive integral
+          location name: cell
+        'subsurface storage [mol]': 
+          variable: water_content
+          region: subsurface domain
+          functional: extensive integral
+          location name: cell
+...

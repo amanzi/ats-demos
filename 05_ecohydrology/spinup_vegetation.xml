@@ -218,7 +218,7 @@
           <Parameter name="verbosity level" type="string" value="low" />
         </ParameterList>
       </ParameterList>
-      <ParameterList name="surface-relative_humidity" type="ParameterList">
+      <ParameterList name="surface-vapor_pressure_air" type="ParameterList">
         <Parameter name="evaluator type" type="string" value="independent variable" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="domain" type="ParameterList">

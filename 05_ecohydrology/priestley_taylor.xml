@@ -21,6 +21,7 @@
       </ParameterList>
     </ParameterList>
   </ParameterList>
+
   <ParameterList name="regions" type="ParameterList">
     <ParameterList name="computational domain" type="ParameterList">
       <ParameterList name="region: all" type="ParameterList">
@@ -48,14 +49,14 @@
     </ParameterList>
     <ParameterList name="inlet" type="ParameterList">
       <ParameterList name="region: plane" type="ParameterList">
-        <Parameter name="point" type="Array(double)" value="{0, 0}" />
-        <Parameter name="normal" type="Array(double)" value="{ -1, 0}" />
+        <Parameter name="point" type="Array(double)" value="{ 0, 0}" />
+        <Parameter name="normal" type="Array(double)" value="{-1, 0}" />
       </ParameterList>
     </ParameterList>
     <ParameterList name="outlet" type="ParameterList">
       <ParameterList name="region: plane" type="ParameterList">
-        <Parameter name="point" type="Array(double)" value="{ 1000, 0}" />
-        <Parameter name="normal" type="Array(double)" value="{1, 0}" />
+        <Parameter name="point" type="Array(double)" value="{1000, 0}" />
+        <Parameter name="normal" type="Array(double)" value="{ 1, 0}" />
       </ParameterList>
     </ParameterList>
     <ParameterList name="evergreen forest" type="ParameterList">
@@ -102,6 +103,7 @@
     </ParameterList>
   </ParameterList>
   <ParameterList name="PKs" type="ParameterList">
+
     <ParameterList name="water balance" type="ParameterList">
       <Parameter name="PK type" type="string" value="weak MPC" />
       <Parameter name="PKs order" type="Array(string)" value="{snow storage, surface-subsurface coupler}" />
@@ -117,7 +119,6 @@
       <Parameter name="source key" type="string" value="snow-source" />
       <Parameter name="modify predictor positivity preserving" type="bool" value="true" />
       <Parameter name="debug cells" type="Array(int)" value="{0}" />
-
       <ParameterList name="initial condition" type="ParameterList">
         <Parameter name="value" type="double" value=" 0" />
       </ParameterList>
@@ -152,6 +153,7 @@
           <Parameter name="initial time step [s]" type="double" value="86400" />
         </ParameterList>
       </ParameterList>
+
     </ParameterList>
 
     <ParameterList name="surface-subsurface coupler" type="ParameterList">
@@ -208,6 +210,7 @@
       </ParameterList>
 
     </ParameterList>
+
     <ParameterList name="flow" type="ParameterList">
       <Parameter name="PK type" type="string" value="richards flow" />
       <Parameter name="primary variable key" type="string" value="pressure" />
@@ -233,22 +236,8 @@
         <Parameter name="hydrostatic water density [kg m^-3]" type="double" value="1000" />
       </ParameterList>
 
-      <ParameterList name="water retention evaluator" type="ParameterList">
-        <Parameter name="minimum rel perm cutoff" type="double" value=" 0" />
-        <Parameter name="use surface rel perm" type="bool" value="true" />
-        <ParameterList name="WRM parameters" type="ParameterList">
-          <ParameterList name="computation domain" type="ParameterList">
-            <Parameter name="region" type="string" value="computational domain" />
-            <Parameter name="WRM Type" type="string" value="van Genuchten" />
-            <Parameter name="van Genuchten alpha [Pa^-1]" type="double" value="2e-05" />
-            <Parameter name="van Genuchten n [-]" type="double" value="1.58" />
-            <Parameter name="residual saturation [-]" type="double" value="0.2" />
-            <Parameter name="smoothing interval width [saturation]" type="double" value="0.05" />
-          </ParameterList>
-        </ParameterList>
-      </ParameterList>
-
     </ParameterList>
+
     <ParameterList name="overland flow" type="ParameterList">
       <Parameter name="PK type" type="string" value="overland flow, pressure basis" />
       <Parameter name="primary variable key" type="string" value="surface-pressure" />
@@ -270,7 +259,7 @@
             <Parameter name="regions" type="Array(string)" value="{outlet}" />
             <ParameterList name="boundary head">
               <ParameterList name="function-constant">
-                <Parameter name="value" type="double" value="0." />
+                <Parameter name="value" type="double" value=" 0" />
               </ParameterList>
             </ParameterList>
           </ParameterList>
@@ -282,6 +271,7 @@
       </ParameterList>
 
     </ParameterList>
+
   </ParameterList>
 
   <ParameterList name="state" type="ParameterList">
@@ -307,13 +297,11 @@
         <Parameter name="dependencies" type="Array(string)" value="{snow-cell_volume, snow-water_equivalent, surface-molar_density_liquid}" />
         <Parameter name="units" type="string" value="mol" />
       </ParameterList>
-
       <ParameterList name="snow-source" type="ParameterList">
         <Parameter name="evaluator type" type="string" value="multiplicative evaluator" />
         <Parameter name="dependencies" type="Array(string)" value="{snow-source_mps, surface-molar_density_liquid}" />
         <Parameter name="units" type="string" value="mol m^-2 s^-1" />
       </ParameterList>
-
       <ParameterList name="snow-source_mps" type="ParameterList">
         <Parameter name="evaluator type" type="string" value="additive evaluator" />
         <Parameter name="dependencies" type="Array(string)" value="{snow-precipitation, snow-melt}" />
@@ -322,7 +310,6 @@
       </ParameterList>
       <ParameterList name="snow-melt" type="ParameterList">
         <Parameter name="evaluator type" type="string" value="snow melt rate" />
-        <Parameter name="air-snow temperature difference [C]" type="double" value=" 3" />
         <Parameter name="snow melt rate [mm day^-1 C^-1]" type="double" value="2.74" />
         <Parameter name="units" type="string" value="m s^-1" />
       </ParameterList>
@@ -335,7 +322,7 @@
             <Parameter name="component" type="string" value="cell" />
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-tabular" type="ParameterList">
-                <Parameter name="file" type="string" value="../data/daymet.h5" />
+                <Parameter name="file" type="string" value="../data/daymet_TaylorRiverCO.h5" />
                 <Parameter name="x header" type="string" value="time [s]" />
                 <Parameter name="y header" type="string" value="precipitation snow [m SWE s^-1]" />
                 <Parameter name="forms" type="string" value="constant" />
@@ -344,7 +331,6 @@
           </ParameterList>
         </ParameterList>
       </ParameterList>
-
       <ParameterList name="surface-water_source" type="ParameterList">
         <Parameter name="evaluator type" type="string" value="additive evaluator" />
         <Parameter name="dependencies" type="Array(string)" value="{snow-melt, surface-precipitation_rain}" />
@@ -359,7 +345,7 @@
             <Parameter name="component" type="string" value="cell" />
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-tabular" type="ParameterList">
-                <Parameter name="file" type="string" value="../data/daymet.h5" />
+                <Parameter name="file" type="string" value="../data/daymet_TaylorRiverCO.h5" />
                 <Parameter name="x header" type="string" value="time [s]" />
                 <Parameter name="y header" type="string" value="precipitation rain [m s^-1]" />
                 <Parameter name="forms" type="string" value="constant" />
@@ -368,7 +354,6 @@
           </ParameterList>
         </ParameterList>
       </ParameterList>
-
       <ParameterList name="water_source" type="ParameterList">
         <Parameter name="evaluator type" type="string" value="additive evaluator" />
         <Parameter name="dependencies" type="Array(string)" value="{transpiration}" />
@@ -383,7 +368,7 @@
         <Parameter name="units" type="string" value="m s^-1" />
       </ParameterList>
       <ParameterList name="transpiration" type="ParameterList">
-        <Parameter name="evaluator type" type="string" value="transpiration distribution via rooting depth" />
+        <Parameter name="evaluator type" type="string" value="transpiration distribution, rooting depth" />
         <Parameter name="potential transpiration key" type="string" value="surface-potential_evapotranspiration" />
         <Parameter name="units" type="string" value="mol m^-3 s^-1" />
       </ParameterList>
@@ -391,8 +376,8 @@
         <Parameter name="evaluator type" type="string" value="plant wilting factor" />
         <Parameter name="units" type="string" value="-" />
       </ParameterList>
-      <ParameterList name="rooting_depth_fraction" type="ParameterList">
-        <Parameter name="evaluator type" type="string" value="rooting depth fraction" />
+      <ParameterList name="root_fraction" type="ParameterList">
+        <Parameter name="evaluator type" type="string" value="root fraction" />
         <Parameter name="units" type="string" value="-" />
       </ParameterList>
       <ParameterList name="depth" type="ParameterList">
@@ -422,7 +407,7 @@
             <Parameter name="component" type="string" value="cell" />
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-tabular" type="ParameterList">
-                <Parameter name="file" type="string" value="../data/daymet.h5" />
+                <Parameter name="file" type="string" value="../data/daymet_TaylorRiverCO.h5" />
                 <Parameter name="x header" type="string" value="time [s]" />
                 <Parameter name="y header" type="string" value="air temperature [K]" />
               </ParameterList>
@@ -430,8 +415,6 @@
           </ParameterList>
         </ParameterList>
       </ParameterList>
-
-      <!-- surface temperature is assumed to be yesterday's air temperature, based on PRMS approach -->
       <ParameterList name="surface-temperature" type="ParameterList">
         <Parameter name="evaluator type" type="string" value="independent variable" />
         <Parameter name="units" type="string" value="K" />
@@ -441,16 +424,16 @@
             <Parameter name="component" type="string" value="cell" />
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-composition" type="ParameterList">
-                <ParameterList name="function1" type="ParameterList">
+                <ParameterList name="function2" type="ParameterList">
                   <ParameterList name="function-linear" type="ParameterList">
-                    <Parameter name="x0" type="Array(double)" value="{-1, 0, 0}" />
+                    <Parameter name="x0" type="Array(double)" value="{86400, 0, 0}" />
                     <Parameter name="y0" type="double" value=" 0" />
                     <Parameter name="gradient" type="Array(double)" value="{ 1, 0, 0}" />
                   </ParameterList>
                 </ParameterList>
-                <ParameterList name="function2" type="ParameterList">
+                <ParameterList name="function1" type="ParameterList">
                   <ParameterList name="function-tabular" type="ParameterList">
-                    <Parameter name="file" type="string" value="../data/daymet.h5" />
+                    <Parameter name="file" type="string" value="../data/daymet_TaylorRiverCO.h5" />
                     <Parameter name="x header" type="string" value="time [s]" />
                     <Parameter name="y header" type="string" value="air temperature [K]" />
                   </ParameterList>
@@ -460,7 +443,6 @@
           </ParameterList>
         </ParameterList>
       </ParameterList>
-
       <ParameterList name="surface-shortwave_radiation" type="ParameterList">
         <Parameter name="evaluator type" type="string" value="independent variable" />
         <Parameter name="units" type="string" value="W m^-2" />
@@ -470,7 +452,7 @@
             <Parameter name="component" type="string" value="cell" />
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-tabular" type="ParameterList">
-                <Parameter name="file" type="string" value="../data/daymet.h5" />
+                <Parameter name="file" type="string" value="../data/daymet_TaylorRiverCO.h5" />
                 <Parameter name="x header" type="string" value="time [s]" />
                 <Parameter name="y header" type="string" value="incoming shortwave radiation [W m^-2]" />
               </ParameterList>
@@ -478,7 +460,6 @@
           </ParameterList>
         </ParameterList>
       </ParameterList>
-
       <ParameterList name="base_porosity">
         <Parameter name="evaluator type" type="string" value="independent variable constant" />
         <Parameter name="value" type="double" value="0.4" />
@@ -504,7 +485,6 @@
         <Parameter name="value" type="double" value=" 1" />
         <Parameter name="units" type="string" value="-" />
       </ParameterList>
-
       <ParameterList name="mass_density_liquid" type="ParameterList">
         <Parameter name="evaluator type" type="string" value="independent variable constant" />
         <Parameter name="value" type="double" value="1000" />
@@ -529,7 +509,6 @@
         <Parameter name="evaluator type" type="string" value="independent variable constant" />
         <Parameter name="value" type="double" value="55000" />
       </ParameterList>
-
       <ParameterList name="surface-manning_coefficient">
         <Parameter name="evaluator type" type="string" value="independent variable constant" />
         <Parameter name="value" type="double" value="0.15" />
@@ -543,8 +522,48 @@
           <Parameter name="slope regularization epsilon" type="double" value="0.01" />
         </ParameterList>
       </ParameterList>
+      <ParameterList name="snow-expected_temperature" type="ParameterList">
+        <Parameter name="evaluator type" type="string" value="additive evaluator" />
+        <Parameter name="dependencies" type="Array(string)" value="{surface-air_temperature}" />
+        <Parameter name="constant shift" type="double" value="-3" />
+      </ParameterList>
+      <ParameterList name="snow-temperature" type="ParameterList">
+        <Parameter name="evaluator type" type="string" value="secondary variable from function" />
+        <Parameter name="dependencies" type="Array(string)" value="{snow-expected_temperature}" />
+        <ParameterList name="function" type="ParameterList">
+          <Parameter name="function type" type="string" value="composition" />
+          <ParameterList name="function1" type="ParameterList">
+            <Parameter name="function type" type="string" value="linear" />
+            <Parameter name="gradient" type="Array(double)" value="{ 1}" />
+            <Parameter name="y0" type="double" value="273.15" />
+          </ParameterList>
+          <ParameterList name="function2" type="ParameterList">
+            <Parameter name="function type" type="string" value="standard math" />
+            <Parameter name="operator" type="string" value="negative" />
+            <Parameter name="shift" type="double" value="273.15" />
+          </ParameterList>
+        </ParameterList>
+      </ParameterList>
+      <ParameterList name="canopy-temperature" type="ParameterList">
+        <Parameter name="evaluator type" type="string" value="additive evaluator" />
+        <Parameter name="dependencies" type="Array(string)" value="{surface-air_temperature}" />
+        <Parameter name="constant shift" type="double" value="-1.5" />
+      </ParameterList>
+      <ParameterList name="relative_permeability" type="ParameterList">
+        <Parameter name="evaluator type" type="string" value="relative permeability, water retention model" />
+        <Parameter name="model parameters" type="string" value="WRM parameters" />
+        <Parameter name="minimum rel perm cutoff" type="double" value=" 0" />
+        <Parameter name="use surface rel perm" type="bool" value="true" />
+      </ParameterList>
+      <ParameterList name="saturation_liquid" type="ParameterList">
+        <Parameter name="model parameters" type="string" value="WRM parameters" />
+        <Parameter name="evaluator type" type="string" value="water retention model" />
+      </ParameterList>
+      <ParameterList name="saturation_gas" type="ParameterList">
+        <Parameter name="model parameters" type="string" value="WRM parameters" />
+        <Parameter name="evaluator type" type="string" value="water retention model" />
+      </ParameterList>
     </ParameterList>
-
     <ParameterList name="initial conditions" type="ParameterList">
 
       <ParameterList name="atmospheric_pressure" type="ParameterList">
@@ -561,34 +580,46 @@
           <Parameter name="leaf on time [doy]" type="double" value="-1" />
           <Parameter name="leaf off time [doy]" type="double" value="-1" />
           <Parameter name="rooting depth max [m]" type="double" value="10" />
-          <Parameter name="rooting profile alpha [-]" type="double" value="6" />
-          <Parameter name="rooting profile beta [-]" type="double" value="2" />
-          <Parameter name="mafic potential at fully closed stomata [Pa]" type="double" value="224000" />
-          <Parameter name="mafic potential at fully open stomata [Pa]" type="double" value="3500" />
+          <Parameter name="rooting profile alpha [-]" type="double" value=" 6" />
+          <Parameter name="rooting profile beta [-]" type="double" value=" 2" />
+          <Parameter name="capillary pressure at fully closed stomata [Pa]" type="double" value="224000" />
+          <Parameter name="capillary pressure at fully open stomata [Pa]" type="double" value="3500" />
           <Parameter name="Priestley-Taylor alpha of transpiration [-]" type="double" value="1.26" />
         </ParameterList>
       </ParameterList>
 
     </ParameterList>
+    <ParameterList name="model parameters" type="ParameterList">
+      <ParameterList name="WRM parameters" type="ParameterList">
+        <ParameterList name="computation domain" type="ParameterList">
+          <Parameter name="region" type="string" value="computational domain" />
+          <Parameter name="wrm type" type="string" value="van Genuchten" />
+          <Parameter name="van Genuchten alpha [Pa^-1]" type="double" value="2e-05" />
+          <Parameter name="van Genuchten n [-]" type="double" value="1.58" />
+          <Parameter name="residual saturation [-]" type="double" value="0.2" />
+          <Parameter name="smoothing interval width [saturation]" type="double" value="0.05" />
+        </ParameterList>
+      </ParameterList>
+    </ParameterList>
   </ParameterList>
-
   <ParameterList name="checkpoint">
-    <Parameter name="times start period stop" type="Array(double)" value="{ 274,365,-1}" />
+    <Parameter name="times start period stop" type="Array(double)" value="{274,365,-1}" />
     <Parameter name="times start period stop units" type="string" value="d" />
   </ParameterList>
 
   <ParameterList name="visualization">
     <ParameterList name="domain" type="ParameterList">
-      <Parameter name="times start period stop" type="Array(double)" value="{ 274,10,-1}" />
+      <Parameter name="times start period stop" type="Array(double)" value="{274,10,-1}" />
       <Parameter name="times start period stop units" type="string" value="d" />
       <Parameter name="time units" type="string" value="d" />
     </ParameterList>
     <ParameterList name="surface" type="ParameterList">
-      <Parameter name="times start period stop" type="Array(double)" value="{ 274,10,-1}" />
+      <Parameter name="times start period stop" type="Array(double)" value="{274,10,-1}" />
       <Parameter name="times start period stop units" type="string" value="d" />
       <Parameter name="time units" type="string" value="d" />
     </ParameterList>
   </ParameterList>
+
   <ParameterList name="observations" type="ParameterList">
     <ParameterList name="fluxes" type="ParameterList">
       <Parameter name="observation output filename" type="string" value="water_balance.dat" />

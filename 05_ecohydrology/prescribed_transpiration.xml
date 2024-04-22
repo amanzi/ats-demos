@@ -43,20 +43,20 @@
     </ParameterList>
     <ParameterList name="inlet" type="ParameterList">
       <ParameterList name="region: plane" type="ParameterList">
-        <Parameter name="point" type="Array(double)" value="{0, 0}" />
-        <Parameter name="normal" type="Array(double)" value="{ -1, 0}" />
+        <Parameter name="point" type="Array(double)" value="{ 0, 0}" />
+        <Parameter name="normal" type="Array(double)" value="{-1, 0}" />
       </ParameterList>
     </ParameterList>
     <ParameterList name="outlet" type="ParameterList">
       <ParameterList name="region: plane" type="ParameterList">
-        <Parameter name="point" type="Array(double)" value="{ 1000, 0}" />
-        <Parameter name="normal" type="Array(double)" value="{1, 0}" />
+        <Parameter name="point" type="Array(double)" value="{1000, 0}" />
+        <Parameter name="normal" type="Array(double)" value="{ 1, 0}" />
       </ParameterList>
     </ParameterList>
   </ParameterList>
 
   <ParameterList name="cycle driver" type="ParameterList">
-    <Parameter name="start time" type="double" value=" 274" />
+    <Parameter name="start time" type="double" value="274" />
     <Parameter name="start time units" type="string" value="d" />
     <Parameter name="end time" type="double" value="639" />
     <Parameter name="end time units" type="string" value="d" />
@@ -143,7 +143,6 @@
       <Parameter name="surface rel perm strategy" type="string" value="clobber" />
       <Parameter name="relative permeability method" type="string" value="upwind with Darcy flux" />
       <Parameter name="debug cells" type="Array(int)" value="{}" />
-
       <ParameterList name="diffusion" type="ParameterList">
         <Parameter name="discretization primary" type="string" value="mfd: default" />
       </ParameterList>
@@ -160,21 +159,6 @@
         <Parameter name="hydrostatic water density [kg m^-3]" type="double" value="1000" />
       </ParameterList>
 
-      <ParameterList name="water retention evaluator" type="ParameterList">
-        <Parameter name="minimum rel perm cutoff" type="double" value=" 0" />
-        <Parameter name="use surface rel perm" type="bool" value="true" />
-        <ParameterList name="WRM parameters" type="ParameterList">
-          <ParameterList name="computation domain" type="ParameterList">
-            <Parameter name="region" type="string" value="computational domain" />
-            <Parameter name="WRM Type" type="string" value="van Genuchten" />
-            <Parameter name="van Genuchten alpha [Pa^-1]" type="double" value="2e-05" />
-            <Parameter name="van Genuchten n [-]" type="double" value="1.58" />
-            <Parameter name="residual saturation [-]" type="double" value="0.2" />
-            <Parameter name="smoothing interval width [saturation]" type="double" value="0.1" />
-          </ParameterList>
-        </ParameterList>
-      </ParameterList>
-
     </ParameterList>
 
     <ParameterList name="overland flow" type="ParameterList">
@@ -184,7 +168,6 @@
       <Parameter name="source term" type="bool" value="true" />
       <Parameter name="source key" type="string" value="surface-precipitation" />
       <Parameter name="water source in meters" type="bool" value="true" />
-
       <ParameterList name="diffusion" type="ParameterList">
         <Parameter name="discretization primary" type="string" value="fv: default" />
       </ParameterList>
@@ -199,7 +182,7 @@
             <Parameter name="regions" type="Array(string)" value="{outlet}" />
             <ParameterList name="boundary head">
               <ParameterList name="function-constant">
-                <Parameter name="value" type="double" value="0." />
+                <Parameter name="value" type="double" value=" 0" />
               </ParameterList>
             </ParameterList>
           </ParameterList>
@@ -228,7 +211,6 @@
       <ParameterList name="capillary_pressure_gas_liq" type="ParameterList">
         <Parameter name="evaluator type" type="string" value="capillary pressure, atmospheric gas over liquid" />
       </ParameterList>
-
       <ParameterList name="surface-precipitation" type="ParameterList">
         <Parameter name="evaluator type" type="string" value="independent variable" />
         <ParameterList name="function" type="ParameterList">
@@ -245,34 +227,31 @@
           </ParameterList>
         </ParameterList>
       </ParameterList>
-
       <ParameterList name="water_source" type="ParameterList">
         <Parameter name="evaluator type" type="string" value="additive evaluator" />
         <Parameter name="dependencies" type="Array(string)" value="{transpiration}" />
         <Parameter name="transpiration coefficient" type="double" value="-1" />
       </ParameterList>
       <ParameterList name="transpiration" type="ParameterList">
-        <Parameter name="evaluator type" type="string" value="transpiration distribution via rooting depth" />
+        <Parameter name="evaluator type" type="string" value="transpiration distribution, rooting depth" />
         <Parameter name="potential transpiration key" type="string" value="surface-potential_evapotranspiration" />
       </ParameterList>
       <ParameterList name="plant_wilting_factor" type="ParameterList">
         <Parameter name="evaluator type" type="string" value="plant wilting factor" />
       </ParameterList>
-      <ParameterList name="rooting_depth_fraction" type="ParameterList">
-        <Parameter name="evaluator type" type="string" value="rooting depth fraction" />
+      <ParameterList name="root_fraction" type="ParameterList">
+        <Parameter name="evaluator type" type="string" value="root fraction" />
       </ParameterList>
       <ParameterList name="depth" type="ParameterList">
         <Parameter name="constant in time" type="bool" value="true" />
         <Parameter name="evaluator type" type="string" value="depth" />
       </ParameterList>
-
       <ParameterList name="surface-total_evapotranspiration" type="ParameterList">
         <Parameter name="evaluator type" type="string" value="column sum evaluator" />
         <Parameter name="summed key" type="string" value="transpiration" />
         <Parameter name="divide by density" type="bool" value="false" />
         <Parameter name="include volume to surface area factor" type="bool" value="true" />
       </ParameterList>
-
       <ParameterList name="surface-potential_evapotranspiration" type="ParameterList">
         <Parameter name="evaluator type" type="string" value="additive evaluator" />
         <Parameter name="dependencies" type="Array(string)" value="{surface-potential_transpiration,surface-potential_evaporation}" />
@@ -311,7 +290,6 @@
           </ParameterList>
         </ParameterList>
       </ParameterList>
-
       <ParameterList name="base_porosity">
         <Parameter name="evaluator type" type="string" value="independent variable constant" />
         <Parameter name="value" type="double" value="0.4" />
@@ -333,7 +311,6 @@
         <Parameter name="evaluator type" type="string" value="independent variable constant" />
         <Parameter name="value" type="double" value=" 1" />
       </ParameterList>
-
       <ParameterList name="mass_density_liquid" type="ParameterList">
         <Parameter name="evaluator type" type="string" value="independent variable constant" />
         <Parameter name="value" type="double" value="1000" />
@@ -358,7 +335,6 @@
         <Parameter name="evaluator type" type="string" value="independent variable constant" />
         <Parameter name="value" type="double" value="55000" />
       </ParameterList>
-
       <ParameterList name="surface-manning_coefficient">
         <Parameter name="evaluator type" type="string" value="independent variable constant" />
         <Parameter name="value" type="double" value="0.15" />
@@ -370,6 +346,20 @@
           <Parameter name="Manning exponent" type="double" value="0.666666666667" />
           <Parameter name="slope regularization epsilon" type="double" value="0.01" />
         </ParameterList>
+      </ParameterList>
+      <ParameterList name="relative_permeability" type="ParameterList">
+        <Parameter name="evaluator type" type="string" value="relative permeability, water retention model" />
+        <Parameter name="model parameters" type="string" value="WRM parameters" />
+        <Parameter name="minimum rel perm cutoff" type="double" value=" 0" />
+        <Parameter name="use surface rel perm" type="bool" value="true" />
+      </ParameterList>
+      <ParameterList name="saturation_liquid" type="ParameterList">
+        <Parameter name="model parameters" type="string" value="WRM parameters" />
+        <Parameter name="evaluator type" type="string" value="water retention model" />
+      </ParameterList>
+      <ParameterList name="saturation_gas" type="ParameterList">
+        <Parameter name="model parameters" type="string" value="WRM parameters" />
+        <Parameter name="evaluator type" type="string" value="water retention model" />
       </ParameterList>
     </ParameterList>
     <ParameterList name="initial conditions" type="ParameterList">
@@ -387,23 +377,35 @@
           <Parameter name="leaf on time [doy]" type="double" value="-1" />
           <Parameter name="leaf off time [doy]" type="double" value="-1" />
           <Parameter name="rooting depth max [m]" type="double" value="10" />
-          <Parameter name="rooting profile alpha [-]" type="double" value="6" />
-          <Parameter name="rooting profile beta [-]" type="double" value="2" />
-          <Parameter name="mafic potential at fully closed stomata [Pa]" type="double" value="224000" />
-          <Parameter name="mafic potential at fully open stomata [Pa]" type="double" value="3500" />
+          <Parameter name="rooting profile alpha [-]" type="double" value=" 6" />
+          <Parameter name="rooting profile beta [-]" type="double" value=" 2" />
+          <Parameter name="capillary pressure at fully closed stomata [Pa]" type="double" value="224000" />
+          <Parameter name="capillary pressure at fully open stomata [Pa]" type="double" value="3500" />
         </ParameterList>
       </ParameterList>
 
     </ParameterList>
+    <ParameterList name="model parameters" type="ParameterList">
+      <ParameterList name="WRM parameters" type="ParameterList">
+        <ParameterList name="computation domain" type="ParameterList">
+          <Parameter name="region" type="string" value="computational domain" />
+          <Parameter name="wrm type" type="string" value="van Genuchten" />
+          <Parameter name="van Genuchten alpha [Pa^-1]" type="double" value="2e-05" />
+          <Parameter name="van Genuchten n [-]" type="double" value="1.58" />
+          <Parameter name="residual saturation [-]" type="double" value="0.2" />
+          <Parameter name="smoothing interval width [saturation]" type="double" value="0.1" />
+        </ParameterList>
+      </ParameterList>
+    </ParameterList>
   </ParameterList>
   <ParameterList name="visualization">
     <ParameterList name="domain" type="ParameterList">
-      <Parameter name="times start period stop" type="Array(double)" value="{ 274, 10,-1}" />
+      <Parameter name="times start period stop" type="Array(double)" value="{274,10,-1}" />
       <Parameter name="times start period stop units" type="string" value="d" />
       <Parameter name="time units" type="string" value="d" />
     </ParameterList>
     <ParameterList name="surface" type="ParameterList">
-      <Parameter name="times start period stop" type="Array(double)" value="{ 274, 10,-1}" />
+      <Parameter name="times start period stop" type="Array(double)" value="{274,10,-1}" />
       <Parameter name="times start period stop units" type="string" value="d" />
       <Parameter name="time units" type="string" value="d" />
     </ParameterList>
@@ -414,7 +416,7 @@
       <Parameter name="observation output filename" type="string" value="water_balance.dat" />
       <Parameter name="write interval" type="int" value="1" />
       <Parameter name="time units" type="string" value="d" />
-      <Parameter name="times start period stop" type="Array(double)" value="{ 0,1,-1}" />
+      <Parameter name="times start period stop" type="Array(double)" value="{ 0, 1,-1}" />
       <Parameter name="times start period stop units" type="string" value="d" />
       <ParameterList name="observed quantities" type="ParameterList">
         <ParameterList name="runoff generation [mol d^-1]" type="ParameterList">

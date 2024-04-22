@@ -651,19 +651,14 @@
         </ParameterList>
       </ParameterList>
       <ParameterList name="saturation_liquid" type="ParameterList">
-        <Parameter name="evaluator type" type="string" value="WRM" />
+        <Parameter name="evaluator type" type="string" value="water retention model" />
+        <Parameter name="model parameters" type="string" value="WRM parameters" />
+      </ParameterList>
+      <ParameterList name="relative_permeability" type="ParameterList">
+        <Parameter name="evaluator type" type="string" value="relative permeability, water retention model" />
+        <Parameter name="model parameters" type="string" value="WRM parameters" />
         <Parameter name="minimum rel perm cutoff" type="double" value=" 0" />
         <Parameter name="use surface rel perm" type="bool" value="true" />
-        <ParameterList name="WRM parameters" type="ParameterList">
-          <ParameterList name="rest domain" type="ParameterList">
-            <Parameter name="region" type="string" value="computational domain" />
-            <Parameter name="WRM Type" type="string" value="van Genuchten" />
-            <Parameter name="van Genuchten alpha [Pa^-1]" type="double" value="0.00010224" />
-            <Parameter name="van Genuchten n [-]" type="double" value=" 2" />
-            <Parameter name="residual saturation [-]" type="double" value="0.2" />
-            <Parameter name="smoothing interval width [saturation]" type="double" value=" 0" />
-          </ParameterList>
-        </ParameterList>
       </ParameterList>
     </ParameterList>
     <ParameterList name="initial conditions">
@@ -785,6 +780,18 @@
       </ParameterList>
 
     </ParameterList>
+    <ParameterList name="model parameters" type="ParameterList">
+      <ParameterList name="WRM parameters" type="ParameterList">
+        <ParameterList name="rest domain" type="ParameterList">
+          <Parameter name="region" type="string" value="computational domain" />
+          <Parameter name="wrm type" type="string" value="van Genuchten" />
+          <Parameter name="van Genuchten alpha [Pa^-1]" type="double" value="0.00010224" />
+          <Parameter name="van Genuchten n [-]" type="double" value=" 2" />
+          <Parameter name="residual saturation [-]" type="double" value="0.2" />
+          <Parameter name="smoothing interval width [saturation]" type="double" value=" 0" />
+        </ParameterList>
+      </ParameterList>
+    </ParameterList>
   </ParameterList>
   <ParameterList name="checkpoint">
     <Parameter name="times start period stop" type="Array(double)" value="{ 0,2160000,-1}" />
@@ -822,19 +829,6 @@
       <Parameter name="observation output filename" type="string" value="surface_total_concentration_crunch_sigmoid.dat" />
       <Parameter name="times start period stop" type="Array(double)" value="{ 0,86400,-1}" />
     </ParameterList>
-    <!--
-    <ParameterList name="surface free concentration" type="ParameterList">
-      <Parameter name="variable" type="string" value="surface-free_ion_species" />
-      <Parameter name="region" type="string" value="east conc" />
-      <Parameter name="functional" type="string" value="average" />
-      <Parameter name="delimiter" type="string" value=" " />
-      <Parameter name="location name" type="string" value="cell" />
-      <Parameter name="write interval" type="int" value="1" />
-      <Parameter name="number of vectors" type="int" value="5" />
-      <Parameter name="observation output filename" type="string" value="surface_free_ion_species_crunch_sigmoid.dat" />
-      <Parameter name="times start period stop" type="Array(double)" value="{ 0,86400,-1}" />
-    </ParameterList>
-    -->
     <ParameterList name="surface-precipitation" type="ParameterList">
       <Parameter name="variable" type="string" value="surface-water_source" />
       <Parameter name="region" type="string" value="surface domain" />
@@ -856,18 +850,5 @@
       <Parameter name="observation output filename" type="string" value="surface_total_concentration_crunch_sigmoid_short.dat" />
       <Parameter name="times start period stop" type="Array(double)" value="{ 0,86400,-1}" />
     </ParameterList>
-    <!--
-    <ParameterList name="surface free concentration short" type="ParameterList">
-      <Parameter name="variable" type="string" value="surface-free_ion_species" />
-      <Parameter name="region" type="string" value="right conc" />
-      <Parameter name="functional" type="string" value="average" />
-      <Parameter name="delimiter" type="string" value=" " />
-      <Parameter name="location name" type="string" value="cell" />
-      <Parameter name="write interval" type="int" value="1" />
-      <Parameter name="number of vectors" type="int" value="5" />
-      <Parameter name="observation output filename" type="string" value="surface_free_ion_species_crunch_sigmoid_short.dat" />
-      <Parameter name="times start period stop" type="Array(double)" value="{ 0,86400,-1}" />
-    </ParameterList>
-    -->
   </ParameterList>
 </ParameterList>

@@ -425,7 +425,7 @@
         <Parameter name="limiter number of dofs" type="int" value="2" />
         <Parameter name="limiter dof" type="int" value="1" />
         <Parameter name="air temperature key" type="string" value="surface-air_temperature" />
-        <Parameter name="surface temperature key" type="string" value="snow-temperature" />
+        <Parameter name="surface temperature key" type="string" value="surface-temperature" />
         <Parameter name="elevation key" type="string" value="surface-elevation" />
         <Parameter name="net radiation key" type="string" value="snow-radiation_balance" />
         <Parameter name="limiter key" type="string" value="surface-area_fractions" />
@@ -482,11 +482,8 @@
         <Parameter name="transpiration coefficient" type="double" value="-1" />
       </ParameterList>
       <ParameterList name="transpiration" type="ParameterList">
-        <Parameter name="evaluator type" type="string" value="transpiration distribution, rooting depth" />
+        <Parameter name="evaluator type" type="string" value="transpiration distribution, relative permeability" />
         <Parameter name="potential transpiration key" type="string" value="canopy-potential_transpiration_mols" />
-      </ParameterList>
-      <ParameterList name="plant_wilting_factor" type="ParameterList">
-        <Parameter name="evaluator type" type="string" value="plant wilting factor" />
       </ParameterList>
       <ParameterList name="root_fraction" type="ParameterList">
         <Parameter name="evaluator type" type="string" value="root fraction" />
@@ -782,8 +779,7 @@
           <Parameter name="rooting depth max [m]" type="double" value="10" />
           <Parameter name="rooting profile alpha [-]" type="double" value=" 6" />
           <Parameter name="rooting profile beta [-]" type="double" value=" 2" />
-          <Parameter name="capillary pressure at fully closed stomata [Pa]" type="double" value="224000" />
-          <Parameter name="capillary pressure at fully open stomata [Pa]" type="double" value="3500" />
+          <Parameter name="maximum xylem capillary pressure [Pa]" type="double" value="2240000" />
           <Parameter name="Priestley-Taylor alpha of snow [-]" type="double" value="1.26" />
           <Parameter name="Priestley-Taylor alpha of canopy [-]" type="double" value="1.26" />
           <Parameter name="Priestley-Taylor alpha of transpiration [-]" type="double" value="1.26" />

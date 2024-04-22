@@ -101,24 +101,29 @@
       <Parameter name="times start period stop units" type="string" value="d" />
     </ParameterList>
     <ParameterList name="PK tree" type="ParameterList">
-      <ParameterList name="snow_and_surface_subsurface_water" type="ParameterList">
-        <Parameter name="PK type" type="string" value="strong MPC" />
-        <ParameterList name="snow" type="ParameterList">
-          <Parameter name="PK type" type="string" value="surface balance implicit subgrid" />
+      <ParameterList name="water_balance" type="ParameterList">
+        <ParameterList name="canopy_water" type="ParameterList">
+          <Parameter name="PK type" type="string" value="general surface balance" />
         </ParameterList>
-        <ParameterList name="permafrost surface and subsurface" type="ParameterList">
-          <Parameter name="PK type" type="string" value="permafrost model" />
-          <ParameterList name="subsurface_flow" type="ParameterList">
-            <Parameter name="PK type" type="string" value="richards flow" />
+        <ParameterList name="snow_and_surface_subsurface_water" type="ParameterList">
+          <Parameter name="PK type" type="string" value="strong MPC" />
+          <ParameterList name="snow" type="ParameterList">
+            <Parameter name="PK type" type="string" value="surface balance implicit subgrid" />
           </ParameterList>
-          <ParameterList name="surface_flow" type="ParameterList">
-            <Parameter name="PK type" type="string" value="overland flow, pressure basis" />
-          </ParameterList>
-          <ParameterList name="subsurface_energy" type="ParameterList">
-            <Parameter name="PK type" type="string" value="two-phase energy" />
-          </ParameterList>
-          <ParameterList name="surface_energy" type="ParameterList">
-            <Parameter name="PK type" type="string" value="surface energy" />
+          <ParameterList name="surface_and_subsurface_flow_and_energy" type="ParameterList">
+            <Parameter name="PK type" type="string" value="permafrost model" />
+            <ParameterList name="subsurface_flow" type="ParameterList">
+              <Parameter name="PK type" type="string" value="richards flow" />
+            </ParameterList>
+            <ParameterList name="surface_flow" type="ParameterList">
+              <Parameter name="PK type" type="string" value="overland flow, pressure basis" />
+            </ParameterList>
+            <ParameterList name="subsurface_energy" type="ParameterList">
+              <Parameter name="PK type" type="string" value="two-phase energy" />
+            </ParameterList>
+            <ParameterList name="surface_energy" type="ParameterList">
+              <Parameter name="PK type" type="string" value="surface energy" />
+            </ParameterList>
           </ParameterList>
         </ParameterList>
       </ParameterList>
@@ -126,9 +131,62 @@
   </ParameterList>
   <ParameterList name="PKs" type="ParameterList">
 
+    <ParameterList name="water_balance" type="ParameterList">
+      <Parameter name="PK type" type="string" value="weak MPC" />
+      <Parameter name="PKs order" type="Array(string)" value="{canopy_water, snow_and_surface_subsurface_water}" />
+
+    </ParameterList>
+
+    <ParameterList name="canopy_water" type="ParameterList">
+      <Parameter name="PK type" type="string" value="general surface balance" />
+      <Parameter name="primary variable key suffix" type="string" value="water_equivalent" />
+      <Parameter name="conserved quantity key suffix" type="string" value="water_content" />
+      <Parameter name="domain name" type="string" value="canopy" />
+      <Parameter name="source term" type="bool" value="true" />
+      <Parameter name="source key" type="string" value="canopy-water_source" />
+      <Parameter name="source term is differentiable" type="bool" value="true" />
+      <Parameter name="modify predictor positivity preserving" type="bool" value="true" />
+      <Parameter name="debug cells" type="Array(int)" value="{0}" />
+      <ParameterList name="initial condition" type="ParameterList">
+        <Parameter name="value" type="double" value=" 0" />
+      </ParameterList>
+
+      <ParameterList name="inverse" type="ParameterList">
+        <Parameter name="preconditioning method" type="string" value="diagonal" />
+      </ParameterList>
+
+      <ParameterList name="time integrator" type="ParameterList">
+        <Parameter name="extrapolate initial guess" type="bool" value="true" />
+        <Parameter name="solver type" type="string" value="nka_bt_ats" />
+        <Parameter name="timestep controller type" type="string" value="smarter" />
+        <ParameterList name="nka_bt_ats parameters" type="ParameterList">
+          <Parameter name="nka lag iterations" type="int" value="2" />
+          <Parameter name="max backtrack steps" type="int" value="5" />
+          <Parameter name="backtrack lag" type="int" value="0" />
+          <Parameter name="backtrack factor" type="double" value="0.5" />
+          <Parameter name="backtrack tolerance" type="double" value="0.0001" />
+          <Parameter name="nonlinear tolerance" type="double" value="1e-06" />
+          <Parameter name="diverged tolerance" type="double" value="1000000" />
+          <Parameter name="limit iterations" type="int" value="21" />
+        </ParameterList>
+        <ParameterList name="timestep controller smarter parameters" type="ParameterList">
+          <Parameter name="max iterations" type="int" value="18" />
+          <Parameter name="min iterations" type="int" value="10" />
+          <Parameter name="time step reduction factor" type="double" value="0.5" />
+          <Parameter name="time step increase factor" type="double" value=" 2" />
+          <Parameter name="max time step" type="double" value="10000000" />
+          <Parameter name="min time step" type="double" value="1e-10" />
+          <Parameter name="growth wait after fail" type="int" value="2" />
+          <Parameter name="count before increasing increase factor" type="int" value="2" />
+          <Parameter name="initial time step [s]" type="double" value="86400" />
+        </ParameterList>
+      </ParameterList>
+
+    </ParameterList>
+
     <ParameterList name="snow_and_surface_subsurface_water" type="ParameterList">
       <Parameter name="PK type" type="string" value="strong MPC" />
-      <Parameter name="PKs order" type="Array(string)" value="{snow, permafrost surface and subsurface}" />
+      <Parameter name="PKs order" type="Array(string)" value="{snow, surface_and_subsurface_flow_and_energy}" />
       <ParameterList name="time integrator" type="ParameterList">
         <Parameter name="extrapolate initial guess" type="bool" value="true" />
         <Parameter name="solver type" type="string" value="nka_bt_ats" />
@@ -182,7 +240,7 @@
 
     </ParameterList>
 
-    <ParameterList name="permafrost surface and subsurface" type="ParameterList">
+    <ParameterList name="surface_and_subsurface_flow_and_energy" type="ParameterList">
       <Parameter name="PK type" type="string" value="permafrost model" />
       <Parameter name="domain name" type="string" value="domain" />
       <Parameter name="PKs order" type="Array(string)" value="{subsurface_flow, subsurface_energy, surface_flow, surface_energy}" />
@@ -370,6 +428,59 @@
 
   <ParameterList name="state" type="ParameterList">
     <ParameterList name="evaluators" type="ParameterList">
+      <ParameterList name="canopy-water_content" type="ParameterList">
+        <Parameter name="evaluator type" type="string" value="multiplicative evaluator" />
+        <Parameter name="dependencies" type="Array(string)" value="{canopy-cell_volume, canopy-water_equivalent, surface-molar_density_liquid}" />
+        <Parameter name="units" type="string" value="mol" />
+      </ParameterList>
+      <ParameterList name="canopy-water_source" type="ParameterList">
+        <Parameter name="evaluator type" type="string" value="multiplicative evaluator" />
+        <Parameter name="dependencies" type="Array(string)" value="{canopy-water_source_meters, surface-molar_density_liquid}" />
+        <Parameter name="units" type="string" value="mol m^-2 s^-1" />
+      </ParameterList>
+      <ParameterList name="canopy-water_source_meters" type="ParameterList">
+        <Parameter name="evaluator type" type="string" value="additive evaluator" />
+        <Parameter name="dependencies" type="Array(string)" value="{canopy-interception, canopy-evaporation, canopy-drainage}" />
+        <Parameter name="canopy-evaporation coefficient" type="double" value="-1" />
+        <Parameter name="canopy-drainage coefficient" type="double" value="-1" />
+        <Parameter name="units" type="string" value="m s^-1" />
+      </ParameterList>
+      <ParameterList name="canopy-interception" type="ParameterList">
+        <Parameter name="evaluator type" type="string" value="interception fraction" />
+        <Parameter name="area index key" type="string" value="canopy-leaf_area_index" />
+        <Parameter name="units" type="string" value="m s^-1" />
+      </ParameterList>
+      <ParameterList name="canopy-drainage" type="ParameterList">
+        <Parameter name="evaluator type" type="string" value="canopy drainage" />
+        <Parameter name="drainage key" type="string" value="canopy-drainage" />
+        <Parameter name="fraction wet key" type="string" value="canopy-fracwet" />
+        <Parameter name="area index key" type="string" value="canopy-leaf_area_index" />
+        <Parameter name="units" type="string" value="m s^-1" />
+      </ParameterList>
+      <ParameterList name="canopy-evaporation" type="ParameterList">
+        <Parameter name="evaluator type" type="string" value="potential evapotranspiration, Priestley-Taylor" />
+        <Parameter name="evaporation type" type="string" value="canopy" />
+        <Parameter name="include limiter" type="bool" value="true" />
+        <Parameter name="air temperature key" type="string" value="surface-air_temperature" />
+        <Parameter name="surface temperature key" type="string" value="surface-air_temperature" />
+        <Parameter name="elevation key" type="string" value="surface-elevation" />
+        <Parameter name="net radiation key" type="string" value="canopy-radiation_balance" />
+        <Parameter name="limiter key" type="string" value="canopy-fracwet" />
+        <Parameter name="units" type="string" value="m s^-1" />
+      </ParameterList>
+      <ParameterList name="canopy-radiation_balance" type="ParameterList">
+        <Parameter name="evaluator type" type="string" value="radiation balance, surface and canopy" />
+        <Parameter name="surface albedos key" type="string" value="surface-albedos" />
+        <Parameter name="surface emissivities key" type="string" value="surface-emissivities" />
+        <Parameter name="surface temperature key" type="string" value="surface-temperature" />
+        <Parameter name="snow temperature key" type="string" value="snow-temperature" />
+        <Parameter name="canopy temperature key" type="string" value="canopy-temperature" />
+        <Parameter name="incoming shortwave radiation key" type="string" value="surface-incident_shortwave_radiation" />
+        <Parameter name="incoming longwave radiation key" type="string" value="surface-incoming_longwave_radiation" />
+        <Parameter name="area fractions key" type="string" value="surface-area_fractions" />
+        <Parameter name="leaf area index key" type="string" value="canopy-leaf_area_index" />
+        <Parameter name="units" type="string" value="W m^-2" />
+      </ParameterList>
       <ParameterList name="water_content" type="ParameterList">
         <Parameter name="evaluator type" type="string" value="richards water content" />
         <Parameter name="units" type="string" value="mol" />
@@ -412,7 +523,10 @@
       <ParameterList name="snow-source_sink">
         <Parameter name="evaluator type" type="string" value="surface energy balance, three components" />
         <Parameter name="save diagnostic data" type="bool" value="true" />
-        <Parameter name="incoming shortwave radiation key" type="string" value="surface-incident_shortwave_radiation" />
+        <Parameter name="incoming shortwave radiation key" type="string" value="surface-??" />
+        <Parameter name="incoming longwave radiation key" type="string" value="surface-??" />
+        <Parameter name="precipitation rain key" type="string" value="canopy-throughfall_drainage_rain" />
+        <Parameter name="precipitation snow key" type="string" value="canopy-throughfall_drainage_snow" />
         <Parameter name="debug cells" type="Array(int)" value="{0}" />
       </ParameterList>
       <ParameterList name="surface-albedos" type="ParameterList">

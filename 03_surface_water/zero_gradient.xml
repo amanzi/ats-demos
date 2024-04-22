@@ -267,6 +267,11 @@
           <Parameter name="slope regularization epsilon" type="double" value=" 0" />
         </ParameterList>
       </ParameterList>
+      <ParameterList name="canopy-temperature" type="ParameterList">
+        <Parameter name="evaluator type" type="string" value="additive evaluator" />
+        <Parameter name="dependencies" type="Array(string)" value="{surface-air_temperature}" />
+        <Parameter name="constant shift" type="double" value="-1.5" />
+      </ParameterList>
     </ParameterList>
     <ParameterList name="initial conditions" type="ParameterList">
 

@@ -182,7 +182,7 @@
       <Parameter name="permeability rescaling" type="double" value="10000000" />
       <Parameter name="debug cells" type="Array(int)" value="{1}" />
       <ParameterList name="diffusion" type="ParameterList">
-        <Parameter name="discretization primary" type="string" value="mfd: optimized for sparsity" />
+        <Parameter name="discretization primary" type="string" value="mfd: two-point flux approximation" />
       </ParameterList>
 
       <ParameterList name="diffusion preconditioner" type="ParameterList">
@@ -340,18 +340,12 @@
       </ParameterList>
 
       <ParameterList name="inverse">
-        <Parameter name="iterative method" type="string" value="pcg" />
-        <Parameter name="preconditioning method" type="string" value="boomer amg" />
-        <ParameterList name="pcg parameters">
-          <Parameter name="maximum number of iterations" type="int" value="400" />
-          <Parameter name="error tolerance" type="double" value="1e-10" />
+        <Parameter name="iterative method" type="string" value="gmres" />
+        <Parameter name="preconditioning method" type="string" value="block ilu" />
+        <ParameterList name="gmres parameters">
+          <Parameter name="maximum number of iterations" type="int" value="10" />
+          <Parameter name="error tolerance" type="double" value="1e-6" />
           <Parameter name="convergence criteria" type="Array(string)" value="{relative rhs, make one iteration}" />
-        </ParameterList>
-        <ParameterList name="boomer amg parameters">
-          <Parameter name="tolerance" type="double" value=" 0" />
-          <Parameter name="smoother sweeps" type="int" value="1" />
-          <Parameter name="cycle applications" type="int" value="1" />
-          <Parameter name="strong threshold" type="double" value="0.65" />
         </ParameterList>
       </ParameterList>
 

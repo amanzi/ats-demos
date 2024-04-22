@@ -779,8 +779,7 @@
           <Parameter name="rooting depth max [m]" type="double" value="10" />
           <Parameter name="rooting profile alpha [-]" type="double" value=" 6" />
           <Parameter name="rooting profile beta [-]" type="double" value=" 2" />
-          <Parameter name="capillary pressure at fully closed stomata [Pa]" type="double" value="2240000" />
-          <Parameter name="capillary pressure at fully open stomata [Pa]" type="double" value="350000" />
+          <Parameter name="maximum xylem capillary pressure [Pa]" type="double" value="2240000" />
           <Parameter name="Priestley-Taylor alpha of snow [-]" type="double" value="1.26" />
           <Parameter name="Priestley-Taylor alpha of canopy [-]" type="double" value="1.26" />
           <Parameter name="Priestley-Taylor alpha of transpiration [-]" type="double" value="1.26" />

@@ -57,8 +57,8 @@
     </ParameterList>
     <ParameterList name="west" type="ParameterList">
       <ParameterList name="region: plane" type="ParameterList">
-        <Parameter name="point" type="Array(double)" value="{-50, 0, 0}" />
-        <Parameter name="normal" type="Array(double)" value="{-1, 0, 0}" />
+        <Parameter name="point" type="Array(double)" value="{-50, 0}" />
+        <Parameter name="normal" type="Array(double)" value="{-1, 0}" />
       </ParameterList>
     </ParameterList>
     <ParameterList name="east" type="ParameterList">
@@ -440,16 +440,6 @@
       </ParameterList>
 
       <ParameterList name="boundary conditions" type="ParameterList">
-        <ParameterList name="diffusive flux" type="ParameterList">
-          <ParameterList name="outlet" type="ParameterList">
-            <Parameter name="regions" type="Array(string)" value="{east,west}" />
-            <ParameterList name="outward diffusive flux" type="ParameterList">
-              <ParameterList name="function-constant" type="ParameterList">
-                <Parameter name="value" type="double" value=" 0" />
-              </ParameterList>
-            </ParameterList>
-          </ParameterList>
-        </ParameterList>
       </ParameterList>
 
       <ParameterList name="initial condition" type="ParameterList">
@@ -667,7 +657,7 @@
         <Parameter name="evaluator type" type="string" value="overland conductivity" />
         <Parameter name="dt factor [s]" type="double" value="864000" />
         <Parameter name="include density" type="bool" value="false" />
-        <Parameter name="depth key" type="string" value="snow-precipitation" />
+        <Parameter name="mobile depth key" type="string" value="snow-precipitation" />
         <Parameter name="slope key" type="string" value="surface-slope_magnitude" />
         <Parameter name="coefficient key" type="string" value="snow-manning_coefficient" />
         <Parameter name="swe density factor [-]" type="double" value="10" />

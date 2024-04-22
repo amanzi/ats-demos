@@ -20,7 +20,7 @@ except ImportError:
     sys.path.append(os.path.join(os.environ['ATS_SRC_DIR'], 'tools', 'testing'))
     import test_manager
 
-def commandline_options():
+def commandline_options(args=None):
     """
     Process the command line arguments and return them as a dict.
     """
@@ -70,7 +70,7 @@ def commandline_options():
                         nargs='+', help='list of directories and/or configuration '
                         'files to parse for suites and tests')
     
-    options = parser.parse_args()
+    options = parser.parse_args(args)
     return options
 
 
@@ -177,6 +177,39 @@ def main(options):
     testlog.close()
 
     return status
+
+
+def _preserve_cwd(function):
+   def decorator(*args, **kwargs):
+      cwd = os.getcwd()
+      result = function(*args, **kwargs)
+      os.chdir(cwd)
+      return result
+   return decorator
+
+
+@_preserve_cwd
+def run_demo_local(testnames, config_dir=None, options_list=None, force=False):
+    """This is a short wrapper to run a demo not from the commandline."""
+    if isinstance(testnames, str):
+        testnames = [testnames,]
+    
+    if config_dir is None:
+        config_dir = os.path.split(os.getcwd())[-1]
+    
+    workdir = os.path.join(os.environ['ATS_SRC_DIR'], 'docs', 'documentation', 'source', 'ats_demos')
+
+    demodirs = [os.path.join(workdir, config_dir, testname+'.demo') for testname in testnames]
+    testnames = [tname for (dd, tname) in zip(demodirs, testnames) if (not os.path.isdir(dd) or force)]
+
+    if len(testnames) > 0:
+        os.chdir(workdir)
+        if options_list is None:
+            options_list = []
+        options_list += [config_dir, '-t'] + testnames
+        opts = commandline_options(options_list)
+        main(opts)
+
 
 if __name__ == "__main__":
     cmdl_options = commandline_options()

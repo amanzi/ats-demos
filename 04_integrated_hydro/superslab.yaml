@@ -179,7 +179,7 @@ ANONYMOUS:
         value: 8.89999999999999949e-04
       surface-relative_permeability: 
         evaluator type: independent variable constant
-        value: 1.00000000000000000e+00
+        value: 1.
       surface-manning_coefficient: 
         evaluator type: independent variable constant
         value: 3.59999999999999990e-03

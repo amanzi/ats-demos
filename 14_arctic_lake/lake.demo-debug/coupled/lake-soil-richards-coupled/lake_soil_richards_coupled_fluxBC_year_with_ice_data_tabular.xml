@@ -382,7 +382,7 @@
               <ParameterList name="outward diffusive flux">
                 <ParameterList name="function-exprtk">
                   <Parameter name="number of arguments" type="int" value="3"/>
-                  <Parameter name="formula" type="string" value=" 100.*sin(2.*3.1415*t/(86400.*365.))"/>
+                  <Parameter name="formula" type="string" value="0."/>
                 </ParameterList>
               </ParameterList>
             </ParameterList>
@@ -500,9 +500,7 @@
     <ParameterList name="coupled soil" type="ParameterList">
       <Parameter name="PK type" type="string" value="coupled soil" />
       <Parameter name="PKs order" type="Array(string)" value="{flow,soil thermo}" />
-      
-<!--      <Parameter name="domain name" type="string" value="soil" />-->
-      
+            
       <ParameterList name="time integrator" type="ParameterList">
         <Parameter name="extrapolate initial guess" type="bool" value="false" />
         <Parameter name="solver type" type="string" value="nka_bt_ats" />
@@ -573,7 +571,6 @@
     <ParameterList name="flow" type="ParameterList">
       <Parameter name="PK type" type="string" value="richards flow" />
       <Parameter name="primary variable key" type="string" value="pressure" />
-<!--      <Parameter name="domain name" type="string" value="soil" />-->
       <Parameter name="initial time step" type="double" value="10.0" />
       <Parameter name="permeability rescaling" type="double" value="10000000.0" />
       <Parameter name="relative permeability method" type="string" value="upwind with Darcy flux" />

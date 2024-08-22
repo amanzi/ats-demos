@@ -11,6 +11,20 @@ import numpy as np
 import h5py
 import matplotlib.pyplot as plt
 
+fig_pre = plt.figure()
+ax_fig_pre = fig_pre.add_subplot(1,1,1)
+
+fig_temp = plt.figure()
+ax_fig_temp = fig_temp.add_subplot(1,1,1)
+
+fig_solar_rad = plt.figure()
+ax_fig_solar_rad = fig_solar_rad.add_subplot(1,1,1)
+
+fig_pressure = plt.figure()
+ax_fig_pressure = fig_pressure.add_subplot(1,1,1)
+
+fig_hum = plt.figure()
+ax_fig_hum = fig_hum.add_subplot(1,1,1)
 
 def convert(filename):
             
@@ -36,9 +50,20 @@ def convert(filename):
 
     
     hf.close()
-        
-    plt.plot(times_sec,dtxt[:,2])
-    plt.show()
+
+    ax_fig_temp.plot(times_days,dtxt[:,0])
+    ax_fig_pressure.plot(times_days,dtxt[:,1])
+    ax_fig_solar_rad.plot(times_days,dtxt[:,3])
+    ax_fig_hum.plot(times_days,dtxt[:,6])
+    ax_fig_pre.plot(times_days,dtxt[:,7])
+#    plt.show()
+
+
+    fig_pre.savefig("precip_data.pdf",format="pdf")
+    fig_temp.savefig("temp_air_data.pdf",format="pdf")
+    fig_solar_rad.savefig("solar_rad_data.pdf",format="pdf")
+    fig_pressure.savefig("pressure_data.pdf",format="pdf")
+    fig_hum.savefig("humidity_data.pdf",format="pdf")
 
 if __name__ == "__main__":
     import sys

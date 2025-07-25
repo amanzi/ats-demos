@@ -26,6 +26,9 @@ def commandline_options(args=None):
     """
     parser = argparse.ArgumentParser(description='Run an collection of ATS demo problems.')
 
+    parser.add_argument('--ats', default=None,
+                        help='Path to ATS source directory')
+    
     parser.add_argument('--backtrace', action='store_true',
                         help='show exception backtraces as extra debugging '
                         'output')
@@ -38,20 +41,40 @@ def commandline_options(args=None):
                         help='perform a dry run, setup the test commands but '
                         'don\'t run them')
 
-    parser.add_argument('-e', '--executable', nargs=1, default=None,
+    parser.add_argument('-e', '--executable', default=None,
                         help='path to executable to use for testing')
 
-    parser.add_argument('--list-suites', default=False, action='store_true',
+    parser.add_argument('--list-available-suites', default=False, action='store_true',
                         help='print the list of test suites from the config '
                         'file and exit')
 
-    parser.add_argument('--list-tests', default=False, action='store_true',
+    parser.add_argument('--list-available-tests', default=False, action='store_true',
                         help='print the list of tests from the config file '
                         'and exit')
 
-    parser.add_argument('-m', '--mpiexec', nargs=1, default=None,
+    parser.add_argument('--list-tests', default=False, action='store_true',
+                        help='print the list of selected tests from the config '
+                        'file and exit')
+
+    parser.add_argument('-m', '--mpiexec', default=None,
                         help="path to the executable for mpiexec (mpirun, etc)"
                         "on the current machine.")
+
+    parser.add_argument('--mpiexec-global-args', default=None,
+                        help="arguments that must be provided to mpiexec executable")
+
+    parser.add_argument('--mpiexec-numprocs-flag', default='-n',
+                        help="mpiexec flag to set number of MPI ranks")
+
+    parser.add_argument('--always-mpiexec', default=False, action='store_true',
+                        help="use mpiexec to launch all tests")
+
+    parser.add_argument('-r', '--rerun-failed', default=None, nargs='?', const=True,
+                        help="Rerun only failed tests from a previous logfile.  If "
+                        "a value is provided, it is the path to the logfile.  If no "
+                        "value is provided, will search for the last logfile. "
+                        "Note that a config file (or '.') must still be provided -- "
+                        "only failed tests in the provided config files will be run.")
 
     parser.add_argument('-s', '--suites', nargs="+", default=[],
                         help='space separated list of test suite names')
@@ -76,11 +99,31 @@ def commandline_options(args=None):
 
 def main(options):
     txtwrap = textwrap.TextWrapper(width=78, subsequent_indent=4*" ")
-    testlog = test_manager.setup_testlog(txtwrap)
-
     root_dir = os.getcwd()
 
+    # find and import test_manager
+    if options.ats is not None:
+        sys.path.append(os.path.join(options.ats, 'tools', 'testing'))
+    if 'ATS_SRC_DIR' in os.environ:
+        sys.path.append(os.path.join(os.environ['ATS_SRC_DIR'], 'tools', 'testing'))
+    import test_manager
+
+    # create the logfile
+    testlog = test_manager.setup_testlog(txtwrap, False)
+    
     test_manager.check_options(options)
+
+    # if using rerun-failed option, parse logfile for failed tests
+    if options.rerun_failed:
+        if isinstance(options.rerun_failed, bool):
+            options.rerun_failed = test_manager.find_last_logfile()
+        options.tests = test_manager.find_failed(options.rerun_failed)
+
+        # need to short-circuit return here, because empty test list
+        # will be interpreted as running all tests
+        if len(options.tests) == 0:
+            return 0
+
     executable = test_manager.check_for_executable(options, testlog)
     mpiexec = test_manager.check_for_mpiexec(options, testlog)
     config_file_list = test_manager.generate_config_file_list(options)
@@ -92,82 +135,71 @@ def main(options):
     start = time.time()
     report = {}
     for config_file in sorted(config_file_list):
-        # try:
-            # NOTE(bja): the try block is inside this loop so that if
-            # a single test throws an exception in a large batch of
-            # tests, we can recover and at least try running the other
-            # config files.
-            print(80 * '=', file=testlog)
-            print(f'Running {config_file}', file=testlog)
+        print(80 * '=', file=testlog)
+        print(f'Running {config_file}', file=testlog)
+        header = os.path.split(config_file)[-1]
+        if len(header) > 20:
+            header = header[:20]
+        else:
+            header = header + ' '*(20-len(header))
 
-            d,f = os.path.split(config_file)
-            d1,header = os.path.split(d)
-            if len(header) > 20:
-                header = header[:20]
-            else:
-                header = header + ' '*(20-len(header))
-            print(f'{header} | ', end='')
+        print(f'{header} | ', end='', file=sys.stdout)
 
-            # get the absolute path of the directory
-            test_dir = os.path.dirname(config_file)
-            # cd into the test directory so that the relative paths in
-            # test files are correct
-            os.chdir(test_dir)
-            if options.debug:
-                print("Changed to working directory: {0}".format(test_dir))
+        # get the absolute path of the directory
+        test_dir = os.path.dirname(config_file)
+        # cd into the test directory so that the relative paths in
+        # test files are correct
+        os.chdir(test_dir)
+        if options.debug:
+            print("Changed to working directory: {0}".format(test_dir))
 
-            tm = test_manager.RegressionTestManager(executable, mpiexec, suffix='demo')
+        tm = test_manager.RegressionTestManager(executable, mpiexec, suffix='demo')
 
-            if options.debug:
-                tm.debug(True)
+        if options.debug:
+            tm.debug(True)
 
-            # get the relative file name
-            filename = os.path.basename(config_file)
+        # get the relative file name
+        filename = os.path.basename(config_file)
 
-            tm.generate_tests(filename,
-                              options.suites,
-                              options.tests,
-                              options.exclude,
-                              options.timeout,
-                              False,
-                              testlog)
+        tm.generate_tests(filename,
+                          options.suites,
+                          options.tests,
+                          options.exclude,
+                          options.timeout,
+                          False,
+                          testlog)
 
-            if options.debug:
-                print(70 * '-')
-                print(tm)
+        if options.debug:
+            print(70 * '-')
+            print(tm)
 
-            if options.list_suites:
-                tm.display_available_suites()
+        if options.list_available_suites:
+            tm.display_available_suites()
 
-            if options.list_tests:
-                tm.display_available_tests()
+        if options.list_available_tests:
+            tm.display_available_tests()
 
-            tm.run_tests(options.dry_run,
-                         False,
-                         False,
-                         False,
-                         True,
-                         testlog)
+        if options.list_tests:
+            tm.display_selected_tests()
 
-            report[filename] = tm.run_status()
-            os.chdir(root_dir)
-        # except Exception as error:
-        #     message = txtwrap.fill(
-        #         "ERROR: a problem occured in file '{0}'.  This is "
-        #         "probably an error with commandline options, the "
-        #         "configuration file, or an internal error.  The "
-        #         "error is:\n{1}".format(config_file, str(error)))
-        #     print(''.join(['\n', message, '\n']), file=testlog)
-        #     if options.backtrace:
-        #         traceback.print_exc()
-        #     print('F', end='', file=sys.stdout)
-        #     report[filename] = TestStatus()
-        #     report[filename].fail = 1
+        tm.run_tests(options.dry_run,
+                     False,
+                     False,
+                     False,
+                     True,
+                     testlog)
 
-            
+        report[filename] = tm.run_status()
+
+        # Not sure why this is needed to get proper printing when there are no tests...
+        if tm.num_tests() == 0:
+            print('', file=sys.stdout)
+
+    os.chdir(root_dir)
+
     stop = time.time()
     status = 0
-    if not options.dry_run:
+    if not options.dry_run and not options.list_tests:
         print("")
         run_time = stop - start
         test_manager.summary_report_by_file(report, testlog)
@@ -175,7 +207,6 @@ def main(options):
         status = test_manager.summary_report(run_time, report, sys.stdout)
 
     testlog.close()
-
     return status
 
 

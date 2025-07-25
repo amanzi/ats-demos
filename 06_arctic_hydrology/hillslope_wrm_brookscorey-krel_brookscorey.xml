@@ -76,7 +76,6 @@
     <Parameter name="start time units" type="string" value="s"/>
     <Parameter name="end time" type="double" value="365.0"/>
     <Parameter name="end time units" type="string" value="d"/>
-    <Parameter name="end cycle" type="int" value="3000"/>
     <ParameterList name="required times" type="ParameterList">
       <Parameter name="times start period stop" type="Array(double)" value="{0.0, 1.0, -1.0}"/>
       <Parameter name="times start period stop units" type="string" value="d"/>
@@ -585,7 +584,7 @@
         <Parameter name="evaluator type" type="string" value="surface rel perm"/>
         <ParameterList name="surface rel perm model" type="ParameterList">
           <Parameter name="surface rel perm model type" type="string" value="unfrozen fraction rel perm, limit one"/>
-          <Parameter name="unfrozen rel perm cutoff pressure [Pa]" type="double" value="100.0"/>
+          <Parameter name="unfrozen rel perm cutoff pressure [Pa]" type="double" value="10.0"/>
           <Parameter name="unfrozen rel perm cutoff pressure, below [Pa]" type="double" value="-100.0"/>
         </ParameterList>
       </ParameterList>
@@ -862,7 +861,7 @@
       <Parameter name="time units" type="string" value="d"/>
       <Parameter name="times start period stop" type="Array(double)" value="{0.0, 1.0, -1.0}"/>
       <Parameter name="times start period stop units" type="string" value="d"/>
-      <Parameter name="delimiter" type="string" value=""/>
+      <Parameter name="delimiter" type="string" value=","/>
       <ParameterList name="observed quantities" type="ParameterList">
         <ParameterList name="evaporation cumulation [m3/d]" type="ParameterList">
           <Parameter name="variable" type="string" value="surface-evaporative_flux"/>

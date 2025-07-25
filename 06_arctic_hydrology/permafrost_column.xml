@@ -69,7 +69,6 @@
   </ParameterList>
 
   <ParameterList name="cycle driver" type="ParameterList">
-    <Parameter name="end cycle" type="int" value="3000"/>
     <Parameter name="start time" type="double" value="0.0"/>
     <Parameter name="start time units" type="string" value="s"/>
     <Parameter name="end time" type="double" value="1.0"/>

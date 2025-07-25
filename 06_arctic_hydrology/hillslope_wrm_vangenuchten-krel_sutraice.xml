@@ -584,7 +584,7 @@
         <Parameter name="evaluator type" type="string" value="surface rel perm"/>
         <ParameterList name="surface rel perm model" type="ParameterList">
           <Parameter name="surface rel perm model type" type="string" value="unfrozen fraction rel perm, limit one"/>
-          <Parameter name="unfrozen rel perm cutoff pressure [Pa]" type="double" value="100.0"/>
+          <Parameter name="unfrozen rel perm cutoff pressure [Pa]" type="double" value="10.0"/>
           <Parameter name="unfrozen rel perm cutoff pressure, below [Pa]" type="double" value="-100.0"/>
         </ParameterList>
       </ParameterList>

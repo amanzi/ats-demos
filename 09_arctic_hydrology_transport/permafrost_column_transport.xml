@@ -5,7 +5,7 @@
       <Parameter name="build columns from set" type="string" value="surface"/>
       <Parameter name="mesh type" type="string" value="read mesh file"/>
       <ParameterList name="read mesh file parameters" type="ParameterList">
-        <Parameter name="file" type="string" value="../../data/column.exo"/>
+        <Parameter name="file" type="string" value="../data/column.exo"/>
         <Parameter name="format" type="string" value="Exodus II"/>
       </ParameterList>
     </ParameterList>
@@ -34,7 +34,7 @@
     </ParameterList>
     <ParameterList name="peat" type="ParameterList">
       <ParameterList name="region: labeled set" type="ParameterList">
-        <Parameter name="file" type="string" value="../../data/column.exo"/>
+        <Parameter name="file" type="string" value="../data/column.exo"/>
         <Parameter name="format" type="string" value="Exodus II"/>
         <Parameter name="label" type="string" value="1001"/>
         <Parameter name="entity" type="string" value="cell"/>
@@ -42,7 +42,7 @@
     </ParameterList>
     <ParameterList name="mineral" type="ParameterList">
       <ParameterList name="region: labeled set" type="ParameterList">
-        <Parameter name="file" type="string" value="../../data/column.exo"/>
+        <Parameter name="file" type="string" value="../data/column.exo"/>
         <Parameter name="format" type="string" value="Exodus II"/>
         <Parameter name="label" type="string" value="1000"/>
         <Parameter name="entity" type="string" value="cell"/>
@@ -50,7 +50,7 @@
     </ParameterList>
     <ParameterList name="surface" type="ParameterList">
       <ParameterList name="region: labeled set" type="ParameterList">
-        <Parameter name="file" type="string" value="../../data/column.exo"/>
+        <Parameter name="file" type="string" value="../data/column.exo"/>
         <Parameter name="format" type="string" value="Exodus II"/>
         <Parameter name="label" type="string" value="2"/>
         <Parameter name="entity" type="string" value="face"/>
@@ -58,7 +58,7 @@
     </ParameterList>
     <ParameterList name="bottom face" type="ParameterList">
       <ParameterList name="region: labeled set" type="ParameterList">
-        <Parameter name="file" type="string" value="../../data/column.exo"/>
+        <Parameter name="file" type="string" value="../data/column.exo"/>
         <Parameter name="format" type="string" value="Exodus II"/>
         <Parameter name="label" type="string" value="1"/>
         <Parameter name="entity" type="string" value="face"/>
@@ -227,7 +227,7 @@
       <ParameterList name="initial conditions" type="ParameterList">
         <Parameter name="initialize faces from cells" type="bool" value="true"/>
         <ParameterList name="initialize from 1D column" type="ParameterList">
-          <Parameter name="file" type="string" value="../../data/freezeup_initial_for_hillslope.h5"/>
+          <Parameter name="file" type="string" value="../data/column_freezeup.h5"/>
           <Parameter name="z header" type="string" value="/z"/>
           <Parameter name="f header" type="string" value="/pressure"/>
           <Parameter name="coordinate orientation" type="string" value="depth"/>
@@ -293,7 +293,7 @@
       <ParameterList name="initial conditions" type="ParameterList">
         <Parameter name="initialize faces from cells" type="bool" value="true"/>
         <ParameterList name="initialize from 1D column" type="ParameterList">
-          <Parameter name="file" type="string" value="../../data/freezeup_initial_for_hillslope.h5"/>
+          <Parameter name="file" type="string" value="../data/column_freezeup.h5"/>
           <Parameter name="z header" type="string" value="/z"/>
           <Parameter name="f header" type="string" value="/temperature"/>
           <Parameter name="coordinate orientation" type="string" value="depth"/>
@@ -875,7 +875,7 @@
             <Parameter name="component" type="string" value="cell" />
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-tabular" type="ParameterList">
-                <Parameter name="file" type="string" value="../../data/forcing_smoothed.h5" />
+                <Parameter name="file" type="string" value="../data/forcing_smoothed.h5" />
                 <Parameter name="x header" type="string" value="time [s]" />
                 <Parameter name="y header" type="string" value="incoming shortwave radiation [W m^-2]" />
               </ParameterList>
@@ -905,7 +905,7 @@
             <Parameter name="component" type="string" value="cell" />
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-tabular" type="ParameterList">
-                <Parameter name="file" type="string" value="../../data/forcing_smoothed.h5" />
+                <Parameter name="file" type="string" value="../data/forcing_smoothed.h5" />
                 <Parameter name="x header" type="string" value="time [s]" />
                 <Parameter name="y header" type="string" value="air temperature [K]" />
               </ParameterList>
@@ -921,7 +921,7 @@
             <Parameter name="component" type="string" value="cell"/>
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-tabular" type="ParameterList">
-                <Parameter name="file" type="string" value="../../data/forcing_smoothed.h5"/>
+                <Parameter name="file" type="string" value="../data/forcing_smoothed.h5"/>
                 <Parameter name="x header" type="string" value="time [s]"/>
                 <Parameter name="y header" type="string" value="vapor pressure air [Pa]"/>
               </ParameterList>
@@ -938,7 +938,7 @@
             <Parameter name="component" type="string" value="cell" />
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-tabular" type="ParameterList">
-                <Parameter name="file" type="string" value="../../data/forcing_smoothed.h5" />
+                <Parameter name="file" type="string" value="../data/forcing_smoothed.h5" />
                 <Parameter name="x header" type="string" value="time [s]" />
                 <Parameter name="y header" type="string" value="wind speed [m s^-1]" />
               </ParameterList>
@@ -954,7 +954,7 @@
             <Parameter name="component" type="string" value="cell" />
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-tabular" type="ParameterList">
-                <Parameter name="file" type="string" value="../../data/forcing_smoothed.h5" />
+                <Parameter name="file" type="string" value="../data/forcing_smoothed.h5" />
                 <Parameter name="x header" type="string" value="time [s]" />
                 <Parameter name="y header" type="string" value="precipitation rain 1.5 [m s^-1]" />
               </ParameterList>
@@ -970,7 +970,7 @@
             <Parameter name="component" type="string" value="cell"/>
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-tabular" type="ParameterList">
-                <Parameter name="file" type="string" value="../../data/forcing_smoothed.h5"/>
+                <Parameter name="file" type="string" value="../data/forcing_smoothed.h5"/>
                 <Parameter name="x header" type="string" value="time [s]"/>
                 <Parameter name="y header" type="string" value="precipitation snow 1.7 [m SWE s^-1]"/>
               </ParameterList>

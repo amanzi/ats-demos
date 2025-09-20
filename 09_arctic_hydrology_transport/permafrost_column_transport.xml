@@ -78,39 +78,36 @@
     <Parameter name="end time units" type="string" value="noleap" />
 
     <ParameterList name="PK tree" type="ParameterList">
-      <ParameterList name="top level MPC" type="ParameterList">
-        <Parameter name="PK type" type="string" value="weak MPC" />
-        <ParameterList name="flow transport energy coupler">
-          <Parameter name="PK type" type="string" value="coupled flow and transport" />
-          <ParameterList name="coupled SEB and permafrost" type="ParameterList">
-            <Parameter name="PK type" type="string" value="strong MPC" />
-            <ParameterList name="SEB" type="ParameterList">
-              <Parameter name="PK type" type="string" value="surface balance implicit subgrid" />
+      <ParameterList name="flow transport energy coupler">
+        <Parameter name="PK type" type="string" value="coupled flow and transport" />
+        <ParameterList name="coupled SEB and permafrost" type="ParameterList">
+          <Parameter name="PK type" type="string" value="strong MPC" />
+          <ParameterList name="SEB" type="ParameterList">
+            <Parameter name="PK type" type="string" value="surface balance implicit subgrid" />
+          </ParameterList>
+          <ParameterList name="permafrost surface and subsurface" type="ParameterList">
+            <Parameter name="PK type" type="string" value="permafrost model" />
+            <ParameterList name="subsurface flow" type="ParameterList">
+              <Parameter name="PK type" type="string" value="permafrost flow" />
             </ParameterList>
-            <ParameterList name="permafrost surface and subsurface" type="ParameterList">
-              <Parameter name="PK type" type="string" value="permafrost model" />
-              <ParameterList name="subsurface flow" type="ParameterList">
-                <Parameter name="PK type" type="string" value="permafrost flow" />
-              </ParameterList>
-              <ParameterList name="surface flow" type="ParameterList">
-                <Parameter name="PK type" type="string" value="overland flow with ice" />
-              </ParameterList>
-              <ParameterList name="subsurface energy" type="ParameterList">
-                <Parameter name="PK type" type="string" value="three-phase energy" />
-              </ParameterList>
-              <ParameterList name="surface energy" type="ParameterList">
-                <Parameter name="PK type" type="string" value="surface energy" />
-              </ParameterList>
+            <ParameterList name="surface flow" type="ParameterList">
+              <Parameter name="PK type" type="string" value="overland flow with ice" />
+            </ParameterList>
+            <ParameterList name="subsurface energy" type="ParameterList">
+              <Parameter name="PK type" type="string" value="three-phase energy" />
+            </ParameterList>
+            <ParameterList name="surface energy" type="ParameterList">
+              <Parameter name="PK type" type="string" value="surface energy" />
             </ParameterList>
           </ParameterList>
-          <ParameterList name="surface-subsurface transport coupler" type="ParameterList">
-            <Parameter name="PK type" type="string" value="surface subsurface transport" />
-            <ParameterList name="subsurface transport" type="ParameterList">
-              <Parameter name="PK type" type="string" value="transport ATS" />
-            </ParameterList>
-            <ParameterList name="surface transport" type="ParameterList">
-              <Parameter name="PK type" type="string" value="transport ATS" />
-            </ParameterList>
+        </ParameterList>
+        <ParameterList name="surface-subsurface transport coupler" type="ParameterList">
+          <Parameter name="PK type" type="string" value="surface subsurface transport" />
+          <ParameterList name="subsurface transport" type="ParameterList">
+            <Parameter name="PK type" type="string" value="transport ATS" />
+          </ParameterList>
+          <ParameterList name="surface transport" type="ParameterList">
+            <Parameter name="PK type" type="string" value="transport ATS" />
           </ParameterList>
         </ParameterList>
       </ParameterList>
@@ -126,7 +123,6 @@
 
     <ParameterList name="flow transport energy coupler">
       <Parameter name="PK type" type="string" value="coupled flow and transport" />
-      <Parameter name="PK name" type="string" value="flow transport energy coupler" />
       <Parameter name="PKs order" type="Array(string)" value="{coupled SEB and permafrost, surface-subsurface transport coupler}" />
       <Parameter name="subcycle" type="Array(int)" value="{0,1}" />
     </ParameterList>
@@ -140,10 +136,10 @@
         <Parameter name="timestep controller type" type="string" value="smarter" />
         <ParameterList name="nka_bt_ats parameters" type="ParameterList">
           <Parameter name="nka lag iterations" type="int" value="2" />
-          <Parameter name="max backtrack steps" type="int" value="10" />
-          <Parameter name="max total backtrack steps" type="int" value="20" />
+          <Parameter name="backtrack max steps" type="int" value="10" />
+          <Parameter name="backtrack max total steps" type="int" value="20" />
           <Parameter name="backtrack lag" type="int" value="0" />
-          <Parameter name="last backtrack iteration" type="int" value="20" />
+          <Parameter name="backtrack last iteration" type="int" value="20" />
           <Parameter name="backtrack factor" type="double" value="0.25" />
           <Parameter name="backtrack tolerance" type="double" value="0.0001" />
           <Parameter name="nonlinear tolerance" type="double" value="1e-05" />
@@ -400,9 +396,7 @@
 
     <ParameterList name="surface-subsurface transport coupler">
       <Parameter name="PK type" type="string" value="surface subsurface transport" />
-      <Parameter name="PK name" type="string" value="surface subsurface transport" />
       <Parameter name="PKs order" type="Array(string)" value="{subsurface transport, surface transport}" />
-      <Parameter name="component names" type="Array(string)" value="{tracer}" />
     </ParameterList>
 
     <ParameterList name="subsurface transport">
@@ -412,26 +406,10 @@
       <Parameter name="temporal discretization order" type="int" value="1" />
       <Parameter name="liquid water content key" type="string" value="liquid_water_content"/>
       <Parameter name="cfl" type="double" value="1.0" />
-      <Parameter name="flow mode" type="string" value="transient" />
       <Parameter name="water tolerance" type="double" value="0.001"/> <!-- adds a little water to prevent dryout -->
-
       <ParameterList name="initial conditions" type="ParameterList">
-        <ParameterList name="function" type="ParameterList">
-          <ParameterList name="ic subsurface" type="ParameterList">
-            <Parameter name="regions" type="Array(string)" value="{domain}"/>
-            <Parameter name="component" type="string" value="cell"/>
-            <ParameterList name="function" type="ParameterList">
-              <Parameter name="number of dofs" type="int" value="1"/>
-              <ParameterList name="dof 1 function">
-                <ParameterList name="function-constant" type="ParameterList">
-                  <Parameter name="value" type="double" value="0.0"/>
-                </ParameterList>
-              </ParameterList>
-            </ParameterList>
-          </ParameterList>
-        </ParameterList>
+        <Parameter name="constant" type="double" value="0.0"/>
       </ParameterList>
-
       <ParameterList name="boundary conditions">
       </ParameterList>
       <ParameterList name="molecular diffusivity [m^2 s^-1]">
@@ -468,35 +446,20 @@
     <ParameterList name="surface transport">
       <Parameter name="PK type" type="string" value="transport ATS" />
       <Parameter name="domain name" type="string" value="surface" />
-      <Parameter name="saturation liquid key" type="string" value="surface-unfrozen_effective_depth" />
-      <Parameter name="previous saturation liquid key" type="string" value="surface-prev_unfrozen_effective_depth" />
       <Parameter name="liquid water content key" type="string" value="surface-liquid_water_content"/>
       <Parameter name="water source in meters" type="bool" value="true"/>
       <Parameter name="component names" type="Array(string)" value="{tracer}" />
       <Parameter name="spatial discretization order" type="int" value="1" />
       <Parameter name="temporal discretization order" type="int" value="1" />
       <Parameter name="cfl" type="double" value=" 1" />
-
       <ParameterList name="initial conditions" type="ParameterList">
-        <ParameterList name="function" type="ParameterList">
-          <ParameterList name="ic surface" type="ParameterList">
-            <Parameter name="regions" type="Array(string)" value="{surface domain}"/>
-            <Parameter name="component" type="string" value="cell"/>
-            <ParameterList name="function" type="ParameterList">
-              <ParameterList name="function-constant" type="ParameterList">
-                <Parameter name="value" type="double" value="0.0"/>
-              </ParameterList>
-            </ParameterList>
-          </ParameterList>
-        </ParameterList>
+        <Parameter name="constant" type="double" value="0.0"/>
       </ParameterList>
-
       <ParameterList name="source terms">
         <ParameterList name="component mass source">
           <ParameterList name="Source Rainfall">
             <Parameter name="component names" type="Array(string)" value="{tracer}"/>
             <Parameter name="regions" type="Array(string)" value="{surface domain}"/>
-            <Parameter name="convert to field" type="bool" value="true"/>
             <Parameter name="spatial distribution method" type="string" value="field"/>
             <ParameterList name="field">
               <Parameter name="field key" type="string" value="surface-tracer_injection_source"/>

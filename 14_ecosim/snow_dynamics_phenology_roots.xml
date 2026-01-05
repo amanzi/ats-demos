@@ -7,10 +7,6 @@
 
   3/25 - this version has been fixed so that the ecosim sources
          should appear correctly in the observation files
-  
-  This file has both albedo modification and phenology off as
-  a baseline for later runs. This should give us standard
-  internal albedo calculation
 
 -->
 <ParameterList name="Main" type="ParameterList">
@@ -149,7 +145,7 @@
         <ParameterList name="EcoSIM for ATS" type="ParameterList">
              <Parameter name="PK type" type="string" value="EcoSIM for ATS" />
         </ParameterList>
-      </ParameterList>  
+      </ParameterList>
     </ParameterList>
   </ParameterList>
   <ParameterList name="visualization">
@@ -162,6 +158,11 @@
     <ParameterList name="surface" type="ParameterList">
       <Parameter name="times start period stop" type="Array(double)" value="{ 0, 864000, -1}" />
     </ParameterList>
+  </ParameterList>
+
+  <!-- checkpoint every 30 days -->
+  <ParameterList name="checkpoint">
+    <Parameter name="times start period stop 0" type="Array(double)" value="{0.0, 2.592e6, -1.0}"/>
   </ParameterList>
 
   <ParameterList name="PKs" type="ParameterList">
@@ -199,7 +200,7 @@
       <Parameter name="initial time step" type="double" value="3600" />
       <Parameter name="EcoSIM Precipitation" type="bool" value="false" />
       <Parameter name="Prescribe Albedo" type="bool" value="false" />
-      <Parameter name="Prescribe Phenology" type="bool" value="false" />
+      <Parameter name="Prescribe Phenology" type="bool" value="true" />
       <Parameter name="Starting day of year [0-364]" type="int" value="363" />
       <Parameter name="Starting year" type="int" value="1995" />
       <ParameterList name="boundary conditions" type="ParameterList">
@@ -266,7 +267,7 @@
         </ParameterList>
       </ParameterList>
 
-    </ParameterList>    
+    </ParameterList>
 
     <ParameterList name="permafrost surface and subsurface" type="ParameterList">
       <Parameter name="PK type" type="string" value="permafrost model" />
@@ -280,7 +281,7 @@
       <ParameterList name="ewc delegate" type="ParameterList">
         <Parameter name="predictor type" type="string" value="smart ewc" />
       </ParameterList>
-      
+
       <ParameterList name="water delegate" type="ParameterList">
         <Parameter name="modify predictor damp and cap the water spurt" type="bool" value="true" />
         <Parameter name="damp and cap the water spurt" type="bool" value="true" />
@@ -310,7 +311,8 @@
     <ParameterList name="subsurface flow" type="ParameterList">
       <Parameter name="PK type" type="string" value="permafrost flow" />
       <Parameter name="primary variable key" type="string" value="pressure" />
-      <Parameter name="source term" type="bool" value="false" />
+      <Parameter name="source term" type="bool" value="true" />
+      <Parameter name="source key" type="string" value="subsurface_ecosim_water_source" />
       <Parameter name="relative permeability method" type="string" value="upwind with Darcy flux" />
       <Parameter name="surface rel perm strategy" type="string" value="clobber" />
       <Parameter name="permeability rescaling" type="double" value="10000000" />
@@ -329,7 +331,7 @@
       </ParameterList>
 
       <ParameterList name="initial condition" type="ParameterList">
-        <Parameter name="hydrostatic head [m]" type="double" value="-2" />
+        <Parameter name="hydrostatic head [m]" type="double" value="0.0" />
         <Parameter name="hydrostatic water density [kg m^-3]" type="double" value="1000" />
       </ParameterList>
 
@@ -514,7 +516,7 @@
   <ParameterList name="state" type="ParameterList">
     <ParameterList name="verbose object" type="ParameterList">
       <Parameter name="verbosity level" type="string" value="low" />
-    </ParameterList>	  
+    </ParameterList>
     <ParameterList name="evaluators" type="ParameterList">
        <!-- Prescribed Phenology -->
        <ParameterList name="surface-LAI" type="ParameterList">
@@ -560,18 +562,22 @@
             </ParameterList>
           </ParameterList>
         </ParameterList>
-       </ParameterList>       
+       </ParameterList>
 
        <!-- ECOSIM -->
        <ParameterList name="surface-ecosim_source" type="ParameterList">
          <Parameter name="evaluator type" type="string" value="independent variable constant" />
          <Parameter name="value" type="double" value="0.00" />
-       </ParameterList>	    
+       </ParameterList>
        <ParameterList name="surface-energy_source_new" type="ParameterList">
          <Parameter name="evaluator type" type="string" value="additive evaluator" />
          <Parameter name="dependencies" type="Array(string)" value="{surface-total_energy_source,surface-ecosim_source}" />
        </ParameterList>
        <ParameterList name="surface-ecosim_water_source" type="ParameterList">
+         <Parameter name="evaluator type" type="string" value="independent variable constant" />
+         <Parameter name="value" type="double" value="0.00" />
+       </ParameterList>
+       <ParameterList name="subsurface_ecosim_water_source" type="ParameterList">
          <Parameter name="evaluator type" type="string" value="independent variable constant" />
          <Parameter name="value" type="double" value="0.00" />
        </ParameterList>
@@ -589,7 +595,7 @@
        </ParameterList>
        <ParameterList name="matric_pressure" type="ParameterList">
          <Parameter name="evaluator type" type="string" value="matric pressure" />
-       </ParameterList>       
+       </ParameterList>
        <!-- TRANSPORT -->
        <ParameterList name="molar_density_liquid" type="ParameterList">
          <Parameter name="evaluator type" type="string" value="eos" />
@@ -606,8 +612,8 @@
          <Parameter name="value" type="double" value=" 1" />
        </ParameterList>
 
-       <!--SURFACE ENERGY BALANCE-->	    
-       
+       <!--SURFACE ENERGY BALANCE-->
+
        <ParameterList name="surface-snow_albedo" type="ParameterList">
         <Parameter name="evaluator type" type="string" value="independent variable" />
         <ParameterList name="function" type="ParameterList">
@@ -637,7 +643,7 @@
             </ParameterList>
           </ParameterList>
         </ParameterList>
-      </ParameterList> 
+      </ParameterList>
       <ParameterList name="surface-precipitation_total" type="ParameterList">
         <Parameter name="evaluator type" type="string" value="independent variable" />
         <ParameterList name="function" type="ParameterList">
@@ -671,7 +677,7 @@
         <Parameter name="evaluator type" type="string" value="surface energy balance, three components" />
         <Parameter name="save diagnostic data" type="bool" value="true" />
         <Parameter name="wind speed reference height [m]" type="double" value=" 3" />
-      </ParameterList>      
+      </ParameterList>
       <ParameterList name="surface-incoming_shortwave_radiation" type="ParameterList">
         <Parameter name="evaluator type" type="string" value="independent variable" />
         <ParameterList name="function" type="ParameterList">
@@ -706,7 +712,7 @@
             </ParameterList>
           </ParameterList>
         </ParameterList>
-      </ParameterList>      
+      </ParameterList>
       <ParameterList name="snow-precipitation" type="ParameterList">
         <Parameter name="evaluator type" type="string" value="independent variable" />
         <ParameterList name="function" type="ParameterList">
@@ -752,7 +758,7 @@
             </ParameterList>
           </ParameterList>
         </ParameterList>
-      </ParameterList>      
+      </ParameterList>
       <ParameterList name="surface-area_fractions" type="ParameterList">
         <Parameter name="evaluator type" type="string" value="area fractions, three components" />
       </ParameterList>
@@ -764,7 +770,7 @@
         <Parameter name="model parameters" type="string" value="WRM parameters" />
       </ParameterList>
       <!-- FLOW AND ENERGY -->
-   
+
       <ParameterList name="water_content" type="ParameterList">
         <Parameter name="evaluator type" type="string" value="liquid+ice water content" />
       </ParameterList>
@@ -1039,7 +1045,7 @@
           <Parameter name="albedo of bare ground [-]" type="double" value="0.135" />
           <Parameter name="emissivity of bare ground [-]" type="double" value="0.92" />
         </ParameterList>
-      </ParameterList>      
+      </ParameterList>
 
     </ParameterList>
     <ParameterList name="model parameters" type="ParameterList">
@@ -1057,50 +1063,8 @@
   </ParameterList>
 
   <ParameterList name="observations" type="ParameterList">
-    <ParameterList name="Qs" type="ParameterList">
-      <Parameter name="observation output filename" type="string" value="Q.dat" />
-      <Parameter name="times start period stop" type="Array(double)" value="{ 0,86400,-1}" />
-      <ParameterList name="observed quantities" type="ParameterList">
-        <ParameterList name="Q_e" type="ParameterList">
-          <Parameter name="variable" type="string" value="surface-energy_source_new" />
-          <Parameter name="region" type="string" value="surf_obs" />
-          <Parameter name="functional" type="string" value="integral" />
-          <Parameter name="location name" type="string" value="cell" />
-        </ParameterList>
-        <ParameterList name="Q_w" type="ParameterList">
-          <Parameter name="variable" type="string" value="surface-water_source_new" />
-          <Parameter name="region" type="string" value="surf_obs" />
-          <Parameter name="functional" type="string" value="integral" />
-          <Parameter name="location name" type="string" value="cell" />
-        </ParameterList>
-        <ParameterList name="Q_e_ecosim" type="ParameterList">
-          <Parameter name="variable" type="string" value="surface-ecosim_source" />
-          <Parameter name="region" type="string" value="surf_obs" />
-          <Parameter name="functional" type="string" value="integral" />
-          <Parameter name="location name" type="string" value="cell" />
-        </ParameterList>
-        <ParameterList name="Q_w_ecosim" type="ParameterList">
-          <Parameter name="variable" type="string" value="surface-ecosim_water_source" />
-          <Parameter name="region" type="string" value="surf_obs" />
-          <Parameter name="functional" type="string" value="integral" />
-          <Parameter name="location name" type="string" value="cell" />
-        </ParameterList>
-        <ParameterList name="Q_e_ats" type="ParameterList">
-          <Parameter name="variable" type="string" value="surface-total_energy_source" />
-          <Parameter name="region" type="string" value="surf_obs" />
-          <Parameter name="functional" type="string" value="integral" />
-          <Parameter name="location name" type="string" value="cell" />
-        </ParameterList>
-        <ParameterList name="Q_w_ats" type="ParameterList">
-          <Parameter name="variable" type="string" value="surface-water_source" />
-          <Parameter name="region" type="string" value="surf_obs" />
-          <Parameter name="functional" type="string" value="integral" />
-          <Parameter name="location name" type="string" value="cell" />
-        </ParameterList>
-      </ParameterList>
-    </ParameterList>
-    <ParameterList name="snow_status" type="ParameterList">
-      <Parameter name="observation output filename" type="string" value="snow_status.dat" />
+    <ParameterList name="surface properties" type="ParameterList">
+      <Parameter name="observation output filename" type="string" value="surf_prop.dat" />
       <Parameter name="times start period stop" type="Array(double)" value="{ 0,86400,-1}" />
       <ParameterList name="observed quantities" type="ParameterList">
         <ParameterList name="snow_depth" type="ParameterList">
@@ -1109,42 +1073,6 @@
           <Parameter name="functional" type="string" value="point" />
           <Parameter name="location name" type="string" value="cell" />
         </ParameterList>
-        <ParameterList name="bulk_density" type="ParameterList">
-          <Parameter name="variable" type="string" value="bulk_density" />
-          <Parameter name="region" type="string" value="top_cell_obs" />
-          <Parameter name="functional" type="string" value="point" />
-          <Parameter name="location name" type="string" value="cell" />
-        </ParameterList>
-        <ParameterList name="water_content" type="ParameterList">
-          <Parameter name="variable" type="string" value="water_content" />
-          <Parameter name="region" type="string" value="top_cell_obs" />
-          <Parameter name="functional" type="string" value="point" />
-          <Parameter name="location name" type="string" value="cell" />
-        </ParameterList>
-        <ParameterList name="saturation_liquid" type="ParameterList">
-          <Parameter name="variable" type="string" value="saturation_liquid" />
-          <Parameter name="region" type="string" value="top_cell_obs" />
-          <Parameter name="functional" type="string" value="point" />
-          <Parameter name="location name" type="string" value="cell" />
-        </ParameterList>
-        <ParameterList name="temperature" type="ParameterList">
-          <Parameter name="variable" type="string" value="temperature" />
-          <Parameter name="region" type="string" value="top_cell_obs" />
-          <Parameter name="functional" type="string" value="point" />
-          <Parameter name="location name" type="string" value="cell" />
-        </ParameterList>
-        <ParameterList name="porosity" type="ParameterList">
-          <Parameter name="variable" type="string" value="porosity" />
-          <Parameter name="region" type="string" value="top_cell_obs" />
-          <Parameter name="functional" type="string" value="point" />
-          <Parameter name="location name" type="string" value="cell" />
-        </ParameterList>
-      </ParameterList>
-     </ParameterList>
-     <ParameterList name="surface properties" type="ParameterList">
-      <Parameter name="observation output filename" type="string" value="evapotranspiration.dat" />
-      <Parameter name="times start period stop" type="Array(double)" value="{ 0,86400,-1}" />
-      <ParameterList name="observed quantities" type="ParameterList">
         <ParameterList name="evapotranspiration" type="ParameterList">
           <Parameter name="variable" type="string" value="surface-evapotranspiration" />
           <Parameter name="region" type="string" value="surf_obs" />
@@ -1166,6 +1094,48 @@
         <ParameterList name="sublimation_snow" type="ParameterList">
           <Parameter name="variable" type="string" value="surface-sublimation_snow" />
           <Parameter name="region" type="string" value="surf_obs" />
+          <Parameter name="functional" type="string" value="point" />
+          <Parameter name="location name" type="string" value="cell" />
+        </ParameterList>
+        <ParameterList name="Q_e_surf" type="ParameterList">
+          <Parameter name="variable" type="string" value="surface-ecosim_source" />
+          <Parameter name="region" type="string" value="surf_obs" />
+          <Parameter name="functional" type="string" value="integral" />
+          <Parameter name="location name" type="string" value="cell" />
+        </ParameterList>
+        <ParameterList name="Q_w_surf" type="ParameterList">
+          <Parameter name="variable" type="string" value="surface-ecosim_water_source" />
+          <Parameter name="region" type="string" value="surf_obs" />
+          <Parameter name="functional" type="string" value="integral" />
+          <Parameter name="location name" type="string" value="cell" />
+        </ParameterList>
+      </ParameterList>
+    </ParameterList>
+    <ParameterList name="subsurface properties" type="ParameterList">
+      <Parameter name="observation output filename" type="string" value="subsurf_prop.dat" />
+      <Parameter name="times start period stop" type="Array(double)" value="{ 0,86400,-1}" />
+      <ParameterList name="observed quantities" type="ParameterList">
+        <ParameterList name="Q_w_subsurf" type="ParameterList">
+          <Parameter name="variable" type="string" value="subsurface_ecosim_water_source" />
+          <Parameter name="region" type="string" value="subsurface domain" />
+          <Parameter name="functional" type="string" value="integral" />
+          <Parameter name="location name" type="string" value="cell" />
+        </ParameterList>
+        <ParameterList name="water_content" type="ParameterList">
+          <Parameter name="variable" type="string" value="water_content" />
+          <Parameter name="region" type="string" value="top_cell_obs" />
+          <Parameter name="functional" type="string" value="point" />
+          <Parameter name="location name" type="string" value="cell" />
+        </ParameterList>
+        <ParameterList name="saturation_liquid" type="ParameterList">
+          <Parameter name="variable" type="string" value="saturation_liquid" />
+          <Parameter name="region" type="string" value="top_cell_obs" />
+          <Parameter name="functional" type="string" value="point" />
+          <Parameter name="location name" type="string" value="cell" />
+        </ParameterList>
+        <ParameterList name="temperature" type="ParameterList">
+          <Parameter name="variable" type="string" value="temperature" />
+          <Parameter name="region" type="string" value="top_cell_obs" />
           <Parameter name="functional" type="string" value="point" />
           <Parameter name="location name" type="string" value="cell" />
         </ParameterList>

@@ -93,8 +93,8 @@
     </ParameterList>
     <ParameterList name="top_cell_obs" type="ParameterList">
       <ParameterList name="region: box" type="ParameterList">
-        <Parameter name="low coordinate" type="Array(double)" value="{ 0, 0, 0}" />
-        <Parameter name="high coordinate" type="Array(double)" value="{ 1, 1, 1}" />
+        <Parameter name="low coordinate" type="Array(double)" value="{ 0, 0, 24}" />
+        <Parameter name="high coordinate" type="Array(double)" value="{ 1, 1, 25}" />
       </ParameterList>
     </ParameterList>
   </ParameterList>
@@ -1115,6 +1115,12 @@
           <Parameter name="functional" type="string" value="point" />
           <Parameter name="location name" type="string" value="cell" />
         </ParameterList>
+        <ParameterList name="saturation_liquid" type="ParameterList">
+          <Parameter name="variable" type="string" value="saturation_liquid" />
+          <Parameter name="region" type="string" value="top_cell_obs" />
+          <Parameter name="functional" type="string" value="point" />
+          <Parameter name="location name" type="string" value="cell" />
+        </ParameterList>
         <ParameterList name="temperature" type="ParameterList">
           <Parameter name="variable" type="string" value="temperature" />
           <Parameter name="region" type="string" value="top_cell_obs" />
@@ -1129,6 +1135,36 @@
         </ParameterList>
       </ParameterList>
      </ParameterList>
+     <ParameterList name="surface properties" type="ParameterList">       
+      <Parameter name="observation output filename" type="string" value="evapotranspiration.dat" />
+      <Parameter name="times start period stop" type="Array(double)" value="{ 0,86400,-1}" />
+      <ParameterList name="observed quantities" type="ParameterList">
+        <ParameterList name="evapotranspiration" type="ParameterList">
+          <Parameter name="variable" type="string" value="surface-evapotranspiration" />
+          <Parameter name="region" type="string" value="surf_obs" />
+          <Parameter name="functional" type="string" value="point" />
+          <Parameter name="location name" type="string" value="cell" />
+        </ParameterList>
+        <ParameterList name="evaporation_ground" type="ParameterList">
+          <Parameter name="variable" type="string" value="surface-evaporation_ground" />
+          <Parameter name="region" type="string" value="surf_obs" />
+          <Parameter name="functional" type="string" value="point" />
+          <Parameter name="location name" type="string" value="cell" />
+        </ParameterList>
+        <ParameterList name="evaporation_snow" type="ParameterList">
+          <Parameter name="variable" type="string" value="surface-evaporation_snow" />
+          <Parameter name="region" type="string" value="surf_obs" />
+          <Parameter name="functional" type="string" value="point" />
+          <Parameter name="location name" type="string" value="cell" />
+        </ParameterList>
+        <ParameterList name="sublimation_snow" type="ParameterList">
+          <Parameter name="variable" type="string" value="surface-sublimation_snow" />
+          <Parameter name="region" type="string" value="surf_obs" />
+          <Parameter name="functional" type="string" value="point" />
+          <Parameter name="location name" type="string" value="cell" />
+        </ParameterList>
+      </ParameterList>
+    </ParameterList>      
   </ParameterList>
 
 </ParameterList>

@@ -115,12 +115,7 @@
   </ParameterList>
 
   <ParameterList name="PKs" type="ParameterList">
-
-    <ParameterList name="top level MPC" type="ParameterList">
-      <Parameter name="PK type" type="string" value="weak MPC" />
-      <Parameter name="PKs order" type="Array(string)" value="{flow transport energy coupler}" />
-    </ParameterList>
-
+  
     <ParameterList name="flow transport energy coupler">
       <Parameter name="PK type" type="string" value="coupled flow and transport" />
       <Parameter name="PKs order" type="Array(string)" value="{coupled SEB and permafrost, surface-subsurface transport coupler}" />

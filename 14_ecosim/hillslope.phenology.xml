@@ -1,21 +1,19 @@
-<!-- This is a test of the ATS-EcoSIM coupler
-the clean 1.6 refers to removeing SEB and transport-->
-
 <ParameterList name="Main" type="ParameterList">
   <ParameterList name="mesh" type="ParameterList">
-    <ParameterList name="domain" type="ParameterList">
-      <Parameter name="mesh type" type="string" value="generate mesh"/>
-      <Parameter name="build columns from set" type="string" value="surface"/>
-      <ParameterList name="generate mesh parameters" type="ParameterList">
-        <Parameter name="number of cells" type="Array(int)" value="{1, 1, 10}"/>
-        <Parameter name="domain low coordinate" type="Array(double)" value="{0.0, 0.0, 0.0}"/>
-        <Parameter name="domain high coordinate" type="Array(double)" value="{1.0, 1.0, 10.0}"/>
-      </ParameterList>
-    </ParameterList>
     <ParameterList name="surface" type="ParameterList">
       <Parameter name="mesh type" type="string" value="surface"/>
+      <ParameterList name="Expert" type="ParameterList">
+        <Parameter name="verify mesh" type="bool" value="false"/>
+      </ParameterList>
       <ParameterList name="surface parameters" type="ParameterList">
         <Parameter name="surface sideset name" type="string" value="surface"/>
+      </ParameterList>
+    </ParameterList>
+    <ParameterList name="domain" type="ParameterList">
+      <Parameter name="mesh type" type="string" value="read mesh file"/>
+      <ParameterList name="read mesh file parameters" type="ParameterList">
+        <Parameter name="file" type="string" value="../data/hillslope2.exo"/>
+        <Parameter name="format" type="string" value="Exodus II"/>
       </ParameterList>
     </ParameterList>
     <ParameterList name="snow" type="ParameterList">
@@ -27,56 +25,34 @@ the clean 1.6 refers to removeing SEB and transport-->
   </ParameterList>
 
   <ParameterList name="regions" type="ParameterList">
-    <ParameterList name="subsurface domain" type="ParameterList">
-      <ParameterList name="region: box" type="ParameterList">
-        <Parameter name="low coordinate" type="Array(double)" value="{0.0, 0.0, 0.0}"/>
-        <Parameter name="high coordinate" type="Array(double)" value="{1.0, 1.0, 10.0}"/>
+    <ParameterList name="computational domain" type="ParameterList">
+      <ParameterList name="region: all" type="ParameterList">
       </ParameterList>
     </ParameterList>
     <ParameterList name="surface domain" type="ParameterList">
       <ParameterList name="region: all" type="ParameterList">
       </ParameterList>
     </ParameterList>
-    <ParameterList name="east face" type="ParameterList">
-      <ParameterList name="region: plane" type="ParameterList">
-        <Parameter name="point" type="Array(double)" value="{1.0, 1.0, 0.0}"/>
-        <Parameter name="normal" type="Array(double)" value="{1.0, 0.0, 0.0}"/>
+    <ParameterList name="surface" type="ParameterList">
+      <ParameterList name="region: labeled set" type="ParameterList">
+        <Parameter name="label" type="string" value="2"/>
+        <Parameter name="file" type="string" value="../data/hillslope2.exo"/>
+        <Parameter name="format" type="string" value="Exodus II"/>
+        <Parameter name="entity" type="string" value="Face"/>
       </ParameterList>
     </ParameterList>
-    <ParameterList name="west face" type="ParameterList">
+    <ParameterList name="outlet" type="ParameterList">
       <ParameterList name="region: plane" type="ParameterList">
-        <Parameter name="point" type="Array(double)" value="{0.0, 0.0, 0.0}"/>
-        <Parameter name="normal" type="Array(double)" value="{-1.0, 0.0, 0.0}"/>
-      </ParameterList>
-    </ParameterList>
-    <ParameterList name="north face" type="ParameterList">
-      <ParameterList name="region: plane" type="ParameterList">
-        <Parameter name="point" type="Array(double)" value="{1.0, 1.0, 0.0}"/>
-        <Parameter name="normal" type="Array(double)" value="{0.0, 1.0, 0.0}"/>
-      </ParameterList>
-    </ParameterList>
-    <ParameterList name="south face" type="ParameterList">
-      <ParameterList name="region: plane" type="ParameterList">
-        <Parameter name="point" type="Array(double)" value="{0.0, 0.0, 0.0}"/>
-        <Parameter name="normal" type="Array(double)" value="{0.0, -1.0, 0.0}"/>
+        <Parameter name="point" type="Array(double)" value="{1000.0, 0.0}"/>
+        <Parameter name="normal" type="Array(double)" value="{1.0, 0.0}"/>
       </ParameterList>
     </ParameterList>
     <ParameterList name="bottom face" type="ParameterList">
-      <ParameterList name="region: plane" type="ParameterList">
-        <Parameter name="point" type="Array(double)" value="{0.5, 0.5, 0.0}"/>
-        <Parameter name="normal" type="Array(double)" value="{0.0, 0.0, -1.0}"/>
-      </ParameterList>
-    </ParameterList>
-    <ParameterList name="surface" type="ParameterList">
-      <ParameterList name="region: plane" type="ParameterList">
-        <Parameter name="point" type="Array(double)" value="{0.5, 0.5, 10.0}"/>
-        <Parameter name="normal" type="Array(double)" value="{0.0, 0.0, 1.0}"/>
-      </ParameterList>
-    </ParameterList>
-    <ParameterList name="east face seepage" type="ParameterList">
-      <ParameterList name="region: box" type="ParameterList">
-        <Parameter name="low coordinate" type="Array(double)" value="{0.0, 0.0, 6.0}"/>
-        <Parameter name="high coordinate" type="Array(double)" value="{1.0, 0.0, 6.1}"/>
+      <ParameterList name="region: labeled set" type="ParameterList">
+        <Parameter name="label" type="string" value="1"/>
+        <Parameter name="file" type="string" value="../data/hillslope2.exo"/>
+        <Parameter name="format" type="string" value="Exodus II"/>
+        <Parameter name="entity" type="string" value="Face"/>
       </ParameterList>
     </ParameterList>
     <ParameterList name="surf_obs" type="ParameterList">
@@ -85,19 +61,13 @@ the clean 1.6 refers to removeing SEB and transport-->
         <Parameter name="high coordinate" type="Array(double)" value="{1.0, 1.0}"/>
       </ParameterList>
     </ParameterList>
-    <ParameterList name="top_cell_obs" type="ParameterList">
-      <ParameterList name="region: box" type="ParameterList">
-        <Parameter name="low coordinate" type="Array(double)" value="{0.0, 0.0, 0.0}"/>
-        <Parameter name="high coordinate" type="Array(double)" value="{1.0, 1.0, 1.0}"/>
-      </ParameterList>
-    </ParameterList>
   </ParameterList>
 
   <!-- No transport or ATS SEB -->
   <ParameterList name="cycle driver" type="ParameterList">
       <Parameter name="start time" type="double" value="0.0"/>
       <Parameter name="start time units" type="string" value="s"/>
-      <Parameter name="end time" type="double" value="1826.0"/>
+      <Parameter name="end time" type="double" value="1825.0"/>
       <Parameter name="end time units" type="string" value="d"/>
       <ParameterList name="PK tree" type="ParameterList">
         <ParameterList name="top level MPC" type="ParameterList">
@@ -141,66 +111,37 @@ the clean 1.6 refers to removeing SEB and transport-->
     <ParameterList name="top level MPC" type="ParameterList">
       <Parameter name="PK type" type="string" value="weak MPC"/>
       <Parameter name="PKs order" type="Array(string)" value="{permafrost surface and subsurface, EcoSIM for ATS}"/>
+
     </ParameterList>
 
     <ParameterList name="EcoSIM for ATS" type="ParameterList">
       <Parameter name="PK type" type="string" value="EcoSIM for ATS"/>
       <Parameter name="engine" type="string" value="EcoSIM"/>
-      <Parameter name="engine input file" type="string" value="Null"/>
+      <!--<Parameter name="engine input file" type="string" value="Null"/>-->
+      <Parameter name="engine input file" type="string" value="/home/ctg/Work/code/ats_dev_dir/amanzi_tpls-build-master-Debug/ecosim/ecosim-0.1.0-source/input_data/ecosim_pftpar_20260303.nc"/>
       <Parameter name="primary variable key" type="string" value="hydraulic_conductivity"/>
-      <Parameter name="heat capacity [MJ mol^-1 K^-1]" type="double" value="0.020"/>
+      <Parameter name="heat capacity [MJ mol^-1 K^-1]" type="double" value="2.0"/>
       <Parameter name="field capacity [Mpa]" type="double" value="-0.033"/>
       <Parameter name="wilting point [Mpa]" type="double" value="-1.5"/>
       <Parameter name="initial time step" type="double" value="3600.0"/>
       <Parameter name="EcoSIM precipitation" type="bool" value="false"/>
-      <Parameter name="prescribe snow albedo" type="bool" value="true"/>
-      <Parameter name="prescribe phenology" type="bool" value="false"/>
-      <Parameter name="number of pfts" type="int" value="1"/>
+      <Parameter name="prescribe snow albedo" type="bool" value="false"/>
+      <Parameter name="prescribe phenology" type="bool" value="true"/>
       <Parameter name="microbe model" type="bool" value="false"/>
+      <Parameter name="number of pfts" type="int" value="1"/>
       <Parameter name="starting day of year [0-364]" type="int" value="363"/>
       <Parameter name="starting year" type="int" value="1995"/>
       <ParameterList name="boundary conditions" type="ParameterList">
       </ParameterList>
 
       <ParameterList name="initial conditions" type="ParameterList">
+
       </ParameterList>
 
     </ParameterList>
 
-    <!--<ParameterList name="flow energy balance" type="ParameterList">
-      <Parameter name="PK type" type="string" value="strong MPC"/>
-      <Parameter name="PKs order" type="Array(string)" value="{SEB, permafrost surface and subsurface}"/>
-      <ParameterList name="time integrator" type="ParameterList">
-        <Parameter name="extrapolate initial guess" type="bool" value="true"/>
-        <Parameter name="solver type" type="string" value="nka_bt_ats"/>
-        <Parameter name="timestep controller type" type="string" value="smarter"/>
-        <ParameterList name="nka_bt_ats parameters" type="ParameterList">
-          <Parameter name="nka lag iterations" type="int" value="2"/>
-          <Parameter name="max backtrack steps" type="int" value="5"/>
-          <Parameter name="backtrack lag" type="int" value="0"/>
-          <Parameter name="backtrack factor" type="double" value="0.5"/>
-          <Parameter name="backtrack tolerance" type="double" value="0.0001"/>
-          <Parameter name="nonlinear tolerance" type="double" value="0.000001"/>
-          <Parameter name="diverged tolerance" type="double" value="10000000000.0"/>
-          <Parameter name="limit iterations" type="int" value="100"/>
-        </ParameterList>
-        <ParameterList name="timestep controller smarter parameters" type="ParameterList">
-          <Parameter name="max iterations" type="int" value="18"/>
-          <Parameter name="min iterations" type="int" value="10"/>
-          <Parameter name="timestep reduction factor" type="double" value="0.5"/>
-          <Parameter name="timestep increase factor" type="double" value="1.5"/>
-          <Parameter name="max timestep" type="double" value="86400.0"/>
-          <Parameter name="min timestep" type="double" value="1e-10"/>
-          <Parameter name="growth wait after fail" type="int" value="2"/>
-          <Parameter name="count before increasing increase factor" type="int" value="2"/>
-          <Parameter name="initial timestep [s]" type="double" value="86400.0"/>
-        </ParameterList>
-      </ParameterList>
-
-    </ParameterList>-->
-
     <ParameterList name="permafrost surface and subsurface" type="ParameterList">
-      <Parameter name="PK type" type="string" value="permafrost model"/>
+      <Parameter name="PK type" type="string" value="richards model"/>
       <Parameter name="PKs order" type="Array(string)" value="{subsurface flow, subsurface energy, surface flow, surface energy}"/>
       <Parameter name="preconditioner type" type="string" value="picard"/>
       <Parameter name="supress Jacobian terms: d div q / dT" type="bool" value="false"/>
@@ -268,7 +209,8 @@ the clean 1.6 refers to removeing SEB and transport-->
     <ParameterList name="subsurface flow" type="ParameterList">
       <Parameter name="PK type" type="string" value="permafrost flow"/>
       <Parameter name="primary variable key" type="string" value="pressure"/>
-      <Parameter name="source term" type="bool" value="false"/>
+      <Parameter name="source term" type="bool" value="true"/>
+      <Parameter name="source key" type="string" value="subsurface_ecosim_water_source" />
       <Parameter name="relative permeability method" type="string" value="upwind with Darcy flux"/>
       <Parameter name="surface rel perm strategy" type="string" value="clobber"/>
       <Parameter name="permeability rescaling" type="double" value="10000000.0"/>
@@ -286,10 +228,25 @@ the clean 1.6 refers to removeing SEB and transport-->
       <ParameterList name="boundary conditions" type="ParameterList">
       </ParameterList>
 
+      <!--<ParameterList name="initial condition" type="ParameterList">
+        <Parameter name="hydrostatic head [m]" type="double" value="-0.5" />
+        <Parameter name="hydrostatic water density [kg m^-3]" type="double" value="1000" />
+      </ParameterList>-->
       <ParameterList name="initial conditions" type="ParameterList">
 
-        <Parameter name="hydrostatic head [m]" type="double" value="-2.0"/>
-        <Parameter name="hydrostatic water density [kg m^-3]" type="double" value="1000.0"/>
+        <ParameterList name="function" type="ParameterList">
+          <ParameterList name="initial pressure cells" type="ParameterList">
+            <Parameter name="region" type="string" value="computational domain"/>
+            <Parameter name="components" type="Array(string)" value="{cell, face}"/>
+            <ParameterList name="function" type="ParameterList">
+              <ParameterList name="function-linear" type="ParameterList">
+                <Parameter name="x0" type="Array(double)" value="{0.0, 0.0, 0.0, -1.0}"/>
+                <Parameter name="y0" type="double" value="101325.0"/>
+                <Parameter name="gradient" type="Array(double)" value="{0.0, -4.888615025, 0.0, -9777.23005}"/>
+              </ParameterList>
+            </ParameterList>
+          </ParameterList>
+        </ParameterList>
 
       </ParameterList>
 
@@ -298,16 +255,26 @@ the clean 1.6 refers to removeing SEB and transport-->
     <ParameterList name="surface flow" type="ParameterList">
       <Parameter name="PK type" type="string" value="overland flow with ice"/>
       <Parameter name="primary variable key" type="string" value="surface-pressure"/>
+      <Parameter name="source key" type="string" value="surface-ecosim_water_source"/>
       <Parameter name="domain name" type="string" value="surface"/>
       <Parameter name="source term" type="bool" value="true"/>
-      <Parameter name="source key" type="string" value="surface-ecosim_water_source"/>
       <Parameter name="water source in meters" type="bool" value="true"/>
       <Parameter name="debug cells" type="Array(int)" value="{0}"/>
       <ParameterList name="diffusion" type="ParameterList">
         <Parameter name="discretization primary" type="string" value="fv: default"/>
       </ParameterList>
 
-      <ParameterList name="boundary conditions" type="ParameterList">
+      <ParameterList name="boundary conditions">
+        <ParameterList name="seepage face head">
+          <ParameterList name="surface">
+            <Parameter name="regions" type="Array(string)" value="{outlet}"/>
+            <ParameterList name="boundary head">
+              <ParameterList name="function-constant">
+                <Parameter name="value" type="double" value="0.0"/>
+              </ParameterList>
+            </ParameterList>
+          </ParameterList>
+        </ParameterList>
       </ParameterList>
 
       <ParameterList name="initial conditions" type="ParameterList">
@@ -334,7 +301,7 @@ the clean 1.6 refers to removeing SEB and transport-->
             <Parameter name="regions" type="Array(string)" value="{bottom face}"/>
             <ParameterList name="boundary temperature" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
-                <Parameter name="value" type="double" value="280.0"/>
+                <Parameter name="value" type="double" value="285.15"/>
               </ParameterList>
             </ParameterList>
           </ParameterList>
@@ -343,17 +310,17 @@ the clean 1.6 refers to removeing SEB and transport-->
 
       <ParameterList name="initial conditions" type="ParameterList">
 
-        <Parameter name="value" type="double" value="280.0"/>
+        <Parameter name="value" type="double" value="285.15"/>
 
       </ParameterList>
 
       <ParameterList name="thermal conductivity evaluator" type="ParameterList">
         <ParameterList name="thermal conductivity parameters" type="ParameterList">
           <ParameterList name="mineral" type="ParameterList">
-            <Parameter name="region" type="string" value="subsurface domain"/>
+            <Parameter name="region" type="string" value="computational domain"/>
             <Parameter name="thermal conductivity type" type="string" value="three-phase wet/dry"/>
             <Parameter name="thermal conductivity, saturated (unfrozen) [W m^-1 K^-1]" type="double" value="1.0"/>
-            <Parameter name="thermal conductivity, dry [W m^-1 K^-1]" type="double" value="0.29"/>
+            <Parameter name="thermal conductivity, dry [W m^-1 K^-1]" type="double" value="0.25"/>
             <Parameter name="unsaturated alpha frozen [-]" type="double" value="1.0"/>
             <Parameter name="unsaturated alpha unfrozen [-]" type="double" value="0.5"/>
           </ParameterList>
@@ -399,6 +366,7 @@ the clean 1.6 refers to removeing SEB and transport-->
       <ParameterList name="enthalpy evaluator" type="ParameterList">
         <Parameter name="include work term" type="bool" value="false"/>
       </ParameterList>
+
     </ParameterList>
 
   </ParameterList>
@@ -408,7 +376,7 @@ the clean 1.6 refers to removeing SEB and transport-->
       <Parameter name="verbosity level" type="string" value="extreme"/>
     </ParameterList>
     <ParameterList name="evaluators" type="ParameterList">
-      <!-- Prescribed Phenology -->
+      <!-- EcoSIM Prescribed Phenology -->
       <ParameterList name="surface-LAI" type="ParameterList">
         <Parameter name="evaluator type" type="string" value="independent variable"/>
         <ParameterList name="function" type="ParameterList">
@@ -464,18 +432,16 @@ the clean 1.6 refers to removeing SEB and transport-->
         <Parameter name="evaluator type" type="string" value="independent variable constant"/>
         <Parameter name="value" type="double" value="0.00"/>
       </ParameterList>
-      <!--<ParameterList name="surface-water_source_new" type="ParameterList">
-        <Parameter name="evaluator type" type="string" value="additive evaluator"/>
-        <Parameter name="dependencies" type="Array(string)" value="{surface-water_source, surface-ecosim_water_source}"/>
-      </ParameterList>-->
-
+      <ParameterList name="subsurface_ecosim_water_source" type="ParameterList">
+        <Parameter name="evaluator type" type="string" value="independent variable constant" />
+        <Parameter name="value" type="double" value="0.00" />
+      </ParameterList>
       <ParameterList name="hydraulic_conductivity" type="ParameterList">
         <Parameter name="evaluator type" type="string" value="independent variable constant"/>
         <Parameter name="value" type="double" value="0.00"/>
       </ParameterList>
       <ParameterList name="bulk_density" type="ParameterList">
-        <Parameter name="evaluator type" type="string" value="independent variable constant"/>
-        <Parameter name="value" type="double" value="0.00"/>
+        <Parameter name="evaluator type" type="string" value="bulk density"/>
       </ParameterList>
       <ParameterList name="matric_pressure" type="ParameterList">
         <Parameter name="evaluator type" type="string" value="matric pressure"/>
@@ -519,32 +485,16 @@ the clean 1.6 refers to removeing SEB and transport-->
           <Parameter name="density [kg m^-3]" type="double" value="1000.0"/>
         </ParameterList>
       </ParameterList>-->
-      <!--SURFACE ENERGY BALANCE-->      
-      <ParameterList name="surface-precipitation_snow" type="ParameterList">
+      <!--SURFACE ENERGY BALANCE-->
+      <ParameterList name="surface-snow_albedo" type="ParameterList">
         <Parameter name="evaluator type" type="string" value="independent variable"/>
         <ParameterList name="function" type="ParameterList">
-          <ParameterList name="domain" type="ParameterList">
-            <Parameter name="region" type="string" value="surface domain"/>
-            <Parameter name="component" type="string" value="cell"/>
-            <ParameterList name="function" type="ParameterList">
-              <ParameterList name="function-tabular" type="ParameterList">
-                <Parameter name="file" type="string" value="../data/daymet_TaylorRiverCO.h5"/>
-                <Parameter name="x header" type="string" value="time [s]"/>
-                <Parameter name="y header" type="string" value="precipitation snow [m SWE s^-1]"/>
-              </ParameterList>
-            </ParameterList>
-          </ParameterList>
-        </ParameterList>
-      </ParameterList>
-      <ParameterList name="surface-precipitation_total" type="ParameterList">
-        <Parameter name="evaluator type" type="string" value="independent variable"/>
-        <ParameterList name="function" type="ParameterList">
-          <ParameterList name="domain" type="ParameterList">
+          <ParameterList name="domain rain" type="ParameterList">
             <Parameter name="region" type="string" value="surface domain"/>
             <Parameter name="component" type="string" value="cell"/>
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
-                <Parameter name="value" type="double" value="0.0"/>
+                <Parameter name="value" type="double" value="0.9"/>
               </ParameterList>
             </ParameterList>
           </ParameterList>
@@ -570,20 +520,6 @@ the clean 1.6 refers to removeing SEB and transport-->
         <Parameter name="save diagnostic data" type="bool" value="true"/>
         <Parameter name="wind speed reference height [m]" type="double" value="3.0"/>
       </ParameterList>
-      <ParameterList name="surface-snow_albedo" type="ParameterList">
-       <Parameter name="evaluator type" type="string" value="independent variable" />
-       <ParameterList name="function" type="ParameterList">
-         <ParameterList name="domain rain" type="ParameterList">
-           <Parameter name="region" type="string" value="surface domain" />
-           <Parameter name="component" type="string" value="cell" />
-           <ParameterList name="function" type="ParameterList">
-             <ParameterList name="function-constant" type="ParameterList">
-               <Parameter name="value" type="double" value="0.3" />
-             </ParameterList>
-           </ParameterList>
-         </ParameterList>
-       </ParameterList>
-      </ParameterList>
       <ParameterList name="surface-incoming_shortwave_radiation" type="ParameterList">
         <Parameter name="evaluator type" type="string" value="independent variable"/>
         <ParameterList name="function" type="ParameterList">
@@ -593,6 +529,10 @@ the clean 1.6 refers to removeing SEB and transport-->
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-tabular" type="ParameterList">
                 <Parameter name="file" type="string" value="../data/daymet_TaylorRiverCO.h5"/>
+                <Parameter name="Prescribe Albedo" type="bool" value="false"/>
+                <Parameter name="Prescribe Phenology" type="bool" value="false"/>
+                <Parameter name="Starting day of year [0-364]" type="int" value="363"/>
+                <Parameter name="Starting year" type="int" value="1995"/>
                 <Parameter name="x header" type="string" value="time [s]"/>
                 <Parameter name="y header" type="string" value="incoming shortwave radiation [W m^-2]"/>
               </ParameterList>
@@ -627,20 +567,6 @@ the clean 1.6 refers to removeing SEB and transport-->
           </ParameterList>
         </ParameterList>
       </ParameterList>
-      <ParameterList name="snow-precipitation" type="ParameterList">
-        <Parameter name="evaluator type" type="string" value="independent variable"/>
-        <ParameterList name="function" type="ParameterList">
-          <ParameterList name="domain rain" type="ParameterList">
-            <Parameter name="region" type="string" value="surface domain"/>
-            <Parameter name="component" type="string" value="cell"/>
-            <ParameterList name="function" type="ParameterList">
-              <ParameterList name="function-constant" type="ParameterList">
-                <Parameter name="value" type="double" value="0.0"/>
-              </ParameterList>
-            </ParameterList>
-          </ParameterList>
-        </ParameterList>
-      </ParameterList>
       <ParameterList name="surface-wind_speed" type="ParameterList">
         <Parameter name="evaluator type" type="string" value="independent variable"/>
         <ParameterList name="function" type="ParameterList">
@@ -668,6 +594,52 @@ the clean 1.6 refers to removeing SEB and transport-->
                 <Parameter name="file" type="string" value="../data/daymet_TaylorRiverCO.h5"/>
                 <Parameter name="x header" type="string" value="time [s]"/>
                 <Parameter name="y header" type="string" value="vapor pressure air [Pa]"/>
+              </ParameterList>
+            </ParameterList>
+          </ParameterList>
+        </ParameterList>
+      </ParameterList>
+      <ParameterList name="surface-precipitation_rain" type="ParameterList">
+        <Parameter name="evaluator type" type="string" value="independent variable"/>
+        <ParameterList name="function" type="ParameterList">
+          <ParameterList name="domain" type="ParameterList">
+            <Parameter name="region" type="string" value="surface domain"/>
+            <Parameter name="component" type="string" value="cell"/>
+            <ParameterList name="function" type="ParameterList">
+              <ParameterList name="function-tabular" type="ParameterList">
+                <Parameter name="file" type="string" value="../data/daymet_TaylorRiverCO.h5"/>
+                <Parameter name="x header" type="string" value="time [s]"/>
+                <Parameter name="y header" type="string" value="precipitation snow [m SWE s^-1]"/>
+              </ParameterList>
+            </ParameterList>
+          </ParameterList>
+        </ParameterList>
+      </ParameterList>
+      <ParameterList name="surface-precipitation_snow" type="ParameterList">
+        <Parameter name="evaluator type" type="string" value="independent variable"/>
+        <ParameterList name="function" type="ParameterList">
+          <ParameterList name="domain" type="ParameterList">
+            <Parameter name="region" type="string" value="surface domain"/>
+            <Parameter name="component" type="string" value="cell"/>
+            <ParameterList name="function" type="ParameterList">
+              <ParameterList name="function-tabular" type="ParameterList">
+                <Parameter name="file" type="string" value="../data/daymet_TaylorRiverCO.h5"/>
+                <Parameter name="x header" type="string" value="time [s]"/>
+                <Parameter name="y header" type="string" value="precipitation snow [m SWE s^-1]"/>
+              </ParameterList>
+            </ParameterList>
+          </ParameterList>
+        </ParameterList>
+      </ParameterList>
+      <ParameterList name="snow-precipitation" type="ParameterList">
+        <Parameter name="evaluator type" type="string" value="independent variable"/>
+        <ParameterList name="function" type="ParameterList">
+          <ParameterList name="domain rain" type="ParameterList">
+            <Parameter name="region" type="string" value="surface domain"/>
+            <Parameter name="component" type="string" value="cell"/>
+            <ParameterList name="function" type="ParameterList">
+              <ParameterList name="function-constant" type="ParameterList">
+                <Parameter name="value" type="double" value="0.0"/>
               </ParameterList>
             </ParameterList>
           </ParameterList>
@@ -823,7 +795,7 @@ the clean 1.6 refers to removeing SEB and transport-->
         <Parameter name="constant in time" type="bool" value="true"/>
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="mineral" type="ParameterList">
-            <Parameter name="region" type="string" value="subsurface domain"/>
+            <Parameter name="region" type="string" value="computational domain"/>
             <Parameter name="component" type="string" value="cell"/>
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
@@ -837,7 +809,7 @@ the clean 1.6 refers to removeing SEB and transport-->
         <Parameter name="evaluator type" type="string" value="compressible porosity"/>
         <ParameterList name="compressible porosity model parameters" type="ParameterList">
           <ParameterList name="upper mineral" type="ParameterList">
-            <Parameter name="region" type="string" value="subsurface domain"/>
+            <Parameter name="region" type="string" value="computational domain"/>
             <Parameter name="pore compressibility [Pa^-1]" type="double" value="1e-8"/>
           </ParameterList>
         </ParameterList>
@@ -847,7 +819,7 @@ the clean 1.6 refers to removeing SEB and transport-->
         <Parameter name="constant in time" type="bool" value="true"/>
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="mineral" type="ParameterList">
-            <Parameter name="region" type="string" value="subsurface domain"/>
+            <Parameter name="region" type="string" value="computational domain"/>
             <Parameter name="component" type="string" value="cell"/>
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
@@ -863,27 +835,11 @@ the clean 1.6 refers to removeing SEB and transport-->
         <Parameter name="constant in time" type="bool" value="true"/>
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="mineral" type="ParameterList">
-            <Parameter name="region" type="string" value="subsurface domain"/>
+            <Parameter name="region" type="string" value="computational domain"/>
             <Parameter name="component" type="string" value="cell"/>
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
                 <Parameter name="value" type="double" value="2170.0"/>
-              </ParameterList>
-            </ParameterList>
-          </ParameterList>
-        </ParameterList>
-      </ParameterList>
-      <ParameterList name="surface-precipitation_rain" type="ParameterList">
-        <Parameter name="evaluator type" type="string" value="independent variable"/>
-        <ParameterList name="function" type="ParameterList">
-          <ParameterList name="domain" type="ParameterList">
-            <Parameter name="region" type="string" value="surface domain"/>
-            <Parameter name="component" type="string" value="cell"/>
-            <ParameterList name="function" type="ParameterList">
-              <ParameterList name="function-tabular" type="ParameterList">
-                <Parameter name="file" type="string" value="../data/daymet_TaylorRiverCO.h5"/>
-                <Parameter name="x header" type="string" value="time [s]"/>
-                <Parameter name="y header" type="string" value="precipitation rain [m s^-1]"/>
               </ParameterList>
             </ParameterList>
           </ParameterList>
@@ -954,11 +910,11 @@ the clean 1.6 refers to removeing SEB and transport-->
     <ParameterList name="model parameters" type="ParameterList">
       <ParameterList name="WRM parameters" type="ParameterList">
         <ParameterList name="mineral" type="ParameterList">
-          <Parameter name="region" type="string" value="subsurface domain"/>
+          <Parameter name="region" type="string" value="computational domain"/>
           <Parameter name="wrm type" type="string" value="van Genuchten"/>
-          <Parameter name="van Genuchten alpha [Pa^-1]" type="double" value="0.00002"/>
-          <Parameter name="van Genuchten n [-]" type="double" value="1.58"/>
-          <Parameter name="residual saturation [-]" type="double" value="0.2"/>
+          <Parameter name="van Genuchten alpha [Pa^-1]" type="double" value="0.00005"/>
+          <Parameter name="van Genuchten n [-]" type="double" value="1.3"/>
+          <Parameter name="residual saturation [-]" type="double" value="0.5"/>
           <Parameter name="smoothing interval width [saturation]" type="double" value="0.05"/>
         </ParameterList>
       </ParameterList>
@@ -975,51 +931,85 @@ the clean 1.6 refers to removeing SEB and transport-->
     </ParameterList>
   </ParameterList>
   <ParameterList name="observations" type="ParameterList">
-    <ParameterList name="Qs" type="ParameterList">
-      <Parameter name="observation output filename" type="string" value="surf_prop.dat"/>
-      <Parameter name="times start period stop" type="Array(double)" value="{0.0, 86400.0, -1.0}"/>
+    <ParameterList name="snow_status" type="ParameterList">
+      <Parameter name="observation output filename" type="string" value="snow_status.dat"/>
+      <Parameter name="times start period stop" type="Array(double)" value="{0.0, 864000.0, -1.0}"/>
       <ParameterList name="observed quantities" type="ParameterList">
-        <ParameterList name="Q_e_ecosim" type="ParameterList">
-          <Parameter name="variable" type="string" value="surface-ecosim_source"/>
-          <Parameter name="region" type="string" value="surf_obs"/>
-          <Parameter name="functional" type="string" value="integral"/>
-          <Parameter name="location name" type="string" value="cell"/>
-        </ParameterList>
-        <ParameterList name="Q_w_ecosim" type="ParameterList">
-          <Parameter name="variable" type="string" value="surface-ecosim_water_source"/>
-          <Parameter name="region" type="string" value="surf_obs"/>
-          <Parameter name="functional" type="string" value="integral"/>
-          <Parameter name="location name" type="string" value="cell"/>
-        </ParameterList>
         <ParameterList name="snow_depth" type="ParameterList">
           <Parameter name="variable" type="string" value="surface-snow_depth"/>
-          <Parameter name="region" type="string" value="surf_obs"/>
+          <Parameter name="region" type="string" value="surface domain"/>
           <Parameter name="functional" type="string" value="point"/>
+          <Parameter name="location name" type="string" value="cell"/>
+        </ParameterList>
+        <ParameterList name="rain" type="ParameterList">
+          <Parameter name="variable" type="string" value="surface-precipitation_rain"/>
+          <Parameter name="region" type="string" value="surface domain"/>
+          <Parameter name="functional" type="string" value="integral"/>
+          <Parameter name="location name" type="string" value="cell"/>
+        </ParameterList>
+        <ParameterList name="snow" type="ParameterList">
+          <Parameter name="variable" type="string" value="surface-precipitation_snow"/>
+          <Parameter name="region" type="string" value="surface domain"/>
+          <Parameter name="functional" type="string" value="integral"/>
           <Parameter name="location name" type="string" value="cell"/>
         </ParameterList>
       </ParameterList>
     </ParameterList>
-    <ParameterList name="snow_status" type="ParameterList">
-      <Parameter name="observation output filename" type="string" value="subsurf_prop.dat"/>
-      <Parameter name="times start period stop" type="Array(double)" value="{0.0, 86400.0, -1.0}"/>
+    <ParameterList name="Qs" type="ParameterList">
+      <Parameter name="observation output filename" type="string" value="Q.dat"/>
+      <Parameter name="times start period stop" type="Array(double)" value="{0.0, 864000.0, -1.0}"/>
       <ParameterList name="observed quantities" type="ParameterList">
-        <ParameterList name="bulk_density" type="ParameterList">
-          <Parameter name="variable" type="string" value="bulk_density"/>
-          <Parameter name="region" type="string" value="top_cell_obs"/>
-          <Parameter name="functional" type="string" value="point"/>
+        <ParameterList name="Q_w_ecosim" type="ParameterList">
+          <Parameter name="variable" type="string" value="surface-ecosim_water_source"/>
+          <Parameter name="region" type="string" value="surface domain"/>
+          <Parameter name="functional" type="string" value="average"/>
           <Parameter name="location name" type="string" value="cell"/>
+          <Parameter name="time integrated" type="bool" value="true"/>
         </ParameterList>
-        <ParameterList name="water_content" type="ParameterList">
-          <Parameter name="variable" type="string" value="water_content"/>
-          <Parameter name="region" type="string" value="top_cell_obs"/>
-          <Parameter name="functional" type="string" value="point"/>
+        <ParameterList name="Q_e_ecosim" type="ParameterList">
+          <Parameter name="variable" type="string" value="surface-ecosim_source"/>
+          <Parameter name="region" type="string" value="surface domain"/>
+          <Parameter name="functional" type="string" value="average"/>
           <Parameter name="location name" type="string" value="cell"/>
+          <Parameter name="time integrated" type="bool" value="true"/>
         </ParameterList>
-        <ParameterList name="temperature" type="ParameterList">
-          <Parameter name="variable" type="string" value="temperature"/>
-          <Parameter name="region" type="string" value="top_cell_obs"/>
-          <Parameter name="functional" type="string" value="point"/>
+        <ParameterList name="Q_w_ecosim_integral" type="ParameterList">
+          <Parameter name="variable" type="string" value="surface-ecosim_water_source"/>
+          <Parameter name="region" type="string" value="surface domain"/>
+          <Parameter name="functional" type="string" value="integral"/>
           <Parameter name="location name" type="string" value="cell"/>
+          <Parameter name="time integrated" type="bool" value="true"/>
+        </ParameterList>
+        <ParameterList name="Q_e_ecosim_integral" type="ParameterList">
+          <Parameter name="variable" type="string" value="surface-ecosim_source"/>
+          <Parameter name="region" type="string" value="surface domain"/>
+          <Parameter name="functional" type="string" value="integral"/>
+          <Parameter name="location name" type="string" value="cell"/>
+          <Parameter name="time integrated" type="bool" value="true"/>
+        </ParameterList>
+        <ParameterList name="transpiration" type="ParameterList">
+          <Parameter name="variable" type="string" value="surface-transpiration" />
+          <Parameter name="region" type="string" value="surf_obs" />
+          <Parameter name="functional" type="string" value="point" />
+          <Parameter name="location name" type="string" value="cell" />
+        </ParameterList>
+        <ParameterList name="evaporation_canopy" type="ParameterList">
+          <Parameter name="variable" type="string" value="surface-evaporation_canopy" />
+          <Parameter name="region" type="string" value="surf_obs" />
+          <Parameter name="functional" type="string" value="point" />
+          <Parameter name="location name" type="string" value="cell" />
+        </ParameterList>
+        <ParameterList name="evaporation_snow" type="ParameterList">
+          <Parameter name="variable" type="string" value="surface-evaporation_snow" />
+          <Parameter name="region" type="string" value="surf_obs" />
+          <Parameter name="functional" type="string" value="point" />
+          <Parameter name="location name" type="string" value="cell" />
+        </ParameterList>
+        <ParameterList name="sublimation_snow" type="ParameterList">
+          <Parameter name="variable" type="string" value="surface-sublimation_snow" />
+          <Parameter name="region" type="string" value="surf_obs" />
+          <Parameter name="functional" type="string" value="point" />
+          <Parameter name="location name" type="string" value="cell" />
         </ParameterList>
       </ParameterList>
     </ParameterList>

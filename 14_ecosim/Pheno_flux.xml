@@ -151,7 +151,7 @@ model.
     <ParameterList name="EcoSIM for ATS" type="ParameterList">
       <Parameter name="PK type" type="string" value="EcoSIM for ATS"/>
       <Parameter name="engine" type="string" value="EcoSIM"/>
-      <Parameter name="engine input file" type="string" value="Null"/>
+      <Parameter name="engine input file" type="string" value="../data/ecosim_pftpar_20260303.nc"/>
       <Parameter name="primary variable key" type="string" value="hydraulic_conductivity"/>
       <Parameter name="heat capacity [MJ mol^-1 K^-1]" type="double" value="0.020"/>
       <Parameter name="initial time step" type="double" value="3600" />
@@ -160,6 +160,8 @@ model.
       <Parameter name="EcoSIM precipitation" type="bool" value="false"/>
       <Parameter name="prescribe snow albedo" type="bool" value="false"/>
       <Parameter name="prescribe phenology" type="bool" value="true"/>
+      <Parameter name="number of pfts" type="int" value="1"/>
+      <Parameter name="microbe model" type="bool" value="false"/>
       <Parameter name="starting day of year [0-364]" type="int" value="363"/>
       <Parameter name="starting year" type="int" value="1995"/>
       <ParameterList name="boundary conditions" type="ParameterList">
@@ -584,6 +586,14 @@ model.
               </ParameterList>
             </ParameterList>
           </ParameterList>
+        </ParameterList>
+      </ParameterList>
+      <ParameterList name="surface-incident_shortwave_radiation" type="ParameterList">
+        <Parameter name="evaluator type" type="string" value="incident shortwave radiation" />
+        <ParameterList name="incident shortwave radiation parameters" type="ParameterList">
+          <Parameter name="daily averaged" type="bool" value="false" />
+          <Parameter name="latitude [degrees]" type="double" value="39" />
+          <Parameter name="day of year at time 0 [Julian days]" type="int" value="0" />
         </ParameterList>
       </ParameterList>
       <ParameterList name="surface-incoming_longwave_radiation" type="ParameterList">

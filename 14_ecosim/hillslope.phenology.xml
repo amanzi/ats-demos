@@ -118,7 +118,7 @@
       <Parameter name="PK type" type="string" value="EcoSIM for ATS"/>
       <Parameter name="engine" type="string" value="EcoSIM"/>
       <!--<Parameter name="engine input file" type="string" value="Null"/>-->
-      <Parameter name="engine input file" type="string" value="/home/ctg/Work/code/ats_dev_dir/amanzi_tpls-build-master-Debug/ecosim/ecosim-0.1.0-source/input_data/ecosim_pftpar_20260303.nc"/>
+      <Parameter name="engine input file" type="string" value="../data/ecosim_pftpar_20260303.nc"/>
       <Parameter name="primary variable key" type="string" value="hydraulic_conductivity"/>
       <Parameter name="heat capacity [MJ mol^-1 K^-1]" type="double" value="2.0"/>
       <Parameter name="field capacity [Mpa]" type="double" value="-0.033"/>

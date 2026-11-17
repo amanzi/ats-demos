@@ -276,7 +276,7 @@
       <Parameter name="advection spatial discretization order" type="int" value="1"/>
       <Parameter name="temporal discretization order" type="int" value="1"/>
       <Parameter name="cfl" type="double" value="1.0"/>
-      <Parameter name="water tolerance" type="double" value="0.001"/>
+      <Parameter name="water tolerance [mol H2O m^-3]" type="double" value="0.001"/>
       <Parameter name="debug cells" type="Array(int)" value="{0}"/>
       <Parameter name="water source in meters" type="bool" value="true"/>
       <ParameterList name="initial conditions" type="ParameterList">
